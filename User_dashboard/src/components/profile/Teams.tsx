@@ -60,7 +60,7 @@ const Teams = () => {
                         <select
                             value={sortBy}
                             onChange={sortChange}
-                            className="w-30 p-1 rounded-lg bg-amber-100 text-black"
+                            className="w-fit p-1 rounded-lg bg-amber-100 text-black"
                         >
                             {sortoptions.map((sortOption) => (
                                 <option key={sortOption.value} value={sortOption.value} disabled={!sortOption.value}>
