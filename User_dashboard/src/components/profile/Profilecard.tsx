@@ -3,7 +3,7 @@ import { Settings, Bell, UserRound } from "lucide-react";
 const Profilecard = () => {
     return (
         <>
-            <div className="rounded-2xl bg-gradient-to-r flex flex-col gap-7 from-[#00FFA3] to-[#00C4FF] w-full h-1/3">
+            <div className="flex flex-col gap-7 rounded-2xl bg-gradient-to-r from-[#00FFA3] to-[#00C4FF] w-full h-1/3">
                 {/* 🔹 Top Navbar */}
                 <div className="flex flex-wrap justify-between items-center px-4 sm:px-6 py-4">
                     {/* Left Side */}
