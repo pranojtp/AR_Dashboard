@@ -1,5 +1,5 @@
 
-import { LogOut, Settings, Bell, UserRound } from "lucide-react";
+import { Settings, Bell,} from "lucide-react";
 import VaultImage from "../../assets/vault.png";
 
 const Headercard = () => {
@@ -13,9 +13,9 @@ const Headercard = () => {
 
                     {/* Right side */}
                     <div className="flex items-center gap-4 text-black font-medium">
-                        <UserRound size={18} />
+                        {/* <UserRound size={18} /> */}
                         <button className="flex items-center gap-1 hover:underline">
-                            <LogOut size={18} /> Sign Out
+                            Sign Out
                         </button>
                         <Settings size={18} className="cursor-pointer hover:text-gray-700" />
                         <Bell size={18} className="cursor-pointer hover:text-gray-700" />
@@ -23,7 +23,7 @@ const Headercard = () => {
                 </div>
 
                 {/* 🔹 Header Card */}
-                <div className="bg-gradient-to-r from-[#00FFA3] to-[#00C4FF] p-6 flex flex-col md:flex-row justify-between items-center gap-6 mx-6 mt-6">
+                <div className="bg-gradient-to-r from-[#00FFA3] to-[#00C4FF] p-6 flex flex-row md:flex-row justify-between items-center gap-5 mx-6 mt-6 h-1/2">
                     {/* Left Section - Text */}
                     <div>
                         <p className="max-w-xl text-sm text-black">

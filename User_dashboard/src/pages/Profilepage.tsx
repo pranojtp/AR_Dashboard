@@ -5,17 +5,17 @@ import Notification from "../components/profile/Notification"
 const Profilepage = () => {
   return (
     <>
-    <div className="flex-1 p-6 space-y-6 bg-neutral-900">
+      <div className="flex-1 space-y-5">
         <Profilecard />
         <div className="grid grid-cols-3 gap-6">
-            <div className="col-span-2">
+          <div className="col-span-2">
             <Teams />
-            </div>
-            <div>
-                <Notification />
-            </div>
+          </div>
+          <div>
+            <Notification />
+          </div>
         </div>
-    </div>
+      </div>
     </>
   )
 }

@@ -11,7 +11,7 @@ const Agreementsign = () => {
     ];
     return (
         <>
-            <div className="min-h-screen flex items-center justify-center bg-neutral-900 text-white">
+            <div className="flex items-center justify-center bg-neutral-900 text-white">
                 <div className="w-[900px] bg-neutral-800 rounded-2xl shadow-lg overflow-hidden">
                     {/* Header */}
                     <div className="flex justify-between items-center px-8 py-5 border-b border-neutral-700">
@@ -26,6 +26,7 @@ const Agreementsign = () => {
                         <div className="col-span-1 bg-black">
                             <ul className="p-6 space-y-4">
                                 {sections.map((item, index) => (
+                                    <a href="">
                                     <li
                                         key={index}
                                         onClick={() => setSelectedSection(index + 1)}
@@ -36,6 +37,7 @@ const Agreementsign = () => {
                                     >
                                         {index + 1}. {item}
                                     </li>
+                                    </a>
                                 ))}
                             </ul>
                         </div>
