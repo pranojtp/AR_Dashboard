@@ -23,7 +23,7 @@ const customStyles: StylesConfig<any, true> = {
         "&:hover": { borderColor: "#00FFA3" },
         color: "white",
         borderRadius: "0.5rem",
-        padding: "2px",
+        padding: "2",
     }),
     menu: (base) => ({
         ...base,
@@ -43,7 +43,7 @@ const customStyles: StylesConfig<any, true> = {
     }),
     multiValue: (base) => ({
         ...base,
-        backgroundColor: "gray",
+        backgroundColor: "white",
         color: "#000",
     }),
     multiValueLabel: (base) => ({
@@ -117,7 +117,7 @@ const Personaldetails = () => {
             <div className="h-full pl-80 pr-20 pt-5 pb-5 bg-neutral-800">
                 <div className="bg-black flex-1 text-white h-fit w-fit border-1 border-neutral-700 rounded-xl p-3">
                     <div className="flex justify-between items-center mb-8">
-                        <h1 className="text-2xl font-semibold">Complete Your Profile</h1>
+                        <h1 className="text-xl font-semibold">Complete Your Profile</h1>
                     </div>
                     <div className="grid grid-cols-3 gap-20">
                         <div className="flex flex-col col-span-2 gap-2 ">
@@ -132,7 +132,7 @@ const Personaldetails = () => {
                                             // value={formData.displayName}
                                             // onChange={handleChange}
                                             placeholder="Enter your display name"
-                                            className="w-full rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                            className="w-full rounded-lg text-xs bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                             required
                                         />
                                     </div>
@@ -144,7 +144,7 @@ const Personaldetails = () => {
                                             // value={formData.legalName}
                                             // onChange={handleChange}
                                             placeholder="Enter your legal name"
-                                            className="w-full rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                            className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
                                     </div>
                                     <div>
@@ -157,6 +157,7 @@ const Personaldetails = () => {
                                             onChange={setSelectedRoles}
                                             placeholder="Select roles..."
                                             styles={customStyles}
+                                            className="text-xs"
                                             required
                                         />
                                     </div>
@@ -172,7 +173,7 @@ const Personaldetails = () => {
                                             // value={formData.affiliation}
                                             // onChange={handleChange}
                                             placeholder="Company or organization affiliation"
-                                            className="w-full rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                            className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
                                     </div>
                                     <div>
@@ -183,7 +184,7 @@ const Personaldetails = () => {
                                             // value={formData.industry}
                                             // onChange={handleChange}
                                             placeholder="e.g. Mollywood, Hollywood"
-                                            className="w-full rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                            className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
                                     </div>
                                     <div>
@@ -194,7 +195,7 @@ const Personaldetails = () => {
                                             // value={formData.location}
                                             // onChange={handleChange}
                                             placeholder="City, State/Country"
-                                            className="w-full rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                            className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
                                     </div>
                                 </div>
@@ -207,15 +208,15 @@ const Personaldetails = () => {
                                     name="bio"
                                     // value={formData.bio}
                                     // onChange={handleChange}
-                                    placeholder="Maximum 500 characters"
-                                    maxLength={500}
-                                    className="w-full h-28 rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                    placeholder="Maximum 200 characters"
+                                    maxLength={200}
+                                    className="w-full h-20 text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                 />
                             </div><br />
                             {/* Social Media */}
 
                             <div className="flex justify-between items-center mb-8">
-                                <h1 className="text-2xl font-semibold">Social Media Links</h1>
+                                <h1 className="text-m font-semibold">Social Media Links</h1>
                             </div>
 
                             <div className="grid grid-cols-2 gap-6">
@@ -229,7 +230,7 @@ const Personaldetails = () => {
                                             // value={formData.displayName}
                                             // onChange={handleChange}
                                             placeholder="https://facebook.com/username"
-                                            className="w-full rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                            className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
                                     </div>
                                     <div>
@@ -240,7 +241,7 @@ const Personaldetails = () => {
                                             // value={formData.legalName}
                                             // onChange={handleChange}
                                             placeholder="https://instagram.com/username"
-                                            className="w-full rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                            className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
                                     </div>
                                 </div>
@@ -253,7 +254,7 @@ const Personaldetails = () => {
                                             // value={formData.affiliation}
                                             // onChange={handleChange}
                                             placeholder="https://twitter.com/username"
-                                            className="w-full rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                            className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
                                     </div>
                                 </div>
@@ -262,7 +263,7 @@ const Personaldetails = () => {
                         <div className="flex flex-col col-span-1 gap-6">
                             <div className="p-6 w-full max-w-sm">
                                 <div className="flex flex-col gap-4">
-                                    <div className="h-28 w-28 rounded-full bg-neutral-800 border border-neutral-500 overflow-hidden flex items-center justify-center">
+                                    <div className="h-25 w-25 rounded-full bg-neutral-800 border border-neutral-500 overflow-hidden flex items-center justify-center">
                                         {image ? (
                                             <img src={image} alt="Profile" className="w-full h-full object-cover" />
                                         ) : (
@@ -270,7 +271,7 @@ const Personaldetails = () => {
                                         )}
                                     </div>
 
-                                    <label className="w-30 py-2 bg-neutral-800 text-[#59fbf0] font-medium rounded-lg border border-[#59fbf0] text-center cursor-pointer transition hover:bg-[#59fbf0] hover:text-black">
+                                    <label className="w-30 py-2 bg-neutral-800 text-xs text-[#59fbf0] font-medium rounded-lg border border-[#59fbf0] text-center cursor-pointer transition hover:bg-[#59fbf0] hover:text-black">
                                         Upload Image
                                         <input
                                             type="file"
@@ -280,7 +281,7 @@ const Personaldetails = () => {
                                         />
                                     </label>
 
-                                    <p className="text-sm text-neutral-400 mb-6">
+                                    <p className="text-xs text-neutral-400 mb-6">
                                         Max size 5 MB JPG or PNG Format
                                     </p>
                                 </div>
@@ -288,11 +289,11 @@ const Personaldetails = () => {
                                 <div className="flex space-x-4">
                                     <button
                                         onClick={handleRemove}
-                                        className="w-fit rounded-lg text-neutral-400 bg-neutral-800 border border-neutral-500 px-2 py-1 hover:bg-neutral-700 transition"
+                                        className="w-fit rounded-lg text-xs text-neutral-400 bg-neutral-800 border border-neutral-500 px-2 py-1 hover:bg-neutral-700 transition"
                                     >
                                         Remove Photo
                                     </button>
-                                    <label className="w-fit rounded-lg text-neutral-400 bg-neutral-800 border border-neutral-500 px-2 py-1 text-center cursor-pointer hover:bg-neutral-700 transition">
+                                    <label className="w-fit rounded-lg text-xs text-neutral-400 bg-neutral-800 border border-neutral-500 px-2 py-1 text-center cursor-pointer hover:bg-neutral-700 transition">
                                         Change Photo
                                         <input
                                             type="file"
@@ -304,7 +305,7 @@ const Personaldetails = () => {
                                 </div>
 
                                 <div className="mt-8">
-                                    <h2 className="block mb-2 text-white text-xl font-medium">
+                                    <h2 className="block mb-2 text-white text-m font-medium">
                                         Or Choose an Avatar
                                     </h2>
                                     <div className="p-4">
@@ -328,11 +329,11 @@ const Personaldetails = () => {
                                         </div>
 
                                         <div className="flex gap-5 mt-8">
-                                            <button className="px-6 py-2 bg-neutral-800 text-[#00e695] font-medium w-35 border border-[#00e695] rounded-lg hover:bg-[#00e695] hover:text-black transition">
+                                            <button className="px-4 py-2 bg-neutral-800 text-sm text-[#00e695] font-medium w-35 border border-[#00e695] rounded-lg hover:bg-[#00e695] hover:text-black transition">
                                                 Cancel
                                             </button>
-                                            <a href="/userdashboard">
-                                                <button className="px-6 py-2 bg-[#00FFA3] text-black font-medium w-35 rounded-lg hover:bg-[#00e695] transition">
+                                            <a href="/userdashboard/profile">
+                                                <button className="px-4 py-2 bg-[#00FFA3] text-sm text-black font-medium w-35 rounded-lg hover:bg-[#00e695] transition">
                                                     Save
                                                 </button>
                                             </a>

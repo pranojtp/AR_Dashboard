@@ -31,11 +31,11 @@ const Profilecard = () => {
                             className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover border-2 border-white"
                         />
                         <div>
-                            <h2 className="text-m sm:text-2xl font-semibold text-white">
+                            <h2 className="text-sm sm:text-lg font-semibold text-white">
                                 Dulquer Salman
                             </h2>
-                            <p className="text-sm sm:text-base text-white max-w-md mt-1">
-                                Dulquer Salmaan is an Indian actor, singer and producer who works in Malayalam films, besides few Tamil, Telugu and Hindi films. One of the highest paid Malayalam actors.
+                            <p className="text-sm sm:text-sm text-white max-w-md mt-1">
+                                Dulquer Salmaan is an Indian actor, singer and producer who works in Malayalam films, besides few Tamil, Telugu and Hindi films. One of the highest paid Malayalam actor.
                             </p>
                         </div>
                     </div>

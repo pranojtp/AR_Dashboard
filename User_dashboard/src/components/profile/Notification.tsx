@@ -14,7 +14,7 @@ const Notification = () => {
 
                     {/* 3. Button: Added w-full sm:w-auto to make the button full width on mobile for easy tapping. */}
                     <button
-                        className="px-4 py-1 bg-black text-[#00e695] rounded-2xl transition hover:bg-[#00e695] hover:text-black text-sm w-full sm:w-auto"
+                        className="px-2 py-1 bg-black text-[#00e695] rounded-2xl transition hover:bg-[#00e695] hover:text-black text-xs w-full sm:w-auto"
                     >
                         MARK ALL READ
                     </button>
