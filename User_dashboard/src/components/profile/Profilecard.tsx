@@ -15,7 +15,7 @@ const Profilecard = () => {
                     {/* Right Side */}
                     <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-black font-medium">
                         {/* <UserRound size={18} className="cursor-pointer" /> */}
-                        <button className="text-sm sm:text-base text-black hover:underline">
+                        <button className="text-sm sm:text-sm text-black hover:underline">
                             Sign Out
                         </button>
                         <a href="/settings"><Settings size={18} className="cursor-pointer" /></a>

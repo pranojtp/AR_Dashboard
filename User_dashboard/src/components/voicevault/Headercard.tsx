@@ -14,7 +14,7 @@ const Headercard = () => {
                     {/* Right side */}
                     <div className="flex items-center gap-4 text-black font-medium">
                         {/* <UserRound size={18} /> */}
-                        <button className="flex items-center gap-1 hover:underline">
+                        <button className="flex items-center gap-1 text-sm sm:text-sm hover:underline">
                             Sign Out
                         </button>
                         <Settings size={18} className="cursor-pointer hover:text-gray-700" />
