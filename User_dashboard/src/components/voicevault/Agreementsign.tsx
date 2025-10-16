@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+// import { X } from "lucide-react";
 
 interface Props {
     onClose: () => void;
@@ -27,12 +27,12 @@ const Agreementsign: React.FC<Props> = ({ onClose }) => {
             >
                 <div className="flex items-center justify-center bg-neutral-900 text-white">
                     <div className="h-fit w-[800px] bg-neutral-800 rounded-2xl shadow-lg overflow-hidden">
-                        <button
+                        {/* <button
                             onClick={onClose}
                             className="absolute top-3 right-3 text-gray-400 hover:text-red-400 transition"
                         >
                             <X size={20} />
-                        </button>
+                        </button> */}
                         {/* Header */}
                         <div className="flex justify-between items-center px-8 py-5 border-b border-neutral-700">
                             <h1 className="text-m font-semibold">Terms and Condition</h1>
@@ -100,7 +100,9 @@ const Agreementsign: React.FC<Props> = ({ onClose }) => {
                                 Send a copy on my email
                             </button>
                             <div className="flex gap-4">
-                                <button className="px-3 py-1 rounded-lg bg-neutral-800 text-xs text-[#00FFA3] border-1 border-[#00FFA3] transition">
+                                <button
+                                    onClick={onClose}
+                                    className="px-3 py-1 rounded-lg bg-neutral-800 text-xs text-[#00FFA3] border-1 border-[#00FFA3] transition">
                                     DECLINE
                                 </button>
                                 <button className="px-6 py-2 rounded-lg bg-[#00FFA3] text-xs text-black font-medium hover:bg-[#00e697] transition">

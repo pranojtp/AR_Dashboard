@@ -10,7 +10,7 @@ const Notification = () => {
                 */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
 
-                    <h3 className="text-lg font-semibold">Notifications</h3>
+                    <h3 className="text-m font-semibold">Notifications</h3>
 
                     {/* 3. Button: Added w-full sm:w-auto to make the button full width on mobile for easy tapping. */}
                     <button

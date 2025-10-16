@@ -1,5 +1,5 @@
 
-import { Settings, Bell,} from "lucide-react";
+import { Settings, Bell, } from "lucide-react";
 import VaultImage from "../../assets/vault.png";
 
 const Headercard = () => {
@@ -14,10 +14,12 @@ const Headercard = () => {
                     {/* Right side */}
                     <div className="flex items-center gap-4 text-black font-medium">
                         {/* <UserRound size={18} /> */}
-                        <button className="flex items-center gap-1 text-sm sm:text-sm hover:underline">
-                            Sign Out
-                        </button>
-                        <Settings size={18} className="cursor-pointer hover:text-gray-700" />
+                        <a href="/login">
+                            <button className="flex items-center gap-1 text-sm sm:text-sm hover:underline">
+                                Sign Out
+                            </button>
+                        </a>
+                        <a href="/userdashboard/settings/account"><Settings size={18} className="cursor-pointer hover:text-gray-700" /></a>
                         <Bell size={18} className="cursor-pointer hover:text-gray-700" />
                     </div>
                 </div>

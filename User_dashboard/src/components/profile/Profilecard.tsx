@@ -11,14 +11,15 @@ const Profilecard = () => {
                     <h1 className="font-semibold text-black text-lg sm:text-xl mb-2 sm:mb-0">
                         Profile
                     </h1>
-
                     {/* Right Side */}
                     <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-black font-medium">
                         {/* <UserRound size={18} className="cursor-pointer" /> */}
+                        <a href="/login">
                         <button className="text-sm sm:text-sm text-black hover:underline">
                             Sign Out
                         </button>
-                        <a href="/settings"><Settings size={18} className="cursor-pointer" /></a>
+                        </a>
+                        <a href="/userdashboard/settings/account"><Settings size={18} className="cursor-pointer" /></a>                        
                         <Bell size={18} className="cursor-pointer" />
                     </div>
                 </div>

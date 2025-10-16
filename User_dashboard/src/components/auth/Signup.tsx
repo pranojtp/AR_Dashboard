@@ -437,7 +437,7 @@ const Signup: React.FC = () => {
                             disabled={!isFormValid}
                             className={`px-4 py-1 rounded-lg font-medium transition ${isFormValid
                                     ? "bg-[#00FFA3] text-black hover:bg-[#00e695]"
-                                    : "bg-[#00FFA3] text-gray-300 cursor-not-allowed"
+                                    : "bg-[#00FFA3] text-black cursor-not-allowed"
                                 }`}
                         >
                             Sign up

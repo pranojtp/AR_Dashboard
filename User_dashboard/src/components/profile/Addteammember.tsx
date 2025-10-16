@@ -125,7 +125,7 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
                                                             e.target.value as Member["role"]
                                                         )
                                                     }
-                                                    className="bg-neutral-800 border border-neutral-600 text-sm text-white rounded-md px-2 py-1 focus:outline-none"
+                                                    className="bg-neutral-800 border border-neutral-600 text-xs text-white rounded-md px-2 py-1 focus:outline-none"
                                                 >
                                                     <option>Admin</option>
                                                     <option>Editor</option>
@@ -135,7 +135,7 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
                                                     onClick={() => handleRemove(member.email)}
                                                     className="text-gray-400 hover:text-red-400 transition"
                                                 >
-                                                    <X size={16} />
+                                                    <X size={14} />
                                                 </button>
                                             </div>
                                         </div>
