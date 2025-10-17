@@ -12,6 +12,8 @@ import Settingspage from "./pages/Settingspage"
 import Generalsettings from "./components/settings/Generalsettings"
 import Notificationsettings from "./components/settings/Notificationsettings"
 import Login from "./components/auth/Login"
+
+
 function App() {
   return (
     <>
@@ -27,7 +29,7 @@ function App() {
             <Route path="profile" element={<Profilepage />} />
             <Route path="voicevault" element={<Voicevault />} />
             <Route path="projectpage" element={<Projectpage />} />
-            <Route path="agreementsign" element={<Agreementsign />} />
+            <Route path="agreementsign" element={<Agreementsign />} />          
             {/* <Route path="settings" element={<Sidebar_settings />} /> */}
             <Route path="settings" element={<Settingspage />} >
               <Route path="account" element={<Accountdetails />} />

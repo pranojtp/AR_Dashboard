@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom"
+// import bg1 from '../../assets/bg1.png'
 const Login = () => {
     const navigate=useNavigate()
     const handleSubmit=()=>{
@@ -6,12 +7,13 @@ const Login = () => {
     }
     return (
         <>
-            <div className="flex items-center justify-center h-screen bg-neutral-800">
+            <div className="flex items-center justify-center h-screen bg-neutral-900"
+            // style={{ backgroundImage: `url(${bg1})` }}
+            >
                 <div className="bg-black border border-neutral-700 rounded-xl flex flex-col gap-3 p-5">
                     <h1 className="text-white text-xl font-semibold text-center">
                         AUDIO REALITIES
                     </h1>
-
                     <div className="p-8 m-5 rounded-2xl w-fit">
                         <form className="flex flex-col space-y-6">
                             {/* Email Field */}
@@ -71,7 +73,7 @@ const Login = () => {
                                         onClick={handleSubmit}
                                         className="px-3 py-1 text-sm rounded-md bg-[#00FFC6] text-black font-medium hover:bg-[#00dcae] transition-all"
                                     >
-                                        Sign In
+                                        Login
                                     </button>                                
                             </div>
                         </form>

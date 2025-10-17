@@ -20,7 +20,7 @@ const Profilecard = () => {
                         </button>
                         </a>
                         <a href="/userdashboard/settings/account"><Settings size={18} className="cursor-pointer" /></a>                        
-                        <Bell size={18} className="cursor-pointer" />
+                        <a href="#"><Bell size={18} className="cursor-pointer" /></a>
                     </div>
                 </div>
                 {/* 🔹 Profile Section */}
