@@ -7,8 +7,8 @@ const Footer = () => {
         <div className="py-16">
           <nav className="mt-10 text-sm" aria-label="quick links">
             <div className="-my-1 flex justify-center gap-x-6 text-white">
-              <a href="#features">Features</a>
-              <a href="#team">Team</a>
+              {/* <a href="#features">Features</a>
+              <a href="#team">Team</a> */}
               {/* <NavLink href="#faq">FAQ</NavLink> */}
               <a href="#">↑ Back to Top</a>
             </div>
@@ -40,7 +40,7 @@ const Footer = () => {
             Copyright &copy; {new Date().getFullYear()} Audio Realities. All rights
             reserved.
           </p>
-          <div className='flex flex-col gap-3'>
+          <div className='flex flex-row gap-3'>
           <a href="/termsofservice"><p className="mt-6 text-sm text-zinc-500 sm:mt-0">Terms of Service</p></a>
           <a href="/privacypolicy"><p className="mt-6 text-sm text-zinc-500 sm:mt-0">Privacy & Policy </p></a>
           </div>

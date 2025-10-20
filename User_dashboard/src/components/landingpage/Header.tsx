@@ -81,20 +81,20 @@ export const Header: React.FC = () => {
         <header className="px-20 py-8 bg-black">
             <nav className="relative z-50 flex items-center justify-between">
                 {/* 🔹 Left - Logo */}
-                <div className="font-logo text-slate-100 text-xl font-semibold">
+                <div className="font-logo text-slate-100 text-lg font-semibold">
                     <Link to="/" aria-label="Home">
-                        Audio Realities
+                        AUDIO REALITIES
                     </Link>
                 </div>
 
                 {/* 🔹 Center - Navigation (Desktop only) */}
                 <div className="absolute left-1/2 transform -translate-x-1/2 hidden md:flex gap-x-8 text-white">
-                    <a href="#features" className="hover:text-lime-400 transition-colors">
+                    {/* <a href="#features" className="hover:text-lime-400 transition-colors">
                         Features
                     </a>
                     <a href="#team" className="hover:text-lime-400 transition-colors">
                         Team
-                    </a>
+                    </a> */}
                 </div>
 
                 {/* 🔹 Right - Login + Mobile Nav */}

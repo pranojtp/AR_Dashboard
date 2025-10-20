@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom"
 const Login = () => {
     const navigate = useNavigate()
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    const handleSubmit = () => {
+        // e.preventDefault()
         navigate('/userdashboard/profile')
     }
 
