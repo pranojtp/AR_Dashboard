@@ -22,7 +22,7 @@ const Sidebar = () => {
                 }`
               }
             >
-              <FileStack className="size-4" /> Profile
+              <UserRound className="size-4" /> Profile
             </NavLink>
             <NavLink
               to="/userdashboard/voicevault"
@@ -34,7 +34,7 @@ const Sidebar = () => {
                 }`
               }
             >
-              <FileStack className="size-4" /> Voice Vault
+              <AudioLines className="size-4" /> Voice Vault
             </NavLink>
             <NavLink
               to="/userdashboard/projectpage"
@@ -63,7 +63,7 @@ const Sidebar = () => {
                 }`
               }
             >
-              <FileStack className="size-4" /> Settings
+              <Settings className="size-4" /> Settings
             </NavLink>
           </nav>
         </div>
