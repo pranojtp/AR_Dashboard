@@ -78,32 +78,41 @@ const MobileNavigation: React.FC = () => {
 
 export const Header: React.FC = () => {
     return (
-        <header className="py-10">
-            <div>
-                <nav className="relative z-50 flex justify-between">
-                    <div className="flex items-center md:gap-x-12">
-                        <div className="font-logo text-slate-100 text-xl font-semibold">
-                            <Link to="/" aria-label="Home">
-                                Audio Realities
-                            </Link>
-                        </div>
-                        <div className="hidden md:flex md:gap-x-6 text-white">
-                            <a href="#features">Features</a>
-                            <a href="#team">Team</a>
-                        </div>
-                    </div>
+        <header className="px-20 py-8 bg-black">
+            <nav className="relative z-50 flex items-center justify-between">
+                {/* 🔹 Left - Logo */}
+                <div className="font-logo text-slate-100 text-xl font-semibold">
+                    <Link to="/" aria-label="Home">
+                        Audio Realities
+                    </Link>
+                </div>
 
-                    <div className="flex items-center gap-x-5 md:gap-x-8">
-                        <a href="#" className="text-lime-400">
-                            <span>Coming Soon</span>
-                        </a>
-                        <div className="-mr-1 md:hidden">
-                            <MobileNavigation />
-                        </div>
+                {/* 🔹 Center - Navigation (Desktop only) */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 hidden md:flex gap-x-8 text-white">
+                    <a href="#features" className="hover:text-lime-400 transition-colors">
+                        Features
+                    </a>
+                    <a href="#team" className="hover:text-lime-400 transition-colors">
+                        Team
+                    </a>
+                </div>
+
+                {/* 🔹 Right - Login + Mobile Nav */}
+                <div className="flex items-center gap-x-4">
+                    <a
+                        href="/login"
+                        className="text-black bg-lime-400 rounded-lg px-5 hover:bg-lime-300 transition"
+                    >
+                        Login
+                    </a>
+                    {/* Mobile Menu Button (only on small screens) */}
+                    <div className="md:hidden">
+                        <MobileNavigation />
                     </div>
-                </nav>
-            </div>
+                </div>
+            </nav>
         </header>
+
     );
 };
 

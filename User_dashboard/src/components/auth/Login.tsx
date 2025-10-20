@@ -29,7 +29,7 @@ const Login = () => {
                                     type="email"
                                     placeholder="Enter your email"
                                     autoComplete="email"
-                                    className="w-full rounded-md  bg-neutral-800 text-sm border border-[#00FFC6] text-gray-300 px-4 py-2  placeholder:text-gray-400"
+                                    className="w-full rounded-md  bg-neutral-800 text-sm border border-neutral-500 text-gray-300 px-4 py-2  placeholder:text-gray-400"
                                 />
                             </div>
 
@@ -46,7 +46,7 @@ const Login = () => {
                                     type="password"
                                     placeholder="Enter your password"
                                     autoComplete="current-password"
-                                    className="w-full rounded-md text-sm bg-neutral-800 border border-[#00FFC6] text-gray-300 px-4 py-2  placeholder:text-gray-400"
+                                    className="w-full rounded-md text-sm bg-neutral-800 border border-neutral-500 text-gray-300 px-4 py-2  placeholder:text-gray-400"
                                 />
                                 <div className="text-right mt-3">
                                     <a
@@ -60,7 +60,7 @@ const Login = () => {
 
                             {/* Buttons */}
                             <div className="flex justify-center items-center mt-4 gap-3">
-                                <a href="/">
+                                <a href="/signup">
                                     <button
                                         type="button"
                                         className="px-2 py-1 text-xs rounded-md border border-[#00FFC6] text-[#00FFC6] hover:bg-[#00FFC6] hover:text-black transition-all"

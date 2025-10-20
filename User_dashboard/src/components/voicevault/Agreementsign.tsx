@@ -2,21 +2,22 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 // import { X } from "lucide-react";
 
-interface Props {
+interface AgreementsignProps {
     onClose: () => void;
 }
 
-const Agreementsign: React.FC<Props> = ({ onClose }) => {
-    const [selectedSection, setSelectedSection] = useState(1);
+const Agreementsign: React.FC<AgreementsignProps> = ({ onClose }) => {
+    const [selectedSection, setSelectedSection] = useState<number>(1);
 
-    const sections = [
+    const sections: string[] = [
         "General Terms and Conditions",
         "Acceptable Use Policy",
         "Cancellation Policy",
         "Privacy Policy",
     ];
+
     return (
-        <> <AnimatePresence>
+        <AnimatePresence>
             <motion.div
                 key="modal"
                 initial={{ opacity: 0, scale: 0.8, y: 40 }}
@@ -26,45 +27,45 @@ const Agreementsign: React.FC<Props> = ({ onClose }) => {
                 className="fixed inset-0 flex items-center justify-center z-50 p-4"
             >
                 <div className="flex items-center justify-center bg-neutral-900 text-white">
-                    <div className="h-fit w-[800px] bg-neutral-800 rounded-2xl shadow-lg overflow-hidden">
+                    <div className="h-fit w-[800px] bg-neutral-800 rounded-2xl shadow-lg overflow-hidden relative">
+                        {/* Optional close icon */}
                         {/* <button
-                            onClick={onClose}
-                            className="absolute top-3 right-3 text-gray-400 hover:text-red-400 transition"
-                        >
-                            <X size={20} />
-                        </button> */}
+              onClick={onClose}
+              className="absolute top-3 right-3 text-gray-400 hover:text-red-400 transition"
+            >
+              <X size={20} />
+            </button> */}
+
                         {/* Header */}
                         <div className="flex justify-between items-center px-8 py-5 border-b border-neutral-700">
-                            <h1 className="text-m font-semibold">Terms and Condition</h1>
+                            <h1 className="text-m font-semibold">Terms and Conditions</h1>
                             <p className="text-sm text-neutral-400">
-                                Agreement code : <span className="text-neutral-200"></span>
+                                Agreement code: <span className="text-neutral-200">AG-001</span>
                             </p>
-
                         </div>
 
+                        {/* Main Body */}
                         <div className="grid grid-cols-4 divide-x divide-neutral-700">
                             {/* Sidebar */}
-                            <div className="col-span-1 bg-black">
+                            <aside className="col-span-1 bg-black">
                                 <ul className="p-6 space-y-4">
                                     {sections.map((item, index) => (
-                                        <a href="">
-                                            <li
-                                                key={index}
-                                                onClick={() => setSelectedSection(index + 1)}
-                                                className={`cursor-pointer text-xs transition-colors duration-200 ${selectedSection === index + 1
+                                        <li
+                                            key={item}
+                                            onClick={() => setSelectedSection(index + 1)}
+                                            className={`cursor-pointer text-xs transition-colors duration-200 ${selectedSection === index + 1
                                                     ? "text-[#00FFA3] font-medium"
                                                     : "text-neutral-400 hover:text-white"
-                                                    }`}
-                                            >
-                                                {index + 1}. {item}
-                                            </li>
-                                        </a>
+                                                }`}
+                                        >
+                                            {index + 1}. {item}
+                                        </li>
                                     ))}
                                 </ul>
-                            </div>
+                            </aside>
 
-                            {/* Main Content */}
-                            <div className="bg-black col-span-3 p-6 space-y-4">
+                            {/* Content */}
+                            <main className="bg-black col-span-3 p-6 space-y-4">
                                 <h2 className="font-semibold text-sm">Summary</h2>
                                 <p className="text-xs leading-relaxed text-neutral-300">
                                     Pizza ipsum dolor amet lovers buffalo. String tomatoes Chicago pineapple extra onions
@@ -91,31 +92,31 @@ const Agreementsign: React.FC<Props> = ({ onClose }) => {
                                     marinara steak bell Hawaiian spinach bacon melted style. Tomato broccoli mushrooms
                                     ranch personal thin mouth sautéed NY. Pan ipsum and parmesan ipsum string ipsum.
                                 </p>
-                            </div>
+                            </main>
                         </div>
 
                         {/* Footer */}
-                        <div className="flex justify-between items-center px-8 py-4 border-t border-neutral-700">
-                            <button className="text-xs text-neutral-400 hover:text-white">
-                                Send a copy on my email
+                        <footer className="flex justify-between items-center px-8 py-4 border-t border-neutral-700">
+                            <button className="text-xs text-neutral-400 hover:text-[#00FFA3]">
+                                Send a copy to my email
                             </button>
                             <div className="flex gap-4">
                                 <button
                                     onClick={onClose}
-                                    className="px-3 py-1 rounded-lg bg-neutral-800 text-xs text-[#00FFA3] border-1 border-[#00FFA3] transition">
+                                    className="px-3 py-1 rounded-lg bg-neutral-800 text-xs text-[#00FFA3] border border-[#00FFA3] transition"
+                                >
                                     DECLINE
                                 </button>
                                 <button className="px-6 py-2 rounded-lg bg-[#00FFA3] text-xs text-black font-medium hover:bg-[#00e697] transition">
                                     AGREE
                                 </button>
                             </div>
-                        </div>
+                        </footer>
                     </div>
                 </div>
             </motion.div>
         </AnimatePresence>
-        </>
-    )
-}
+    );
+};
 
-export default Agreementsign
+export default Agreementsign;

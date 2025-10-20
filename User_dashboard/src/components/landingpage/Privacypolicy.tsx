@@ -4,18 +4,18 @@ const Privacypolicy = () => {
     return (
         <>
             <div className="flex-1 flex-col pt-20 pl-30 pr-30 h-auto justify-items-center  bg-black  gap-15" >
-                <h1 className="text-3xl text-[#71ecbf] font-bold">Audio Realities Privacy Policy</h1><br /><br />
-                <div className="flex flex-col gap-5 text-2sm text-[#71ecbf] font-semibold leading-7">
+                <h1 className="text-lg text-white font-bold">Audio Realities Privacy Policy</h1><br /><br />
+                <div className="flex flex-col gap-5 text-sm text-white font-sans leading-7 text-justify">
                     <p>Effective Date: \[Date]</p>
                     <p>Last Updated: \[Date]</p>
 
-                    <h3 className="text-xl text-[#71ecbf] font-bold">1. Introduction</h3>
+                    <h3 className="text-m text-white font-bold">1. Introduction</h3>
 
                     <p className="p-3">This Privacy Policy explains how [Your SaaS Company Name] ("Company," "we," "us," or "our") collects, uses, protects, and discloses information and data when you use our software-as-a-service application ("Service").
 
                         By using the Service, you consent to the data practices described in this policy.</p>
 
-                    <h3 className="text-xl text-[#71ecbf] font-bold">2. Information We Collect</h3>
+                    <h3 className="text-m text-white font-bold">2. Information We Collect</h3>
 
                     <p className="p-3">We collect information in three main categories:
 
@@ -48,7 +48,7 @@ const Privacypolicy = () => {
 
                         Tracking Technologies: We use cookies and similar tracking technologies (e.g., beacons) to track activity on our Service and hold certain information. (See Section 6).</p>
 
-                    <h3 className="text-xl text-[#71ecbf] font-bold"> 3. How we use your information</h3>
+                    <h3 className="text-m text-white font-bold"> 3. How we use your information</h3>
 
                     <p className="p-3">We use the information we collect for the following purposes:
 
@@ -64,7 +64,7 @@ const Privacypolicy = () => {
 
                         For Legal Compliance: To comply with legal obligations, regulatory requirements, and requests from governmental authorities.
                     </p>
-                    <h3 className="text-xl text-[#71ecbf] font-bold"> 4. How we share your information </h3>
+                    <h3 className="text-m text-white font-bold"> 4. How we share your information </h3>
 
                     <p className="p-3">We only share your information in the following limited circumstances:
 
@@ -86,13 +86,13 @@ const Privacypolicy = () => {
 
                         With Your Consent: We may disclose your information for any other purpose with your express consent.</p>
 
-                    <h3 className="text-xl text-[#71ecbf] font-bold"> 5.  Data Security and Retention </h3>
+                    <h3 className="text-m text-white font-bold"> 5.  Data Security and Retention </h3>
 
                     <p className="p-3">Security: We implement technical and organizational measures designed to secure your personal data from accidental loss and from unauthorized access, use, alteration, or disclosure. However, no method of transmission over the Internet is 100% secure.
 
                         Retention: We retain personal data for as long as your account is active or as needed to provide you with the Service. We will also retain and use your information as necessary to comply with our legal obligations, resolve disputes, and enforce our agreements.</p>
 
-                    <h3 className="text-xl text-[#71ecbf] font-bold"> 6. Your Data Rights </h3>
+                    <h3 className="text-m text-white font-bold"> 6. Your Data Rights </h3>
 
                     <p className="p-3"> Depending on your location (e.g., if you are in the EU/EEA and GDPR applies), you may have the following rights regarding your personal data:
 
@@ -108,11 +108,11 @@ const Privacypolicy = () => {
 
                         To exercise any of these rights, please contact us at [Your Legal Contact Email].</p>
 
-                    <h3 className="text-xl text-[#71ecbf] font-bold"> 7. Policy Updates </h3>
+                    <h3 className="text-m text-white font-bold"> 7. Policy Updates </h3>
 
                     <p className="p-3">We reserve the right to modify this Privacy Policy at any time. We will notify you of any material changes by posting the new policy on this page and updating the "Last Updated" date. Your continued use of the Service after the revised policy has become effective indicates that you have read, understood, and agreed to the current version.</p>
 
-                    <h3 className="text-xl text-[#71ecbf] font-bold"> 8. Contact Us </h3>
+                    <h3 className="text-m text-white font-bold"> 8. Contact Us </h3>
 
                     <p className="p-3">If you have questions or comments about this Privacy Policy, please contact us at: <br />
 

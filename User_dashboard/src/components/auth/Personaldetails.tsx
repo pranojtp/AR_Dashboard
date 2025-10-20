@@ -67,7 +67,7 @@ const customStyles: StylesConfig<any, true> = {
 
 
 const Personaldetails = () => {
-    const [selectedRoles, setSelectedRoles] = useState([]);
+    // const [selectedRoles, setSelectedRoles] = useState([]);
     const [image, setImage] = useState<string | null>(null);
     const [selectedAvatar, setSelectedAvatar] = useState<number | null>(null);
 
@@ -153,8 +153,8 @@ const Personaldetails = () => {
                                             isMulti
                                             name="role"
                                             options={roleOptions}
-                                            value={selectedRoles}
-                                            onChange={setSelectedRoles}
+                                            // value={selectedRoles}
+                                            // onChange={setSelectedRoles}
                                             placeholder="Select roles..."
                                             styles={customStyles}
                                             className="text-xs"
