@@ -71,7 +71,7 @@ const SidebarSettings = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="h-auto w-full bg-neutral-900 text-white">
+        <div className="h-fit w-full bg-neutral-900 text-white">
             {/* Header */}
             {/* <h1 className="text-lg font-bold">Settings</h1>
             <p className="text-sm text-neutral-400 mt-1">Manage your account preferences</p> */}

@@ -1,18 +1,22 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
+// import logo from '../../assets/favicon.ico'
 
 const Login = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const location = useLocation();
+    const fromSignout = location.state?.fromSignout || false;
 
-    const handleSubmit = () => {
-        // e.preventDefault()
-        navigate('/userdashboard/profile')
-    }
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        navigate("/userdashboard/profile");
+    };
 
     return (
         <>
             <div className="relative flex items-center justify-center h-screen bg-neutral-800 overflow-hidden">
                 {/* Login Form */}
                 <div className="relative z-10 bg-black backdrop-blur-xl border border-neutral-800/50 rounded-2xl flex flex-col gap-3 p-5 shadow-2xl w-full max-w-md">
+                    {/* <img src={logo} alt="logo" className="w-8 h-8"/> */}
                     <h1 className="text-white text-2xl font-bold text-center tracking-wide mt-2">
                         AUDIO REALITIES
                     </h1>
@@ -62,14 +66,16 @@ const Login = () => {
 
                             {/* Buttons */}
                             <div className="flex justify-center items-center mt-6 gap-3">
-                                <a href="/signup">
-                                    <button
-                                        type="button"
-                                        className="px-4 py-2 text-sm rounded-lg border border-neutral-700 text-gray-300 hover:border-[#00FFC6] hover:text-[#00FFC6] transition-all"
-                                    >
-                                        Create Account
-                                    </button>
-                                </a>
+                                {!fromSignout && (
+                                    <a href="/signup">
+                                        <button
+                                            type="button"
+                                            className="px-4 py-2 text-sm rounded-lg border border-neutral-700 text-gray-300 hover:border-[#00FFC6] hover:text-[#00FFC6] transition-all"
+                                        >
+                                            Create Account
+                                        </button>
+                                    </a>
+                                )}
                                 <button
                                     type="submit"
                                     className="px-6 py-2 text-sm rounded-lg bg-[#00FFC6] text-black font-semibold hover:bg-[#00e6b8] transition-all"

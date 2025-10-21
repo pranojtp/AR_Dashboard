@@ -15,6 +15,7 @@ import SidebarSettings from "./components/settings/Sidebar_settings"
 import LandingPage from "./pages/LandingPage"
 import Termsofservice from "./components/landingpage/Termsofservice"
 import Privacypolicy from "./components/landingpage/Privacypolicy"
+import Createproject from "./components/projects/Createproject"
 
 
 function App() {
@@ -34,8 +35,13 @@ function App() {
 
           <Route path="/userdashboard" element={<Dashboard />} >
             <Route path="profile" element={<Profilepage />} />
-            <Route path="voicevault" element={<Voicevault />} />            
-            <Route path="projectpage" element={<Projectpage />} />
+
+            <Route path="voicevault" element={<Voicevault />} />
+
+            <Route path="projectpage" element={<Projectpage />} >
+              <Route path="createproject" element={<Createproject />} />
+            </Route>
+
             <Route path="settings" element={<SidebarSettings />} />
             <Route path="settings" element={<Settingspage />} >
               <Route path="account" element={<Accountdetails />} />

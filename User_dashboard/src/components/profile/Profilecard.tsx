@@ -1,7 +1,14 @@
-import { Settings, Bell} from "lucide-react";
+import { Settings, Bell } from "lucide-react";
 import DP from "../../assets/dq.jpg"
+import { useNavigate } from "react-router-dom";
 
 const Profilecard = () => {
+    const navigate = useNavigate();
+
+    const handleSignOut = () => {
+        // Navigate back to login with state
+        navigate("/login", { state: { fromSignout: true } });
+    };
     return (
         <>
             <div className="flex flex-col gap-7 rounded-2xl bg-gradient-to-r from-[#00FFA3] to-[#00C4FF] w-full h-auto">
@@ -14,12 +21,12 @@ const Profilecard = () => {
                     {/* Right Side */}
                     <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-black font-medium">
                         {/* <UserRound size={18} className="cursor-pointer" /> */}
-                        <a href="/login">
-                        <button className="text-sm sm:text-sm text-black hover:underline">
-                            Sign Out
-                        </button>
-                        </a>
-                        <a href="/userdashboard/settings/account"><Settings size={18} className="cursor-pointer" /></a>                        
+                        {/* <a href="/login"> */}
+                            <button onClick={handleSignOut} className="text-sm sm:text-sm text-black hover:underline">
+                                Sign Out
+                            </button>
+                        {/* </a> */}
+                        <a href="/userdashboard/settings/account"><Settings size={18} className="cursor-pointer" /></a>
                         <a href="#"><Bell size={18} className="cursor-pointer" /></a>
                     </div>
                 </div>
