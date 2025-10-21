@@ -37,7 +37,7 @@ const Sidebar = () => {
               <AudioLines className="size-4" /> Voice Vault
             </NavLink>
             <NavLink
-              to="/userdashboard/projectpage"
+              to="/userdashboard/projectpage/createproject"
               className={({ isActive }) =>
                 `flex flex-row gap-3 px-2 py-1 rounded text-white hover:border-r-4 border-[#00FFA3] hover:bg-neutral-700
                 ${isActive

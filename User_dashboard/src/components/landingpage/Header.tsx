@@ -101,9 +101,11 @@ export const Header: React.FC = () => {
                 <div className="flex items-center gap-x-4">
                     <a
                         href="/login"
-                        className="text-black bg-lime-400 rounded-lg px-5 hover:bg-lime-300 transition"
+                        // className="text-black bg-lime-400 rounded-lg px-5 hover:bg-lime-300 transition"
+                        className="text-lime-300 rounded-lg px-5 hover:text-lime-400 transition"
                     >
-                        Login
+                        {/* Login */}
+                        Coming Soon
                     </a>
                     {/* Mobile Menu Button (only on small screens) */}
                     <div className="md:hidden">
