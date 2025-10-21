@@ -53,9 +53,9 @@ const Sidebar = () => {
         </div>
 
         <div>
-          <nav className="text-sm text-gray-300">
+          <nav className="text-sm text-gray-300">            
             <NavLink
-              to="/login"
+              to="/userdashboard/settings/account"
               className={({ isActive }) =>
                 `flex flex-row gap-3 px-2 py-1 rounded text-white hover:border-r-4 border-[#00FFA3] hover:bg-neutral-700
                 ${isActive
@@ -67,7 +67,7 @@ const Sidebar = () => {
               <Settings className="size-4" /> Settings
             </NavLink>
             <NavLink
-              to="/login"              
+              to="/login"
               className={({ isActive }) =>
                 `flex flex-row gap-3 px-2 py-1 rounded text-white hover:border-r-4 border-[#00FFA3] hover:bg-neutral-700
                 ${isActive
