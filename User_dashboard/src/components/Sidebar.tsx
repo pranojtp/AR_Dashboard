@@ -3,6 +3,7 @@ import { AudioLines } from "lucide-react"
 import { FileStack } from "lucide-react"
 import { Settings } from "lucide-react"
 import { NavLink } from "react-router-dom"
+import { LogOut } from "lucide-react"
 const Sidebar = () => {
   return (
     <>
@@ -54,7 +55,7 @@ const Sidebar = () => {
         <div>
           <nav className="text-sm text-gray-300">
             <NavLink
-              to="/userdashboard/settings/account"
+              to="/login"
               className={({ isActive }) =>
                 `flex flex-row gap-3 px-2 py-1 rounded text-white hover:border-r-4 border-[#00FFA3] hover:bg-neutral-700
                 ${isActive
@@ -64,6 +65,18 @@ const Sidebar = () => {
               }
             >
               <Settings className="size-4" /> Settings
+            </NavLink>
+            <NavLink
+              to="/login"              
+              className={({ isActive }) =>
+                `flex flex-row gap-3 px-2 py-1 rounded text-white hover:border-r-4 border-[#00FFA3] hover:bg-neutral-700
+                ${isActive
+                  ? 'border-r-4 bg-neutral-700'
+                  : ''
+                }`
+              }
+            >
+              <LogOut className="size-4" />
             </NavLink>
           </nav>
         </div>

@@ -1,15 +1,15 @@
 
-import { Settings, Bell, } from "lucide-react";
+// import { Settings, Bell, } from "lucide-react";
 import VaultImage from "../../assets/vault.png";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const Headercard = () => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
-    const handleSignOut = () => {
-        // Navigate back to login with state
-        navigate("/login", { state: { fromSignout: true } });
-    };
+    // const handleSignOut = () => {
+    //     // Navigate back to login with state
+    //     navigate("/login", { state: { fromSignout: true } });
+    // };
     return (
         <>
             <div className="lg:h-1/3 rounded-2xl bg-gradient-to-r from-[#00FFA3] to-[#00C4FF]">
@@ -22,12 +22,12 @@ const Headercard = () => {
                     <div className="flex items-center gap-4 text-black font-medium">
                         {/* <UserRound size={18} /> */}
                         {/* <a href="/login"> */}
-                            <button onClick={handleSignOut} className="flex items-center gap-1 text-sm sm:text-sm hover:underline">
+                            {/* <button onClick={handleSignOut} className="flex items-center gap-1 text-sm sm:text-sm hover:underline">
                                 Sign Out
-                            </button>
+                            </button> */}
                         {/* </a> */}
-                        <a href="/userdashboard/settings/account"><Settings size={18} className="cursor-pointer hover:text-gray-700" /></a>
-                        <Bell size={18} className="cursor-pointer hover:text-gray-700" />
+                        {/* <a href="/userdashboard/settings/account"><Settings size={18} className="cursor-pointer hover:text-gray-700" /></a>
+                        <Bell size={18} className="cursor-pointer hover:text-gray-700" /> */}
                     </div>
                 </div>
 
