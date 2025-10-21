@@ -17,9 +17,11 @@ const Login = () => {
                 {/* Login Form */}
                 <div className="relative z-10 bg-black backdrop-blur-xl border border-neutral-800/50 rounded-2xl flex flex-col gap-3 p-5 shadow-2xl w-full max-w-md">
                     {/* <img src={logo} alt="logo" className="w-8 h-8"/> */}
-                    <h1 className="text-white text-2xl font-bold text-center tracking-wide mt-2">
-                        AUDIO REALITIES
-                    </h1>
+                    <a href="/">
+                        <h1 className="text-white text-2xl font-bold text-center tracking-wide mt-2">
+                            AUDIO REALITIES
+                        </h1>
+                    </a>
                     <div className="p-8 rounded-2xl">
                         <form className="flex flex-col space-y-6" onSubmit={handleSubmit}>
                             {/* Email Field */}
