@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const navigation = [
     { name: "Create a Project", href: "/userdashboard/projectpage/createproject"},
-    { name: "Project Details", href: "" },
+    { name: "Project Details", href: "/userdashboard/projectpage/projectdetails" },
     { name: "Project Team View", href: ""},
 ];
 const Navbar_project = () => {

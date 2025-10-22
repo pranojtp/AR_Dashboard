@@ -16,6 +16,7 @@ import LandingPage from "./pages/LandingPage"
 import Termsofservice from "./components/landingpage/Termsofservice"
 import Privacypolicy from "./components/landingpage/Privacypolicy"
 import Createproject from "./components/projects/Createproject"
+import Projectdetails from "./components/projects/Projectdetails"
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
 
             <Route path="projectpage" element={<Projectpage />} >
               <Route path="createproject" element={<Createproject />} />
+              <Route path="projectdetails" element={<Projectdetails />} />
             </Route>
 
             <Route path="settings" element={<SidebarSettings />} />
