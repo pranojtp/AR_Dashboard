@@ -10,7 +10,6 @@ const Login = () => {
         e.preventDefault();
         navigate("/userdashboard/profile");
     };
-
     return (
         <>
             <div className="relative flex items-center justify-center h-screen bg-neutral-800 overflow-hidden">
@@ -72,7 +71,7 @@ const Login = () => {
                                     <a href="/signup">
                                         <button
                                             type="button"
-                                            className="px-4 py-2 text-sm rounded-lg border border-neutral-700 text-gray-300 hover:border-[#00FFC6] hover:text-[#00FFC6] transition-all"
+                                            className="px-4 py-2 text-sm rounded-lg border border-neutral-700 text-gray-300 hover:border-[#00FFA3] hover:text-[#00FFA3] transition-all"
                                         >
                                             Create Account
                                         </button>
@@ -80,7 +79,7 @@ const Login = () => {
                                 )} */}
                                 <button
                                     type="submit"
-                                    className="px-8 py-2 text-sm rounded-2xl bg-[#00FFC6] text-black font-semibold hover:bg-[#00e6b8] transition-all"
+                                    className="px-8 py-2 text-sm rounded-2xl bg-[#00FFA3] text-black font-semibold hover:bg-[#00e6b8] transition-all"
                                 >
                                     LOGIN
                                 </button>
