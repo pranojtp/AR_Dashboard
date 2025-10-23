@@ -118,7 +118,6 @@ const Teams = () => {
     const [query, setQuery] = useState<string>("");
     const [showModal, setShowModal] = useState<boolean>(false);
 
-    // Dummy team members
     const members: Member[] = [
         { name: "Babychen Paul", role: "Assistant" },
         { name: "Biju Basil", role: "Legal Head" },
@@ -126,32 +125,27 @@ const Teams = () => {
         { name: "Nithin Chand", role: "Manager" },
     ];
 
-    // Filtering + Sorting
     const filteredAndSortedMembers = useMemo(() => {
         let filtered = members;
 
-        // Filter by role
         if (selectedValue !== "allroles") {
             filtered = filtered.filter(
                 (m) => m.role.toLowerCase() === selectedValue.toLowerCase()
             );
         }
 
-        // Search
         if (query.trim()) {
             filtered = filtered.filter((m) =>
                 m.name.toLowerCase().includes(query.toLowerCase())
             );
         }
 
-        // Sort
         if (sortBy === "names") filtered = [...filtered].sort((a, b) => a.name.localeCompare(b.name));
         if (sortBy === "role") filtered = [...filtered].sort((a, b) => a.role.localeCompare(b.role));
 
         return filtered;
     }, [members, selectedValue, sortBy, query]);
 
-    // Role Filter Options
     const options = [
         { label: "All Roles", value: "allroles" },
         { label: "Manager", value: "manager" },
@@ -164,7 +158,6 @@ const Teams = () => {
         { label: "Sort By Role", value: "role" },
     ];
 
-    // Function to get initials
     const getInitials = (name: string) =>
         name
             .split(" ")
@@ -173,10 +166,10 @@ const Teams = () => {
             .toUpperCase();
 
     return (
-        <div className="bg-neutral-950 rounded-2xl p-6 text-white relative">
+        <div className="bg-neutral-950 rounded-2xl p-4 sm:p-6 text-white relative w-full">
             {/* Header */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
-                <h3 className="text-lg font-semibold">Team Members</h3>
+                <h3 className="text-base sm:text-lg font-semibold">Team Members</h3>
 
                 <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
                     <input
@@ -184,13 +177,13 @@ const Teams = () => {
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         placeholder="Search..."
-                        className="p-1.5 border rounded-lg border-neutral-700 bg-neutral-900 text-white w-full sm:w-auto text-sm max-w-xs focus:outline-none"
+                        className="p-2 sm:p-1.5 border rounded-lg border-neutral-700 bg-neutral-900 text-white w-full sm:w-auto text-sm sm:text-xs max-w-full sm:max-w-xs focus:outline-none"
                     />
 
                     <select
                         value={selectedValue}
                         onChange={(e) => setSelectedValue(e.target.value)}
-                        className="p-1.5 rounded-lg bg-amber-100 text-black text-xs"
+                        className="p-2 sm:p-1.5 rounded-lg bg-amber-100 text-black text-xs sm:text-xs w-full sm:w-auto"
                     >
                         {options.map((option) => (
                             <option key={option.value} value={option.value}>
@@ -202,7 +195,7 @@ const Teams = () => {
                     <select
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value)}
-                        className="p-1.5 rounded-lg bg-amber-100 text-black text-xs"
+                        className="p-2 sm:p-1.5 rounded-lg bg-amber-100 text-black text-xs sm:text-xs w-full sm:w-auto"
                     >
                         <option value="">-- Sort --</option>
                         {sortOptions.map((option) => (
@@ -214,7 +207,7 @@ const Teams = () => {
 
                     <button
                         onClick={() => setShowModal(true)}
-                        className="px-4 py-1.5 bg-[#00FFA3] text-black rounded-xl hover:bg-[#00e695] transition text-xs font-medium"
+                        className="px-4 py-2 sm:py-1.5 bg-[#00FFA3] text-black rounded-xl hover:bg-[#00e695] transition text-xs sm:text-xs font-medium w-full sm:w-auto"
                     >
                         + Add Members
                     </button>
@@ -227,19 +220,19 @@ const Teams = () => {
                     filteredAndSortedMembers.map((member, index) => (
                         <div
                             key={index}
-                            className="flex items-center justify-between py-3 hover:bg-neutral-900 transition rounded-lg px-2"
+                            className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 hover:bg-neutral-900 transition rounded-lg px-2 gap-2 sm:gap-0"
                         >
-                            <div className="flex items-center gap-2">
-                                <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[#00FFA3] text-black font-semibold">
+                            <div className="flex items-center gap-3 sm:gap-2">
+                                <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[#00FFA3] text-black font-semibold text-sm sm:text-base">
                                     {getInitials(member.name)}
                                 </div>
                                 <div>
-                                    <p className="font-medium text-xs">{member.name}</p>
-                                    <p className="text-neutral-400 text-xs">{member.role}</p>
+                                    <p className="font-medium text-sm sm:text-xs">{member.name}</p>
+                                    <p className="text-neutral-400 text-xs sm:text-xs">{member.role}</p>
                                 </div>
                             </div>
 
-                            <div className="flex gap-4 text-[#00FFA3] text-xs font-semibold">
+                            <div className="flex gap-4 text-[#00FFA3] text-xs font-semibold sm:justify-end">
                                 <button className="hover:text-[#00e695]">EDIT</button>
                                 <button className="hover:text-red-400">REMOVE</button>
                             </div>
@@ -251,10 +244,9 @@ const Teams = () => {
             </div>
 
             {/* Footer */}
-            <div className="flex justify-between items-center border-t border-neutral-800 mt-4 pt-3 text-xs text-neutral-400">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-t border-neutral-800 mt-4 pt-3 text-xs text-neutral-400 gap-2">
                 <p>
-                    Showing {filteredAndSortedMembers.length} of {members.length} team
-                    members
+                    Showing {filteredAndSortedMembers.length} of {members.length} team members
                 </p>
                 <p>
                     Total Members:{" "}
@@ -276,7 +268,7 @@ const Teams = () => {
                             onClick={() => setShowModal(false)}
                         />
                         <motion.div
-                            className="fixed inset-0 flex items-center justify-center z-50"
+                            className="fixed inset-0 flex items-center justify-center z-50 p-3 sm:p-6"
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.8 }}
