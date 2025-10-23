@@ -103,109 +103,94 @@
 
 // export default Teams
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Addteammember from "./Addteammember";
 
-interface Option {
-    label: string;
-    value: string;
+interface Member {
+    name: string;
+    role: string;
 }
-
-interface sortOption {
-    label: string;
-    value: string;
-}
-
-// interface Member {
-//     id: number;
-//     name: string;
-//     role: string;
-// }
 
 const Teams = () => {
     const [selectedValue, setSelectedValue] = useState<string>("allroles");
     const [sortBy, setSortBy] = useState<string>("");
     const [query, setQuery] = useState<string>("");
     const [showModal, setShowModal] = useState<boolean>(false);
-    // const [members, setMembers] = useState<Member[]>([]);
-    // const [formData, setFormData] = useState({ name: "", role: "" });
 
-    const options: Option[] = [
-        { label: "All Roles", value: "allroles" },
-        { label: "Sound Designer", value: "sounddesigner" },
-        { label: "Sound Mixer", value: "soundmixer" },
-        { label: "Producer", value: "producer" },
+    // Dummy team members
+    const members: Member[] = [
+        { name: "Babychen Paul", role: "Assistant" },
+        { name: "Biju Basil", role: "Legal Head" },
+        { name: "Daniel de Bem", role: "Assistant" },
+        { name: "Nithin Chand", role: "Manager" },
     ];
 
-    const sortoptions: sortOption[] = [
+    // Filtering + Sorting
+    const filteredAndSortedMembers = useMemo(() => {
+        let filtered = members;
+
+        // Filter by role
+        if (selectedValue !== "allroles") {
+            filtered = filtered.filter(
+                (m) => m.role.toLowerCase() === selectedValue.toLowerCase()
+            );
+        }
+
+        // Search
+        if (query.trim()) {
+            filtered = filtered.filter((m) =>
+                m.name.toLowerCase().includes(query.toLowerCase())
+            );
+        }
+
+        // Sort
+        if (sortBy === "names") filtered = [...filtered].sort((a, b) => a.name.localeCompare(b.name));
+        if (sortBy === "role") filtered = [...filtered].sort((a, b) => a.role.localeCompare(b.role));
+
+        return filtered;
+    }, [members, selectedValue, sortBy, query]);
+
+    // Role Filter Options
+    const options = [
+        { label: "All Roles", value: "allroles" },
+        { label: "Manager", value: "manager" },
+        { label: "Legal Head", value: "legal head" },
+        { label: "Assistant", value: "assistant" },
+    ];
+
+    const sortOptions = [
         { label: "Sort By Name", value: "names" },
         { label: "Sort By Role", value: "role" },
     ];
 
-    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedValue(event.target.value);
-    };
-
-    const sortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSortBy(event.target.value);
-    };
-
-    const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setQuery(event.target.value);
-    };
-
-    // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //     const { name, value } = event.target;
-    //     setFormData({ ...formData, [name]: value });
-    // };
-
-    // const handleSubmit = (event: React.FormEvent) => {
-    //     event.preventDefault();
-    //     if (formData.name.trim() && formData.role.trim()) {
-    //         const newMember: Member = {
-    //             id: Date.now(),
-    //             name: formData.name,
-    //             role: formData.role,
-    //         };
-    //         setMembers([...members, newMember]);
-    //         setFormData({ name: "", role: "" });
-    //         setShowModal(false);
-    //     }
-    // };
-
-    // Filtering + Sorting
-    // const filteredMembers = members
-    //     .filter((m) =>
-    //         selectedValue === "allroles" ? true : m.role.toLowerCase() === selectedValue
-    //     )
-    //     .filter((m) => m.name.toLowerCase().includes(query.toLowerCase()));
-
-    // const sortedMembers = [...filteredMembers].sort((a, b) => {
-    //     if (sortBy === "names") return a.name.localeCompare(b.name);
-    //     if (sortBy === "role") return a.role.localeCompare(b.role);
-    //     return 0;
-    // });
+    // Function to get initials
+    const getInitials = (name: string) =>
+        name
+            .split(" ")
+            .map((n) => n[0])
+            .join("")
+            .toUpperCase();
 
     return (
-        <div className="bg-black rounded-2xl p-4 text-white relative">
+        <div className="bg-neutral-950 rounded-2xl p-6 text-white relative">
             {/* Header */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4 md:gap-0">
-                <h3 className="text-lg font-semibold mb-2 md:mb-0">Teams</h3>
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
+                <h3 className="text-lg font-semibold">Team Members</h3>
 
-                <div className="flex flex-wrap items-center gap-3 sm:gap-4 w-full md:w-auto">
+                <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
                     <input
                         type="text"
                         value={query}
-                        onChange={handleQueryChange}
-                        placeholder="Search ..."
-                        className="p-1 border rounded-lg border-neutral-500 text-white w-full sm:w-auto text-xs max-w-xs"
+                        onChange={(e) => setQuery(e.target.value)}
+                        placeholder="Search..."
+                        className="p-1.5 border rounded-lg border-neutral-700 bg-neutral-900 text-white w-full sm:w-auto text-sm max-w-xs focus:outline-none"
                     />
 
                     <select
                         value={selectedValue}
-                        onChange={handleChange}
-                        className="w-fit min-w-[100px] p-1 rounded-lg bg-amber-100 text-black text-xs"
+                        onChange={(e) => setSelectedValue(e.target.value)}
+                        className="p-1.5 rounded-lg bg-amber-100 text-black text-xs"
                     >
                         {options.map((option) => (
                             <option key={option.value} value={option.value}>
@@ -216,19 +201,20 @@ const Teams = () => {
 
                     <select
                         value={sortBy}
-                        onChange={sortChange}
-                        className="w-fit min-w-[100px] p-1 rounded-lg bg-amber-100 text-black text-xs"
+                        onChange={(e) => setSortBy(e.target.value)}
+                        className="p-1.5 rounded-lg bg-amber-100 text-black text-xs"
                     >
-                        {sortoptions.map((sortOption) => (
-                            <option key={sortOption.value} value={sortOption.value}>
-                                {sortOption.label}
+                        <option value="">-- Sort --</option>
+                        {sortOptions.map((option) => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
                             </option>
                         ))}
                     </select>
 
                     <button
                         onClick={() => setShowModal(true)}
-                        className="px-4 py-1 bg-[#00FFA3] text-black rounded-xl hover:bg-[#00e695] transition w-full sm:w-auto text-xs font-medium"
+                        className="px-4 py-1.5 bg-[#00FFA3] text-black rounded-xl hover:bg-[#00e695] transition text-xs font-medium"
                     >
                         + Add Members
                     </button>
@@ -236,48 +222,74 @@ const Teams = () => {
             </div>
 
             {/* Member List */}
-            {/* {sortedMembers.length > 0 ? (
-                <div className="space-y-2">
-                    {sortedMembers.map((member) => (
+            <div className="divide-y divide-neutral-800">
+                {filteredAndSortedMembers.length > 0 ? (
+                    filteredAndSortedMembers.map((member, index) => (
                         <div
-                            key={member.id}
-                            className="flex justify-between items-center bg-neutral-800 p-3 rounded-lg"
+                            key={index}
+                            className="flex items-center justify-between py-3 hover:bg-neutral-900 transition rounded-lg px-2"
                         >
-                            <span className="font-medium">{member.name}</span>
-                            <span className="text-gray-400 text-sm">{member.role}</span>
-                        </div>
-                    ))}
-                </div>
-            ) : (
-                <p className="text-gray-400 text-sm">No members added yet.</p>
-            )} */}
+                            <div className="flex items-center gap-2">
+                                <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[#00FFA3] text-black font-semibold">
+                                    {getInitials(member.name)}
+                                </div>
+                                <div>
+                                    <p className="font-medium text-xs">{member.name}</p>
+                                    <p className="text-neutral-400 text-xs">{member.role}</p>
+                                </div>
+                            </div>
 
-            {/* Modal with Framer Motion */}
+                            <div className="flex gap-4 text-[#00FFA3] text-xs font-semibold">
+                                <button className="hover:text-[#00e695]">EDIT</button>
+                                <button className="hover:text-red-400">REMOVE</button>
+                            </div>
+                        </div>
+                    ))
+                ) : (
+                    <p className="text-gray-400 text-sm py-4">No members found.</p>
+                )}
+            </div>
+
+            {/* Footer */}
+            <div className="flex justify-between items-center border-t border-neutral-800 mt-4 pt-3 text-xs text-neutral-400">
+                <p>
+                    Showing {filteredAndSortedMembers.length} of {members.length} team
+                    members
+                </p>
+                <p>
+                    Total Members:{" "}
+                    <span className="ml-1 px-2 py-0.5 bg-[#00FFA3] text-black rounded-md font-semibold">
+                        {members.length}
+                    </span>
+                </p>
+            </div>
+
+            {/* Modal */}
             <AnimatePresence>
                 {showModal && (
                     <>
                         <motion.div
-                            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
+                            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setShowModal(false)}
                         />
-
-                        Modal Content
                         <motion.div
                             className="fixed inset-0 flex items-center justify-center z-50"
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.8 }}
                             transition={{ duration: 0.25, ease: "easeOut" }}
-                        ></motion.div>
-                        <Addteammember onClose={() => setShowModal(false)} />
+                        >
+                            <Addteammember onClose={() => setShowModal(false)} />
+                        </motion.div>
                     </>
                 )}
             </AnimatePresence>
-        </div >
+        </div>
     );
 };
 
 export default Teams;
+

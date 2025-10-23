@@ -31,7 +31,7 @@ const Profilecard = () => {
                     </div>
                 </div>
                 {/* 🔹 Profile Section */}
-                <section className="rounded-2xl bg-gradient-to-r from-[#00FFA3] to-[#00C4FF] p-6 flex flex-col md:flex-row justify-between items-center gap-6 shadow-[0_8px_30px_rgba(0,0,0,0.6)] mt-15 h-1/2">
+                <section className="rounded-2xl bg-gradient-to-r from-[#00FFA3] to-[#00C4FF] p-6 flex flex-col md:flex-row justify-between items-center gap-6 shadow-[0_8px_30px_rgba(0,0,0,0.6)] mt-5 h-auto">
                     <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left space-y-3 sm:space-y-0 sm:space-x-4">
                         <img
                             src={DP}

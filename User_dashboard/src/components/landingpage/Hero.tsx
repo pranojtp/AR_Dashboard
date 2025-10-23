@@ -14,7 +14,7 @@ const Hero = () => {
                         <span className="relative whitespace-nowrap text-lime-400">
                             <span className="relative">speech technology</span>
                         </span>{' '}
-                        for modern cinema.
+                        for the modern cinema.
                     </h1>
 
                     <div className="mx-auto bg-black/50 bg-opacity-80 p-6 rounded-lg">
@@ -26,9 +26,9 @@ const Hero = () => {
                             so you can enjoy all the time and effort you put into creating magic with sounds.
                             We are committed to get inspired by the same magic to push boundaries in audio technology.
                         </p>
-                        <div className="mt-10 flex justify-center gap-x-6">
+                        {/* <div className="mt-10 flex justify-center gap-x-6">
                             <button className='text-white'>Explore Features</button>
-                        </div>
+                        </div> */}
                     </div>
 
                     {/* Three.js Waves Background */}
