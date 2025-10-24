@@ -1,10 +1,10 @@
 import Select from "react-select";
 import { useState } from "react";
 import type { StylesConfig } from "react-select";
-// import avatar1 from "../../assets/avatar1.jpg"
-// import avatar2 from "../../assets/avatar2.jpg"
-import avatar3 from "../../assets/avatar3.jpg"
-import avatar4 from "../../assets/avatar4.jpg"
+import avatar1 from "../../assets/avatar1.jpg"
+import avatar2 from "../../assets/avatar2.jpg"
+// import avatar3 from "../../assets/avatar3.jpg"
+// import avatar4 from "../../assets/avatar4.jpg"
 
 const roleOptions = [
     { value: "Actor", label: "Actor" },
@@ -74,15 +74,15 @@ const Personaldetails = () => {
     const [selectedAvatar, setSelectedAvatar] = useState<number | null>(null);
 
     const avatars = [
-        avatar4,
-        avatar3,
-        avatar4,
-        avatar3,
-        avatar4,
-        avatar3,
-        avatar4,
-        avatar3,
-        avatar4,
+        avatar1,
+        avatar2,
+        avatar1,
+        avatar2,
+        avatar1,
+        avatar2,
+        avatar1,
+        avatar2,
+        avatar1,
     ];
 
     // Handle image upload
@@ -265,7 +265,7 @@ const Personaldetails = () => {
                         <div className="flex flex-col col-span-1 gap-6">
                             <div className="p-6 w-full max-w-sm">
                                 <div className="flex flex-col gap-4">
-                                    <div className="h-25 w-25 rounded-2xl bg-neutral-800 border border-neutral-500 overflow-hidden flex items-center justify-center">
+                                    <div className="h-25 w-25 rounded-full bg-neutral-800 border border-neutral-500 overflow-hidden flex items-center justify-center">
                                         {image ? (
                                             <img src={image} alt="Profile" className="w-full h-full object-cover" />
                                         ) : (
@@ -316,7 +316,7 @@ const Personaldetails = () => {
                                                 <div
                                                     key={index}
                                                     onClick={() => handleAvatarSelect(index)}
-                                                    className={`h-15 w-15 flex items-center justify-center rounded-2xl border border-neutral-700 cursor-pointer transition ${selectedAvatar === index
+                                                    className={`h-15 w-15 flex items-center justify-center rounded-full border border-neutral-700 cursor-pointer transition ${selectedAvatar === index
                                                         ? "ring-2 ring-neutral-500"
                                                         : "hover:ring-1 hover:ring-neutral-500"
                                                         }`}
@@ -324,7 +324,7 @@ const Personaldetails = () => {
                                                     <img
                                                         src={avatar}
                                                         alt={`Avatar ${index + 1}`}
-                                                        className="w-full h-full object-cover rounded-2xl"
+                                                        className="w-full h-full object-cover rounded-full"
                                                     />
                                                 </div>
                                             ))}
