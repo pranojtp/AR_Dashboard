@@ -1,8 +1,9 @@
 import Select from "react-select";
 import { useState } from "react";
 import type { StylesConfig } from "react-select";
-import avatar1 from "../../assets/avatar1.jpg"
-import avatar2 from "../../assets/avatar2.jpg"
+import { useNavigate } from "react-router-dom";
+import avatar1 from "../../assets/avatar1.jpg";
+import avatar2 from "../../assets/avatar2.jpg";
 
 const roleOptions = [
     { value: "Actor", label: "Actor" },
@@ -14,11 +15,12 @@ const roleOptions = [
     { value: "Music Director", label: "Music Director" },
     { value: "Dubbing Director", label: "Dubbing Director" },
 ];
+
 const customStyles: StylesConfig<any, true> = {
     control: (base, state) => ({
         ...base,
         backgroundColor: "#262626", // bg-neutral-800
-        borderColor: state.isFocused ? "#00FFA3" : "#737373", // focus border
+        borderColor: state.isFocused ? "#00FFA3" : "#737373",
         boxShadow: state.isFocused ? "0 0 0 1px #00FFA3" : "none",
         "&:hover": { borderColor: "#00FFA3" },
         color: "white",
@@ -27,7 +29,7 @@ const customStyles: StylesConfig<any, true> = {
     }),
     menu: (base) => ({
         ...base,
-        backgroundColor: "#171717", // darker dropdown background
+        backgroundColor: "#171717",
         color: "white",
         borderRadius: "0.5rem",
     }),
@@ -57,7 +59,7 @@ const customStyles: StylesConfig<any, true> = {
     }),
     placeholder: (base) => ({
         ...base,
-        color: "#9CA3AF", // text-gray-400
+        color: "#9CA3AF",
     }),
     singleValue: (base) => ({
         ...base,
@@ -65,9 +67,23 @@ const customStyles: StylesConfig<any, true> = {
     }),
 };
 
-
 const Personaldetails = () => {
-    // const [selectedRoles, setSelectedRoles] = useState([]);
+    const navigate = useNavigate();
+
+    // --- Form State ---
+    const [formData, setFormData] = useState({
+        displayName: "",
+        legalName: "",
+        roles: [],
+    });
+
+    const [errors, setErrors] = useState({
+        displayName: "",
+        legalName: "",
+        roles: "",
+    });
+
+    // --- Image Upload ---
     const [image, setImage] = useState<string | null>(null);
     const [selectedAvatar, setSelectedAvatar] = useState<number | null>(null);
 
@@ -83,7 +99,33 @@ const Personaldetails = () => {
         avatar1,
     ];
 
-    // Handle image upload
+    // --- Handle Text Inputs ---
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    // --- Handle Role Select ---
+    const handleRoleChange = (selected: any) => {
+        setFormData((prev) => ({ ...prev, roles: selected }));
+    };
+
+    // --- Handle Save with Validation ---
+    const handleSave = () => {
+        const newErrors = {
+            displayName: formData.displayName ? "" : "Display Name is required",
+            legalName: formData.legalName ? "" : "Legal Name is required",
+            roles: formData.roles.length > 0 ? "" : "Please select at least one role",
+        };
+        setErrors(newErrors);
+
+        const hasError = Object.values(newErrors).some((err) => err !== "");
+        if (!hasError) {
+            navigate("/userdashboard/profile");
+        }
+    };
+
+    // --- Image Upload Handler ---
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
@@ -101,17 +143,16 @@ const Personaldetails = () => {
         reader.readAsDataURL(file);
     };
 
-    // Handle remove photo
     const handleRemove = () => {
         setImage(null);
         setSelectedAvatar(null);
     };
 
-    // Handle avatar selection
     const handleAvatarSelect = (index: number) => {
         setSelectedAvatar(index);
         setImage(avatars[index]);
     };
+
     return (
         <>
             <div className="h-full pl-80 pr-20 pt-5 pb-5 bg-neutral-800">
@@ -119,47 +160,62 @@ const Personaldetails = () => {
                     <div className="flex justify-between items-center mb-8">
                         <h1 className="text-xl font-semibold">Complete Your Profile</h1>
                     </div>
+
                     <div className="grid grid-cols-3 gap-20">
                         <div className="flex flex-col col-span-2 gap-2 ">
                             <div className="grid grid-cols-2 gap-6">
                                 {/* Left column */}
                                 <div className="flex flex-col gap-6">
+                                    {/* Display Name */}
                                     <div>
                                         <label className="block mb-2 text-sm font-medium">Display Name *</label>
                                         <input
                                             type="text"
                                             name="displayName"
-                                            // value={formData.displayName}
-                                            // onChange={handleChange}
+                                            value={formData.displayName}
+                                            onChange={handleChange}
                                             placeholder="Enter your display name"
                                             className="w-full rounded-lg text-xs bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                             required
                                         />
+                                        {errors.displayName && (
+                                            <p className="text-red-500 text-xs mt-1">{errors.displayName}</p>
+                                        )}
                                     </div>
+
+                                    {/* Legal Name */}
                                     <div>
                                         <label className="block mb-2 text-sm font-medium">Legal Name *</label>
                                         <input
                                             type="text"
                                             name="legalName"
-                                            // value={formData.legalName}
-                                            // onChange={handleChange}
+                                            value={formData.legalName}
+                                            onChange={handleChange}
                                             placeholder="Enter your legal name"
                                             className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
+                                        {errors.legalName && (
+                                            <p className="text-red-500 text-xs mt-1">{errors.legalName}</p>
+                                        )}
                                     </div>
+
+                                    {/* Role */}
                                     <div>
                                         <label className="block mb-2 text-sm font-medium">Role *</label>
                                         <Select
                                             isMulti
                                             name="role"
                                             options={roleOptions}
-                                            // value={selectedRoles}
-                                            // onChange={setSelectedRoles}
+                                            value={formData.roles}
+                                            onChange={handleRoleChange}
                                             placeholder="Select roles..."
                                             styles={customStyles}
                                             className="text-xs"
                                             required
                                         />
+                                        {errors.roles && (
+                                            <p className="text-red-500 text-xs mt-1">{errors.roles}</p>
+                                        )}
                                     </div>
                                 </div>
 
@@ -170,8 +226,6 @@ const Personaldetails = () => {
                                         <input
                                             type="text"
                                             name="affiliation"
-                                            // value={formData.affiliation}
-                                            // onChange={handleChange}
                                             placeholder="Company or organization affiliation"
                                             className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
@@ -181,8 +235,6 @@ const Personaldetails = () => {
                                         <input
                                             type="text"
                                             name="industry"
-                                            // value={formData.industry}
-                                            // onChange={handleChange}
                                             placeholder="e.g. Mollywood, Hollywood"
                                             className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
@@ -192,8 +244,6 @@ const Personaldetails = () => {
                                         <input
                                             type="text"
                                             name="location"
-                                            // value={formData.location}
-                                            // onChange={handleChange}
                                             placeholder="City, State/Country"
                                             className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
@@ -206,29 +256,24 @@ const Personaldetails = () => {
                                 <label className="block mb-2 text-sm font-medium">Bio</label>
                                 <textarea
                                     name="bio"
-                                    // value={formData.bio}
-                                    // onChange={handleChange}
                                     placeholder="Maximum 200 characters"
                                     maxLength={200}
                                     className="w-full h-20 text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                 />
                             </div><br />
-                            {/* Social Media */}
 
+                            {/* Social Media */}
                             <div className="flex justify-between items-center mb-8">
                                 <h1 className="text-m font-semibold">Social Media Links</h1>
                             </div>
 
                             <div className="grid grid-cols-2 gap-6">
-                                {/* Left column */}
                                 <div className="flex flex-col gap-6">
                                     <div>
                                         <label className="block mb-2 text-sm font-medium">Facebook</label>
                                         <input
                                             type="text"
                                             name="facebook"
-                                            // value={formData.displayName}
-                                            // onChange={handleChange}
                                             placeholder="https://facebook.com/username"
                                             className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
@@ -237,9 +282,7 @@ const Personaldetails = () => {
                                         <label className="block mb-2 text-sm font-medium">Instagram</label>
                                         <input
                                             type="text"
-                                            name="twitter"
-                                            // value={formData.legalName}
-                                            // onChange={handleChange}
+                                            name="instagram"
                                             placeholder="https://instagram.com/username"
                                             className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
@@ -251,8 +294,6 @@ const Personaldetails = () => {
                                         <input
                                             type="text"
                                             name="twitter"
-                                            // value={formData.affiliation}
-                                            // onChange={handleChange}
                                             placeholder="https://twitter.com/username"
                                             className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
@@ -260,6 +301,8 @@ const Personaldetails = () => {
                                 </div>
                             </div>
                         </div>
+
+                        {/* Image Upload + Avatar Section */}
                         <div className="flex flex-col col-span-1 gap-6">
                             <div className="p-6 w-full max-w-sm">
                                 <div className="flex flex-col gap-4">
@@ -332,38 +375,22 @@ const Personaldetails = () => {
                                             <button className="px-4 py-2 bg-neutral-800 text-sm text-[#00e695] font-medium w-35 border border-[#00e695] rounded-lg hover:bg-[#00e695] hover:text-black transition">
                                                 Cancel
                                             </button>
-                                            <a href="/userdashboard/profile">
-                                                <button className="px-4 py-2 bg-[#00FFA3] text-sm text-black font-medium w-35 rounded-lg hover:bg-[#00e695] transition">
-                                                    Save
-                                                </button>
-                                            </a>
+                                            <button
+                                                onClick={handleSave}
+                                                className="px-4 py-2 bg-[#00FFA3] text-sm text-black font-medium w-35 rounded-lg hover:bg-[#00e695] transition"
+                                            >
+                                                Save
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {/* <div className="flex justify-end gap-5 mb-8">
-                    <button
-                        // onClick={handleSave}
-                        className="px-6 py-2 bg-neutral-800 text-[#00e695] font-Read w-35 border-1 border-[#00e695] rounded-lg hover:bg-[#00e695] hover:text-black transition"
-                    >
-                        Cancel
-                    </button>
-                    <a href="/addmembers">
-                        <button
-                            // onClick={handleSave}
-                            className="px-6 py-2 bg-[#00FFA3] text-black font-Read w-35 rounded-lg hover:bg-[#00e695] transition"
-                        >
-                            Save
-                        </button>
-                    </a>
-                </div> */}
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default Personaldetails
-
+export default Personaldetails;

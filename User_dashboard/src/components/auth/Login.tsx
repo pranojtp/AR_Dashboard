@@ -1,10 +1,11 @@
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
+
 // import logo from '../../assets/favicon.ico'
 
 const Login = () => {
     const navigate = useNavigate();
-    // const location = useLocation();
-    // const fromSignout = location.state?.fromSignout || false;
+    const location = useLocation();
+    const fromSignout = location.state?.fromSignout || false;
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -67,7 +68,7 @@ const Login = () => {
 
                             {/* Buttons */}
                             <div className="flex justify-center items-center mt-6 gap-3">
-                                {/* {!fromSignout && (
+                                {!fromSignout && (
                                     <a href="/signup">
                                         <button
                                             type="button"
@@ -76,7 +77,7 @@ const Login = () => {
                                             Create Account
                                         </button>
                                     </a>
-                                )} */}
+                                )}
                                 <button
                                     type="submit"
                                     className="px-8 py-2 text-sm rounded-2xl bg-[#00FFA3] text-black font-semibold hover:bg-[#00e6b8] transition-all"
