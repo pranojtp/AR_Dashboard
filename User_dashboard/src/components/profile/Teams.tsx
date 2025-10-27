@@ -166,8 +166,7 @@ const Teams = () => {
             .toUpperCase();
 
     return (
-        <div className="bg-neutral-950 rounded-2xl p-4 sm:p-6 text-white relative w-full">
-            {/* Header */}
+        <div className="bg-neutral-950 rounded-2xl p-4 sm:p-4 text-white relative w-full">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
                 <h3 className="text-base sm:text-lg font-semibold">Team Members</h3>
 
