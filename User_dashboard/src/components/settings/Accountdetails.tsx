@@ -127,7 +127,7 @@ const Personaldetails = () => {
                                 {/* Left column */}
                                 <div className="flex flex-col gap-6">
                                     <div>
-                                        <label className="block mb-2 text-sm font-medium">Display Name *</label>
+                                        <label className="block mb-2 text-sm font-medium">Display Name</label>
                                         <input
                                             type="text"
                                             name="displayName"
@@ -139,7 +139,7 @@ const Personaldetails = () => {
                                         />
                                     </div>
                                     <div>
-                                        <label className="block mb-2 text-sm font-medium">Legal Name *</label>
+                                        <label className="block mb-2 text-sm font-medium">Legal Name</label>
                                         <input
                                             type="text"
                                             name="legalName"
@@ -150,7 +150,7 @@ const Personaldetails = () => {
                                         />
                                     </div>
                                     <div>
-                                        <label className="block mb-2 text-sm font-medium">Role *</label>
+                                        <label className="block mb-2 text-sm font-medium">Role</label>
                                         <Select
                                             isMulti
                                             name="role"
