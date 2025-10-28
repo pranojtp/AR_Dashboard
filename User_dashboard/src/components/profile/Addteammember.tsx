@@ -145,7 +145,7 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
                         )}
 
                         {/* 🔘 Action Buttons */}
-                        <div className="flex flex-col sm:flex-row justify-between gap-3 mt-2">
+                        <div className="flex flex-col sm:flex-row justify-between gap-3 text-sm mt-2">
                             <button
                                 onClick={onClose}
                                 className="px-3 py-1 border border-[#00FFA3] rounded-md text-[#00FFA3] hover:bg-[#00FFA3]/20 transition w-full sm:w-auto"

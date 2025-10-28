@@ -78,7 +78,7 @@ const Notification: React.FC = () => {
                 ))}
             </div>
 
-            <div className="border-t border-neutral-800 mt-4 pt-3 text-center text-xs text-gray-500">
+            <div className="border-t border-neutral-800 mt-4 pt-3 text-center text-xs text-neutral-400">
                 Total Notifications: {notifications.length}
             </div>
         </div>

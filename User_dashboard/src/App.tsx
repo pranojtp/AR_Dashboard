@@ -44,7 +44,7 @@ function App() {
               <Route path="projectdetails" element={<Projectdetails />} />
             </Route>
 
-            <Route path="settings" element={<SidebarSettings />} />
+            <Route path="sidebarsettings" element={<SidebarSettings />} />
             <Route path="settings" element={<Settingspage />} >
               <Route path="account" element={<Accountdetails />} />
               <Route path="general" element={<Generalsettings />} />
