@@ -34,7 +34,7 @@ const notifications: NotificationItem[] = [
 
 const Notification: React.FC = () => {
     return (
-        <div className="bg-black rounded-2xl p-4 text-white w-full max-w-md mx-auto">
+        <div className="bg-neutral-950 rounded-2xl p-4 border-1 border-neutral-800 text-white w-full max-w-md mx-auto">
             
             <div className="flex justify-between items-center mb-4">
                 <h3 className="text-base font-semibold flex items-center gap-2">
@@ -52,7 +52,7 @@ const Notification: React.FC = () => {
                 {notifications.map((n) => (
                     <div
                         key={n.id}
-                        className="flex items-start justify-between bg-neutral-950 rounded-xl p-3 hover:bg-neutral-900 transition"
+                        className="flex items-start justify-between rounded-xl p-3 hover:bg-neutral-900 transition"
                     >
                         <div className="flex items-start gap-3">
                             <div className="relative">
