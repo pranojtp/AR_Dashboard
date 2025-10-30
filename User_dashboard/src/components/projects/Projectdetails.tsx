@@ -41,7 +41,7 @@ const Projectdetails = () => {
     return (
         <>
             <div className="h-auto bg-neutral-900 p-3">
-                <div className="flex flex-col gap-5">
+                <div className="flex flex-col gap-3">
                     {/* Left column */}
                     <div className="flex flex-row gap-10">
                         <div>

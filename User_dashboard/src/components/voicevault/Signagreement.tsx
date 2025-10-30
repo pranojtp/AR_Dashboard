@@ -45,7 +45,8 @@
 // export default Signagreement
 
 import { motion, AnimatePresence } from "framer-motion";
-import Agreementsign from "./Agreementsign";
+// import Agreementsign from "./Agreementsign";
+import TermsAndCondition from "./Termsandcondition";
 import { useState } from "react";
 
 interface SignagreementProps {
@@ -94,7 +95,8 @@ const Signagreement: React.FC<SignagreementProps> = ({ onAgree }) => {
                                 exit={{ opacity: 0, scale: 0.8 }}
                                 transition={{ duration: 0.25, ease: "easeOut" }}
                             >
-                                <Agreementsign onClose={handleCloseModal} onAgree={handleAgree} />
+                                {/* <Agreementsign onClose={handleCloseModal} onAgree={handleAgree} /> */}
+                                <TermsAndCondition onClose={handleCloseModal} onAgree={handleAgree} />
                             </motion.div>
                         </>
                     )}

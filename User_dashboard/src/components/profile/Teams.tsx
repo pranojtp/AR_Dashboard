@@ -222,7 +222,7 @@ const Teams = () => {
                             className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 hover:bg-neutral-900 transition rounded-lg px-2 gap-2 sm:gap-0"
                         >
                             <div className="flex items-center gap-3 sm:gap-2">
-                                <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[#00FFA3] text-black font-semibold text-sm sm:text-base">
+                                <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-[#00FFA3] text-black font-bold text-sm sm:text-base">
                                     {getInitials(member.name)}
                                 </div>
                                 <div>
