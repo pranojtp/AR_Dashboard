@@ -190,7 +190,8 @@
 // export default Profilecard
 
 
-import DP from "../../assets/dq.jpg"
+import DP from "../../assets/nivin4.webp"
+
 import { UserRound, Facebook, Instagram, Twitter} from "lucide-react"
 // import { useNavigate } from "react-router-dom";
 
@@ -203,7 +204,7 @@ const Profilecard = () => {
     const languages: Language[] = [
         { id: 1, name: "Malayalam" },
         { id: 2, name: "Tamil" },
-        { id: 3, name: "Hindi" },
+        // { id: 3, name: "Hindi" },
         { id: 4, name: "Telugu" },
     ];
     interface Roles {
@@ -214,7 +215,7 @@ const Profilecard = () => {
     const roles: Roles[] = [
         { id: 1, name: "Actor" },
         { id: 2, name: "Producer" },
-        { id: 3, name: "Director" },        
+        // { id: 3, name: "Director" },        
     ];
     // const navigate = useNavigate();
 
@@ -247,10 +248,10 @@ const Profilecard = () => {
                             className="w-20 h-20 sm:w-40 sm:h-40 rounded-full object-cover border-2 border-white"
                         />
                         <div className="mt-15">
-                            <h2 className="text-sm sm:text-sm font-semibold text-white">
-                                Dulquer Salman
+                            <h2 className="text-lg sm:text-lg font-semibold text-white">
+                                Nivin Pauly
                             </h2>
-                            <div className="flex flex-wrap gap-2 pt-2 rounded-md">
+                            <div className="flex flex-wrap gap-2 pt-1 rounded-md">
                                 {roles.map((role) => (
                                     <div
                                         key={role.id}
@@ -261,7 +262,7 @@ const Profilecard = () => {
                                 ))}
                             </div>
                             <p className="text-xs sm:text-xs text-white font-extralight text-justify max-w-md mt-1">
-                                Dulquer Salmaan is an Indian actor, singer and producer who works in Malayalam films, besides few Tamil, Telugu and Hindi films. One of the highest paid Malayalam actor.
+                                Nivin Pauly is an Indian actor and producer who works predominantly in Malayalam films. He is the recipient of two Kerala State Film Awards, three Filmfare Awards South, two Kerala Film Critics Association Awards, and six SIIMA Awards.
                             </p>
                         </div>
                         <div className="mt-15">
@@ -284,8 +285,8 @@ const Profilecard = () => {
                                 Affiliation
                             </h2>
                             <div className="flex flex-col gap-2 text-white text-xs max-w-md mt-1">
-                                <p>Wayfarer Films</p>
-                                <p>Mammotty Company</p>
+                                <p>Pauly Jr. Pictures</p>
+                                {/* <p>Mammotty Company</p> */}
                             </div>
                         </div>
                     </div>
