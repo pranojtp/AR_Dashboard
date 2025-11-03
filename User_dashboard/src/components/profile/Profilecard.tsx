@@ -229,10 +229,10 @@ const Profilecard = () => {
                 {/* 🔹 Top Navbar */}
                 <div className="flex flex-row gap-2 px-4 sm:px-6 py-4 border-b border-neutral-700">
                     {/* Left Side */}
-                    <UserRound className="size-4 text-[#00FFA3]" />
+                    {/* <UserRound className="size-4 text-[#00FFA3]" />
                     <h1 className="font-semibold text-[#00FFA3] text-xs sm:text-xs">
                         Profile Details
-                    </h1>
+                    </h1> */}
                 </div>
 
 

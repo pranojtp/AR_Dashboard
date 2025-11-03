@@ -41,8 +41,8 @@ const Projectdetails = () => {
     return (
         <>
             <div className="h-auto bg-neutral-900 p-3">
-                <div className="flex flex-col gap-3">
-                    {/* Left column */}
+                <div className="flex flex-col gap-2">                    
+                    <h1 className="text-m font-medium mb-2">Select the type of Project</h1>
                     <div className="flex flex-row gap-10">
                         <div>
                             <label className="block mb-2 text-xs font-medium">Project Name</label>
@@ -57,7 +57,7 @@ const Projectdetails = () => {
                             />
                         </div>
                         <div>
-                            <label className="block mb-2 text-xs font-medium">Production</label>
+                            <label className="block mb-2 text-xs font-medium">Type of project</label>
                             <input
                                 type="text"
                                 name="legalName"
@@ -68,28 +68,28 @@ const Projectdetails = () => {
                             />
                         </div>
                     </div>
-                    <h1 className="text-m font-medium mt-6">Talents Involved</h1>
+                    <h1 className="text-m font-medium mt-5">Talents Involved</h1>
                     {/* Right column */}
                     <div className="flex flex-row gap-10">
                         <div>
-                            <label className="block mb-2 text-xs font-medium">Talent 1</label>
+                            <label className="block mb-2 text-xs font-medium">Source Voice 1</label>
                             <input
                                 type="text"
                                 name="affiliation"
                                 // value={formData.affiliation}
                                 // onChange={handleChange}
-                                placeholder="Enter your legal name"
+                                // placeholder="Enter your legal name"
                                 className="w-64 text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                             />
                         </div>
                         <div>
-                            <label className="block mb-2 text-xs font-medium">Talent 2</label>
+                            <label className="block mb-2 text-xs font-medium">Source Voice 2</label>
                             <input
                                 type="text"
                                 name="industry"
                                 // value={formData.industry}
                                 // onChange={handleChange}
-                                placeholder="e.g. Mollywood, Hollywood"
+                                // placeholder="e.g. Mollywood, Hollywood"
                                 className="w-64 text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                             />
                         </div>
