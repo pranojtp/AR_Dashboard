@@ -168,9 +168,9 @@ const Teams = () => {
     return (
         <div className="bg-neutral-950 rounded-2xl border-1 border-neutral-800 p-4 sm:p-4 text-white relative w-full">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
-                <h3 className="text-base sm:text-lg font-semibold">Team Members</h3>
+                <h3 className="text-base sm:text-lg font-semibold">Teams</h3>
 
-                <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+                <div className="flex flex-row gap-2 w-full md:w-auto">
                     <input
                         type="text"
                         value={query}
@@ -206,9 +206,9 @@ const Teams = () => {
 
                     <button
                         onClick={() => setShowModal(true)}
-                        className="px-4 py-2 sm:py-1.5 bg-[#00FFA3] text-black rounded-xl hover:bg-[#00e695] transition text-xs sm:text-xs font-medium w-full sm:w-auto"
+                        className="px-2 py-1 sm:py-1.5 bg-[#00FFA3] text-black rounded-xl hover:bg-[#00e695] transition text-xs sm:text-xs font-medium w-full sm:w-auto"
                     >
-                        + Add Members
+                        + Add Member
                     </button>
                 </div>
             </div>
@@ -222,7 +222,7 @@ const Teams = () => {
                             className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 hover:bg-neutral-900 transition rounded-lg px-2 gap-2 sm:gap-0"
                         >
                             <div className="flex items-center gap-3 sm:gap-2">
-                                <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-[#00FFA3] text-black font-bold text-sm sm:text-base">
+                                <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[#00FFA3] text-black font-bold text-sm sm:text-base">
                                     {getInitials(member.name)}
                                 </div>
                                 <div>
@@ -231,7 +231,7 @@ const Teams = () => {
                                 </div>
                             </div>
 
-                            <div className="flex gap-4 text-[#00FFA3] text-xs font-semibold sm:justify-end">
+                            <div className="flex gap-4 text-[#00FFA3] text-xs sm:justify-end">
                                 <button className="hover:text-[#00e695]">EDIT</button>
                                 <button className="hover:text-red-400">REMOVE</button>
                             </div>

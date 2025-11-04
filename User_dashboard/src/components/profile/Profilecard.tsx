@@ -192,7 +192,7 @@
 
 import DP from "../../assets/nivin4.webp"
 
-import { UserRound, Facebook, Instagram, Twitter} from "lucide-react"
+import {Facebook, Instagram, Twitter} from "lucide-react"
 // import { useNavigate } from "react-router-dom";
 
 const Profilecard = () => {
@@ -235,9 +235,8 @@ const Profilecard = () => {
                     </h1> */}
                 </div>
 
-
                 {/* 🔹 Profile Section */}
-                <section className="bg-neutral-950 p-4 flex flex-col md:flex-col h-auto border-1 border-neutral-800 rounded-2xl">
+                <section className="bg-neutral-950 p-4 flex flex-col md:flex-col h-auto border-t-6 border-[#00FFA3] rounded-2xl">
                     <div className="flex flex-wrap gap-2 justify-end ">
                         <p></p><Facebook className="size-4" /><Instagram className="size-4" /> <Twitter className="size-4" />
                     </div>

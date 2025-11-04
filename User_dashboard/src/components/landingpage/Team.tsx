@@ -5,7 +5,7 @@ const Team = () => {
             <section
                 id="team"
                 aria-label="TeamMemberss for simplifying everyday business tasks"
-                className="pb-14 pt-20 sm:pb-20 sm:pt-32 lg:pb-32"
+                className="pb-14 pt-20 px-6 sm:pb-20 sm:pt-32 lg:pb-32"
             >
                 <div>
                     <div className="mx-auto max-w-4xl md:text-center">

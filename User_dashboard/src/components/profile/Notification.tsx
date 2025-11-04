@@ -34,7 +34,7 @@ const notifications: NotificationItem[] = [
 
 const Notification: React.FC = () => {
     return (
-        <div className="bg-neutral-950 rounded-2xl p-4 border-1 border-neutral-800 text-white w-full max-w-md mx-auto">
+        <div className="bg-neutral-950 rounded-2xl p-4 border-1 border-neutral-800 text-white w-full">
             
             <div className="flex justify-between items-center mb-4">
                 <h3 className="text-base font-semibold flex items-center gap-2">
