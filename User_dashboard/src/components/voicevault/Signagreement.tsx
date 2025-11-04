@@ -70,7 +70,7 @@ const Signagreement: React.FC<SignagreementProps> = ({ onAgree }) => {
                 </p>
                 <button
                     onClick={() => setShowModal(true)}
-                    className="px-3 py-1 bg-[#00FFA3] text-xs text-black rounded-xl hover:bg-[#00e695] transition"
+                    className="px-4 py-2 bg-[#00FFA3] text-xs font-semibold text-black rounded-xl hover:bg-[#00e695] transition"
                 >
                     SIGN THE AGREEMENT
                 </button>

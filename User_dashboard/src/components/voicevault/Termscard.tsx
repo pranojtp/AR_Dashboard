@@ -2,7 +2,7 @@ import React from "react";
 
 const TermsCard: React.FC = () => {
   return (
-    <div className="bg-black p-4 rounded-xl flex justify-between items-center lg:h-30">
+    <div className="bg-black p-6 rounded-xl flex justify-between items-center h-fit">
       <div>
         <h3 className="font-semibold text-white">Terms and Condition</h3>
         <p className="text-xs text-neutral-400">Agreement code : FRB1235476</p>

@@ -81,81 +81,85 @@
 //         </div>
 //       ) : (
 //         // Table view after upload
-//         <div className="bg-black rounded-xl p-2">
-//           <div className="flex justify-between items-center mb-3">
-//             <h2 className="text-lg font-semibold">Voices</h2>
+{/* <div className="bg-black rounded-xl p-2">
+  <div className="flex justify-between items-center mb-3">
+    <h2 className="text-lg font-semibold">Voices</h2>
 
-//             <button
-//               onClick={handleUploadClick}
-//               className="bg-[#00FFA3] hover:bg-green-500 text-black px-4 py-1 rounded-md font-semibold"
-//             >
-//               Upload
-//             </button>
+    <div className="flex flex-row gap-5">
+      <button
+        onClick={handleUploadClick}
+        className="bg-[#00FFA3] hover:bg-green-500 text-black px-4 py-1 text-sm rounded-md font-semibold"
+      >
+        Upload
+      </button>
+      <input
+        ref={fileInputRef}
+        type="file"
+        multiple
+        className="hidden"
+        onChange={handleFileChange}
+      />
+      <button
+        onClick={() => setShowModal(true)}
+        className="bg-[#00FFA3] hover:bg-green-500 text-black px-4 py-1 text-sm rounded-md font-semibold"
+      >
+        Request
+      </button>
+    </div>
+  </div>
 
-//             {/* Hidden input triggered by Upload button */}
-//             <input
-//               ref={fileInputRef}
-//               type="file"
-//               multiple
-//               className="hidden"
-//               onChange={handleFileChange}
-//             />
-//           </div>
-
-//           <div className="overflow-x-auto">
-//             <table className="w-full text-left text-xs">
-//               <thead className="text-neutral-200 border-b border-neutral-700">
-//                 <tr>
-//                   <th className="pb-2">LIST</th>
-//                   <th className="pb-2">LENGTH</th>
-//                   <th className="pb-2">QUALITY</th>
-//                   <th className="pb-2">STATUS</th>
-//                 </tr>
-//               </thead>
-//               <tbody>
-//                 {files.map((file, index) => (
-//                   <tr
-//                     key={index}
-//                     className="border-b border-neutral-800 hover:bg-neutral-800/40 transition"
-//                   >
-//                     <td className="py-3">{file.name}</td>
-//                     <td>{file.length}</td>
-//                     <td
-//                       className={`${
-//                         file.quality === "Good"
-//                           ? "text-green-400"
-//                           : file.quality === "Avg"
-//                           ? "text-yellow-400"
-//                           : "text-red-400"
-//                       }`}
-//                     >
-//                       {file.quality}
-//                     </td>
-//                     <td>
-//                       <div className="flex items-center gap-2 w-32">
-//                         <span>{file.status}%</span>
-//                         <div className="w-full bg-neutral-700 h-1.5 rounded-full">
-//                           <div
-//                             className={`h-1.5 rounded-full ${
-//                               file.status < 30
-//                                 ? "bg-red-500"
-//                                 : file.status < 70
-//                                 ? "bg-yellow-400"
-//                                 : "bg-green-400"
-//                             }`}
-//                             style={{ width: `${file.status}%` }}
-//                           ></div>
-//                         </div>
-//                       </div>
-//                     </td>
-//                   </tr>
-//                 ))}
-//               </tbody>
-//             </table>
-//           </div>
-//         </div>
-//       )}
-//     </div>
+  <div className="overflow-x-auto">
+    <table className="w-full text-left text-xs">
+      <thead className="text-neutral-200 border-b border-neutral-700">
+        <tr>
+          <th className="pb-2">LIST</th>
+          <th className="pb-2">LENGTH</th>
+          <th className="pb-2">QUALITY</th>
+          <th className="pb-2">STATUS</th>
+        </tr>
+      </thead>
+      <tbody>
+        {files.map((file, index) => (
+          <tr
+            key={index}
+            className="border-b border-neutral-800 hover:bg-neutral-800/40 transition"
+          >
+            <td className="py-3">{file.name}</td>
+            <td>{file.length}</td>
+            <td
+              className={`${file.quality === "Good"
+                  ? "text-green-400"
+                  : file.quality === "Avg"
+                    ? "text-yellow-400"
+                    : "text-red-400"
+                }`}
+            >
+              {file.quality}
+            </td>
+            <td>
+              <div className="flex items-center gap-2 w-32">
+                <span>{file.status}%</span>
+                <div className="w-full bg-neutral-700 h-1.5 rounded-full">
+                  <div
+                    className={`h-1.5 rounded-full ${file.status < 30
+                        ? "bg-red-500"
+                        : file.status < 70
+                          ? "bg-yellow-400"
+                          : "bg-green-400"
+                      }`}
+                    style={{ width: `${file.status}%` }}
+                  ></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div> */}
+//   )}
+// </div>
 //   );
 // };
 
@@ -223,10 +227,10 @@ const FileUpload: React.FC = () => {
 
       {files.length === 0 ? (
         // ========== INITIAL UPLOAD AREA ==========
-        <div className="flex flex-col md:flex-row items-center justify-center w-full gap-5">
+        <div className="flex flex-col md:flex-row items-center justify-center w-full gap-3">
           {/* LEFT SIDE - FILE UPLOAD */}
           <div
-            className={`flex-1 border-2 border-dashed rounded-xl h-72 flex flex-col justify-center items-center text-center transition-all duration-300 hover:border-[#00C4FF]
+            className={`flex-1 border-2 border-dashed rounded-xl h-64 flex flex-col justify-center items-center text-center transition-all duration-300 hover:border-[#00C4FF]
         ${isDragging ? " bg-neutral-900" : "border-neutral-700"}`}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
@@ -252,7 +256,7 @@ const FileUpload: React.FC = () => {
           <div className="text-gray-500 text-sm font-medium">or</div>
 
           {/* RIGHT SIDE - REQUEST UPLOAD */}
-          <div className="flex-1 border-2 border-dashed border-neutral-700 rounded-xl h-72 flex flex-col gap-5 justify-center items-center text-center transition-all duration-300 hover:border-[#00C4FF]">
+          <div className="flex-1 border-2 border-dashed border-neutral-700 rounded-xl h-64 flex flex-col gap-5 justify-center items-center text-center transition-all duration-300 hover:border-[#00C4FF]">
             <p className="text-white text-lg font-medium">Request to Upload</p>
             <button
               onClick={() => setShowModal(true)}
@@ -264,13 +268,14 @@ const FileUpload: React.FC = () => {
         </div>
       ) : (
         // ========== FILE TABLE VIEW ==========
-        <div className="bg-black rounded-xl p-4">
-          <div className="flex justify-between items-end mb-4">
+        <div className="bg-black rounded-xl p-2">
+          <div className="flex justify-between items-center mb-3">
             <h2 className="text-lg font-semibold">Voices</h2>
+
             <div className="flex flex-row gap-5">
               <button
                 onClick={handleUploadClick}
-                className="bg-[#00FFA3] hover:bg-green-500 text-black px-4 py-1 rounded-md font-semibold"
+                className="bg-[#00FFA3] hover:bg-green-500 text-black px-4 py-1 text-sm rounded-md font-semibold"
               >
                 Upload
               </button>
@@ -283,7 +288,7 @@ const FileUpload: React.FC = () => {
               />
               <button
                 onClick={() => setShowModal(true)}
-                className="bg-[#00FFA3] hover:bg-green-500 text-black px-4 py-1 rounded-md font-semibold"
+                className="bg-[#00FFA3] hover:bg-green-500 text-black px-4 py-1 text-sm rounded-md font-semibold"
               >
                 Request
               </button>
@@ -291,7 +296,7 @@ const FileUpload: React.FC = () => {
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
+            <table className="w-full text-left text-xs">
               <thead className="text-neutral-200 border-b border-neutral-700">
                 <tr>
                   <th className="pb-2">LIST</th>
@@ -310,10 +315,10 @@ const FileUpload: React.FC = () => {
                     <td>{file.length}</td>
                     <td
                       className={`${file.quality === "Good"
-                        ? "text-green-400"
-                        : file.quality === "Avg"
-                          ? "text-yellow-400"
-                          : "text-red-400"
+                          ? "text-green-400"
+                          : file.quality === "Avg"
+                            ? "text-yellow-400"
+                            : "text-red-400"
                         }`}
                     >
                       {file.quality}
@@ -324,10 +329,10 @@ const FileUpload: React.FC = () => {
                         <div className="w-full bg-neutral-700 h-1.5 rounded-full">
                           <div
                             className={`h-1.5 rounded-full ${file.status < 30
-                              ? "bg-red-500"
-                              : file.status < 70
-                                ? "bg-yellow-400"
-                                : "bg-green-400"
+                                ? "bg-red-500"
+                                : file.status < 70
+                                  ? "bg-yellow-400"
+                                  : "bg-green-400"
                               }`}
                             style={{ width: `${file.status}%` }}
                           ></div>

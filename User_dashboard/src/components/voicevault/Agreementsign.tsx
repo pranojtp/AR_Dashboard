@@ -173,7 +173,7 @@ interface AgreementsignProps {
     onAgree: () => void;
 }
 
-const Agreementsign: React.FC<AgreementsignProps> = ({ onClose }) => {
+const Agreementsign: React.FC<AgreementsignProps> = ({ onClose,onAgree }) => {
     const [selectedSection, setSelectedSection] = useState<number>(1);
 
     const sections = [
@@ -262,7 +262,7 @@ const Agreementsign: React.FC<AgreementsignProps> = ({ onClose }) => {
             >
                 {/* Header */}
                 <div className="flex justify-between items-center px-8 py-5 border-b border-neutral-700">
-                    <h1 className="text-m font-semibold">Terms and Conditions</h1>
+                    <h1 className="text-m font-semibold">Agreement</h1>
                     <p className="text-sm text-neutral-400">
                         Agreement code: <span className="text-neutral-200">FRB1235476</span>
                     </p>
@@ -305,7 +305,7 @@ const Agreementsign: React.FC<AgreementsignProps> = ({ onClose }) => {
                             DECLINE
                         </button>
                         <button
-                            onClick={onClose}
+                            onClick={onAgree}
                             className="px-6 py-2 rounded-lg bg-[#00FFA3] text-xs text-black font-medium hover:bg-[#00e697] transition"
                         >
                             AGREE

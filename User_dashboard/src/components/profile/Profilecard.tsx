@@ -244,7 +244,7 @@ const Profilecard = () => {
                         <img
                             src={DP}
                             alt="Profile Picture"
-                            className="w-20 h-20 sm:w-40 sm:h-40 rounded-full object-cover border-2 border-white"
+                            className="w-20 h-20 sm:w-40 sm:h-40 rounded-full object-cover border-1 border-[#00FFA3]"
                         />
                         <div className="mt-15">
                             <h2 className="text-lg sm:text-lg font-semibold text-white">

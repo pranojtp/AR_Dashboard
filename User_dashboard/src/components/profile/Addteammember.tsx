@@ -44,9 +44,9 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.8, y: 40 }}
                     transition={{ duration: 0.3, ease: "easeOut" }}
-                    className="fixed inset-0 flex items-center justify-center z-50 p-4"
+                    className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-xs z-50 p-4"
                 >
-                    <div className="flex flex-col gap-4 bg-neutral-900 p-6 sm:p-8 rounded-2xl shadow-2xl w-full max-w-md sm:max-w-lg lg:max-w-xl relative border border-neutral-700">
+                    <div className="flex flex-col gap-4 bg-neutral-900 p-6 sm:p-8 rounded-2xl shadow-2xl w-fit max-w-md sm:max-w-lg lg:max-w-xl relative border border-neutral-700">
                         {/* Close Button (top-right) */}
                         <button
                             onClick={onClose}
@@ -66,7 +66,7 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
                         </div>
 
                         {/* 🔗 Share Link Section */}
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-neutral-800 border border-neutral-600 rounded-lg px-4 py-3 gap-3 sm:gap-0">
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-neutral-800 border border-neutral-600 rounded-lg px-4 py-3 gap-4 sm:gap-4">
                             <div>
                                 <p className="text-sm sm:text-sm text-white">
                                     Invite members via a sharable link
