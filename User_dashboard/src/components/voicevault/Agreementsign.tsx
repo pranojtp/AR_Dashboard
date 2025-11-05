@@ -300,7 +300,7 @@ const Agreementsign: React.FC<AgreementsignProps> = ({ onClose,onAgree }) => {
                     <div className="flex gap-4">
                         <button
                             onClick={onClose}
-                            className="px-3 py-1 rounded-lg bg-neutral-800 text-xs text-[#00FFA3] border border-[#00FFA3] transition"
+                            className="px-3 py-1 rounded-lg bg-neutral-800 text-xs text-[#00FFA3] border border-[#00FFA3] hover:border-[#ff0000] hover:text-[#ff0000] transition"
                         >
                             DECLINE
                         </button>

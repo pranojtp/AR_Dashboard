@@ -43,8 +43,8 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
                     initial={{ opacity: 0, scale: 0.8, y: 40 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.8, y: 40 }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
-                    className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-xs z-50 p-4"
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    className="fixed inset-0 flex items-center justify-center bg-black/40 z-50 p-4"
                 >
                     <div className="flex flex-col gap-4 bg-neutral-900 p-6 sm:p-8 rounded-2xl shadow-2xl w-fit max-w-md sm:max-w-lg lg:max-w-xl relative border border-neutral-700">
                         {/* Close Button (top-right) */}

@@ -181,7 +181,7 @@ interface UploadedFile {
 const FileUpload: React.FC = () => {
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const [isDragging, setIsDragging] = useState(false);
-  const [showModal, setShowModal] = useState(false); // 👈 Modal toggle state
+  const [showModal, setShowModal] = useState(false); // 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // --- Drag Handlers ---
@@ -240,7 +240,7 @@ const FileUpload: React.FC = () => {
               {isDragging ? "Release to upload files" : "Drag your files here"}
             </p>
             <p className="text-gray-400 text-sm my-2">or</p>
-            <label className="cursor-pointer bg-gradient-to-r from-[#00FFA3] to-[#00C4FF] px-6 py-2 rounded-lg text-black font-semibold hover:opacity-90 transition">
+            <label className="cursor-pointer bg-[#00FFA3] px-4 py-2 text-sm rounded-lg text-black font-semibold hover:opacity-90 transition">
               Browse
               <input
                 ref={fileInputRef}
@@ -260,7 +260,7 @@ const FileUpload: React.FC = () => {
             <p className="text-white text-lg font-medium">Request to Upload</p>
             <button
               onClick={() => setShowModal(true)}
-              className="bg-gradient-to-r from-[#00C4FF] to-emerald-400 text-black font-semibold px-6 py-2 rounded-lg hover:opacity-90 transition"
+              className="bg-[#00FFA3] text-black text-sm font-semibold px-4 py-2 rounded-lg hover:opacity-90 transition"
             >
               Request Now
             </button>
