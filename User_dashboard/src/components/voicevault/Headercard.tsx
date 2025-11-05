@@ -34,9 +34,9 @@ const Headercard = () => {
                 {/* 🔹 Header Card */}
                 <div className="bg-gradient-to-r from-[#00FFA3] to-[#00C4FF] p-6 flex flex-row md:flex-row justify-between items-center gap-5 mx-6 mt-6 h-1/2">
                     {/* Left Section - Text */}
-                    <div>
-                        <p className="max-w-xl text-sm text-black">
-                            Secure, Private and Compliant!
+                    <div className="flex flex-col gap-2">
+                        <p className="font-semibold text-black">Secure, Private and Compliant!</p>
+                        <p className="max-w-xl text-sm text-black text-justify">
                             Voice Vault is a secure digital platform where you can store, manage, and license your voice assets. Through transparent tracking and consent management, you maintain full control over your vocal assets while Audio Realities add value to it by leveraging the potential of AI for creative endeavours.
                         </p>
                     </div>
