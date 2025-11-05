@@ -230,7 +230,7 @@ const FileUpload: React.FC = () => {
         <div className="flex flex-col md:flex-row items-center justify-center w-full gap-3">
           {/* LEFT SIDE - FILE UPLOAD */}
           <div
-            className={`flex-1 border-2 border-dashed rounded-xl h-64 flex flex-col justify-center items-center text-center transition-all duration-300 hover:border-[#00C4FF]
+            className={`flex-1 border-2 border-dashed rounded-xl h-64 flex flex-col justify-center items-center text-center transition-all duration-300 hover:border-[#00FFA3]
         ${isDragging ? " bg-neutral-900" : "border-neutral-700"}`}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
@@ -256,7 +256,7 @@ const FileUpload: React.FC = () => {
           <div className="text-gray-500 text-sm font-medium">or</div>
 
           {/* RIGHT SIDE - REQUEST UPLOAD */}
-          <div className="flex-1 border-2 border-dashed border-neutral-700 rounded-xl h-64 flex flex-col gap-5 justify-center items-center text-center transition-all duration-300 hover:border-[#00C4FF]">
+          <div className="flex-1 border-2 border-dashed border-neutral-700 rounded-xl h-64 flex flex-col gap-5 justify-center items-center text-center transition-all duration-300 hover:border-[#00FFA3]">
             <p className="text-white text-lg font-medium">Request to Upload</p>
             <button
               onClick={() => setShowModal(true)}
