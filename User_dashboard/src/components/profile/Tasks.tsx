@@ -117,7 +117,8 @@ interface TaskItem {
     initials: string;
 }
 
-const tasks: TaskItem[] = [
+// 🟢 Dummy data — You can modify as needed
+const pendingTasks: TaskItem[] = [
     {
         id: 1,
         name: "Babychen Paul",
@@ -156,8 +157,16 @@ const tasks: TaskItem[] = [
     },
 ];
 
+const completedTasks: TaskItem[] = [
+    
+];
+
 const Tasks: React.FC = () => {
     const [selectedTask, setSelectedTask] = useState<TaskItem | null>(null);
+    const [activeTab, setActiveTab] = useState<"pending" | "completed">("pending");
+
+    // 🟢 Dynamically switch between task sets
+    const displayedTasks = activeTab === "pending" ? pendingTasks : completedTasks;
 
     return (
         <div className="bg-neutral-950 rounded-2xl p-4 border border-neutral-800 text-white w-full">
@@ -167,17 +176,31 @@ const Tasks: React.FC = () => {
                     Tasks
                     <span>
                         <input
-                            type="text"
-                            placeholder="Search..."
-                            className="p-2 sm:p-1.5 border rounded-lg border-neutral-700 bg-neutral-900 text-white text-sm focus:outline-none"
-                        />
+                        type="text"
+                        // value={query}
+                        // onChange={(e) => setQuery(e.target.value)}
+                        placeholder="Search..."
+                        className="p-2 sm:p-1.5 border rounded-lg border-neutral-700 bg-neutral-900 text-white w-full sm:w-auto text-sm sm:text-xs max-w-full sm:max-w-xs focus:outline-none"
+                    />
                     </span>
                 </h3>
                 <div className="flex flex-row gap-4">
-                    <button className="text-[#00e695] text-xs font-semibold hover:underline">
+                    <button
+                        className={`text-xs font-semibold ${activeTab === "pending"
+                                ? "text-[#00e695]"
+                                : "text-neutral-400 hover:text-white"
+                            }`}
+                        onClick={() => setActiveTab("pending")}
+                    >
                         Pending
                     </button>
-                    <button className="text-neutral-400 text-xs font-semibold hover:underline">
+                    <button
+                        className={`text-xs font-semibold ${activeTab === "completed"
+                                ? "text-[#00e695]"
+                                : "text-neutral-400 hover:text-white"
+                            }`}
+                        onClick={() => setActiveTab("completed")}
+                    >
                         Completed
                     </button>
                 </div>
@@ -185,7 +208,7 @@ const Tasks: React.FC = () => {
 
             {/* Task list */}
             <div className="flex flex-col gap-1">
-                {tasks.map((n) => (
+                {displayedTasks.map((n) => (
                     <div
                         key={n.id}
                         className="flex items-start justify-between rounded-xl p-2 border-b border-neutral-800 hover:bg-neutral-900 transition"
@@ -204,7 +227,7 @@ const Tasks: React.FC = () => {
                                 onClick={() => setSelectedTask(n)}
                                 className="text-[#00e695] hover:underline"
                             >
-                                JOIN NOW
+                                {activeTab === "pending" ? "JOIN NOW" : "VIEW"}
                             </button>
                             <button className="text-[#00e695] hover:text-red-400 transition">
                                 CLOSE
@@ -212,13 +235,18 @@ const Tasks: React.FC = () => {
                         </div>
                     </div>
                 ))}
+
+                {displayedTasks.length === 0 && (
+                    <p className="text-neutral-500 text-xs text-center py-4">
+                        No {activeTab} tasks found.
+                    </p>
+                )}
             </div>
 
             {/* Modal with animation */}
             <AnimatePresence>
                 {selectedTask && (
                     <>
-                        {/* Background overlay */}
                         <motion.div
                             className="fixed inset-0 bg-black/70 z-40"
                             initial={{ opacity: 0 }}
@@ -226,7 +254,6 @@ const Tasks: React.FC = () => {
                             exit={{ opacity: 0 }}
                         />
 
-                        {/* Popup container */}
                         <motion.div
                             className="fixed inset-0 flex items-center justify-end pr-10 z-50"
                             initial={{ opacity: 0, scale: 0.8 }}
@@ -235,7 +262,6 @@ const Tasks: React.FC = () => {
                             transition={{ duration: 0.2 }}
                         >
                             <div className="bg-neutral-950 rounded-2xl w-[90%] sm:w-[450px] p-5 border border-neutral-700 shadow-xl text-white relative">
-                                {/* Close button */}
                                 <button
                                     className="absolute top-3 right-4 text-neutral-400 hover:text-white"
                                     onClick={() => setSelectedTask(null)}
@@ -243,10 +269,8 @@ const Tasks: React.FC = () => {
                                     ✕
                                 </button>
 
-                                {/* Header */}
                                 <h4 className="text-m text-white mb-3">Task</h4>
 
-                                {/* User info */}
                                 <div className="flex justify-between items-center mb-4">
                                     <div className="flex flex-row gap-2">
                                         <div className="w-10 h-10 rounded-full bg-[#00e695] text-black font-bold flex items-center justify-center">
@@ -256,31 +280,31 @@ const Tasks: React.FC = () => {
                                             <p className="text-white font-normal text-xs">
                                                 {selectedTask.name}
                                             </p>
-                                            <p className="text-white font-semibold text-sm">{selectedTask.message}</p>
+                                            <p className="text-white font-semibold text-sm">
+                                                {selectedTask.message}
+                                            </p>
                                         </div>
                                     </div>
-                                    <div className="fkex justify-end">
-                                        <p className="text-xs text-neutral-500">
-                                            12 Oct
-                                        </p>
+                                    <div>
+                                        <p className="text-xs text-neutral-500">12 Oct</p>
                                     </div>
                                 </div>
 
-                                {/* Details */}
                                 <p className="text-xs text-neutral-300 leading-relaxed mb-6">
                                     {selectedTask.details}
                                 </p>
 
-                                {/* Footer buttons */}
                                 <div className="flex justify-end gap-6 text-xs font-semibold">
                                     <button className="text-[#00e695] hover:underline">
-                                        JOIN NOW
+                                        {activeTab === "pending"
+                                            ? "JOIN NOW"
+                                            : "REOPEN TASK"}
                                     </button>
                                     <button
                                         onClick={() => setSelectedTask(null)}
                                         className="text-neutral-400 hover:text-red-400 transition"
                                     >
-                                        REJECT
+                                        CLOSE
                                     </button>
                                 </div>
                             </div>
@@ -293,4 +317,3 @@ const Tasks: React.FC = () => {
 };
 
 export default Tasks;
-

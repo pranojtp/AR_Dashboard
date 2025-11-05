@@ -22,7 +22,7 @@ const Headercard = () => {
                     <div className="flex items-center gap-4 text-black font-medium">
                         {/* <UserRound size={18} /> */}
                         {/* <a href="/login"> */}
-                            {/* <button onClick={handleSignOut} className="flex items-center gap-1 text-sm sm:text-sm hover:underline">
+                        {/* <button onClick={handleSignOut} className="flex items-center gap-1 text-sm sm:text-sm hover:underline">
                                 Sign Out
                             </button> */}
                         {/* </a> */}
@@ -36,12 +36,8 @@ const Headercard = () => {
                     {/* Left Section - Text */}
                     <div>
                         <p className="max-w-xl text-sm text-black">
-                            Pizza ipsum dolor meat lovers buffalo. Marinara mushrooms tossed
-                            anchovies personal party lovers. Onions beef broccoli ham personal
-                            white ham mouth. Red ipsum pork beef Philly mushrooms sautéed and
-                            broccoli. Bell stuffed lovers mushrooms bbq roll pesto lovers.
-                            Chicken bacon banana pineapple Bianca anchovies broccoli pepperoni
-                            ranch thin.
+                            Secure, Private and Compliant!
+                            Voice Vault is a secure digital platform where you can store, manage, and license your voice assets. Through transparent tracking and consent management, you maintain full control over your vocal assets while Audio Realities add value to it by leveraging the potential of AI for creative endeavours.
                         </p>
                     </div>
 
