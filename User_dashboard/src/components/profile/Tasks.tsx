@@ -117,7 +117,7 @@ interface TaskItem {
     initials: string;
 }
 
-// 🟢 Dummy data — You can modify as needed
+// 🟢 Dummy Data
 const pendingTasks: TaskItem[] = [
     {
         id: 1,
@@ -164,21 +164,39 @@ const completedTasks: TaskItem[] = [
 const Tasks: React.FC = () => {
     const [selectedTask, setSelectedTask] = useState<TaskItem | null>(null);
     const [activeTab, setActiveTab] = useState<"pending" | "completed">("pending");
+    const [direction, setDirection] = useState<1 | -1>(1); // 1 = slide left, -1 = slide right
 
-    // 🟢 Dynamically switch between task sets
     const displayedTasks = activeTab === "pending" ? pendingTasks : completedTasks;
 
+    // 🟩 Animation Variants for Sliding
+    const slideVariants = {
+        enter: (direction: number) => ({
+            x: direction > 0 ? 100 : -100,
+            opacity: 0,
+        }),
+        center: { x: 0, opacity: 1 },
+        exit: (direction: number) => ({
+            x: direction > 0 ? -100 : 100,
+            opacity: 0,
+        }),
+    };
+
+    // 🟩 Handle Tab Switching
+    const handleTabChange = (tab: "pending" | "completed") => {
+        if (tab === activeTab) return;
+        setDirection(tab === "completed" ? 1 : -1);
+        setActiveTab(tab);
+    };
+
     return (
-        <div className="bg-neutral-950 rounded-2xl p-4 border border-neutral-800 text-white w-full">
+        <div className="bg-neutral-950 rounded-2xl p-4 border border-neutral-800 text-white w-full h-fit overflow-hidden">
             {/* Header */}
             <div className="flex justify-between items-center mb-4">
                 <h3 className="text-base font-semibold flex items-center gap-4">
                     Tasks
                     <span>
                         <input
-                        type="text"
-                        // value={query}
-                        // onChange={(e) => setQuery(e.target.value)}
+                        type="text"                        
                         placeholder="Search..."
                         className="p-2 sm:p-1.5 border rounded-lg border-neutral-700 bg-neutral-900 text-white w-full sm:w-auto text-sm sm:text-xs max-w-full sm:max-w-xs focus:outline-none"
                     />
@@ -187,63 +205,76 @@ const Tasks: React.FC = () => {
                 <div className="flex flex-row gap-4">
                     <button
                         className={`text-xs font-semibold ${activeTab === "pending"
-                                ? "text-[#00e695]"
-                                : "text-neutral-400 hover:text-white"
+                            ? "text-[#00e695]"
+                            : "text-neutral-400 hover:text-white"
                             }`}
-                        onClick={() => setActiveTab("pending")}
+                        onClick={() => handleTabChange("pending")}
                     >
                         Pending
                     </button>
                     <button
                         className={`text-xs font-semibold ${activeTab === "completed"
-                                ? "text-[#00e695]"
-                                : "text-neutral-400 hover:text-white"
+                            ? "text-[#00e695] "
+                            : "text-neutral-400 hover:text-white"
                             }`}
-                        onClick={() => setActiveTab("completed")}
+                        onClick={() => handleTabChange("completed")}
                     >
                         Completed
                     </button>
                 </div>
             </div>
 
-            {/* Task list */}
-            <div className="flex flex-col gap-1">
-                {displayedTasks.map((n) => (
-                    <div
-                        key={n.id}
-                        className="flex items-start justify-between rounded-xl p-2 border-b border-neutral-800 hover:bg-neutral-900 transition"
+            {/* Animated Task List */}
+            <div className="relative h-[300px] overflow-hidden">
+                <AnimatePresence mode="popLayout" custom={direction}>
+                    <motion.div
+                        key={activeTab}
+                        custom={direction}
+                        variants={slideVariants}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="absolute w-full"
                     >
-                        <div className="flex items-start gap-3">
-                            <div className="w-10 h-10 rounded-full bg-[#00e695] text-black font-bold flex items-center justify-center">
-                                {n.initials}
-                            </div>
-                            <div className="flex flex-col">
-                                <p className="font-semibold text-xs">{n.message}</p>
-                                <p className="font-normal text-xs">{n.name}</p>
-                            </div>
-                        </div>
-                        <div className="flex flex-row items-end gap-4 text-xs font-normal">
-                            <button
-                                onClick={() => setSelectedTask(n)}
-                                className="text-[#00e695] hover:underline"
+                        {displayedTasks.map((n) => (
+                            <div
+                                key={n.id}
+                                className="flex items-start justify-between rounded-xl p-2 border-b border-neutral-800 hover:bg-neutral-900 transition"
                             >
-                                {activeTab === "pending" ? "JOIN NOW" : "VIEW"}
-                            </button>
-                            <button className="text-[#00e695] hover:text-red-400 transition">
-                                CLOSE
-                            </button>
-                        </div>
-                    </div>
-                ))}
+                                <div className="flex items-start gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-[#00e695] text-black font-bold flex items-center justify-center">
+                                        {n.initials}
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <p className="font-semibold text-xs">{n.message}</p>
+                                        <p className="font-normal text-xs">{n.name}</p>
+                                    </div>
+                                </div>
+                                <div className="flex flex-row items-end gap-4 text-xs font-normal">
+                                    <button
+                                        onClick={() => setSelectedTask(n)}
+                                        className="text-[#00e695] hover:underline"
+                                    >
+                                        {activeTab === "pending" ? "JOIN NOW" : "VIEW"}
+                                    </button>
+                                    <button className="text-[#00e695] hover:text-red-400 transition">
+                                        CLOSE
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
 
-                {displayedTasks.length === 0 && (
-                    <p className="text-neutral-500 text-xs text-center py-4">
-                        No {activeTab} tasks found.
-                    </p>
-                )}
+                        {displayedTasks.length === 0 && (
+                            <p className="text-neutral-500 text-xs text-center py-4">
+                                No {activeTab} tasks found.
+                            </p>
+                        )}
+                    </motion.div>
+                </AnimatePresence>
             </div>
 
-            {/* Modal with animation */}
+            {/* Modal */}
             <AnimatePresence>
                 {selectedTask && (
                     <>
@@ -256,10 +287,10 @@ const Tasks: React.FC = () => {
 
                         <motion.div
                             className="fixed inset-0 flex items-center justify-end pr-10 z-50"
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.8 }}
-                            transition={{ duration: 0.2 }}
+                            initial={{ x: 200, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            exit={{ x: 200, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
                         >
                             <div className="bg-neutral-950 rounded-2xl w-[90%] sm:w-[450px] p-5 border border-neutral-700 shadow-xl text-white relative">
                                 <button

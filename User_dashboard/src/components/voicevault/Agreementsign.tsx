@@ -257,7 +257,7 @@ const Agreementsign: React.FC<AgreementsignProps> = ({ onClose,onAgree }) => {
                 initial={{ opacity: 0, scale: 0.8, y: 40 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.8, y: 40 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
                 className="bg-neutral-900 text-white rounded-2xl shadow-lg w-[800px]"
             >
                 {/* Header */}

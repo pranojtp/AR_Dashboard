@@ -46,7 +46,7 @@ const Requestupload: React.FC<Props> = ({ onClose }) => {
                     transition={{ duration: 0.3, ease: "easeOut" }}
                     className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-xs z-50 p-4"
                 >
-                    <div className="flex flex-col gap-4 bg-neutral-900 p-6 sm:p-8 rounded-2xl shadow-2xl w-fit max-w-md sm:max-w-lg lg:max-w-xl relative border border-neutral-700">
+                    <div className="flex flex-col gap-4 bg-neutral-900 p-6 sm:p-6 rounded-2xl shadow-2xl w-fit max-w-md sm:max-w-lg lg:max-w-xl relative border border-neutral-700">
                         {/* Close Button (top-right) */}
                         <button
                             onClick={onClose}

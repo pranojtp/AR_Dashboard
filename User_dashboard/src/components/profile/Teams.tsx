@@ -178,7 +178,6 @@ const Teams = () => {
                         placeholder="Search..."
                         className="p-2 sm:p-1.5 border rounded-lg border-neutral-700 bg-neutral-900 text-white w-full sm:w-auto text-sm sm:text-xs max-w-full sm:max-w-xs focus:outline-none"
                     />
-
                     <select
                         value={selectedValue}
                         onChange={(e) => setSelectedValue(e.target.value)}
