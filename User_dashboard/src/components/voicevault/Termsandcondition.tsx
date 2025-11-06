@@ -111,9 +111,8 @@
 
 // export default TermsAndCondition;
 
-
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence,easeInOut } from "framer-motion";
 import Agreementsign from "./Agreementsign";
 
 interface TermsAndConditionProps {
@@ -126,6 +125,25 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
     onAgree,
 }) => {
     const [showAgreement, setShowAgreement] = useState(false);
+    const [direction, setDirection] = useState(1);
+
+    // 🧭 Smooth sliding variants
+    const slideVariants = {
+        enter: (direction: number) => ({
+            x: direction > 0 ? "100%" : "-100%",
+            opacity: 0,
+        }),
+        center: {
+            x: 0,
+            opacity: 1,
+            transition: { duration: 0.45, ease: easeInOut},
+        },
+        exit: (direction: number) => ({
+            x: direction < 0 ? "100%" : "-100%",
+            opacity: 0,
+            transition: { duration: 0.4, ease: easeInOut },
+        }),
+    };
 
     return (
         <>
@@ -137,102 +155,122 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
                 exit={{ opacity: 0 }}
             />
 
-            {/* Popup Container */}
-            <div className="fixed inset-0 flex items-center justify-center z-50">
-                <AnimatePresence mode="wait">
-                    {!showAgreement ? (
-                        <motion.section
-                            key="terms"
-                            initial={{ x: 120, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            exit={{ x: -120, opacity: 0 }}
-                            transition={{
-                                duration: 0.55,
-                                ease: [0.45, 0.05, 0.55, 0.95], // custom cubic-bezier
-                            }}
-                            className="bg-neutral-950 p-6 flex flex-col gap-5 w-[700px] border border-neutral-800 rounded-2xl shadow-xl"
-                        >
-                            <div className="flex justify-between items-center">
-                                <p className="text-sm sm:text-base font-bold text-white">Agreement</p>
-                                <div className="text-xs text-gray-400">
-                                    Agreement code : <span>FRB1235476</span>
-                                </div>
-                            </div>
-
-                            {/* Input fields */}
-                            <div className="flex flex-col gap-3 text-sm">
-                                <div>
-                                    <label className="block mb-1 text-xs font-medium">Legal Name</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Enter your legal name"
-                                        className="w-full text-xs rounded-lg bg-neutral-900 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block mb-1 text-xs font-medium">Address</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Enter your address"
-                                        className="w-full text-xs rounded-lg bg-neutral-900 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
-                                    />
+            {/* Center Modal Container */}
+            <div className="fixed inset-0 flex items-center justify-center z-50 px-4 sm:px-6">
+                {/* ✅ Responsive wrapper */}
+                <div
+                    className="relative bg-neutral-950 border border-neutral-800 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] overflow-hidden w-full max-w-[800px] h-[90vh] sm:h-[365px]"
+                >
+                    <AnimatePresence custom={direction} mode="wait">
+                        {!showAgreement ? (
+                            <motion.section
+                                key="terms"
+                                custom={direction}
+                                variants={slideVariants}
+                                initial="enter"
+                                animate="center"
+                                exit="exit"
+                                className="absolute inset-0 p-6 flex flex-col gap-5 text-white"
+                            >
+                                {/* Header */}
+                                <div className="flex justify-between items-center">
+                                    <p className="text-sm sm:text-base font-bold text-white">
+                                        Agreement
+                                    </p>
+                                    <div className="text-xs text-gray-400">
+                                        Agreement code : <span>FRB1235476</span>
+                                    </div>
                                 </div>
 
-                                <div className="flex gap-3">
-                                    <div className="flex-1">
-                                        <label className="block mb-1 text-xs font-medium">Valid Proof ID</label>
+                                {/* Input fields */}
+                                <div className="flex flex-col gap-3 text-sm mt-2 flex-grow overflow-y-auto">
+                                    <div>
+                                        <label className="block mb-1 text-xs font-medium">
+                                            Legal Name
+                                        </label>
                                         <input
                                             type="text"
-                                            placeholder="Proof ID"
+                                            placeholder="Enter your legal name"
                                             className="w-full text-xs rounded-lg bg-neutral-900 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
                                     </div>
-                                    <div className="flex-1">
-                                        <label className="block mb-1 text-xs font-medium">D.O.B</label>
+                                    <div>
+                                        <label className="block mb-1 text-xs font-medium">
+                                            Address
+                                        </label>
                                         <input
-                                            type="date"
+                                            type="text"
+                                            placeholder="Enter your address"
                                             className="w-full text-xs rounded-lg bg-neutral-900 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
+                                    </div>
+
+                                    <div className="flex flex-col sm:flex-row gap-3">
+                                        <div className="flex-1">
+                                            <label className="block mb-1 text-xs font-medium">
+                                                Valid Proof ID
+                                            </label>
+                                            <input
+                                                type="text"
+                                                placeholder="Proof ID"
+                                                className="w-full text-xs rounded-lg bg-neutral-900 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                            />
+                                        </div>
+                                        <div className="flex-1">
+                                            <label className="block mb-1 text-xs font-medium">
+                                                D.O.B
+                                            </label>
+                                            <input
+                                                type="date"
+                                                className="w-full text-xs rounded-lg bg-neutral-900 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div className="flex justify-end gap-3">
-                                <button
-                                    onClick={onClose}
-                                    className="px-6 py-2 rounded-lg text-xs text-[#00FFA3] border border-[#00FFA3] hover:border-[#ff0000] hover:text-[#ff0000] transition"
-                                >
-                                    Cancel
-                                </button>
-                                <button
-                                    onClick={() => setShowAgreement(true)}
-                                    className="px-6 py-2 rounded-lg bg-[#00FFA3] text-xs text-black font-medium hover:bg-[#30e3a5] transition"
-                                >
-                                    Next
-                                </button>
-                            </div>
-                        </motion.section>
-                    ) : (
-                        <motion.div
-                            key="agreement"
-                            initial={{ x: 120, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            exit={{ x: -120, opacity: 0 }}
-                            transition={{
-                                duration: 0.55,
-                                ease: [0.45, 0.05, 0.55, 0.95], // custom cubic-bezier
-                            }}
-                        >
-                            <Agreementsign
-                                onClose={() => setShowAgreement(false)}
-                                onAgree={() => {
-                                    setShowAgreement(false);
-                                    onAgree();
-                                }}
-                            />
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                                {/* Buttons */}
+                                <div className="flex justify-end gap-3 mt-auto">
+                                    <button
+                                        onClick={onClose}
+                                        className="px-5 sm:px-6 py-2 rounded-lg text-xs text-[#00FFA3] border border-[#00FFA3] hover:border-[#ff0000] hover:text-[#ff0000] transition"
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            setDirection(1);
+                                            setShowAgreement(true);
+                                        }}
+                                        className="px-5 sm:px-6 py-2 rounded-lg bg-[#00FFA3] text-xs text-black font-medium hover:bg-[#30e3a5] transition"
+                                    >
+                                        Next
+                                    </button>
+                                </div>
+                            </motion.section>
+                        ) : (
+                            <motion.div
+                                key="agreement"
+                                custom={direction}
+                                variants={slideVariants}
+                                initial="enter"
+                                animate="center"
+                                exit="exit"
+                                className="absolute inset-0"
+                            >
+                                <Agreementsign
+                                    onClose={() => {
+                                        setDirection(-1);
+                                        setShowAgreement(false);
+                                    }}
+                                    onAgree={() => {
+                                        setShowAgreement(false);
+                                        onAgree();
+                                    }}
+                                />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
             </div>
         </>
     );

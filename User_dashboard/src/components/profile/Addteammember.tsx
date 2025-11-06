@@ -46,7 +46,7 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
                     transition={{ duration: 0.2, ease: "easeOut" }}
                     className="fixed inset-0 flex items-center justify-center bg-black/40 z-50 p-4"
                 >
-                    <div className="flex flex-col gap-4 bg-neutral-900 p-6 sm:p-6 rounded-2xl shadow-2xl w-fit max-w-md sm:max-w-lg lg:max-w-xl relative border border-neutral-700">
+                    <div className="flex flex-col gap-4 bg-neutral-950 p-6 sm:p-6 rounded-2xl shadow-2xl w-fit max-w-md sm:max-w-lg lg:max-w-xl relative border border-neutral-700">
                         {/* Close Button (top-right) */}
                         <button
                             onClick={onClose}
@@ -148,7 +148,7 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
                         <div className="flex flex-col sm:flex-row justify-between gap-3 text-sm mt-2">
                             <button
                                 onClick={onClose}
-                                className="px-3 py-1 border border-[#00FFA3] rounded-md text-[#00FFA3] hover:bg-[#00FFA3]/20 transition w-full sm:w-auto"
+                                className="px-3 py-1 border border-[#00FFA3] rounded-md text-[#00FFA3] hover:border-[#ff0000] hover:text-[#ff0000] transition w-full sm:w-auto"
                             >
                                 Cancel
                             </button>

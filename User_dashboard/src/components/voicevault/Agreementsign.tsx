@@ -173,7 +173,7 @@ interface AgreementsignProps {
     onAgree: () => void;
 }
 
-const Agreementsign: React.FC<AgreementsignProps> = ({ onClose,onAgree }) => {
+const Agreementsign: React.FC<AgreementsignProps> = ({ onClose, onAgree }) => {
     const [selectedSection, setSelectedSection] = useState<number>(1);
 
     const sections = [
@@ -188,19 +188,25 @@ const Agreementsign: React.FC<AgreementsignProps> = ({ onClose,onAgree }) => {
             case 1:
                 return (
                     <>
-                        <h2 className="font-semibold text-sm mb-2">General Terms and Conditions</h2>
+                        <h2 className="font-semibold text-sm mb-2">
+                            General Terms and Conditions
+                        </h2>
                         <p className="text-xs leading-relaxed text-neutral-300">
-                            Pizza ipsum dolor amet lovers buffalo. String tomatoes Chicago pineapple extra onions
-                            pork onions hand. Red spinach crust Bianca ham sauce Aussie garlic. Ham rib black stuffed
-                            ipsum ricotta sausage pepperoni pepperoni. Pie red personal tomatoes platter broccoli.
+                            Pizza ipsum dolor amet lovers buffalo. String tomatoes Chicago
+                            pineapple extra onions pork onions hand. Red spinach crust Bianca
+                            ham sauce Aussie garlic. Ham rib black stuffed ipsum ricotta
+                            sausage pepperoni pepperoni. Pie red personal tomatoes platter
+                            broccoli.
                         </p>
                         <p className="text-xs leading-relaxed text-neutral-300">
-                            Mushrooms garlic roll meatball thin melted dolor ham. NY mouth lot pork party lasagna
-                            buffalo mouth platter pork. Pineapple lovers meat tomato white pepperoni Hawaiian red.
+                            Mushrooms garlic roll meatball thin melted dolor ham. NY mouth lot
+                            pork party lasagna buffalo mouth platter pork. Pineapple lovers
+                            meat tomato white pepperoni Hawaiian red.
                         </p>
                         <p className="text-xs leading-relaxed text-neutral-300">
-                            Rib cheese meat Hawaiian anchovies Bianca. Hand banana meat steak spinach string
-                            personal pork lot Philly. Deep stuffed pie stuffed meatball bbq lasagna mushrooms.
+                            Rib cheese meat Hawaiian anchovies Bianca. Hand banana meat steak
+                            spinach string personal pork lot Philly. Deep stuffed pie stuffed
+                            meatball bbq lasagna mushrooms.
                         </p>
                     </>
                 );
@@ -209,12 +215,14 @@ const Agreementsign: React.FC<AgreementsignProps> = ({ onClose,onAgree }) => {
                     <>
                         <h2 className="font-semibold text-sm mb-2">Acceptable Use Policy</h2>
                         <p className="text-xs leading-relaxed text-neutral-300">
-                            Users must refrain from uploading offensive, copyrighted, or illegal voice content.
-                            Data collected will be used only for approved purposes outlined by the company.
+                            Users must refrain from uploading offensive, copyrighted, or
+                            illegal voice content. Data collected will be used only for
+                            approved purposes outlined by the company.
                         </p>
                         <p className="text-xs leading-relaxed text-neutral-300">
-                            Violation of these rules may result in termination of access and legal action.
-                            The organization reserves the right to monitor activity to ensure compliance.
+                            Violation of these rules may result in termination of access and
+                            legal action. The organization reserves the right to monitor
+                            activity to ensure compliance.
                         </p>
                     </>
                 );
@@ -223,12 +231,13 @@ const Agreementsign: React.FC<AgreementsignProps> = ({ onClose,onAgree }) => {
                     <>
                         <h2 className="font-semibold text-sm mb-2">Cancellation Policy</h2>
                         <p className="text-xs leading-relaxed text-neutral-300">
-                            You may cancel your agreement within 7 days of signing without penalty. After this
-                            period, standard cancellation charges apply based on your subscription plan.
+                            You may cancel your agreement within 7 days of signing without
+                            penalty. After this period, standard cancellation charges apply
+                            based on your subscription plan.
                         </p>
                         <p className="text-xs leading-relaxed text-neutral-300">
-                            All cancellations must be confirmed via email. Any active projects or uploads
-                            will be paused immediately upon cancellation.
+                            All cancellations must be confirmed via email. Any active projects
+                            or uploads will be paused immediately upon cancellation.
                         </p>
                     </>
                 );
@@ -237,12 +246,13 @@ const Agreementsign: React.FC<AgreementsignProps> = ({ onClose,onAgree }) => {
                     <>
                         <h2 className="font-semibold text-sm mb-2">Privacy Policy</h2>
                         <p className="text-xs leading-relaxed text-neutral-300">
-                            Your data and uploaded files are encrypted and stored securely. We do not share
-                            personal or voice data with third parties without explicit consent.
+                            Your data and uploaded files are encrypted and stored securely. We
+                            do not share personal or voice data with third parties without
+                            explicit consent.
                         </p>
                         <p className="text-xs leading-relaxed text-neutral-300">
-                            You can request deletion of your personal information at any time, subject to
-                            legal retention requirements.
+                            You can request deletion of your personal information at any time,
+                            subject to legal retention requirements.
                         </p>
                     </>
                 );
@@ -258,55 +268,60 @@ const Agreementsign: React.FC<AgreementsignProps> = ({ onClose,onAgree }) => {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.8, y: 40 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                className="bg-neutral-900 text-white rounded-2xl shadow-lg w-[800px]"
+                className="bg-neutral-900 text-white rounded-2xl shadow-lg w-full max-w-4xl mx-auto flex flex-col max-h-[90vh]"
             >
                 {/* Header */}
-                <div className="flex justify-between items-center px-8 py-5 border-b border-neutral-700">
-                    <h1 className="text-m font-semibold">Agreement</h1>
-                    <p className="text-sm text-neutral-400">
-                        Agreement code: <span className="text-neutral-200">FRB1235476</span>
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 px-6 md:px-8 py-5 border-b border-neutral-700">
+                    <h1 className="text-base font-semibold">Agreement</h1>
+                    <p className="text-xs md:text-sm text-neutral-400">
+                        Agreement code:{" "}
+                        <span className="text-neutral-200">FRB1235476</span>
                     </p>
                 </div>
 
-                {/* Main */}
-                <div className="grid grid-cols-4 divide-x divide-neutral-700">
-                    {/* Sidebar */}
-                    <aside className="col-span-1 bg-black">
-                        <ul className="p-6 space-y-4">
-                            {sections.map((item, index) => (
-                                <li
-                                    key={item}
-                                    onClick={() => setSelectedSection(index + 1)}
-                                    className={`cursor-pointer text-xs ${selectedSection === index + 1
-                                        ? "text-[#00FFA3] font-medium"
-                                        : "text-neutral-400 hover:text-white"
-                                        }`}
-                                >
-                                    {index + 1}. {item}
-                                </li>
-                            ))}
-                        </ul>
-                    </aside>
+                {/* Scrollable Content */}
+                <div className="flex-1 overflow-y-auto custom-scrollbar">
+                    <div className="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-neutral-700">
+                        {/* Sidebar */}
+                        <aside className="bg-black md:col-span-1 p-4 md:p-6">
+                            <ul className="space-y-3 md:space-y-4">
+                                {sections.map((item, index) => (
+                                    <li
+                                        key={item}
+                                        onClick={() => setSelectedSection(index + 1)}
+                                        className={`cursor-pointer text-xs md:text-sm ${selectedSection === index + 1
+                                                ? "text-[#00FFA3] font-medium"
+                                                : "text-neutral-400 hover:text-white"
+                                            }`}
+                                    >
+                                        {index + 1}. {item}
+                                    </li>
+                                ))}
+                            </ul>
+                        </aside>
 
-                    {/* Content */}
-                    <main className="col-span-3 bg-black p-6 space-y-3">{renderContent()}</main>
+                        {/* Content */}
+                        <main className="p-4 md:p-6 col-span-1 md:col-span-3 bg-black space-y-3">
+                            {renderContent()}
+                        </main>
+                    </div>
                 </div>
 
                 {/* Footer */}
-                <footer className="flex justify-between items-center px-8 py-4 border-t border-neutral-700">
-                    <button className="text-xs text-neutral-400 hover:text-[#00FFA3]">
+                <footer className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 px-6 md:px-8 py-4 border-t border-neutral-700">
+                    <button className="text-xs md:text-sm text-neutral-400 hover:text-[#00FFA3]">
                         Send a copy to my email
                     </button>
-                    <div className="flex gap-4">
+                    <div className="flex gap-3 md:gap-4 w-full md:w-auto justify-end">
                         <button
                             onClick={onClose}
-                            className="px-3 py-1 rounded-lg bg-neutral-800 text-xs text-[#00FFA3] border border-[#00FFA3] hover:border-[#ff0000] hover:text-[#ff0000] transition"
+                            className="px-4 py-2 rounded-lg bg-neutral-800 text-xs md:text-xs text-[#00FFA3] border border-[#00FFA3] hover:border-[#ff0000] hover:text-[#ff0000] transition w-full md:w-auto"
                         >
                             DECLINE
                         </button>
                         <button
                             onClick={onAgree}
-                            className="px-6 py-2 rounded-lg bg-[#00FFA3] text-xs text-black font-medium hover:bg-[#00e697] transition"
+                            className="px-6 py-2 rounded-lg bg-[#00FFA3] text-xs md:text-xs text-black font-medium hover:bg-[#00e697] transition w-full md:w-auto"
                         >
                             AGREE
                         </button>
