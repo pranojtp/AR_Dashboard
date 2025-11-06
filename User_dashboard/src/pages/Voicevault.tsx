@@ -8,7 +8,7 @@ const Voicevault = () => {
   const [isAgreementSigned, setIsAgreementSigned] = useState(false);
 
   return (
-    <div className="flex-1 space-y-6 px-3 sm:px-4 md:px-6 lg:px-8 pb-6">
+    <div className="flex-1 space-y-5 px-2 sm:px-3 md:px-4 lg:px-5 pb-6">
       <Headercard />
 
       {!isAgreementSigned ? (
