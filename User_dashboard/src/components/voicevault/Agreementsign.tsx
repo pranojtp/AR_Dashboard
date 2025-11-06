@@ -177,10 +177,10 @@ const Agreementsign: React.FC<AgreementsignProps> = ({ onClose, onAgree }) => {
     const [selectedSection, setSelectedSection] = useState<number>(1);
 
     const sections = [
-        "General Terms and Conditions",
-        "Acceptable Use Policy",
-        "Cancellation Policy",
-        "Privacy Policy",
+        "AUDIO COLLABORATION AND VOICE PROCESSING AGREEMENT",
+        // "Acceptable Use Policy",
+        // "Cancellation Policy",
+        // "Privacy Policy",
     ];
 
     const renderContent = () => {
@@ -189,24 +189,61 @@ const Agreementsign: React.FC<AgreementsignProps> = ({ onClose, onAgree }) => {
                 return (
                     <>
                         <h2 className="font-semibold text-sm mb-2">
-                            General Terms and Conditions
+                            AUDIO COLLABORATION AND VOICE PROCESSING AGREEMENT
                         </h2>
-                        <p className="text-xs leading-relaxed text-neutral-300">
-                            Pizza ipsum dolor amet lovers buffalo. String tomatoes Chicago
-                            pineapple extra onions pork onions hand. Red spinach crust Bianca
-                            ham sauce Aussie garlic. Ham rib black stuffed ipsum ricotta
-                            sausage pepperoni pepperoni. Pie red personal tomatoes platter
-                            broccoli.
-                        </p>
-                        <p className="text-xs leading-relaxed text-neutral-300">
-                            Mushrooms garlic roll meatball thin melted dolor ham. NY mouth lot
-                            pork party lasagna buffalo mouth platter pork. Pineapple lovers
-                            meat tomato white pepperoni Hawaiian red.
-                        </p>
-                        <p className="text-xs leading-relaxed text-neutral-300">
-                            Rib cheese meat Hawaiian anchovies Bianca. Hand banana meat steak
-                            spinach string personal pork lot Philly. Deep stuffed pie stuffed
-                            meatball bbq lasagna mushrooms.
+                        <p className="text-sm leading-relaxed text-neutral-300">                        
+                            This Audio Collaboration and Voice Processing Agreement (hereinafter referred to as “Agreement”) is executed at ___ on this the ___ day of __, 2025 (in words) and shall be effective from ____, which shall be the “Effective Date” of this Agreement. <br />
+
+                            BY AND BETWEEN <br />
+
+                            1.	[Name of the Actor], aged ___, residing at ______, who is an actor/actress/ media personality/sportsperson by profession and hereinafter referred to as “Party A” or “the Artist,” which expression shall, unless repugnant to the context or meaning thereof, include his/her heirs, successors, and permitted assigns.
+
+                            2.	Audio Realities Pvt. Ltd., a company incorporated under the Companies Act, 2013, having its registered office at “Karotte Maliyeckal, Chathamattom PO,  Ernakulam, Kerala 686671, represented by its authorized signatory ______, hereinafter referred to as “Party B” or “the Company,” which expression shall, unless repugnant to the context or meaning thereof, include its successors and permitted assigns.
+
+                            Party A and Party B may be collectively referred to as the “Parties” and individually as a “Party.”
+
+                            WHEREAS, the Artist is a well-known actor/actress/media personality/sportsperson and is desirous of creating AI-generated versions of his/her voice for purposes including but not limited to dubbing in other languages, voice-overs, commercials, and other artistic or commercial/non-commercial artistic or visual media projects;
+
+                            WHEREAS, the Company is engaged in the business of procuring voice samples or voice recordings, storing, processing, and utilizing such voice-based data of artists for generating synthetic voice-based content using artificial intelligence, tailored for use in films, advertisements, and/or  other commercial or non-commercial artistic works or visual media projects, as per the requirements of third party users including Producers and/or Project Creators as defined in this Agreement;
+
+                            WHEREAS, the Artist wishes to store his/her voice in digital format with the Company, for the purpose of enabling the creation of synthetic voice content, thereby facilitating efficient production workflows and reducing the need for manual dubbing or repeated voice-over performances;
+
+                            WHEREAS, the Company agrees to store the Artist’s voice in its secured Voice Vault as defined in this Agreement, and make use of the same, as and when required by third - parties identified herein, for approved applications in accordance with the terms of this Agreement;
+
+                            WHEREAS, the Company has accepted the Artist’s proposal and shall provide the services of voice storage and AI-based voice processing upon requirement raised by third - parties identified in this Agreement;
+
+                            AND WHEREAS, both Parties mutually agree and acknowledge that this Agreement constitutes a legal and valid authorization for the Company to utilize the Artist’s voice to generate AI-based versions, and that such processing and usage shall not, in any manner, infringe upon or prejudice the Artist’s personality rights, publicity rights, or any other moral or proprietary rights.
+
+                            NOW, THEREFORE, in consideration of the mutual covenants and undertakings herein contained, the Parties agree as follows: <br />
+
+
+                            01.	DEFINITIONS
+                            For the purposes of this Agreement, unless the context otherwise requires, the following terms shall have the meanings ascribed to them below:
+                            a)	“Applicable Laws” :  Means and includes all applicable statutes, enactments, acts of legislature, laws, ordinances, rules, bye-laws, regulations, guidelines, policies, directions, directives, notifications, and orders of any governmental or regulatory authority (whether central, state, or local), and all applicable international treaties and conventions, as may be in force and effect from time to time.
+                            b)	"Algorithm": Means the digital construct developed by the Company through artificial intelligence model training and algorithmic processing utilizing the Artist’s Voice Data. The Algorithm operates as a technical tool to generate synthetic voice outputs as permitted under this Agreement. The Algorithm may be retained and used by the Company for internal research and development, provided such use does not result in the direct recreation of the Artist’s recognizable voice, persona, or any other personally identifiable characteristics. For clarity, the Algorithm exists as code and mathematical models, distinct from the Artist’s unique vocal qualities or personality traits, and cannot, in itself, reproduce or represent the Artist’s identity without the application of the associated Voice Data;
+
+                            c)	“Business Day”: Means any day other than a Saturday, Sunday, or any public holiday declared by the Government of India or the applicable local government. <br />
+
+                            02.	MUTUAL OBLIGATIONS:
+                            Each Party agrees to not knowingly do any act or knowingly make any statement, oral or written, which would injure the other party’s business, its interest, or its reputation, unless required to do so in a legal proceeding by a competent court with proper jurisdiction. <br />
+
+                            03.	COUNTERPARTS
+                            This Agreement may be executed in any number of counterparts, each of which when executed and delivered shall be deemed an original, and all of which together shall constitute one and the same instrument. Execution and exchange of counterparts by electronic means, including via scanned PDF or digital signature platforms, shall be valid and binding upon the Parties to the same extent as delivery of an original executed counterpart. <br />
+
+
+                            IN WITNESS WHEREOF, the Parties have executed this Agreement as of the date first above written. <br />
+
+                            Party	A (Actor): <br />
+                            Signature: _________________________ <br />
+                            Name: ____________________________ <br />
+                            Date: _____________________________ <br />
+                            <br />
+                            Party	B (Company): <br />
+                            Signature: _________________________ <br />
+                            Name: ____________________________ <br />
+                            Designation: _______________________ <br />
+                            Date: _____________________________ 
+
                         </p>
                     </>
                 );
@@ -290,8 +327,8 @@ const Agreementsign: React.FC<AgreementsignProps> = ({ onClose, onAgree }) => {
                                         key={item}
                                         onClick={() => setSelectedSection(index + 1)}
                                         className={`cursor-pointer text-xs md:text-sm ${selectedSection === index + 1
-                                                ? "text-[#00FFA3] font-medium"
-                                                : "text-neutral-400 hover:text-white"
+                                            ? "text-[#00FFA3] font-medium"
+                                            : "text-neutral-400 hover:text-white"
                                             }`}
                                     >
                                         {index + 1}. {item}

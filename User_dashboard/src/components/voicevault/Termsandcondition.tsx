@@ -159,7 +159,7 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
             <div className="fixed inset-0 flex items-center justify-center z-50 px-4 sm:px-6">
                 {/* ✅ Responsive wrapper */}
                 <div
-                    className="relative bg-neutral-950 border border-neutral-800 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] overflow-hidden w-full max-w-[800px] h-[90vh] sm:h-[365px]"
+                    className="relative bg-neutral-950 border border-neutral-800 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] overflow-hidden w-full max-w-[900px] h-[90vh] sm:h-[665px]"
                 >
                     <AnimatePresence custom={direction} mode="wait">
                         {!showAgreement ? (
