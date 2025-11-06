@@ -227,13 +227,13 @@ const Profilecard = () => {
         <>
             <div className="flex flex-col gap-3 rounded-2xl bg-neutral-900 w-full h-auto">
                 {/* 🔹 Top Navbar */}
-                <div className="flex flex-row gap-2 px-4 sm:px-6 py-4 border-b border-neutral-700">
-                    {/* Left Side */}
-                    {/* <UserRound className="size-4 text-[#00FFA3]" />
+                {/* <div className="flex flex-row gap-2 px-4 sm:px-6 py-4 border-b border-neutral-700">
+                    Left Side
+                    <UserRound className="size-4 text-[#00FFA3]" />
                     <h1 className="font-semibold text-[#00FFA3] text-xs sm:text-xs">
                         Profile Details
-                    </h1> */}
-                </div>
+                    </h1>
+                </div> */}
 
                 {/* 🔹 Profile Section */}
                 <section className="bg-neutral-950 p-4 flex flex-col md:flex-col h-auto border-t-6 border-[#00FFA3] rounded-2xl">
