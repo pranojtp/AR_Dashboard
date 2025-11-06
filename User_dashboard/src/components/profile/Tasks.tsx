@@ -251,15 +251,15 @@ const Tasks: React.FC = () => {
                                         <p className="font-normal text-xs">{n.name}</p>
                                     </div>
                                 </div>
-                                <div className="flex flex-row items-end gap-4 text-xs font-normal">
+                                <div className="flex flex-row items-end gap-4 text-sm font-normal">
                                     <button
                                         onClick={() => setSelectedTask(n)}
-                                        className="text-[#00e695] hover:underline"
+                                        className="text-[#00e695]"
                                     >
-                                        {activeTab === "pending" ? "JOIN NOW" : "VIEW"}
+                                        {activeTab === "pending" ? "VIEW" : "VIEW"}
                                     </button>
                                     <button className="text-[#00e695] hover:text-red-400 transition">
-                                        CLOSE
+                                        {/* CLOSE */}
                                     </button>
                                 </div>
                             </div>

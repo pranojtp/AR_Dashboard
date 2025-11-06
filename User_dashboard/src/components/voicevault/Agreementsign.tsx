@@ -308,13 +308,13 @@ const Agreementsign: React.FC<AgreementsignProps> = ({ onClose, onAgree }) => {
                 className="bg-neutral-900 text-white rounded-2xl shadow-lg w-full max-w-4xl mx-auto flex flex-col max-h-[90vh]"
             >
                 {/* Header */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 px-6 md:px-8 py-5 border-b border-neutral-700">
+                {/* <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 px-6 md:px-8 py-5 border-b border-neutral-700">
                     <h1 className="text-base font-semibold">Agreement</h1>
                     <p className="text-xs md:text-sm text-neutral-400">
                         Agreement code:{" "}
                         <span className="text-neutral-200">FRB1235476</span>
                     </p>
-                </div>
+                </div> */}
 
                 {/* Scrollable Content */}
                 <div className="flex-1 overflow-y-auto custom-scrollbar">
