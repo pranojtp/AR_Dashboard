@@ -178,9 +178,9 @@ const Agreementsign: React.FC<AgreementsignProps> = ({ onClose, onAgree }) => {
 
     const sections = [
         "AUDIO COLLABORATION AND VOICE PROCESSING AGREEMENT",
-        // "Acceptable Use Policy",
-        // "Cancellation Policy",
-        // "Privacy Policy",
+        "Acceptable Use Policy",
+        "Cancellation Policy",
+        "Privacy Policy",
     ];
 
     const renderContent = () => {
