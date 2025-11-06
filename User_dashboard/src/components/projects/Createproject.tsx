@@ -74,21 +74,21 @@ const Createproject = () => {
         {
             title: 'Dubbing',
             gradientFrom: 'from-blue-700',
-            gradientTo: 'to-blue-400',        
+            gradientTo: 'to-blue-400',
         },
         {
             title: 'Text to Speech',
             gradientFrom: 'from-purple-600',
-            gradientTo: 'to-cyan-400',            
+            gradientTo: 'to-cyan-400',
         },
         {
-            title: 'Voice Cloning',            
+            title: 'Voice Cloning',
             gradientFrom: 'from-yellow-200',
             gradientTo: 'to-cyan-200',
             customGradientClass: 'bg-gradient-to-br from-yellow-100 to-cyan-300'
         },
         {
-            title: 'Voice Conversion',            
+            title: 'Voice Conversion',
             gradientFrom: 'from-blue-900',
             gradientTo: 'to-green-500',
             customGradientClass: 'bg-gradient-to-br from-blue-900 to-green-600/70'

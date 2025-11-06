@@ -16,7 +16,7 @@ const Headercard = () => {
                 {/* 🔹 Top Navbar */}
                 <div className="flex justify-between items-center px-6 py-4">
                     {/* Left side */}
-                    <h1 className="font-semibold text-[#02212a] text-lg">Voice Vault</h1>
+                    <h1 className="font-bold text-[#02212a] text-lg mx-2">VOICE VAULT</h1>
 
                     {/* Right side */}
                     <div className="flex items-center gap-4 text-black font-medium">
@@ -32,11 +32,11 @@ const Headercard = () => {
                 </div>
 
                 {/* 🔹 Header Card */}
-                <div className="bg-gradient-to-r from-[#00FFA3] to-[#00C4FF] p-4 flex flex-row md:flex-row justify-between items-center gap-3 mx-5">
+                <div className="bg-gradient-to-r from-[#00FFA3] to-[#00C4FF] p-3 flex flex-row md:flex-row justify-between items-center gap-3 mx-5">
                     {/* Left Section - Text */}
                     <div className="flex flex-col gap-2">
-                        <p className="font-medium italic text-[#02212a]">Secure, Private and Compliant!</p>
-                        <p className="max-w-xl text-sm italic text-[#02212a] text-justify">
+                        <p className="font-semibold italic text-[#02212a]">Secure, Private and Compliant!</p>
+                        <p className="max-w-xl text-sm text-[#02212a] text-justify">
                             Voice Vault is a secure digital platform where you can store, manage, and license your voice assets. Through transparent tracking and consent management, you maintain full control over your vocal assets while Audio Realities add value to it by leveraging the potential of AI for creative endeavours.
                         </p>
                     </div>
@@ -52,3 +52,4 @@ const Headercard = () => {
 }
 
 export default Headercard
+

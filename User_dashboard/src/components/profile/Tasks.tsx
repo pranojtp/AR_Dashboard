@@ -231,7 +231,7 @@ const Tasks: React.FC = () => {
                         key={activeTab}
                         custom={direction}
                         variants={slideVariants}
-                        initial="enter"
+                        initial=""
                         animate="center"
                         exit="exit"
                         transition={{ duration: 0.3, ease: "easeInOut" }}
