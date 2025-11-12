@@ -158,7 +158,7 @@ const pendingTasks: TaskItem[] = [
 ];
 
 const completedTasks: TaskItem[] = [
-    
+
 ];
 
 const Tasks: React.FC = () => {
@@ -196,10 +196,10 @@ const Tasks: React.FC = () => {
                     Tasks
                     <span>
                         <input
-                        type="text"                        
-                        placeholder="Search..."
-                        className="p-2 sm:p-1.5 border rounded-lg border-neutral-700 bg-neutral-900 text-white w-full sm:w-auto text-sm sm:text-xs max-w-full sm:max-w-xs focus:outline-none"
-                    />
+                            type="text"
+                            placeholder="Search..."
+                            className="p-2 sm:p-1.5 border rounded-lg border-neutral-700 bg-neutral-900 text-white w-full sm:w-auto text-sm sm:text-xs max-w-full sm:max-w-xs focus:outline-none"
+                        />
                     </span>
                 </h3>
                 <div className="flex flex-row gap-4">
@@ -286,13 +286,13 @@ const Tasks: React.FC = () => {
                         />
 
                         <motion.div
-                            className="fixed inset-0 flex items-center justify-end pr-10 z-50"
+                            className="fixed inset-0 flex items-center justify-center sm:justify-end sm:pr-10 z-50"
                             initial={{ x: 200, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
                             exit={{ x: 200, opacity: 0 }}
                             transition={{ duration: 0.3 }}
                         >
-                            <div className="bg-neutral-950 rounded-2xl w-[90%] sm:w-[450px] p-5 border border-neutral-700 shadow-xl text-white relative">
+                            <div className="bg-neutral-950 rounded-2xl w-[95%] sm:w-[450px] max-h-[90vh] overflow-y-auto p-5 border border-neutral-700 shadow-xl text-white relative">
                                 <button
                                     className="absolute top-3 right-4 text-neutral-400 hover:text-white"
                                     onClick={() => setSelectedTask(null)}

@@ -192,7 +192,8 @@
 
 import DP from "../../assets/nivin4.webp"
 
-import {Facebook, Instagram, Twitter} from "lucide-react"
+import { Facebook, Instagram} from "lucide-react"
+import { FaXTwitter } from "react-icons/fa6";
 // import { useNavigate } from "react-router-dom";
 
 const Profilecard = () => {
@@ -238,7 +239,7 @@ const Profilecard = () => {
                 {/* 🔹 Profile Section */}
                 <section className="bg-neutral-950 p-4 flex flex-col md:flex-col h-auto border-t-6 border-[#00FFA3] rounded-2xl">
                     <div className="flex flex-wrap gap-2 justify-end ">
-                        <p></p><Facebook className="size-4" /><Instagram className="size-4" /> <Twitter className="size-4" />
+                        <p></p><Facebook className="size-4" /><Instagram className="size-4" /> <FaXTwitter className="size-4" />
                     </div>
                     <div className="flex flex-col sm:flex-row gap-3 items-center sm:items-start text-center sm:text-left space-y-3 sm:space-y-0 sm:space-x-4">
                         <img
@@ -246,7 +247,7 @@ const Profilecard = () => {
                             alt="Profile Picture"
                             className="w-20 h-20 sm:w-40 sm:h-40 rounded-full object-cover border-1 border-[#00FFA3]"
                         />
-                        <div className="mt-15">
+                        <div className="sm:mt-0 md:mt-15">
                             <h2 className="text-lg sm:text-lg font-semibold text-white">
                                 Nivin Pauly
                             </h2>
@@ -264,7 +265,7 @@ const Profilecard = () => {
                                 Nivin Pauly is an Indian actor and producer who works predominantly in Malayalam films. He is the recipient of two Kerala State Film Awards, three Filmfare Awards South, two Kerala Film Critics Association Awards, and six SIIMA Awards.
                             </p>
                         </div>
-                        <div className="mt-15">
+                        <div className="sm:mt-0 md:mt-15">
                             <h2 className="text-sm sm:text-sm font-semibold text-white">
                                 Industry
                             </h2>
@@ -279,7 +280,7 @@ const Profilecard = () => {
                                 ))}
                             </div>
                         </div>
-                        <div className="mt-15">
+                        <div className="sm:mt-0 md:mt-15">
                             <h2 className="text-sm sm:text-sm font-semibold text-white">
                                 Affiliation
                             </h2>

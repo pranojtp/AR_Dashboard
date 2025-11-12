@@ -181,7 +181,7 @@ interface UploadedFile {
 const FileUpload: React.FC = () => {
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const [isDragging, setIsDragging] = useState(false);
-  const [showModal, setShowModal] = useState(false); // 
+  const [showModal, setShowModal] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // --- Drag Handlers ---
@@ -211,32 +211,31 @@ const FileUpload: React.FC = () => {
     const processed = fileList.map((file) => ({
       name: file.name,
       length: `${(file.size / 1024).toFixed(2)} KB`,
-      quality: ["Good", "Avg", "Poor"][Math.floor(Math.random() * 3)] as
-        | "Good"
-        | "Avg"
-        | "Poor",
+      quality: ["Good", "Avg", "Poor"][
+        Math.floor(Math.random() * 3)
+      ] as "Good" | "Avg" | "Poor",
       status: Math.floor(Math.random() * 100),
     }));
     setFiles(processed);
   };
 
   return (
-    <div className="bg-black text-white p-6 rounded-xl min-h-64 relative">
+    <div className="bg-black text-white p-4 sm:p-6 rounded-xl min-h-64 relative">
       {/* Show popup modal */}
       {showModal && <Requestupload onClose={() => setShowModal(false)} />}
 
       {files.length === 0 ? (
         // ========== INITIAL UPLOAD AREA ==========
-        <div className="flex flex-col md:flex-row items-center justify-center w-full gap-3">
+        <div className="flex flex-col md:flex-row items-center justify-center w-full gap-4 sm:gap-6">
           {/* LEFT SIDE - FILE UPLOAD */}
           <div
-            className={`flex-1 border-2 border-dashed rounded-xl h-64 flex flex-col justify-center items-center text-center transition-all duration-300 hover:border-[#00FFA3]
-        ${isDragging ? " bg-neutral-900" : "border-neutral-700"}`}
+            className={`flex-1 border-2 border-dashed rounded-xl h-56 sm:h-64 flex flex-col justify-center items-center text-center transition-all duration-300 hover:border-[#00FFA3] p-3 sm:p-3 w-full md:w-auto
+              ${isDragging ? "bg-neutral-900" : "border-neutral-700"}`}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
           >
-            <p className="text-white text-lg font-medium">
+            <p className="text-white text-base sm:text-lg font-medium px-3">
               {isDragging ? "Release to upload files" : "Drag your files here"}
             </p>
             <p className="text-gray-400 text-sm my-2">or</p>
@@ -253,11 +252,13 @@ const FileUpload: React.FC = () => {
           </div>
 
           {/* CENTER DIVIDER */}
-          <div className="text-gray-500 text-sm font-medium">or</div>
+          <div className="text-gray-500 text-sm font-medium md:block hidden">or</div>
 
           {/* RIGHT SIDE - REQUEST UPLOAD */}
-          <div className="flex-1 border-2 border-dashed border-neutral-700 rounded-xl h-64 flex flex-col gap-5 justify-center items-center text-center transition-all duration-300 hover:border-[#00FFA3]">
-            <p className="text-white text-lg font-medium">Request to Upload</p>
+          <div className="flex-1 border-2 border-dashed border-neutral-700 rounded-xl h-56 sm:h-64 flex flex-col gap-4 sm:gap-5 justify-center items-center text-center transition-all duration-300 hover:border-[#00FFA3] p-3 sm:p-3 w-full md:w-auto">
+            <p className="text-white text-base sm:text-lg font-medium">
+              Request to Upload
+            </p>
             <button
               onClick={() => setShowModal(true)}
               className="bg-[#00FFA3] text-black text-sm font-semibold px-4 py-2 rounded-lg hover:opacity-90 transition"
@@ -268,11 +269,11 @@ const FileUpload: React.FC = () => {
         </div>
       ) : (
         // ========== FILE TABLE VIEW ==========
-        <div className="bg-black rounded-xl p-2">
-          <div className="flex justify-between items-center mb-3">
+        <div className="bg-black rounded-xl p-3 sm:p-4">
+          <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-4 gap-3 sm:gap-0">
             <h2 className="text-lg font-semibold">Voices</h2>
 
-            <div className="flex flex-row gap-5">
+            <div className="flex flex-row gap-3 sm:gap-5">
               <button
                 onClick={handleUploadClick}
                 className="bg-[#00FFA3] hover:bg-green-500 text-black px-4 py-1 text-sm rounded-md font-semibold"
@@ -296,7 +297,7 @@ const FileUpload: React.FC = () => {
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+            <table className="w-full text-left text-xs sm:text-sm">
               <thead className="text-neutral-200 border-b border-neutral-700">
                 <tr>
                   <th className="pb-2">LIST</th>
@@ -311,7 +312,7 @@ const FileUpload: React.FC = () => {
                     key={index}
                     className="border-b border-neutral-800 hover:bg-neutral-800/40 transition"
                   >
-                    <td className="py-3">{file.name}</td>
+                    <td className="py-3 max-w-[140px] truncate">{file.name}</td>
                     <td>{file.length}</td>
                     <td
                       className={`${file.quality === "Good"
@@ -324,7 +325,7 @@ const FileUpload: React.FC = () => {
                       {file.quality}
                     </td>
                     <td>
-                      <div className="flex items-center gap-2 w-32">
+                      <div className="flex items-center gap-2 w-28 sm:w-32">
                         <span>{file.status}%</span>
                         <div className="w-full bg-neutral-700 h-1.5 rounded-full">
                           <div

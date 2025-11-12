@@ -66,7 +66,7 @@ const customStyles: StylesConfig<any, true> = {
     }),
 };
 
-const Personaldetails = () => {
+const Accountdetails = () => {
     const [image, setImage] = useState<string | null>(null);
     const [selectedAvatar, setSelectedAvatar] = useState<number | null>(null);
 
@@ -234,11 +234,11 @@ const Personaldetails = () => {
                                 <div className="flex flex-col gap-4">
                                     <div>
                                         <label className="block mb-2 text-sm font-medium">
-                                            Twitter
+                                            X
                                         </label>
                                         <input
                                             type="text"
-                                            placeholder="https://twitter.com/username"
+                                            placeholder="https://x.com/username"
                                             className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
                                     </div>
@@ -308,8 +308,8 @@ const Personaldetails = () => {
                                             key={index}
                                             onClick={() => handleAvatarSelect(index)}
                                             className={`h-14 w-14 flex items-center justify-center rounded-full border border-neutral-700 cursor-pointer transition ${selectedAvatar === index
-                                                    ? "ring-2 ring-neutral-500"
-                                                    : "hover:ring-1 hover:ring-neutral-500"
+                                                ? "ring-2 ring-neutral-500"
+                                                : "hover:ring-1 hover:ring-neutral-500"
                                                 }`}
                                         >
                                             <img
@@ -338,4 +338,4 @@ const Personaldetails = () => {
     );
 };
 
-export default Personaldetails;
+export default Accountdetails;

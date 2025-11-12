@@ -302,7 +302,6 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
         "Privacy Policy",
     ];
 
-    // 🧭 Smooth slide animation
     const slideVariants = {
         enter: (dir: number) => ({
             x: dir > 0 ? "100%" : "-100%",
@@ -379,7 +378,54 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
                             Signature: _________________________ <br />
                             Name: ____________________________ <br />
                             Designation: _______________________ <br />
-                            Date: _____________________________ 
+                            Date: _____________________________
+
+                        </p>
+                    </>
+                );
+            case 2:
+                return (
+                    <>
+                        <h2 className="font-semibold text-sm mb-2">Acceptable Use Policy</h2>
+                        <p className="text-xs leading-relaxed text-neutral-300">
+                            Users must refrain from uploading offensive, copyrighted, or
+                            illegal voice content. Data collected will be used only for
+                            approved purposes outlined by the company.
+                        </p>
+                        <p className="text-xs leading-relaxed text-neutral-300">
+                            Violation of these rules may result in termination of access and
+                            legal action. The organization reserves the right to monitor
+                            activity to ensure compliance.
+                        </p>
+                    </>
+                );
+            case 3:
+                return (
+                    <>
+                        <h2 className="font-semibold text-sm mb-2">Cancellation Policy</h2>
+                        <p className="text-xs leading-relaxed text-neutral-300">
+                            You may cancel your agreement within 7 days of signing without
+                            penalty. After this period, standard cancellation charges apply
+                            based on your subscription plan.
+                        </p>
+                        <p className="text-xs leading-relaxed text-neutral-300">
+                            All cancellations must be confirmed via email. Any active projects
+                            or uploads will be paused immediately upon cancellation.
+                        </p>
+                    </>
+                );
+            case 4:
+                return (
+                    <>
+                        <h2 className="font-semibold text-sm mb-2">Privacy Policy</h2>
+                        <p className="text-xs leading-relaxed text-neutral-300">
+                            Your data and uploaded files are encrypted and stored securely. We
+                            do not share personal or voice data with third parties without
+                            explicit consent.
+                        </p>
+                        <p className="text-xs leading-relaxed text-neutral-300">
+                            You can request deletion of your personal information at any time,
+                            subject to legal retention requirements.
                         </p>
                     </>
                 );
@@ -400,10 +446,10 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
 
             {/* Modal */}
             <div className="fixed inset-0 flex items-center justify-center z-50 px-4 sm:px-6">
-                <div className="relative bg-neutral-950 border border-neutral-800 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] overflow-hidden w-full max-w-[900px] h-[90vh] sm:h-[665px] flex flex-col text-white">
-                    {/* Header (Stable) */}
-                    <div className="flex justify-between items-center p-6 border-b border-neutral-800">
-                        <p className="text-sm sm:text-base font-bold text-white">Agreement</p>
+                <div className="relative bg-neutral-950 border border-neutral-800 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] overflow-hidden w-full max-w-[900px] h-[90vh] flex flex-col text-white">
+                    {/* Header */}
+                    <div className="flex justify-between items-center p-4 sm:p-6 border-b border-neutral-800">
+                        <p className="text-sm sm:text-base font-bold">Agreement</p>
                         <div className="text-xs text-gray-400">
                             Agreement code : <span>FRB1235476</span>
                         </div>
@@ -498,40 +544,38 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
                                     exit="exit"
                                     className="absolute inset-0 flex flex-col"
                                 >
-                                    <div className="flex-1 overflow-y-auto custom-scrollbar">
-                                        <div className="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-neutral-700">
-                                            {/* Sidebar */}
-                                            <aside className="bg-black md:col-span-1 p-4 md:p-6">
-                                                <ul className="space-y-3 md:space-y-4">
-                                                    {sections.map((item, index) => (
-                                                        <li
-                                                            key={item}
-                                                            onClick={() => setSelectedSection(index + 1)}
-                                                            className={`cursor-pointer text-xs md:text-sm ${selectedSection === index + 1
-                                                                    ? "text-[#00FFA3] font-medium"
-                                                                    : "text-neutral-400 hover:text-white"
-                                                                }`}
-                                                        >
-                                                            {index + 1}. {item}
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </aside>
+                                    {/* Body */}
+                                    <div className="flex-1 overflow-hidden flex flex-col md:flex-row">
+                                        {/* Sidebar (Fixed) */}
+                                        <aside className="bg-black md:w-[30%] border-b md:border-b-0 md:border-r border-neutral-700 p-4 md:p-6 overflow-y-auto shrink-0">
+                                            <ul className="space-y-3 md:space-y-4">
+                                                {sections.map((item, index) => (
+                                                    <li
+                                                        key={item}
+                                                        onClick={() => setSelectedSection(index + 1)}
+                                                        className={`cursor-pointer text-xs md:text-sm ${selectedSection === index + 1
+                                                            ? "text-[#00FFA3] font-medium"
+                                                            : "text-neutral-400 hover:text-white"
+                                                            }`}
+                                                    >
+                                                        {index + 1}. {item}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </aside>
 
-                                            {/* Content */}
-                                            <main className="p-4 md:p-6 col-span-1 md:col-span-3 bg-black space-y-3">
-                                                {renderContent()}
-                                            </main>
-                                        </div>
+                                        {/* Right Content Scrollable */}
+                                        <main className="flex-1 p-4 md:p-6 bg-black overflow-y-auto custom-scrollbar">
+                                            {renderContent()}
+                                        </main>
                                     </div>
 
-                                    {/* Footer */}
-                                    <footer className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 px-6 md:px-8 py-4 border-t border-neutral-700">
-                                        <button className="text-xs md:text-xs text-neutral-400 hover:text-[#00FFA3]">
+                                    {/* Fixed Footer */}
+                                    <footer className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 px-6 md:px-8 py-4 border-t border-neutral-700 bg-neutral-950 shrink-0">
+                                        <button className="text-xs text-neutral-400 hover:text-[#00FFA3]">
                                             Send a copy to my email
                                         </button>
-                                        <div className="flex gap-3 md:gap-4 w-full md:w-auto justify-end">
-                                            {/* 🟡 New Back Button */}
+                                        <div className="flex gap-3 w-full md:w-auto justify-end">
                                             <button
                                                 onClick={() => {
                                                     setDirection(-1);
@@ -541,13 +585,6 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
                                             >
                                                 Back
                                             </button>
-
-                                            {/* <button
-                                                onClick={onClose}
-                                                className="px-4 py-2 rounded-lg bg-neutral-800 text-xs text-[#ff0000] border border-[#ff0000] hover:bg-[#ff0000] hover:text-white transition"
-                                            >
-                                                Decline
-                                            </button> */}
                                             <button
                                                 onClick={onAgree}
                                                 className="px-6 py-2 rounded-lg bg-[#00FFA3] text-xs text-black font-medium hover:bg-[#00e697] transition"
