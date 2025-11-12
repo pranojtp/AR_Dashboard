@@ -14,6 +14,17 @@
   -moz-osx-font-smoothing: grayscale; */
 }
 
+/* @keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.animate-float-slow {
+  animation: float-slow 10s ease-in-out infinite;
+} */
+
+
+
 /* a {
   font-weight: 500;
   color: #646cff;

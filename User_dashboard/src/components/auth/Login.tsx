@@ -1,96 +1,251 @@
-import { useNavigate } from "react-router-dom"
+// import { useNavigate } from "react-router-dom"
+// import ThreeWavesScene from "../landingpage/Threeparticles";
+// import bgscrn from "../../assets/wavebg3.webp"
 
-// import logo from '../../assets/favicon.ico'
+// // import logo from '../../assets/favicon.ico'
+
+// const Login = () => {
+//     const navigate = useNavigate();
+//     // const location = useLocation();
+//     // const fromSignout = location.state?.fromSignout || false;
+
+//     const handleSubmit = (e: React.FormEvent) => {
+//         e.preventDefault();
+//         navigate("/userdashboard/profile");
+//     };
+//     return (
+//         <>
+//             <div className="relative flex items-center justify-center h-screen overflow-hidden  w-full bg-cover bg-center"
+//                 style={{ backgroundImage: `url(${bgscrn})` }}>
+//                 {/* <div className="absolute inset-0 z-0">
+//                     <ThreeWavesScene />
+//                 </div> */}
+
+//                 {/* Login Form */}
+//                 <div className="relative z-10 flex flex-col bg-black/80 border border-neutral-700 rounded-xl gap-3 p-5 shadow-2xl w-full max-w-md">
+//                     {/* <div className="flex justify-center items-center">
+//                         <img src={logo} alt="logo" className="w-8 h-8"/>
+//                     </div>                     */}
+//                     <a href="/">
+//                         <h1 className="text-white text-xl font-bold text-center tracking-wide mt-2 mb-5">
+//                             AUDIO REALITIES
+//                         </h1>
+//                     </a>
+//                     <div className="p-8 rounded-2xl">
+//                         <form className="flex flex-col space-y-6" onSubmit={handleSubmit}>
+//                             {/* Email Field */}
+//                             <div>
+//                                 <label
+//                                     htmlFor="email"
+//                                     className="block text-sm font-medium text-gray-300 mb-2"
+//                                 >
+//                                     Email
+//                                 </label>
+//                                 <input
+//                                     id="email"
+//                                     type="email"
+//                                     placeholder="Enter your email"
+//                                     autoComplete="email"
+//                                     className="w-full rounded-lg bg-neutral-800/50 text-sm border border-neutral-700 text-white px-4 py-3 placeholder:text-gray-500 focus:outline-none focus:border-[#00FFC6] focus:ring-1 focus:ring-[#00FFC6] transition-all"
+//                                 />
+//                             </div>
+
+//                             {/* Password Field */}
+//                             <div>
+//                                 <label
+//                                     htmlFor="password"
+//                                     className="block text-sm font-medium text-gray-300 mb-2"
+//                                 >
+//                                     Password
+//                                 </label>
+//                                 <input
+//                                     id="password"
+//                                     type="password"
+//                                     placeholder="Enter your password"
+//                                     autoComplete="current-password"
+//                                     className="w-full rounded-lg text-sm bg-neutral-800/50 border border-neutral-700 text-white px-4 py-3 placeholder:text-gray-500 focus:outline-none focus:border-[#00FFC6] focus:ring-1 focus:ring-[#00FFC6] transition-all"
+//                                 />
+//                                 <div className="text-right mt-3">
+//                                     <a
+//                                         href="#"
+//                                         className="text-xs text-gray-400 hover:text-[#00FFC6] transition-colors"
+//                                     >
+//                                         Forgot password?
+//                                     </a>
+//                                 </div>
+//                             </div>
+
+//                             {/* Buttons */}
+//                             <div className="flex justify-center items-center gap-3">
+//                                 {/* {!fromSignout && (
+//                                     <a href="/signup">
+//                                         <button
+//                                             type="button"
+//                                             className="px-4 py-2 text-sm rounded-lg border border-neutral-700 text-gray-300 hover:border-[#00FFA3] hover:text-[#00FFA3] transition-all"
+//                                         >
+//                                             Create Account
+//                                         </button>
+//                                     </a>
+//                                 )} */}
+//                                 <button
+//                                     type="submit"
+//                                     className="px-8 py-2 text-sm rounded-xl bg-[#00FFA3] text-black font-semibold hover:bg-[#00e6b8] transition-all"
+//                                 >
+//                                     LOGIN
+//                                 </button>
+//                             </div>
+//                         </form>
+//                     </div>
+//                 </div>
+//             </div>
+//         </>
+//     )
+// }
+// export default Login
+
+
+
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { useEffect, useState } from "react";
+import { loadFull } from "tsparticles";
 
 const Login = () => {
     const navigate = useNavigate();
-    // const location = useLocation();
-    // const fromSignout = location.state?.fromSignout || false;
+    const [init, setInit] = useState(false);
+
+    useEffect(() => {
+        initParticlesEngine(async (engine) => {
+            await loadFull(engine);
+        }).then(() => setInit(true));
+    }, []);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         navigate("/userdashboard/profile");
     };
+
     return (
-        <>
-            <div className="relative flex items-center justify-center h-screen bg-neutral-800 overflow-hidden">
-                {/* Login Form */}
-                <div className="relative z-10 bg-black backdrop-blur-xl border border-neutral-800/50 rounded-2xl flex flex-col gap-3 p-5 shadow-2xl w-full max-w-md">
-                    {/* <img src={logo} alt="logo" className="w-8 h-8"/> */}
-                    <a href="/">
-                        <h1 className="text-white text-2xl font-bold text-center tracking-wide mt-2">
-                            AUDIO REALITIES
-                        </h1>
-                    </a>
-                    <div className="p-8 rounded-2xl">
-                        <form className="flex flex-col space-y-6" onSubmit={handleSubmit}>
-                            {/* Email Field */}
-                            <div>
-                                <label
-                                    htmlFor="email"
-                                    className="block text-sm font-medium text-gray-300 mb-2"
-                                >
-                                    Email
-                                </label>
-                                <input
-                                    id="email"
-                                    type="email"
-                                    placeholder="Enter your email"
-                                    autoComplete="email"
-                                    className="w-full rounded-lg bg-neutral-800/50 text-sm border border-neutral-700 text-white px-4 py-3 placeholder:text-gray-500 focus:outline-none focus:border-[#00FFC6] focus:ring-1 focus:ring-[#00FFC6] transition-all"
-                                />
-                            </div>
+        <div className="relative flex items-center justify-center h-screen bg-black overflow-hidden">
+            {/* 🌊 3D Wave Particle Background */}
+            {init && (
+                <Particles
+                    id="wave-particles"
+                    className="absolute inset-0"
+                    options={{
+                        background: { color: "#000000" },
+                        fpsLimit: 60,
+                        particles: {
+                            number: { value: 70, density: { enable: true } },
+                            color: { value: "#FFFFFF" },
+                            shape: { type: "circle" },
+                            opacity: { value: 0.4 },
+                            size: { value: 3 },
+                            move: {
+                                enable: true,
+                                speed: 1,
+                                direction: "none",
+                                random: false,
+                                straight: false,
+                                outModes: "out",
+                            },
+                            links: {
+                                enable: true,
+                                distance: 130,
+                                color: "#FFFFFF",
+                                opacity: 0.2,
+                                width: 2,
+                            },
+                        },
+                        interactivity: {
+                            events: {
+                                onHover: { enable: true, mode: "grab" },
+                                // resize: true,
+                            },
+                            modes: {
+                                grab: { distance: 200, line_linked: { opacity: 0.3 } },
+                            },
+                        },
+                        detectRetina: true,
+                        style: {
+                            // zIndex: 0,
+                        },
+                    }}
+                />
+            )}
 
-                            {/* Password Field */}
-                            <div>
-                                <label
-                                    htmlFor="password"
-                                    className="block text-sm font-medium text-gray-300 mb-2"
-                                >
-                                    Password
-                                </label>
-                                <input
-                                    id="password"
-                                    type="password"
-                                    placeholder="Enter your password"
-                                    autoComplete="current-password"
-                                    className="w-full rounded-lg text-sm bg-neutral-800/50 border border-neutral-700 text-white px-4 py-3 placeholder:text-gray-500 focus:outline-none focus:border-[#00FFC6] focus:ring-1 focus:ring-[#00FFC6] transition-all"
-                                />
-                                <div className="text-right mt-3">
-                                    <a
-                                        href="#"
-                                        className="text-xs text-gray-400 hover:text-[#00FFC6] transition-colors"
-                                    >
-                                        Forgot password?
-                                    </a>
-                                </div>
-                            </div>
+            {/* Soft gradient overlay for depth */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-neutral-900/70 to-black/90"></div>
 
-                            {/* Buttons */}
-                            <div className="flex justify-center items-center mt-6 gap-3">
-                                {/* {!fromSignout && (
-                                    <a href="/signup">
-                                        <button
-                                            type="button"
-                                            className="px-4 py-2 text-sm rounded-lg border border-neutral-700 text-gray-300 hover:border-[#00FFA3] hover:text-[#00FFA3] transition-all"
-                                        >
-                                            Create Account
-                                        </button>
-                                    </a>
-                                )} */}
-                                <button
-                                    type="submit"
-                                    className="px-8 py-2 text-sm rounded-2xl bg-[#00FFA3] text-black font-semibold hover:bg-[#00e6b8] transition-all"
-                                >
-                                    LOGIN
-                                </button>
-                            </div>
-                        </form>
+            {/* 🪞 Frosted Glass Login Card */}
+            <motion.div                
+                className="relative z-10 bg-#000000  p-8 w-full max-w-md border border-neutral-700 rounded-2xl"
+            >
+                <a href="/">
+                    <h1 className="text-2xl font-bold text-center text-white tracking-wide mb-10">
+                        AUDIO REALITIES
+                    </h1>
+                </a>
+
+                <form className="flex flex-col space-y-6" onSubmit={handleSubmit}>
+                    {/* Email Field */}
+                    <div>
+                        <label
+                            htmlFor="email"
+                            className="block text-sm font-medium text-gray-300 mb-2"
+                        >
+                            Email
+                        </label>
+                        <input
+                            id="email"
+                            type="email"
+                            placeholder="Enter your email"
+                            className="w-full rounded-lg bg-neutral-900/70 border border-neutral-700 text-white px-4 py-3 placeholder:text-neutral-500 focus:outline-none focus:border-[#00FFC6] focus:ring-1 focus:ring-[#00FFC6] transition-all"
+                        />
                     </div>
-                </div>
-            </div>
-        </>
-    )
-}
 
-export default Login
+                    {/* Password Field */}
+                    <div>
+                        <label
+                            htmlFor="password"
+                            className="block text-sm font-medium text-gray-300 mb-2"
+                        >
+                            Password
+                        </label>
+                        <input
+                            id="password"
+                            type="password"
+                            placeholder="Enter your password"
+                            className="w-full rounded-lg bg-neutral-900/70 border border-neutral-700 text-white px-4 py-3 placeholder:text-neutral-500 focus:outline-none focus:border-[#00FFC6] focus:ring-1 focus:ring-[#00FFC6] transition-all"
+                        />
+                        <div className="text-right mt-3">
+                            <a
+                                href="#"
+                                className="text-xs text-neutral-500 hover:text-[#00FFC6] transition-colors"
+                            >
+                                Forgot password?
+                            </a>
+                        </div>
+                    </div>
+
+                    {/* Buttons */}
+                    <div className="flex justify-center items-center gap-3 mt-4">
+                        <button
+                            type="submit"
+                            className="px-8 py-2 text-sm rounded-xl bg-[#00FFA3] text-black font-semibold hover:bg-[#00e6b8] transition-all"
+                        >
+                            LOGIN
+                        </button>
+                    </div>
+                </form>
+            </motion.div>
+
+            {/* Floating Glow Effects */}
+            <div className="absolute w-72 h-72 bg-neutral-500/30 rounded-full blur-[120px] animate-float-slow top-20 left-10"></div>
+            <div className="absolute w-80 h-80 bg-neutral-500/30 rounded-full blur-[160px] animate-float-slow bottom-10 right-20"></div>
+        </div>
+    );
+};
+
+export default Login;
