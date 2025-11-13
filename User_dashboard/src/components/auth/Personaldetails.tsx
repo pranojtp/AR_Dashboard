@@ -290,11 +290,12 @@ const Personaldetails = () => {
                                 </div>
                                 <div className="flex flex-col gap-6">
                                     <div>
-                                        <label className="block mb-2 text-sm font-medium">Twitter</label>
+                                        <label className="block mb-2 text-sm font-medium">
+                                            X
+                                        </label>
                                         <input
                                             type="text"
-                                            name="twitter"
-                                            placeholder="https://twitter.com/username"
+                                            placeholder="https://x.com/username"
                                             className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
                                     </div>

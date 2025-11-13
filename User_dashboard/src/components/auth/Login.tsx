@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom"
+// import { useLocation } from "react-router-dom";
 // import ThreeWavesScene from "../landingpage/Threeparticles";
 import bgscrn from "../../assets/micbg1.jpg"
 
@@ -68,7 +69,7 @@ const Login = () => {
                                 <div className="text-right mt-3">
                                     <a
                                         href="#"
-                                        className="text-xs text-gray-400 hover:text-[#00FFC6] transition-colors"
+                                        className="text-xs text-gray-400 hover:text-gray-300 transition-colors"
                                     >
                                         Forgot password?
                                     </a>
@@ -81,7 +82,7 @@ const Login = () => {
                                     <a href="/signup">
                                         <button
                                             type="button"
-                                            className="px-4 py-2 text-sm rounded-lg border border-neutral-700 text-gray-300 hover:border-[#00FFA3] hover:text-[#00FFA3] transition-all"
+                                            className="px-4 py-2 text-base rounded-2xl bg-black border border-neutral-600 text-white font-bold hover:bg-neutral-300 hover:text-black hover:py-2.5 transition-all"
                                         >
                                             Create Account
                                         </button>
@@ -89,7 +90,7 @@ const Login = () => {
                                 )} */}
                                 <button
                                     type="submit"
-                                    className="w-full py-2 text-base rounded-2xl bg-neutral-200 border border-neutral-600 text-black font-bold hover:bg-neutral-400 transition-all"
+                                    className="w-full py-2 text-base rounded-2xl bg-neutral-200 border border-neutral-600 text-black font-bold hover:bg-neutral-300 hover:py-2.5 transition-all"
                                 >
                                     LOGIN
                                 </button>
