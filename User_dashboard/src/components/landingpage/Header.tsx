@@ -102,10 +102,10 @@ export const Header: React.FC = () => {
                     <a
                         href="/login"
                         // className="text-black bg-lime-400 rounded-lg px-5 hover:bg-lime-300 transition"
-                        className="text-lime-300 rounded-lg px-5 hover:text-lime-400 transition"
+                        className="text-lime-300 rounded-xl px-5 font-semibold border border-lime-300 hover:bg-lime-300 hover:text-black transition"
                     >
-                        {/* Login */}
-                        Coming Soon
+                        LOGIN
+                        {/* Coming Soon */}
                     </a>
                     {/* Mobile Menu Button (only on small screens) */}
                     <div className="md:hidden">
