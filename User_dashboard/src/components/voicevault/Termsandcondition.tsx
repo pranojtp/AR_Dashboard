@@ -315,7 +315,7 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
         exit: (dir: number) => ({
             x: dir < 0 ? "100%" : "-100%",
             opacity: 0,
-            transition: { duration: 0.4, ease: "easeInOut" as any },
+            transition: { duration: 0.3, ease: "easeInOut" as any },
         }),
     };
 
@@ -464,7 +464,7 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
                                     key="form"
                                     custom={direction}
                                     variants={slideVariants}
-                                    initial="enter"
+                                    // initial="enter"
                                     animate="center"
                                     exit="exit"
                                     className="absolute inset-0 p-6 flex flex-col gap-5"
