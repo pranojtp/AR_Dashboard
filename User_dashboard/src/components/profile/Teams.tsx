@@ -106,8 +106,9 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Addteammember from "./Addteammember";
+import Editteammember from "./Editteammember";
 
-interface Member {
+export interface Member {
     name: string;
     role: string;
 }
@@ -117,13 +118,17 @@ const Teams = () => {
     const [sortBy, setSortBy] = useState<string>("");
     const [query, setQuery] = useState<string>("");
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [showEditModal, setShowEditModal] = useState<boolean>(false);
+    const [memberToEdit, setMemberToEdit] = useState<Member | null>(null);
 
-    const members: Member[] = [
+
+    const [members, setMembers] = useState<Member[]>([
         { name: "Babychen Paul", role: "Assistant" },
         { name: "Biju Basil", role: "Legal Head" },
         { name: "Daniel de Bem", role: "Assistant" },
         { name: "Nithin Chand", role: "Manager" },
-    ];
+    ]);
+
 
     const filteredAndSortedMembers = useMemo(() => {
         let filtered = members;
@@ -231,7 +236,16 @@ const Teams = () => {
                             </div>
 
                             <div className="flex gap-4 text-[#00FFA3] text-xs sm:justify-end">
-                                <button className="hover:text-[#00e695]">EDIT</button>
+                                <button
+                                    className="px-2 py-1 hover:bg-[#00FFA3] hover:text-black hover:rounded-lg"
+                                    onClick={() => {
+                                        setMemberToEdit(member);
+                                        setShowEditModal(true);
+                                    }}
+                                >
+                                    EDIT
+                                </button>
+
                                 <button className="hover:text-red-400">REMOVE</button>
                             </div>
                         </div>
@@ -273,6 +287,39 @@ const Teams = () => {
                             transition={{ duration: 0.25, ease: "easeOut" }}
                         >
                             <Addteammember onClose={() => setShowModal(false)} />
+                        </motion.div>
+                    </>
+                )}
+                {showEditModal && memberToEdit && (
+                    <>
+                        <motion.div
+                            className="fixed inset-0 bg-black/40 z-40"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setShowEditModal(false)}
+                        />
+
+                        <motion.div
+                            className="fixed inset-0 flex items-center justify-center z-50 p-3 sm:p-6"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.8 }}
+                            transition={{ duration: 0.25, ease: "easeOut" }}
+                        >
+                            <Editteammember
+                                member={memberToEdit}
+                                onClose={() => setShowEditModal(false)}
+                                onSave={(newRole) => {
+                                    setMembers((prev) =>
+                                        prev.map((m) =>
+                                            m.name === memberToEdit!.name ? { ...m, role: newRole } : m
+                                        )
+                                    );
+
+                                    setShowEditModal(false);
+                                }}
+                            />
                         </motion.div>
                     </>
                 )}

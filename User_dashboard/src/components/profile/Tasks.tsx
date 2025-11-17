@@ -254,7 +254,7 @@ const Tasks: React.FC = () => {
                                 <div className="flex flex-row items-end gap-4 text-sm font-normal">
                                     <button
                                         onClick={() => setSelectedTask(n)}
-                                        className="text-[#00e695]"
+                                        className="text-[#00e695] hover:bg-[#00FFA3] hover:text-black hover:rounded-xl px-2 py-1"
                                     >
                                         {activeTab === "pending" ? "VIEW" : "VIEW"}
                                     </button>
