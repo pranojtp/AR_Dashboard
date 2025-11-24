@@ -121,6 +121,7 @@ const Teams = () => {
     const [showEditModal, setShowEditModal] = useState<boolean>(false);
     const [memberToEdit, setMemberToEdit] = useState<Member | null>(null);
 
+    const [showPrevious, setShowPrevious] = useState(false);
 
     const [members, setMembers] = useState<Member[]>([
         { name: "Babychen Paul", role: "Assistant" },
@@ -129,6 +130,11 @@ const Teams = () => {
         { name: "Nithin Chand", role: "Manager" },
     ]);
 
+    // Static previous members list
+    const [previousMembers] = useState<Member[]>([
+        { name: "Arun Kumar", role: "Former Manager" },
+        { name: "Sajan Thomas", role: "Former Assistant" },
+    ]);
 
     const filteredAndSortedMembers = useMemo(() => {
         let filtered = members;
@@ -172,6 +178,8 @@ const Teams = () => {
 
     return (
         <div className="bg-neutral-950 rounded-2xl border-1 border-neutral-800 p-4 sm:p-4 text-white relative w-full">
+
+            {/* Header */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
                 <h3 className="text-base sm:text-lg font-semibold">Teams</h3>
 
@@ -183,6 +191,7 @@ const Teams = () => {
                         placeholder="Search..."
                         className="p-2 sm:p-1.5 border rounded-lg border-neutral-700 bg-neutral-900 text-white w-full sm:w-auto text-sm sm:text-xs max-w-full sm:max-w-xs focus:outline-none"
                     />
+
                     <select
                         value={selectedValue}
                         onChange={(e) => setSelectedValue(e.target.value)}
@@ -217,71 +226,131 @@ const Teams = () => {
                 </div>
             </div>
 
-            {/* Member List */}
-            <div className="divide-y divide-neutral-800">
-                {filteredAndSortedMembers.length > 0 ? (
-                    filteredAndSortedMembers.map((member, index) => (
-                        <div
-                            key={index}
-                            className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 hover:bg-neutral-900 transition rounded-lg px-2 gap-2 sm:gap-0"
+            {/* Animated Member List */}
+            <div className="relative min-h-[255px] overflow-hidden">
+                <AnimatePresence mode="wait">
+                    {showPrevious ? (
+                        
+                        /* PREVIOUS MEMBERS */
+                        <motion.div
+                            key="previous"
+                            initial={{ x: "100%", opacity: 0 }}
+                            animate={{ x: "0%", opacity: 1 }}
+                            exit={{ x: "-100%", opacity: 0 }}
+                            transition={{
+                                type: "spring",
+                                stiffness: 60,
+                                damping: 18
+                            }}
+                            className="absolute w-full"
                         >
-                            <div className="flex items-center gap-3 sm:gap-2">
-                                <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[#00FFA3] text-black font-bold text-sm sm:text-base">
-                                    {getInitials(member.name)}
-                                </div>
-                                <div>
-                                    <p className="font-medium text-sm sm:text-xs">{member.name}</p>
-                                    <p className="text-neutral-400 text-xs sm:text-xs">{member.role}</p>
-                                </div>
-                            </div>
 
-                            <div className="flex gap-4 text-[#00FFA3] text-xs sm:justify-end">
-                                <button
-                                    className="px-2 py-1 hover:bg-[#00FFA3] hover:text-black hover:rounded-lg"
-                                    onClick={() => {
-                                        setMemberToEdit(member);
-                                        setShowEditModal(true);
-                                    }}
+                            {previousMembers.map((member, index) => (
+                                <div
+                                    key={index}
+                                    className="flex justify-between py-3 border-b border-neutral-800 px-2"
                                 >
-                                    EDIT
-                                </button>
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 flex items-center justify-center rounded-full bg-neutral-600 text-black font-bold">
+                                            {getInitials(member.name)}
+                                        </div>
+                                        <div>
+                                            <p className="text-neutral-400 font-medium text-sm">{member.name}</p>
+                                            <p className="text-neutral-400 text-xs">{member.role}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </motion.div>
+                    ) : (
+                        /* ACTIVE MEMBERS */
+                        <motion.div
+                            key="active"
+                            initial={{ x: "-100%", opacity: 0 }}
+                            animate={{ x: "0%", opacity: 1 }}
+                            exit={{ x: "100%", opacity: 0 }}
+                            transition={{
+                                type: "spring",
+                                stiffness: 60,
+                                damping: 18
+                            }}
+                            className="absolute w-full"
+                        >
+                            {filteredAndSortedMembers.map((member, index) => (
+                                <div
+                                    key={index}
+                                    className="flex justify-between py-3 border-b border-neutral-800 px-2 hover:bg-neutral-900 transition rounded-lg"
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[#00FFA3] text-black font-bold">
+                                            {getInitials(member.name)}
+                                        </div>
+                                        <div>
+                                            <p className="font-medium text-sm">{member.name}</p>
+                                            <p className="text-neutral-400 text-xs">{member.role}</p>
+                                        </div>
+                                    </div>
 
-                                <button className="hover:text-red-400">REMOVE</button>
-                            </div>
-                        </div>
-                    ))
-                ) : (
-                    <p className="text-gray-400 text-sm py-4">No members found.</p>
-                )}
+                                    <div className="flex gap-4 text-[#00FFA3] text-xs sm:justify-end">
+                                        <button
+                                            className="px-2 py-1 hover:bg-[#00FFA3] hover:text-black hover:rounded-lg"
+                                            onClick={() => {
+                                                setMemberToEdit(member);
+                                                setShowEditModal(true);
+                                            }}
+                                        >
+                                            EDIT
+                                        </button>
+
+                                        <button className="hover:text-red-400">REMOVE</button>
+                                    </div>
+                                </div>
+                            ))}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
 
             {/* Footer */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-t border-neutral-800 mt-4 pt-3 text-xs text-neutral-400 gap-2">
-                <p>
-                    Showing {filteredAndSortedMembers.length} of {members.length} team members
-                </p>
+            <div className="flex justify-between items-center border-t border-neutral-800 mt-4 pt-3 text-xs text-neutral-400">
+                {showPrevious ? (
+                    <button
+                        className="hover:text-[#00FFA3]"
+                        onClick={() => setShowPrevious(false)}
+                    >
+                        Show Active Members
+                    </button>
+                ) : (
+                    <button
+                        className="hover:text-[#00FFA3]"
+                        onClick={() => setShowPrevious(true)}
+                    >
+                        Show Previous Members
+                    </button>
+                )}
+
                 <p>
                     Total Members:{" "}
                     <span className="ml-1 px-2 py-0.5 bg-[#00FFA3] text-black rounded-md font-semibold">
-                        {members.length}
+                        {showPrevious ? previousMembers.length : members.length}
                     </span>
                 </p>
             </div>
 
-            {/* Modal */}
+            {/* Add Member Modal */}
             <AnimatePresence>
                 {showModal && (
                     <>
                         <motion.div
                             className="fixed inset-0 bg-black/40 z-40"
-                            initial={{ opacity: 0 }}
+                            // initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setShowModal(false)}
                         />
                         <motion.div
                             className="fixed inset-0 flex items-center justify-center z-50 p-3 sm:p-6"
-                            initial={{ opacity: 0, scale: 0.8 }}
+                            // initial={{ opacity: 0, scale: 0 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.8 }}
                             transition={{ duration: 0.25, ease: "easeOut" }}
@@ -290,11 +359,13 @@ const Teams = () => {
                         </motion.div>
                     </>
                 )}
+
+                {/* Edit Member Modal */}
                 {showEditModal && memberToEdit && (
                     <>
                         <motion.div
                             className="fixed inset-0 bg-black/40 z-40"
-                            initial={{ opacity: 0 }}
+                            // initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setShowEditModal(false)}
@@ -302,7 +373,7 @@ const Teams = () => {
 
                         <motion.div
                             className="fixed inset-0 flex items-center justify-center z-50 p-3 sm:p-6"
-                            initial={{ opacity: 0, scale: 0.8 }}
+                            // initial={{ opacity: 0, scale: 0}}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.8 }}
                             transition={{ duration: 0.25, ease: "easeOut" }}
@@ -316,7 +387,6 @@ const Teams = () => {
                                             m.name === memberToEdit!.name ? { ...m, role: newRole } : m
                                         )
                                     );
-
                                     setShowEditModal(false);
                                 }}
                             />
@@ -329,4 +399,3 @@ const Teams = () => {
 };
 
 export default Teams;
-

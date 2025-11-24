@@ -225,7 +225,7 @@ const Tasks: React.FC = () => {
             </div>
 
             {/* Animated Task List */}
-            <div className="relative h-[300px] overflow-hidden">
+            <div className="relative min-h-[300px] overflow-hidden">
                 <AnimatePresence mode="popLayout" custom={direction}>
                     <motion.div
                         key={activeTab}
