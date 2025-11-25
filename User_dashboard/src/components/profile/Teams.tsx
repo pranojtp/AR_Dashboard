@@ -104,7 +104,7 @@
 // export default Teams
 
 import { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence,easeInOut } from "framer-motion";
 import Addteammember from "./Addteammember";
 import Editteammember from "./Editteammember";
 
@@ -130,7 +130,6 @@ const Teams = () => {
         { name: "Nithin Chand", role: "Manager" },
     ]);
 
-    // Static previous members list
     const [previousMembers] = useState<Member[]>([
         { name: "Arun Kumar", role: "Former Manager" },
         { name: "Sajan Thomas", role: "Former Assistant" },
@@ -175,6 +174,38 @@ const Teams = () => {
             .map((n) => n[0])
             .join("")
             .toUpperCase();
+
+    const [direction, setDirection] = useState(1);
+
+    // SUPER SMOOTH VARIANTS (direction based)
+    const slideVariants = {
+        enter: (direction: number) => ({
+            x: direction > 0 ? 120 : -120,
+            opacity: 0,
+        }),
+        center: {
+            x: 0,
+            opacity: 1,
+            transition: {
+                duration: 0.50,
+                ease: easeInOut
+            }
+        },
+        exit: (direction: number) => ({
+            x: direction > 0 ? -120 : 120,
+            opacity: 0,
+            transition: {
+                duration: 0.35,
+                ease: easeInOut
+            }
+        }),
+    };
+    const togglePrevious = () => {
+        setDirection(showPrevious ? -1 : 1);
+        setShowPrevious(!showPrevious);
+    };
+
+
 
     return (
         <div className="bg-neutral-950 rounded-2xl border-1 border-neutral-800 p-4 sm:p-4 text-white relative w-full">
@@ -226,25 +257,19 @@ const Teams = () => {
                 </div>
             </div>
 
-            {/* Animated Member List */}
+            {/* Smooth Carousel Animated Member List */}
             <div className="relative min-h-[255px] overflow-hidden">
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode="popLayout" custom={direction}>
                     {showPrevious ? (
-                        
-                        /* PREVIOUS MEMBERS */
                         <motion.div
                             key="previous"
-                            initial={{ x: "100%", opacity: 0 }}
-                            animate={{ x: "0%", opacity: 1 }}
-                            exit={{ x: "-100%", opacity: 0 }}
-                            transition={{
-                                type: "spring",
-                                stiffness: 60,
-                                damping: 18
-                            }}
+                            custom={direction}
+                            variants={slideVariants}
+                            initial="enter"
+                            animate="center"
+                            exit="exit"
                             className="absolute w-full"
                         >
-
                             {previousMembers.map((member, index) => (
                                 <div
                                     key={index}
@@ -263,17 +288,13 @@ const Teams = () => {
                             ))}
                         </motion.div>
                     ) : (
-                        /* ACTIVE MEMBERS */
                         <motion.div
                             key="active"
-                            initial={{ x: "-100%", opacity: 0 }}
-                            animate={{ x: "0%", opacity: 1 }}
-                            exit={{ x: "100%", opacity: 0 }}
-                            transition={{
-                                type: "spring",
-                                stiffness: 60,
-                                damping: 18
-                            }}
+                            custom={direction}
+                            variants={slideVariants}
+                            initial=""
+                            animate="center"
+                            exit="exit"
                             className="absolute w-full"
                         >
                             {filteredAndSortedMembers.map((member, index) => (
@@ -311,23 +332,16 @@ const Teams = () => {
                 </AnimatePresence>
             </div>
 
+
             {/* Footer */}
             <div className="flex justify-between items-center border-t border-neutral-800 mt-4 pt-3 text-xs text-neutral-400">
-                {showPrevious ? (
-                    <button
-                        className="hover:text-[#00FFA3]"
-                        onClick={() => setShowPrevious(false)}
-                    >
-                        Show Active Members
-                    </button>
-                ) : (
-                    <button
-                        className="hover:text-[#00FFA3]"
-                        onClick={() => setShowPrevious(true)}
-                    >
-                        Show Previous Members
-                    </button>
-                )}
+                <button
+                    className="hover:text-[#00FFA3]"
+                    onClick={togglePrevious}
+                >
+                    {showPrevious ? "Show Active Members" : "Show Previous Members"}
+                </button>
+
 
                 <p>
                     Total Members:{" "}
@@ -337,35 +351,32 @@ const Teams = () => {
                 </p>
             </div>
 
-            {/* Add Member Modal */}
+            {/* Add Modal */}
             <AnimatePresence>
                 {showModal && (
                     <>
                         <motion.div
                             className="fixed inset-0 bg-black/40 z-40"
-                            // initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setShowModal(false)}
                         />
                         <motion.div
                             className="fixed inset-0 flex items-center justify-center z-50 p-3 sm:p-6"
-                            // initial={{ opacity: 0, scale: 0 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.8 }}
-                            transition={{ duration: 0.25, ease: "easeOut" }}
+                            transition={{ duration: 0.25 }}
                         >
                             <Addteammember onClose={() => setShowModal(false)} />
                         </motion.div>
                     </>
                 )}
 
-                {/* Edit Member Modal */}
+                {/* Edit Modal */}
                 {showEditModal && memberToEdit && (
                     <>
                         <motion.div
                             className="fixed inset-0 bg-black/40 z-40"
-                            // initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setShowEditModal(false)}
@@ -373,10 +384,9 @@ const Teams = () => {
 
                         <motion.div
                             className="fixed inset-0 flex items-center justify-center z-50 p-3 sm:p-6"
-                            // initial={{ opacity: 0, scale: 0}}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.8 }}
-                            transition={{ duration: 0.25, ease: "easeOut" }}
+                            transition={{ duration: 0.25 }}
                         >
                             <Editteammember
                                 member={memberToEdit}
