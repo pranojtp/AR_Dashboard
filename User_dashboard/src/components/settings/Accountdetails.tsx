@@ -145,7 +145,7 @@ const Accountdetails = () => {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block mb-2 text-sm font-medium">Role</label>
+                                    <label className="block mb-2 text-sm font-medium">Additional Roles</label>
                                     <Select
                                         isMulti
                                         name="role"
@@ -172,17 +172,17 @@ const Accountdetails = () => {
                                 </div>
                                 <div>
                                     <label className="block mb-2 text-sm font-medium">
-                                        Industry
+                                        Primary Role
                                     </label>
                                     <input
                                         type="text"
-                                        placeholder="e.g. Mollywood, Hollywood"
+                                        placeholder="e.g. Actor,Producer,Director"
                                         className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                     />
                                 </div>
                                 <div>
                                     <label className="block mb-2 text-sm font-medium">
-                                        Location
+                                        Address
                                     </label>
                                     <input
                                         type="text"

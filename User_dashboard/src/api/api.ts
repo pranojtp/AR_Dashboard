@@ -25,3 +25,27 @@
 // );
 
 // export default api;
+
+
+// src/api/api.ts
+import axios from "axios";
+
+const api = axios.create({
+  baseURL: "https://audiorealities.com/api", 
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: false, // change to true only if backend uses cookies
+});
+
+// Optional: Response interceptor
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    console.error("API Error:", error.response?.data || error.message);
+    return Promise.reject(error);
+  }
+);
+
+export default api;
+
