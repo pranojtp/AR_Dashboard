@@ -27,7 +27,6 @@
 // export default api;
 
 
-// src/api/api.ts
 import axios from "axios";
 
 const api = axios.create({
@@ -35,7 +34,7 @@ const api = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  withCredentials: false, // change to true only if backend uses cookies
+  withCredentials: false, // 
 });
 
 // Optional: Response interceptor
@@ -48,4 +47,3 @@ api.interceptors.response.use(
 );
 
 export default api;
-

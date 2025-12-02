@@ -1,4 +1,4 @@
-// src/services/userService.ts
+
 import api from "../api/api";
 
 const userService = {
@@ -8,9 +8,10 @@ const userService = {
   },
 
   //Read specific user 
-  getSpecificUser: (id: string, userData: any) => {
-    return api.get(`/users/${id}`, userData);
+  getSpecificUser: (id: string) => {
+    return api.get(`/users/${id}`);
   },
+
 
   // Signup / create new user
   addUser: (userData: any) => {

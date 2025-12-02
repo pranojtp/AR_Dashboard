@@ -10,7 +10,7 @@ const Team = () => {
                 <div>
                     <div className="mx-auto max-w-4xl md:text-center">
                         <h2 className="font-display text-2xl tracking-tight text-white sm:text-4xl">
-                            Who we are
+                            Our Mission
                         </h2>
                         <p className="mt-4 text-m tracking-tight text-zinc-400 font-body">
                             We are on a mission to simplify voice conversion for the film industry.
