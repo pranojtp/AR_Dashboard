@@ -17,6 +17,8 @@ import Termsofservice from "./components/landingpage/Termsofservice"
 import Privacypolicy from "./components/landingpage/Privacypolicy"
 import Createproject from "./components/projects/Createproject"
 import Projectdetails from "./components/projects/Projectdetails"
+import AuthCallback from "./pages/AuthCallBack"
+import ProtectedRoute from "./components/ProtectedRoute"
 
 
 function App() {
@@ -32,10 +34,11 @@ function App() {
           <Route path="/personaldetails" element={<Personaldetails />} />
           <Route path="/login" element={<Login />} />
 
+          <Route path="/auth/callback" element={<AuthCallback />} />
 
 
           <Route path="/userdashboard" element={<Dashboard />} >
-            <Route path="profile" element={<Profilepage />} />
+            <Route path="profile" element={<ProtectedRoute> <Profilepage /> </ProtectedRoute>} />
 
             <Route path="voicevault" element={<Voicevault />} />
 

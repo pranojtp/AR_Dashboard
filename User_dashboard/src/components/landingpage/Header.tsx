@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Popover } from "@headlessui/react";
 import clsx from "clsx";
+import { signInRedirect } from "../../services/authService";
 
 // ✅ Replace with your actual Button & Container components or create simple ones below
 
@@ -77,6 +78,14 @@ const MobileNavigation: React.FC = () => {
 };
 
 export const Header: React.FC = () => {
+    const handleLogin = async () => {
+    console.log("LOGIN CLICKED");
+    try {
+      await signInRedirect();
+    } catch (err) {
+      console.error("signin redirect error", err);
+    }
+  };
     return (
         <header className="px-20 py-8 bg-black">
             <nav className="relative z-50 flex items-center justify-between">
@@ -99,14 +108,14 @@ export const Header: React.FC = () => {
 
                 {/* 🔹 Right - Login + Mobile Nav */}
                 <div className="flex items-center gap-x-4">
-                    <a
-                        href="/login"
+                    <button                        
+                        onClick={handleLogin}
                         // className="text-black bg-lime-400 rounded-lg px-5 hover:bg-lime-300 transition"
                         className="text-lime-300 rounded-xl px-5 font-semibold border border-lime-300 hover:bg-lime-300 hover:text-black transition"
                     >
                         LOGIN
                         {/* Coming Soon */}
-                    </a>
+                    </button>
                     {/* Mobile Menu Button (only on small screens) */}
                     <div className="md:hidden">
                         <MobileNavigation />

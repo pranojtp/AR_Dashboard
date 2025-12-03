@@ -24,3 +24,48 @@
 // };
 
 // export default oidcConfig;
+
+
+
+// src/auth/authService.ts
+
+import { UserManager, WebStorageStateStore, User} from "oidc-client-ts";
+
+const authority = import.meta.env.VITE_COGNITO_DOMAIN!;
+const client_id = import.meta.env.VITE_COGNITO_CLIENT_ID!;
+const redirect_uri = import.meta.env.VITE_REDIRECT_URI!;
+const post_logout_redirect_uri = import.meta.env.VITE_POST_LOGOUT_REDIRECT_URI!;
+
+const settings = {
+  authority,
+  client_id,
+  redirect_uri,
+  post_logout_redirect_uri,
+  response_type: "code",
+  scope: "email openid phone",
+  // store user in sessionStorage so it doesn't persist across browser sessions
+  userStore: new WebStorageStateStore({ store: window.sessionStorage }),
+  // enable automatic silent renew if you later want refresh
+  automaticSilentRenew: false,
+};
+
+export const userManager = new UserManager(settings);
+
+// helper to start signin redirect
+export function signInRedirect() {
+  return userManager.signinRedirect();
+}
+
+// called on /auth/callback to handle the redirect and get user
+export async function handleSigninCallback(): Promise<User | null> {
+  const user = await userManager.signinRedirectCallback();
+  return user;
+}
+
+export function signOutRedirect() {
+  return userManager.signoutRedirect();
+}
+
+export async function getUser() {
+  return userManager.getUser();
+}

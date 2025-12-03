@@ -27,23 +27,28 @@
 // export default api;
 
 
+// src/api/api.ts
 import axios from "axios";
+import { getUser } from "../services/authService";
+
+const API_BASE = import.meta.env.VITE_API_BASE || "https://audiorealities.com/api";
 
 const api = axios.create({
-  baseURL: "https://audiorealities.com/api", 
-  headers: {
-    "Content-Type": "application/json",
-  },
-  withCredentials: false, // 
+  baseURL: API_BASE,
 });
 
-// Optional: Response interceptor
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    console.error("API Error:", error.response?.data || error.message);
-    return Promise.reject(error);
+// request interceptor to attach bearer token
+api.interceptors.request.use(async (config) => {
+  try {
+    const user = await getUser();
+    const token = user?.access_token;
+    if (token && config.headers) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+  } catch (e) {
+    // no-op
   }
-);
+  return config;
+});
 
 export default api;

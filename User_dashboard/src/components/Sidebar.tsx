@@ -86,6 +86,7 @@
 // }
 
 import { useLocation, useNavigate } from "react-router-dom";
+import { signOutRedirect } from "../services/authService";
 import {
   UserRound,
   AudioLines,
@@ -153,7 +154,7 @@ const Sidebar = () => {
             </button>
 
             <button
-              onClick={() => navigate("/login")}
+              onClick={() => signOutRedirect()}
               className={`flex items-center gap-3 px-2 py-2 w-full text-left rounded text-white hover:border-r-4 border-[#00FFA3] hover:bg-neutral-700 transition
                 ${isLoginActive ? "border-r-4 bg-neutral-700" : ""}`}
             >
@@ -202,7 +203,7 @@ const Sidebar = () => {
         </button>
 
         <button
-          onClick={() => navigate("/login")}
+          onClick={() => signOutRedirect()}
           className={`flex flex-col items-center text-xs ${isLoginActive ? "text-[#00FFA3]" : "text-gray-400"
             }`}
         >
