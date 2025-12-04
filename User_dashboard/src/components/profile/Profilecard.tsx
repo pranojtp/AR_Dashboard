@@ -190,116 +190,249 @@
 // export default Profilecard
 
 
-import DP from "../../assets/nivin4.webp"
+// import DP from "../../assets/nivin4.webp"
 
-import { Facebook, Instagram} from "lucide-react"
+// import { Facebook, Instagram} from "lucide-react"
+// import { FaXTwitter } from "react-icons/fa6";
+// // import { useNavigate } from "react-router-dom";
+
+// const Profilecard = () => {
+//     interface Language {
+//         id: number;
+//         name: string;
+//     }
+
+//     const languages: Language[] = [
+//         { id: 1, name: "Malayalam" },
+//         { id: 2, name: "Tamil" },
+//         // { id: 3, name: "Hindi" },
+//         { id: 4, name: "Telugu" },
+//     ];
+//     interface Roles {
+//         id: number;
+//         name: string;
+//     }
+
+//     const roles: Roles[] = [
+//         { id: 1, name: "Actor" },
+//         { id: 2, name: "Producer" },
+//         // { id: 3, name: "Director" },        
+//     ];
+//     // const navigate = useNavigate();
+
+//     // const handleSignOut = () => {
+//     //     // Navigate back to login with state
+//     //     navigate("/login", { state: { fromSignout: true } });
+//     // };
+//     return (
+//         <>
+//             <div className="flex flex-col gap-3 rounded-2xl bg-neutral-900 w-full h-auto">
+//                 {/* 🔹 Top Navbar */}
+//                 {/* <div className="flex flex-row gap-2 px-4 sm:px-6 py-4 border-b border-neutral-700">
+//                     Left Side
+//                     <UserRound className="size-4 text-[#00FFA3]" />
+//                     <h1 className="font-semibold text-[#00FFA3] text-xs sm:text-xs">
+//                         Profile Details
+//                     </h1>
+//                 </div> */}
+
+//                 {/* 🔹 Profile Section */}
+//                 <section className="bg-neutral-950 p-4 flex flex-col md:flex-col h-auto border-t-6 border-[#00FFA3] rounded-2xl">
+//                     <div className="flex flex-wrap gap-2 justify-end ">
+//                         <p></p><Facebook className="size-4" /><Instagram className="size-4" /> <FaXTwitter className="size-4" />
+//                     </div>
+//                     <div className="flex flex-col sm:flex-row gap-3 items-center sm:items-start text-center sm:text-left space-y-3 sm:space-y-0 sm:space-x-4">
+//                         <img
+//                             src={DP}
+//                             alt="Profile Picture"
+//                             className="w-20 h-20 sm:w-40 sm:h-40 rounded-full object-cover border-1 border-[#00FFA3]"
+//                         />
+//                         <div className="sm:mt-0 md:mt-15">
+//                             <h2 className="text-lg sm:text-lg font-semibold text-white">
+//                                 Nivin Pauly
+//                             </h2>
+//                             <div className="flex flex-wrap gap-2 pt-1 rounded-md">
+//                                 {roles.map((role) => (
+//                                     <div
+//                                         key={role.id}
+//                                         className="flex items-center gap-2 bg-neutral-200 text-black px-1 text-xs rounded-sm"
+//                                     >
+//                                         <span>{role.name}</span>
+//                                     </div>
+//                                 ))}
+//                             </div>
+//                             <p className="text-xs sm:text-xs text-white font-extralight text-justify max-w-md mt-1">
+//                                 Nivin Pauly is an Indian actor and producer who works predominantly in Malayalam films. He is the recipient of two Kerala State Film Awards, three Filmfare Awards South, two Kerala Film Critics Association Awards, and six SIIMA Awards.
+//                             </p>
+//                         </div>
+//                         <div className="sm:mt-0 md:mt-15">
+//                             <h2 className="text-sm sm:text-sm font-semibold text-white">
+//                                 Industry
+//                             </h2>
+//                             <div className="flex flex-wrap gap-2 pt-2 rounded-md">
+//                                 {languages.map((lang) => (
+//                                     <div
+//                                         key={lang.id}
+//                                         className="flex items-center gap-2 bg-neutral-200 text-black px-1 text-xs rounded-sm"
+//                                     >
+//                                         <span>{lang.name}</span>
+//                                     </div>
+//                                 ))}
+//                             </div>
+//                         </div>
+//                         <div className="sm:mt-0 md:mt-15">
+//                             <h2 className="text-sm sm:text-sm font-semibold text-white">
+//                                 Affiliation
+//                             </h2>
+//                             <div className="flex flex-col gap-2 text-white text-xs max-w-md mt-1">
+//                                 <p>Pauly Jr. Pictures</p>
+//                                 {/* <p>Mammotty Company</p> */}
+//                             </div>
+//                         </div>
+//                     </div>
+
+//                     <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+
+//                         {/* <button className="px-4 py-2 rounded-3xl bg-black text-[#00FFA3] shadow-md hover:bg-gray-900 transition w-full sm:w-auto">                        
+//                         </button> */}
+//                     </div>
+//                 </section>
+//             </div>
+//         </>
+//     )
+// }
+
+// export default Profilecard
+
+
+// src/pages/Profilecard.tsx
+import React from "react";
+import DP from "../../assets/nivin4.webp";
+import { Facebook, Instagram } from "lucide-react";
 import { FaXTwitter } from "react-icons/fa6";
-// import { useNavigate } from "react-router-dom";
+import useCurrentUser from "../../hooks/useCurrentUser";
 
-const Profilecard = () => {
-    interface Language {
-        id: number;
-        name: string;
-    }
+const Profilecard: React.FC = () => {
+  const { user, loading, error } = useCurrentUser();
 
-    const languages: Language[] = [
-        { id: 1, name: "Malayalam" },
-        { id: 2, name: "Tamil" },
-        // { id: 3, name: "Hindi" },
-        { id: 4, name: "Telugu" },
-    ];
-    interface Roles {
-        id: number;
-        name: string;
-    }
+  if (loading) {
+    return <div className="p-4 text-white">Loading profile…</div>;
+  }
 
-    const roles: Roles[] = [
-        { id: 1, name: "Actor" },
-        { id: 2, name: "Producer" },
-        // { id: 3, name: "Director" },        
-    ];
-    // const navigate = useNavigate();
+  if (error) {
+    return <div className="p-4 text-red-400">Error loading profile: {error}</div>;
+  }
 
-    // const handleSignOut = () => {
-    //     // Navigate back to login with state
-    //     navigate("/login", { state: { fromSignout: true } });
-    // };
-    return (
-        <>
-            <div className="flex flex-col gap-3 rounded-2xl bg-neutral-900 w-full h-auto">
-                {/* 🔹 Top Navbar */}
-                {/* <div className="flex flex-row gap-2 px-4 sm:px-6 py-4 border-b border-neutral-700">
-                    Left Side
-                    <UserRound className="size-4 text-[#00FFA3]" />
-                    <h1 className="font-semibold text-[#00FFA3] text-xs sm:text-xs">
-                        Profile Details
-                    </h1>
-                </div> */}
+  if (!user) {
+    return <div className="p-4 text-white">No user data found.</div>;
+  }
 
-                {/* 🔹 Profile Section */}
-                <section className="bg-neutral-950 p-4 flex flex-col md:flex-col h-auto border-t-6 border-[#00FFA3] rounded-2xl">
-                    <div className="flex flex-wrap gap-2 justify-end ">
-                        <p></p><Facebook className="size-4" /><Instagram className="size-4" /> <FaXTwitter className="size-4" />
-                    </div>
-                    <div className="flex flex-col sm:flex-row gap-3 items-center sm:items-start text-center sm:text-left space-y-3 sm:space-y-0 sm:space-x-4">
-                        <img
-                            src={DP}
-                            alt="Profile Picture"
-                            className="w-20 h-20 sm:w-40 sm:h-40 rounded-full object-cover border-1 border-[#00FFA3]"
-                        />
-                        <div className="sm:mt-0 md:mt-15">
-                            <h2 className="text-lg sm:text-lg font-semibold text-white">
-                                Nivin Pauly
-                            </h2>
-                            <div className="flex flex-wrap gap-2 pt-1 rounded-md">
-                                {roles.map((role) => (
-                                    <div
-                                        key={role.id}
-                                        className="flex items-center gap-2 bg-neutral-200 text-black px-1 text-xs rounded-sm"
-                                    >
-                                        <span>{role.name}</span>
-                                    </div>
-                                ))}
-                            </div>
-                            <p className="text-xs sm:text-xs text-white font-extralight text-justify max-w-md mt-1">
-                                Nivin Pauly is an Indian actor and producer who works predominantly in Malayalam films. He is the recipient of two Kerala State Film Awards, three Filmfare Awards South, two Kerala Film Critics Association Awards, and six SIIMA Awards.
-                            </p>
-                        </div>
-                        <div className="sm:mt-0 md:mt-15">
-                            <h2 className="text-sm sm:text-sm font-semibold text-white">
-                                Industry
-                            </h2>
-                            <div className="flex flex-wrap gap-2 pt-2 rounded-md">
-                                {languages.map((lang) => (
-                                    <div
-                                        key={lang.id}
-                                        className="flex items-center gap-2 bg-neutral-200 text-black px-1 text-xs rounded-sm"
-                                    >
-                                        <span>{lang.name}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                        <div className="sm:mt-0 md:mt-15">
-                            <h2 className="text-sm sm:text-sm font-semibold text-white">
-                                Affiliation
-                            </h2>
-                            <div className="flex flex-col gap-2 text-white text-xs max-w-md mt-1">
-                                <p>Pauly Jr. Pictures</p>
-                                {/* <p>Mammotty Company</p> */}
-                            </div>
-                        </div>
-                    </div>
+  // API-safe fields (your backend only returns what exists)
+  const displayName =
+    user.displayName ||
+    user.legalName ||
+    user.email ||
+    "User";
 
-                    <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+  const roles = user.primaryRole
+    ? [user.primaryRole, ...(user.otherRoles || [])]
+    : user.otherRoles || ["Actor"];
 
-                        {/* <button className="px-4 py-2 rounded-3xl bg-black text-[#00FFA3] shadow-md hover:bg-gray-900 transition w-full sm:w-auto">                        
-                        </button> */}
-                    </div>
-                </section>
+  const bio = user.bio || "No bio provided.";
+  const profilePhoto = user.profilePhoto || DP;
+
+  const languages = ["Malayalam", "Tamil", "Telugu"]; // still hardcoded unless API provides languages
+  const affiliation = user.affiliation || "Pauly Jr. Pictures"; // or remove if not needed
+
+  return (
+    <div className="flex flex-col gap-3 rounded-2xl bg-neutral-900 w-full h-auto">
+      <section className="bg-neutral-950 p-4 flex flex-col md:flex-col h-auto border-t-6 border-[#00FFA3] rounded-2xl">
+        
+        {/* Social Icons */}
+        <div className="flex flex-wrap gap-2 justify-end">
+          {user.facebook && (
+            <a href={user.facebook} target="_blank" rel="noreferrer">
+              <Facebook className="size-4" />
+            </a>
+          )}
+          {user.instagram && (
+            <a href={user.instagram} target="_blank" rel="noreferrer">
+              <Instagram className="size-4" />
+            </a>
+          )}
+          {user.x && (
+            <a href={user.x} target="_blank" rel="noreferrer">
+              <FaXTwitter className="size-4" />
+            </a>
+          )}
+        </div>
+
+        {/* Top Section */}
+        <div className="flex flex-col sm:flex-row gap-3 items-center sm:items-start text-center sm:text-left space-y-3 sm:space-y-0 sm:space-x-4">
+          
+          {/* Profile Photo */}
+          <img
+            src={profilePhoto}
+            alt="Profile"
+            onError={(e) => (e.currentTarget.src = DP)}
+            className="w-20 h-20 sm:w-40 sm:h-40 rounded-full object-cover border-1 border-[#00FFA3]"
+          />
+
+          {/* User Info */}
+          <div className="sm:mt-0 md:mt-15">
+            <h2 className="text-lg sm:text-lg font-semibold text-white">
+              {displayName}
+            </h2>
+
+            {/* Roles */}
+            <div className="flex flex-wrap gap-2 pt-1 rounded-md">
+              {roles.map((role: string, idx: number) => (
+                <div
+                  key={idx}
+                  className="flex items-center gap-2 bg-neutral-200 text-black px-1 text-xs rounded-sm"
+                >
+                  <span>{role}</span>
+                </div>
+              ))}
             </div>
-        </>
-    )
-}
 
-export default Profilecard
+            {/* Bio */}
+            <p className="text-xs sm:text-xs text-white font-extralight text-justify max-w-md mt-1">
+              {bio}
+            </p>
+          </div>
+
+          {/* Languages */}
+          <div className="sm:mt-0 md:mt-15">
+            <h2 className="text-sm sm:text-sm font-semibold text-white">
+              Industry
+            </h2>
+            <div className="flex flex-wrap gap-2 pt-2 rounded-md">
+              {languages.map((lang, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-2 bg-neutral-200 text-black px-1 text-xs rounded-sm"
+                >
+                  <span>{lang}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Affiliation */}
+          <div className="sm:mt-0 md:mt-15">
+            <h2 className="text-sm sm:text-sm font-semibold text-white">
+              Affiliation
+            </h2>
+            <div className="flex flex-col gap-2 text-white text-xs max-w-md mt-1">
+              <p>{affiliation}</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Profilecard;

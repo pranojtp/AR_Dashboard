@@ -28,27 +28,52 @@
 
 
 // src/api/api.ts
-import axios from "axios";
-import { getUser } from "../services/authService";
+// import axios from "axios";
+// import { getUser } from "../services/authService";
 
-const API_BASE = import.meta.env.VITE_API_BASE || "https://audiorealities.com/api";
+// const API_BASE = import.meta.env.VITE_API_BASE || "https://audiorealities.com/api";
+
+// const api = axios.create({
+//   baseURL: API_BASE,
+// });
+
+// // request interceptor to attach bearer token
+// api.interceptors.request.use(async (config) => {
+//   try {
+//     const user = await getUser();
+//     const token = user?.access_token;
+//     if (token && config.headers) {
+//       config.headers["Authorization"] = `Bearer ${token}`;
+//     }
+//   } catch (e) {
+//     // no-op
+//   }
+//   return config;
+// });
+
+// export default api;
+
+// src/api/api.ts
+import axios from "axios";
+import { getAccessToken } from "../services/authService";
+
+const baseURL = import.meta.env.VITE_API_BASE_URL || "https://audiorealities.com/api";
 
 const api = axios.create({
-  baseURL: API_BASE,
+  baseURL,
+  headers: { "Content-Type": "application/json" },
 });
 
-// request interceptor to attach bearer token
-api.interceptors.request.use(async (config) => {
-  try {
-    const user = await getUser();
-    const token = user?.access_token;
-    if (token && config.headers) {
-      config.headers["Authorization"] = `Bearer ${token}`;
+api.interceptors.request.use(
+  async (config) => {
+    const token = await getAccessToken();
+    if (token) {
+      if (!config.headers) config.headers = {};
+      config.headers.Authorization = `Bearer ${token}`;
     }
-  } catch (e) {
-    // no-op
-  }
-  return config;
-});
+    return config;
+  },
+  (err) => Promise.reject(err)
+);
 
 export default api;

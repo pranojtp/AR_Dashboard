@@ -178,59 +178,102 @@ interface UploadedFile {
   status: number;
 }
 
-const FileUpload: React.FC = () => {
+interface FileUploadProps {
+  isAgreementSigned: boolean;
+}
+
+const FileUpload: React.FC<FileUploadProps> = ({ isAgreementSigned }) => {
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Check if agreement is not signed
+  const blockIfNotSigned = () => {
+    if (!isAgreementSigned) {
+      setShowWarning(true);
+      return true;
+    }
+    return false;
+  };
 
   // Drag Events
   const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
+    if (blockIfNotSigned()) return;
     setIsDragging(true);
   };
+
   const handleDragLeave = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsDragging(false);
   };
+
   const handleDrop = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
+    if (blockIfNotSigned()) return;
     setIsDragging(false);
     const droppedFiles = Array.from(e.dataTransfer.files);
     processFiles(droppedFiles);
   };
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (blockIfNotSigned()) return;
     const selectedFiles = e.target.files ? Array.from(e.target.files) : [];
     processFiles(selectedFiles);
   };
 
-  const handleUploadClick = () => fileInputRef.current?.click();
+  const handleUploadClick = () => {
+    if (blockIfNotSigned()) return;
+    fileInputRef.current?.click();
+  };
 
   const processFiles = (fileList: File[]) => {
     const processed = fileList.map((file) => ({
       name: file.name,
       length: `${(file.size / 1024).toFixed(2)} KB`,
-      quality: ["Good", "Avg", "Poor"][
-        Math.floor(Math.random() * 3)
-      ] as "Good" | "Avg" | "Poor",
+      quality: ["Good", "Avg", "Poor"][Math.floor(Math.random() * 3)] as
+        | "Good"
+        | "Avg"
+        | "Poor",
       status: Math.floor(Math.random() * 100),
     }));
+
     setFiles(processed);
   };
 
   return (
     <div className="bg-black text-white p-4 sm:p-6 rounded-xl min-h-64 w-full">
 
+      {/* Warning Modal */}
+      {showWarning && (
+        <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-50">
+          <div className="bg-white text-black rounded-xl p-6 w-80 text-center space-y-4">
+            <h2 className="font-semibold text-lg">Agreement Required</h2>
+            <p>You must sign the agreement before uploading or requesting.</p>
+
+            <button
+              onClick={() => setShowWarning(false)}
+              className="bg-black text-white px-4 py-2 rounded-lg w-full"
+            >
+              Ok
+            </button>
+          </div>
+        </div>
+      )}
+
       {showModal && <Requestupload onClose={() => setShowModal(false)} />}
 
       {files.length === 0 ? (
-        
         <div className="flex flex-col md:flex-row items-center justify-center w-full gap-4 sm:gap-6">
 
-          {/* LEFT SIDE UPLOAD BOX */}
+          {/* LEFT UPLOAD AREA */}
           <div
-            className={`flex-1 border-2 border-dashed rounded-xl h-56 sm:h-64 flex flex-col justify-center items-center text-center transition-all duration-300 hover:border-[#00FFA3] p-4 w-full
+            className={`flex-1 border-2 border-dashed rounded-xl h-56 sm:h-64 
+              flex flex-col justify-center items-center text-center transition-all duration-300 
+              hover:border-[#00FFA3] p-4 w-full
               ${isDragging ? "bg-neutral-900" : "border-neutral-700"}`}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
@@ -242,7 +285,14 @@ const FileUpload: React.FC = () => {
 
             <p className="text-gray-400 text-sm my-2">or</p>
 
-            <label className="cursor-pointer bg-[#00FFA3] px-4 py-2 text-sm rounded-lg text-black font-semibold hover:opacity-90 transition">
+            <label className="cursor-pointer bg-[#00FFA3] px-4 py-2 text-sm rounded-lg text-black font-semibold hover:opacity-90 transition"
+              onClick={(e) => {
+                if (blockIfNotSigned()) {
+                  e.preventDefault();  // Stops file dialog opening
+                  e.stopPropagation(); // Ensures input doesn't trigger
+                }
+              }}
+            >
               Browse
               <input
                 ref={fileInputRef}
@@ -254,28 +304,32 @@ const FileUpload: React.FC = () => {
             </label>
           </div>
 
-          {/* DIVIDER (hidden on mobile) */}
+          {/* DIVIDER */}
           <div className="text-gray-500 text-sm font-medium md:block hidden">or</div>
 
-          {/* RIGHT SIDE REQUEST BOX */}
-          <div className="flex-1 border-2 border-dashed border-neutral-700 rounded-xl h-56 sm:h-64 flex flex-col gap-5 justify-center items-center text-center transition-all duration-300 hover:border-[#00FFA3] p-4 w-full">
-            <p className="text-white text-base sm:text-lg font-medium">
-              Request to Upload
-            </p>
+          {/* RIGHT REQUEST BOX */}
+          <div className="flex-1 border-2 border-dashed border-neutral-700 rounded-xl h-56 sm:h-64 
+            flex flex-col gap-5 justify-center items-center text-center transition-all duration-300 
+            hover:border-[#00FFA3] p-4 w-full">
+            <p className="text-white text-base sm:text-lg font-medium">Request to Upload</p>
 
             <button
-              onClick={() => setShowModal(true)}
+              onClick={() => {
+                if (blockIfNotSigned()) return;
+                setShowModal(true);
+              }}
               className="bg-[#00FFA3] text-black text-sm font-semibold px-4 py-2 rounded-lg hover:opacity-90 transition"
             >
               Request Now
             </button>
           </div>
+
         </div>
+
       ) : (
-        
+        // FILES TABLE
         <div className="bg-black rounded-xl p-4">
 
-          
           <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-4 gap-3">
             <h2 className="text-lg font-semibold">Voices</h2>
 
@@ -296,7 +350,10 @@ const FileUpload: React.FC = () => {
               />
 
               <button
-                onClick={() => setShowModal(true)}
+                onClick={() => {
+                  if (blockIfNotSigned()) return;
+                  setShowModal(true);
+                }}
                 className="bg-[#00FFA3] hover:bg-green-500 text-black px-4 py-1 text-sm rounded-md font-semibold"
               >
                 Request
@@ -304,7 +361,6 @@ const FileUpload: React.FC = () => {
             </div>
           </div>
 
-          
           <div className="overflow-x-auto w-full">
             <table className="w-full text-left text-xs sm:text-sm min-w-[460px]">
               <thead className="text-neutral-200 border-b border-neutral-700">
@@ -360,6 +416,7 @@ const FileUpload: React.FC = () => {
               </tbody>
             </table>
           </div>
+
         </div>
       )}
     </div>

@@ -104,7 +104,7 @@
 // export default Teams
 
 import { useState, useMemo } from "react";
-import { motion, AnimatePresence,easeInOut } from "framer-motion";
+import { motion, AnimatePresence, easeInOut } from "framer-motion";
 import Addteammember from "./Addteammember";
 import Editteammember from "./Editteammember";
 
@@ -205,28 +205,25 @@ const Teams = () => {
         setShowPrevious(!showPrevious);
     };
 
-
-
     return (
         <div className="bg-neutral-950 rounded-2xl border-1 border-neutral-800 p-4 sm:p-4 text-white relative w-full">
-
             {/* Header */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
                 <h3 className="text-base sm:text-lg font-semibold">Teams</h3>
 
-                <div className="flex flex-row gap-2 w-full md:w-auto">
+                <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
                     <input
                         type="text"
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         placeholder="Search..."
-                        className="p-2 sm:p-1.5 border rounded-lg border-neutral-700 bg-neutral-900 text-white w-full sm:w-auto text-sm sm:text-xs max-w-full sm:max-w-xs focus:outline-none"
+                        className="p-2 sm:p-1.5 border rounded-lg border-neutral-700 bg-neutral-900 text-white w-full text-sm sm:text-xs max-w-full focus:outline-none"
                     />
 
                     <select
                         value={selectedValue}
                         onChange={(e) => setSelectedValue(e.target.value)}
-                        className="p-2 sm:p-1.5 rounded-lg bg-amber-100 text-black text-xs sm:text-xs w-full sm:w-auto"
+                        className="p-2 sm:p-1.5 rounded-lg bg-amber-100 text-black text-xs w-full"
                     >
                         {options.map((option) => (
                             <option key={option.value} value={option.value}>
@@ -238,7 +235,7 @@ const Teams = () => {
                     <select
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value)}
-                        className="p-2 sm:p-1.5 rounded-lg bg-amber-100 text-black text-xs sm:text-xs w-full sm:w-auto"
+                        className="p-2 sm:p-1.5 rounded-lg bg-amber-100 text-black text-xs w-full"
                     >
                         <option value="">-- Sort --</option>
                         {sortOptions.map((option) => (
@@ -250,7 +247,7 @@ const Teams = () => {
 
                     <button
                         onClick={() => setShowModal(true)}
-                        className="px-2 py-1 sm:py-1.5 bg-[#00FFA3] text-black rounded-xl hover:bg-[#00e695] transition text-xs sm:text-xs font-medium w-full sm:w-auto"
+                        className="px-2 py-1 sm:py-1.5 bg-[#00FFA3] text-black rounded-xl hover:bg-[#00e695] transition text-xs font-medium w-full sm:w-auto"
                     >
                         + Add Member
                     </button>
@@ -258,7 +255,7 @@ const Teams = () => {
             </div>
 
             {/* Smooth Carousel Animated Member List */}
-            <div className="relative min-h-[255px] overflow-hidden">
+            <div className="relative min-h-[200px] sm:min-h-[255px] overflow-hidden">
                 <AnimatePresence mode="popLayout" custom={direction}>
                     {showPrevious ? (
                         <motion.div
@@ -273,7 +270,7 @@ const Teams = () => {
                             {previousMembers.map((member, index) => (
                                 <div
                                     key={index}
-                                    className="flex justify-between py-3 border-b border-neutral-800 px-2"
+                                    className="flex flex-col sm:flex-row sm:justify-between py-3 border-b border-neutral-800 px-2 gap-2"
                                 >
                                     <div className="flex items-center gap-3">
                                         <div className="w-10 h-10 flex items-center justify-center rounded-full bg-neutral-600 text-black font-bold">
@@ -300,7 +297,7 @@ const Teams = () => {
                             {filteredAndSortedMembers.map((member, index) => (
                                 <div
                                     key={index}
-                                    className="flex justify-between py-3 border-b border-neutral-800 px-2 hover:bg-neutral-900 transition rounded-lg"
+                                    className="flex flex-col sm:flex-row sm:justify-between py-3 border-b border-neutral-800 px-2 hover:bg-neutral-900 transition rounded-lg gap-2"
                                 >
                                     <div className="flex items-center gap-3">
                                         <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[#00FFA3] text-black font-bold">
@@ -312,7 +309,7 @@ const Teams = () => {
                                         </div>
                                     </div>
 
-                                    <div className="flex gap-4 text-[#00FFA3] text-xs sm:justify-end">
+                                    <div className="flex gap-4 text-[#00FFA3] text-xs">
                                         <button
                                             className="px-2 py-1 hover:bg-[#00FFA3] hover:text-black hover:rounded-lg"
                                             onClick={() => {
@@ -332,16 +329,14 @@ const Teams = () => {
                 </AnimatePresence>
             </div>
 
-
             {/* Footer */}
-            <div className="flex justify-between items-center border-t border-neutral-800 mt-4 pt-3 text-xs text-neutral-400">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-t border-neutral-800 mt-4 pt-3 text-xs text-neutral-400 gap-2">
                 <button
                     className="hover:text-[#00FFA3]"
                     onClick={togglePrevious}
                 >
                     {showPrevious ? "Show Active Members" : "Show Previous Members"}
                 </button>
-
 
                 <p>
                     Total Members:{" "}
