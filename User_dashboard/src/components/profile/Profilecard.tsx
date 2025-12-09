@@ -305,7 +305,6 @@
 // export default Profilecard
 
 
-// src/pages/Profilecard.tsx
 import React from "react";
 import DP from "../../assets/nivin4.webp";
 import { Facebook, Instagram } from "lucide-react";
@@ -315,41 +314,29 @@ import useCurrentUser from "../../hooks/useCurrentUser";
 const Profilecard: React.FC = () => {
   const { user, loading, error } = useCurrentUser();
 
-  if (loading) {
-    return <div className="p-4 text-white">Loading profile…</div>;
-  }
+  if (loading) return <div className="p-4 text-white">Loading profile…</div>;
+  if (error) return <div className="p-4 text-red-400">Error loading profile: {error}</div>;
+  if (!user) return <div className="p-4 text-white">No user data found.</div>;
 
-  if (error) {
-    return <div className="p-4 text-red-400">Error loading profile: {error}</div>;
-  }
-
-  if (!user) {
-    return <div className="p-4 text-white">No user data found.</div>;
-  }
-
-  // API-safe fields (your backend only returns what exists)
   const displayName =
-    user.displayName ||
-    user.legalName ||
-    user.email ||
-    "User";
+    user.displayName || user.legalName || user.email || "User";
 
-  const roles = user.primaryRole
+  const roles: string[] = user.primaryRole
     ? [user.primaryRole, ...(user.otherRoles || [])]
     : user.otherRoles || ["Actor"];
 
   const bio = user.bio || "No bio provided.";
   const profilePhoto = user.profilePhoto || DP;
 
-  const languages = ["Malayalam", "Tamil", "Telugu"]; // still hardcoded unless API provides languages
-  const affiliation = user.affiliation || "Pauly Jr. Pictures"; // or remove if not needed
+  const languages = ["Malayalam", "Tamil", "Telugu"];
+  const affiliation = user.affiliation || "Pauly Jr. Pictures";
 
   return (
     <div className="flex flex-col gap-3 rounded-2xl bg-neutral-900 w-full h-auto">
-      <section className="bg-neutral-950 p-4 flex flex-col md:flex-col h-auto border-t-6 border-[#00FFA3] rounded-2xl">
-        
+      <section className="bg-neutral-950 p-4 flex flex-col border-t-6 border-[#00FFA3] rounded-2xl">
+
         {/* Social Icons */}
-        <div className="flex flex-wrap gap-2 justify-end">
+        <div className="flex gap-2 justify-end">
           {user.facebook && (
             <a href={user.facebook} target="_blank" rel="noreferrer">
               <Facebook className="size-4" />
@@ -367,66 +354,53 @@ const Profilecard: React.FC = () => {
           )}
         </div>
 
-        {/* Top Section */}
-        <div className="flex flex-col sm:flex-row gap-3 items-center sm:items-start text-center sm:text-left space-y-3 sm:space-y-0 sm:space-x-4">
-          
-          {/* Profile Photo */}
+        <div className="flex flex-col sm:flex-row gap-5 items-center sm:items-start text-center sm:text-left">
+
           <img
             src={profilePhoto}
-            alt="Profile"
             onError={(e) => (e.currentTarget.src = DP)}
-            className="w-20 h-20 sm:w-40 sm:h-40 rounded-full object-cover border-1 border-[#00FFA3]"
+            className="w-20 h-20 sm:w-40 sm:h-40 rounded-full object-cover border border-[#00FFA3]"
           />
 
-          {/* User Info */}
-          <div className="sm:mt-0 md:mt-15">
-            <h2 className="text-lg sm:text-lg font-semibold text-white">
-              {displayName}
-            </h2>
+          {/* Name + Roles + Bio */}
+          <div>
+            <h2 className="text-lg font-semibold text-white">{displayName}</h2>
 
-            {/* Roles */}
-            <div className="flex flex-wrap gap-2 pt-1 rounded-md">
+            <div className="flex flex-wrap gap-2 pt-1">
               {roles.map((role: string, idx: number) => (
-                <div
+                <span
                   key={idx}
-                  className="flex items-center gap-2 bg-neutral-200 text-black px-1 text-xs rounded-sm"
+                  className="bg-neutral-200 text-black px-2 text-xs rounded-sm"
                 >
-                  <span>{role}</span>
-                </div>
+                  {role}
+                </span>
               ))}
             </div>
 
-            {/* Bio */}
-            <p className="text-xs sm:text-xs text-white font-extralight text-justify max-w-md mt-1">
+            <p className="text-xs text-white font-extralight text-justify max-w-md mt-1">
               {bio}
             </p>
           </div>
 
-          {/* Languages */}
-          <div className="sm:mt-0 md:mt-15">
-            <h2 className="text-sm sm:text-sm font-semibold text-white">
-              Industry
-            </h2>
-            <div className="flex flex-wrap gap-2 pt-2 rounded-md">
-              {languages.map((lang, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-2 bg-neutral-200 text-black px-1 text-xs rounded-sm"
+          {/* Industry */}
+          <div>
+            <h2 className="text-sm font-semibold text-white">Industry</h2>
+            <div className="flex flex-wrap gap-2 pt-2">
+              {languages.map((lang: string, idx: number) => (
+                <span
+                  key={idx}
+                  className="bg-neutral-200 text-black px-2 text-xs rounded-sm"
                 >
-                  <span>{lang}</span>
-                </div>
+                  {lang}
+                </span>
               ))}
             </div>
           </div>
 
           {/* Affiliation */}
-          <div className="sm:mt-0 md:mt-15">
-            <h2 className="text-sm sm:text-sm font-semibold text-white">
-              Affiliation
-            </h2>
-            <div className="flex flex-col gap-2 text-white text-xs max-w-md mt-1">
-              <p>{affiliation}</p>
-            </div>
+          <div>
+            <h2 className="text-sm font-semibold text-white">Affiliation</h2>
+            <p className="text-xs text-white mt-1">{affiliation}</p>
           </div>
 
         </div>

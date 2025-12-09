@@ -32,16 +32,36 @@
 // export default userService;
 
 // src/services/userService.ts
+// import api from "../api/api";
+
+// const userService = {
+//   // Get user by ID (Cognito sub)
+//   getSpecificUser: (id: string) => api.get(`/users/${id}`),
+
+//   getUsers: () => api.get("/users"),
+//   addUser: (data: any) => api.post("/users", data),
+//   updateUser: (id: string, data: any) => api.put(`/users/${id}`, data),
+//   deleteUser: (id: string) => api.delete(`/users/${id}`)
+// };
+
+// export default userService;
+
+// userService.ts
+// src/services/userService.ts
 import api from "../api/api";
 
 const userService = {
-  // Get user by ID (Cognito sub)
-  getSpecificUser: (id: string) => api.get(`/users/${id}`),
-
+  // Fetch a single user by Cognito 'sub'
+ 
   getUsers: () => api.get("/users"),
+
+  getUserProfile: () => api.get("/users/e05044ab-26d3-48df-b5d5-520d046bb55d"),
+
   addUser: (data: any) => api.post("/users", data),
+
   updateUser: (id: string, data: any) => api.put(`/users/${id}`, data),
-  deleteUser: (id: string) => api.delete(`/users/${id}`)
+
+  deleteUser: (id: string) => api.delete(`/users/${id}`),
 };
 
 export default userService;

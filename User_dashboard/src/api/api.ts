@@ -55,25 +55,32 @@
 
 // src/api/api.ts
 import axios from "axios";
-import { getAccessToken } from "../services/authService";
+import type { InternalAxiosRequestConfig } from "axios";
+import { userManager } from "../services/authService";
 
-const baseURL = import.meta.env.VITE_API_BASE_URL || "https://audiorealities.com/api";
+const baseURL =
+  import.meta.env.VITE_API_BASE_URL || "https://audiorealities.com/api";
 
 const api = axios.create({
   baseURL,
-  headers: { "Content-Type": "application/json" },
+  headers: {
+    "Content-Type": "application/json"
+  }
 });
 
 api.interceptors.request.use(
-  async (config) => {
-    const token = await getAccessToken();
-    if (token) {
-      if (!config.headers) config.headers = {};
-      config.headers.Authorization = `Bearer ${token}`;
+  async (config: InternalAxiosRequestConfig) => {
+    
+    const user= await userManager.getUser();
+    if (user){
+      const token =user.id_token
+      config.headers.set("Authorization", `Bearer ${token}`);
+      config.headers.set("Accept", "application/json");
+      config.headers.set("Content-Type", "application/json");
     }
+    
     return config;
-  },
-  (err) => Promise.reject(err)
+  }
 );
 
 export default api;
