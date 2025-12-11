@@ -177,7 +177,6 @@ const Teams = () => {
 
     const [direction, setDirection] = useState(1);
 
-    // SUPER SMOOTH VARIANTS (direction based)
     const slideVariants = {
         enter: (direction: number) => ({
             x: direction > 0 ? 120 : -120,
@@ -187,7 +186,7 @@ const Teams = () => {
             x: 0,
             opacity: 1,
             transition: {
-                duration: 0.50,
+                duration: 0.5,
                 ease: easeInOut
             }
         },
@@ -200,30 +199,35 @@ const Teams = () => {
             }
         }),
     };
+
     const togglePrevious = () => {
         setDirection(showPrevious ? -1 : 1);
         setShowPrevious(!showPrevious);
     };
 
     return (
-        <div className="bg-neutral-950 rounded-2xl border-1 border-neutral-800 p-4 sm:p-4 text-white relative w-full">
+        <div className="bg-neutral-950 rounded-2xl border border-neutral-800 p-4 sm:p-4 text-white w-full">
+
             {/* Header */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
+
                 <h3 className="text-base sm:text-lg font-semibold">Teams</h3>
 
-                <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
+                {/* Responsive Filters */}
+                <div className="flex flex-col sm:flex-row flex-wrap gap-2 w-full md:w-auto">
+
                     <input
                         type="text"
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         placeholder="Search..."
-                        className="p-2 sm:p-1.5 border rounded-lg border-neutral-700 bg-neutral-900 text-white w-full text-sm sm:text-xs max-w-full focus:outline-none"
+                        className="p-2 sm:p-1.5 border rounded-lg border-neutral-700 bg-neutral-900 text-white text-sm sm:text-xs"
                     />
 
                     <select
                         value={selectedValue}
                         onChange={(e) => setSelectedValue(e.target.value)}
-                        className="p-2 sm:p-1.5 rounded-lg bg-amber-100 text-black text-xs w-full"
+                        className="p-2 sm:p-1.5 rounded-lg bg-amber-100 text-black text-xs w-full sm:w-auto"
                     >
                         {options.map((option) => (
                             <option key={option.value} value={option.value}>
@@ -235,7 +239,7 @@ const Teams = () => {
                     <select
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value)}
-                        className="p-2 sm:p-1.5 rounded-lg bg-amber-100 text-black text-xs w-full"
+                        className="p-2 sm:p-1.5 rounded-lg bg-amber-100 text-black text-xs w-full sm:w-auto"
                     >
                         <option value="">-- Sort --</option>
                         {sortOptions.map((option) => (
@@ -247,35 +251,37 @@ const Teams = () => {
 
                     <button
                         onClick={() => setShowModal(true)}
-                        className="px-2 py-1 sm:py-1.5 bg-[#00FFA3] text-black rounded-xl hover:bg-[#00e695] transition text-xs font-medium w-full sm:w-auto"
+                        className="p-2 sm:p-1.5 bg-[#00FFA3] text-black rounded-lg hover:bg-[#00e695] transition text-xs font-medium w-full sm:w-auto"
                     >
                         + Add Member
                     </button>
+
                 </div>
             </div>
 
-            {/* Smooth Carousel Animated Member List */}
-            <div className="relative min-h-[200px] sm:min-h-[255px] overflow-hidden">
+            {/* Responsive Animated List */}
+            <div className="relative min-h-[220px] sm:min-h-[260px] overflow-hidden">
                 <AnimatePresence mode="popLayout" custom={direction}>
                     {showPrevious ? (
                         <motion.div
                             key="previous"
                             custom={direction}
                             variants={slideVariants}
-                            initial="enter"
+                            initial=""
                             animate="center"
                             exit="exit"
                             className="absolute w-full"
                         >
-                            {previousMembers.map((member, index) => (
+                            {previousMembers.map((member, idx) => (
                                 <div
-                                    key={index}
+                                    key={idx}
                                     className="flex flex-col sm:flex-row sm:justify-between py-3 border-b border-neutral-800 px-2 gap-2"
                                 >
                                     <div className="flex items-center gap-3">
                                         <div className="w-10 h-10 flex items-center justify-center rounded-full bg-neutral-600 text-black font-bold">
                                             {getInitials(member.name)}
                                         </div>
+
                                         <div>
                                             <p className="text-neutral-400 font-medium text-sm">{member.name}</p>
                                             <p className="text-neutral-400 text-xs">{member.role}</p>
@@ -294,15 +300,16 @@ const Teams = () => {
                             exit="exit"
                             className="absolute w-full"
                         >
-                            {filteredAndSortedMembers.map((member, index) => (
+                            {filteredAndSortedMembers.map((member, idx) => (
                                 <div
-                                    key={index}
+                                    key={idx}
                                     className="flex flex-col sm:flex-row sm:justify-between py-3 border-b border-neutral-800 px-2 hover:bg-neutral-900 transition rounded-lg gap-2"
                                 >
                                     <div className="flex items-center gap-3">
                                         <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[#00FFA3] text-black font-bold">
                                             {getInitials(member.name)}
                                         </div>
+
                                         <div>
                                             <p className="font-medium text-sm">{member.name}</p>
                                             <p className="text-neutral-400 text-xs">{member.role}</p>
@@ -327,10 +334,12 @@ const Teams = () => {
                         </motion.div>
                     )}
                 </AnimatePresence>
+
             </div>
 
             {/* Footer */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-t border-neutral-800 mt-4 pt-3 text-xs text-neutral-400 gap-2">
+
                 <button
                     className="hover:text-[#00FFA3]"
                     onClick={togglePrevious}
@@ -356,11 +365,11 @@ const Teams = () => {
                             exit={{ opacity: 0 }}
                             onClick={() => setShowModal(false)}
                         />
+
                         <motion.div
                             className="fixed inset-0 flex items-center justify-center z-50 p-3 sm:p-6"
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.8 }}
-                            transition={{ duration: 0.25 }}
                         >
                             <Addteammember onClose={() => setShowModal(false)} />
                         </motion.div>
@@ -381,7 +390,6 @@ const Teams = () => {
                             className="fixed inset-0 flex items-center justify-center z-50 p-3 sm:p-6"
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.8 }}
-                            transition={{ duration: 0.25 }}
                         >
                             <Editteammember
                                 member={memberToEdit}
@@ -389,7 +397,9 @@ const Teams = () => {
                                 onSave={(newRole) => {
                                     setMembers((prev) =>
                                         prev.map((m) =>
-                                            m.name === memberToEdit!.name ? { ...m, role: newRole } : m
+                                            m.name === memberToEdit!.name
+                                                ? { ...m, role: newRole }
+                                                : m
                                         )
                                     );
                                     setShowEditModal(false);

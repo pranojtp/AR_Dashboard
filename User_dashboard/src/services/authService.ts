@@ -162,6 +162,10 @@ export async function handleSigninCallback(): Promise<User | null> {
 
   return user;
 }
+// export async function getLoggedInUserId(): Promise<string | null> {
+//   const user = await userManager.getUser();
+//   return user?.profile?.sub ?? null;
+// }
 
 
 export function signOutRedirect() {

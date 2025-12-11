@@ -117,7 +117,7 @@ interface TaskItem {
     initials: string;
 }
 
-// 🟢 Dummy Data
+// Dummy Data
 const pendingTasks: TaskItem[] = [
     {
         id: 1,
@@ -131,44 +131,45 @@ const pendingTasks: TaskItem[] = [
         id: 2,
         name: "Marcus Johnson",
         message: "SFX feedback on the new reel",
-        details: "Pizza ipsum dolor meat lovers buffalo. Marinara mushrooms tossed anchovies personal party lovers. Onions beef broccoli ham personal white ham mouth. Red ipsum pork beef Philly mushrooms sautéed and broccoli",
+        details:
+            "Pizza ipsum dolor meat lovers buffalo. Marinara mushrooms tossed anchovies personal party lovers. Onions beef broccoli ham personal white ham mouth. Red ipsum pork beef Philly mushrooms sautéed and broccoli",
         initials: "MJ",
     },
     {
         id: 3,
         name: "Emma Rodriguez",
         message: "Contract of [project name] is ready to sign",
-        details: "Pizza ipsum dolor meat lovers buffalo. Marinara mushrooms tossed anchovies personal party lovers. Onions beef broccoli ham personal white ham mouth. Red ipsum pork beef Philly mushrooms sautéed and broccoli",
+        details:
+            "Pizza ipsum dolor meat lovers buffalo. Marinara mushrooms tossed anchovies personal party lovers. Onions beef broccoli ham personal white ham mouth. Red ipsum pork beef Philly mushrooms sautéed and broccoli",
         initials: "ER",
     },
     {
         id: 4,
         name: "Emma Rodriguez",
         message: "Reel 4 is ready for production",
-        details: "Pizza ipsum dolor meat lovers buffalo. Marinara mushrooms tossed anchovies personal party lovers. Onions beef broccoli ham personal white ham mouth. Red ipsum pork beef Philly mushrooms sautéed and broccoli",
+        details:
+            "Pizza ipsum dolor meat lovers buffalo. Marinara mushrooms tossed anchovies personal party lovers. Onions beef broccoli ham personal white ham mouth. Red ipsum pork beef Philly mushrooms sautéed and broccoli",
         initials: "ER",
     },
     {
         id: 5,
         name: "Babychen Paul",
         message: "Contract of [project name] is ready",
-        details: "Pizza ipsum dolor meat lovers buffalo. Marinara mushrooms tossed anchovies personal party lovers. Onions beef broccoli ham personal white ham mouth. Red ipsum pork beef Philly mushrooms sautéed and broccoli",
+        details:
+            "Pizza ipsum dolor meat lovers buffalo. Marinara mushrooms tossed anchovies personal party lovers. Onions beef broccoli ham personal white ham mouth. Red ipsum pork beef Philly mushrooms sautéed and broccoli",
         initials: "BP",
     },
 ];
 
-const completedTasks: TaskItem[] = [
-
-];
+const completedTasks: TaskItem[] = [];
 
 const Tasks: React.FC = () => {
     const [selectedTask, setSelectedTask] = useState<TaskItem | null>(null);
     const [activeTab, setActiveTab] = useState<"pending" | "completed">("pending");
-    const [direction, setDirection] = useState<1 | -1>(1); // 1 = slide left, -1 = slide right
+    const [direction, setDirection] = useState<1 | -1>(1);
 
     const displayedTasks = activeTab === "pending" ? pendingTasks : completedTasks;
 
-    // 🟩 Animation Variants for Sliding
     const slideVariants = {
         enter: (direction: number) => ({
             x: direction > 0 ? 100 : -100,
@@ -181,7 +182,6 @@ const Tasks: React.FC = () => {
         }),
     };
 
-    // 🟩 Handle Tab Switching
     const handleTabChange = (tab: "pending" | "completed") => {
         if (tab === activeTab) return;
         setDirection(tab === "completed" ? 1 : -1);
@@ -190,33 +190,41 @@ const Tasks: React.FC = () => {
 
     return (
         <div className="bg-neutral-950 rounded-2xl p-4 border border-neutral-800 text-white w-full h-fit overflow-hidden">
-            {/* Header */}
-            <div className="flex justify-between items-center mb-4">
-                <h3 className="text-base font-semibold flex items-center gap-4">
-                    Tasks
-                    <span>
-                        <input
-                            type="text"
-                            placeholder="Search..."
-                            className="p-2 sm:p-1.5 border rounded-lg border-neutral-700 bg-neutral-900 text-white w-full sm:w-auto text-sm sm:text-xs max-w-full sm:max-w-xs focus:outline-none"
-                        />
-                    </span>
-                </h3>
-                <div className="flex flex-row gap-4">
+
+            {/* 🔥 FIXED RESPONSIVE HEADER (Matches Screenshot 1 Always) */}
+            <div className="flex justify-between items-center mb-4 w-full">
+
+                {/* Left: Title + Search field */}
+                <div className="flex items-center gap-4">
+                    <h3 className="text-base font-semibold">Tasks</h3>
+
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                        className="p-2 border rounded-lg border-neutral-700 bg-neutral-900 
+                        text-white w-[150px] sm:w-60 text-xs focus:outline-none"
+                    />
+                </div>
+
+                {/* Right: Tabs */}
+                <div className="flex gap-4 shrink-0">
                     <button
-                        className={`text-xs font-semibold ${activeTab === "pending"
-                            ? "text-[#00e695]"
-                            : "text-neutral-400 hover:text-white"
-                            }`}
+                        className={`text-xs font-semibold ${
+                            activeTab === "pending"
+                                ? "text-[#00e695]"
+                                : "text-neutral-400 hover:text-white"
+                        }`}
                         onClick={() => handleTabChange("pending")}
                     >
                         Pending
                     </button>
+
                     <button
-                        className={`text-xs font-semibold ${activeTab === "completed"
-                            ? "text-[#00e695] "
-                            : "text-neutral-400 hover:text-white"
-                            }`}
+                        className={`text-xs font-semibold ${
+                            activeTab === "completed"
+                                ? "text-[#00e695]"
+                                : "text-neutral-400 hover:text-white"
+                        }`}
                         onClick={() => handleTabChange("completed")}
                     >
                         Completed
@@ -224,8 +232,8 @@ const Tasks: React.FC = () => {
                 </div>
             </div>
 
-            {/* Animated Task List */}
-            <div className="relative min-h-[310px] overflow-hidden">
+            {/* Task List */}
+            <div className="relative min-h-[300px] overflow-hidden">
                 <AnimatePresence mode="popLayout" custom={direction}>
                     <motion.div
                         key={activeTab}
@@ -251,17 +259,12 @@ const Tasks: React.FC = () => {
                                         <p className="font-normal text-xs">{n.name}</p>
                                     </div>
                                 </div>
-                                <div className="flex flex-row items-end gap-4 text-sm font-normal">
-                                    <button
-                                        onClick={() => setSelectedTask(n)}
-                                        className="text-[#00e695] hover:bg-[#00FFA3] hover:text-black hover:rounded-xl px-2 py-1"
-                                    >
-                                        {activeTab === "pending" ? "VIEW" : "VIEW"}
-                                    </button>
-                                    <button className="text-[#00e695] hover:text-red-400 transition">
-                                        {/* CLOSE */}
-                                    </button>
-                                </div>
+                                <button
+                                    onClick={() => setSelectedTask(n)}
+                                    className="text-[#00e695] hover:bg-[#00FFA3] hover:text-black hover:rounded-xl px-2 py-1 text-sm"
+                                >
+                                    VIEW
+                                </button>
                             </div>
                         ))}
 
@@ -316,9 +319,7 @@ const Tasks: React.FC = () => {
                                             </p>
                                         </div>
                                     </div>
-                                    <div>
-                                        <p className="text-xs text-neutral-500">12 Oct</p>
-                                    </div>
+                                    <p className="text-xs text-neutral-500">12 Oct</p>
                                 </div>
 
                                 <p className="text-xs text-neutral-300 leading-relaxed mb-6">

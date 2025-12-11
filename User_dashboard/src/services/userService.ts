@@ -49,13 +49,21 @@
 // userService.ts
 // src/services/userService.ts
 import api from "../api/api";
+// import { getLoggedInUserId } from "./authService";
 
 const userService = {
-  // Fetch a single user by Cognito 'sub'
- 
+
   getUsers: () => api.get("/users"),
 
-  getUserProfile: () => api.get("/users/e05044ab-26d3-48df-b5d5-520d046bb55d"),
+  getUserProfile: () => api.get("/users/6939496e8ef65137212ac698"),
+
+  // getUserProfile: async () => {
+  //   const id = await getLoggedInUserId();
+  //   if (!id) throw new Error("User ID not found in token");
+
+  //   return api.get(`/users/${id}`);
+  // },
+
 
   addUser: (data: any) => api.post("/users", data),
 

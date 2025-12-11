@@ -99,7 +99,6 @@ const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Manual active checks
   const isProfileActive = location.pathname === "/userdashboard/profile";
   const isVoiceVaultActive = location.pathname === "/userdashboard/voicevault";
   const isProjectActive = location.pathname.startsWith("/userdashboard/projectpage");
@@ -109,16 +108,33 @@ const Sidebar = () => {
   return (
     <>
       {/* Desktop Sidebar */}
-      <div className="hidden md:flex w-64 lg:w-72 bg-neutral-900 p-4 flex-col justify-between fixed md:static">
-        {/* Top section */}
+      <div
+        className="
+          hidden md:flex 
+          w-64 lg:w-72 
+          bg-neutral-900 
+          p-4 
+          flex-col 
+          justify-between 
+          fixed 
+          md:static 
+          h-full 
+          overflow-y-auto 
+          custom-scroll
+        "
+      >
+        {/* Top */}
         <div>
-          <h1 className="text-lg font-sans mb-8 text-white tracking-wide">AUDIO REALITIES</h1>
+          <h1 className="text-lg font-sans mb-3 p-2 text-white tracking-wide">
+            AUDIO REALITIES
+          </h1>
           <hr className="text-white mb-4" />
 
           <nav className="space-y-3 text-sm text-gray-300">
             <button
               onClick={() => navigate("/userdashboard/profile")}
-              className={`flex items-center gap-3 px-2 py-2 w-full text-left rounded text-white hover:border-r-4 border-[#00FFA3] hover:bg-neutral-700 transition
+              className={`flex items-center gap-3 px-2 py-2 w-full text-left rounded text-white
+                hover:border-r-4 border-[#00FFA3] hover:bg-neutral-700 transition
                 ${isProfileActive ? "border-r-4 bg-neutral-700" : ""}`}
             >
               <UserRound className="size-4" /> Profile
@@ -126,7 +142,8 @@ const Sidebar = () => {
 
             <button
               onClick={() => navigate("/userdashboard/voicevault")}
-              className={`flex items-center gap-3 px-2 py-2 w-full text-left rounded text-white hover:border-r-4 border-[#00FFA3] hover:bg-neutral-700 transition
+              className={`flex items-center gap-3 px-2 py-2 w-full text-left rounded text-white
+                hover:border-r-4 border-[#00FFA3] hover:bg-neutral-700 transition
                 ${isVoiceVaultActive ? "border-r-4 bg-neutral-700" : ""}`}
             >
               <AudioLines className="size-4" /> Voice Vault
@@ -134,7 +151,8 @@ const Sidebar = () => {
 
             <button
               onClick={() => navigate("/userdashboard/projectpage/createproject")}
-              className={`flex items-center gap-3 px-2 py-2 w-full text-left rounded text-white hover:border-r-4 border-[#00FFA3] hover:bg-neutral-700 transition
+              className={`flex items-center gap-3 px-2 py-2 w-full text-left rounded text-white
+                hover:border-r-4 border-[#00FFA3] hover:bg-neutral-700 transition
                 ${isProjectActive ? "border-r-4 bg-neutral-700" : ""}`}
             >
               <FileStack className="size-4" /> Project
@@ -142,12 +160,13 @@ const Sidebar = () => {
           </nav>
         </div>
 
-        {/* Bottom section */}
-        <div>
+        {/* Bottom */}
+        <div className="mt-6">
           <nav className="text-sm text-gray-300">
             <button
               onClick={() => navigate("/userdashboard/settings/account")}
-              className={`flex items-center gap-3 px-2 py-2 w-full text-left rounded text-white hover:border-r-4 border-[#00FFA3] hover:bg-neutral-700 transition
+              className={`flex items-center gap-3 px-2 py-2 w-full text-left rounded text-white
+                hover:border-r-4 border-[#00FFA3] hover:bg-neutral-700 transition
                 ${isSettingsActive ? "border-r-4 bg-neutral-700" : ""}`}
             >
               <Settings className="size-4" /> Settings
@@ -155,7 +174,8 @@ const Sidebar = () => {
 
             <button
               onClick={() => signOutRedirect()}
-              className={`flex items-center gap-3 px-2 py-2 w-full text-left rounded text-white hover:border-r-4 border-[#00FFA3] hover:bg-neutral-700 transition
+              className={`flex items-center gap-3 px-2 py-2 w-full text-left rounded text-white
+                hover:border-r-4 border-[#00FFA3] hover:bg-neutral-700 transition
                 ${isLoginActive ? "border-r-4 bg-neutral-700" : ""}`}
             >
               <LogOut className="size-4" /> Logout
@@ -165,11 +185,28 @@ const Sidebar = () => {
       </div>
 
       {/* Mobile Bottom Nav */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-neutral-900 text-white flex justify-around items-center py-2 border-t border-neutral-700 z-50">
+      <div
+        className="
+          md:hidden 
+          fixed 
+          bottom-0 
+          left-0 
+          right-0 
+          bg-neutral-900 
+          text-white 
+          flex 
+          justify-around 
+          items-center 
+          py-2 
+          border-t 
+          border-neutral-700 
+          z-50 
+          pb-[env(safe-area-inset-bottom)]
+        "
+      >
         <button
           onClick={() => navigate("/userdashboard/profile")}
-          className={`flex flex-col items-center text-xs ${isProfileActive ? "text-[#00FFA3]" : "text-gray-400"
-            }`}
+          className={`flex flex-col items-center text-xs ${isProfileActive ? "text-[#00FFA3]" : "text-gray-400"}`}
         >
           <UserRound className="size-5" />
           <span>Profile</span>
@@ -177,8 +214,7 @@ const Sidebar = () => {
 
         <button
           onClick={() => navigate("/userdashboard/voicevault")}
-          className={`flex flex-col items-center text-xs ${isVoiceVaultActive ? "text-[#00FFA3]" : "text-gray-400"
-            }`}
+          className={`flex flex-col items-center text-xs ${isVoiceVaultActive ? "text-[#00FFA3]" : "text-gray-400"}`}
         >
           <AudioLines className="size-5" />
           <span>Vault</span>
@@ -186,8 +222,7 @@ const Sidebar = () => {
 
         <button
           onClick={() => navigate("/userdashboard/projectpage/createproject")}
-          className={`flex flex-col items-center text-xs ${isProjectActive ? "text-[#00FFA3]" : "text-gray-400"
-            }`}
+          className={`flex flex-col items-center text-xs ${isProjectActive ? "text-[#00FFA3]" : "text-gray-400"}`}
         >
           <FileStack className="size-5" />
           <span>Project</span>
@@ -195,8 +230,7 @@ const Sidebar = () => {
 
         <button
           onClick={() => navigate("/userdashboard/settings/account")}
-          className={`flex flex-col items-center text-xs ${isSettingsActive ? "text-[#00FFA3]" : "text-gray-400"
-            }`}
+          className={`flex flex-col items-center text-xs ${isSettingsActive ? "text-[#00FFA3]" : "text-gray-400"}`}
         >
           <Settings className="size-5" />
           <span>Settings</span>
@@ -204,8 +238,7 @@ const Sidebar = () => {
 
         <button
           onClick={() => signOutRedirect()}
-          className={`flex flex-col items-center text-xs ${isLoginActive ? "text-[#00FFA3]" : "text-gray-400"
-            }`}
+          className={`flex flex-col items-center text-xs ${isLoginActive ? "text-[#00FFA3]" : "text-gray-400"}`}
         >
           <LogOut className="size-5" />
           <span>Logout</span>

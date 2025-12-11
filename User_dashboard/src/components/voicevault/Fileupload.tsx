@@ -190,7 +190,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ isAgreementSigned }) => {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Check if agreement is not signed
+  // Show popup + block actions if agreement not signed
   const blockIfNotSigned = () => {
     if (!isAgreementSigned) {
       setShowWarning(true);
@@ -245,9 +245,8 @@ const FileUpload: React.FC<FileUploadProps> = ({ isAgreementSigned }) => {
   };
 
   return (
-    <div className="bg-black text-white p-4 sm:p-6 rounded-xl min-h-64 w-full">
-
-      {/* Warning Modal */}
+    <>
+      {/* 🔥 Warning Popup (always visible even when faded) */}
       {showWarning && (
         <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-50">
           <div className="bg-white text-black rounded-xl p-6 w-80 text-center space-y-4">
@@ -264,162 +263,173 @@ const FileUpload: React.FC<FileUploadProps> = ({ isAgreementSigned }) => {
         </div>
       )}
 
+      {/* Modal */}
       {showModal && <Requestupload onClose={() => setShowModal(false)} />}
 
-      {files.length === 0 ? (
-        <div className="flex flex-col md:flex-row items-center justify-center w-full gap-4 sm:gap-6">
+      {/* 🔥 Entire upload section becomes faded + disabled before signing */}
+      <div
+        className={`bg-black text-white p-4 sm:p-6 rounded-xl min-h-64 w-full 
+          ${!isAgreementSigned ? "opacity-50" : ""}
+        `}
+      >
+        {files.length === 0 ? (
+          <div className="flex flex-col md:flex-row items-center justify-center w-full gap-4 sm:gap-6">
 
-          {/* LEFT UPLOAD AREA */}
-          <div
-            className={`flex-1 border-2 border-dashed rounded-xl h-56 sm:h-64 
-              flex flex-col justify-center items-center text-center transition-all duration-300 
-              hover:border-[#00FFA3] p-4 w-full
-              ${isDragging ? "bg-neutral-900" : "border-neutral-700"}`}
-            onDragOver={handleDragOver}
-            onDragLeave={handleDragLeave}
-            onDrop={handleDrop}
-          >
-            <p className="text-white text-base sm:text-lg font-medium px-2">
-              {isDragging ? "Release to upload files" : "Drag your files here"}
-            </p>
-
-            <p className="text-gray-400 text-sm my-2">or</p>
-
-            <label className="cursor-pointer bg-[#00FFA3] px-4 py-2 text-sm rounded-lg text-black font-semibold hover:opacity-90 transition"
-              onClick={(e) => {
-                if (blockIfNotSigned()) {
-                  e.preventDefault();  // Stops file dialog opening
-                  e.stopPropagation(); // Ensures input doesn't trigger
-                }
-              }}
+            {/* LEFT UPLOAD AREA */}
+            <div
+              className={`flex-1 border-2 border-dashed rounded-xl h-56 sm:h-64 
+                flex flex-col justify-center items-center text-center transition-all duration-300 
+                p-4 w-full
+                ${isDragging ? "bg-neutral-900" : "border-neutral-700"}
+    ${isAgreementSigned ? "hover:border-[#00FFA3]" : ""}`}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
             >
-              Browse
-              <input
-                ref={fileInputRef}
-                type="file"
-                multiple
-                className="hidden"
-                onChange={handleFileChange}
-              />
-            </label>
-          </div>
+              <p className="text-white text-base sm:text-lg font-medium px-2">
+                {isDragging ? "Release to upload files" : "Drag your files here"}
+              </p>
 
-          {/* DIVIDER */}
-          <div className="text-gray-500 text-sm font-medium md:block hidden">or</div>
+              <p className="text-gray-400 text-sm my-2">or</p>
 
-          {/* RIGHT REQUEST BOX */}
-          <div className="flex-1 border-2 border-dashed border-neutral-700 rounded-xl h-56 sm:h-64 
-            flex flex-col gap-5 justify-center items-center text-center transition-all duration-300 
-            hover:border-[#00FFA3] p-4 w-full">
-            <p className="text-white text-base sm:text-lg font-medium">Request to Upload</p>
-
-            <button
-              onClick={() => {
-                if (blockIfNotSigned()) return;
-                setShowModal(true);
-              }}
-              className="bg-[#00FFA3] text-black text-sm font-semibold px-4 py-2 rounded-lg hover:opacity-90 transition"
-            >
-              Request Now
-            </button>
-          </div>
-
-        </div>
-
-      ) : (
-        // FILES TABLE
-        <div className="bg-black rounded-xl p-4">
-
-          <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-4 gap-3">
-            <h2 className="text-lg font-semibold">Voices</h2>
-
-            <div className="flex gap-3 sm:gap-5">
-              <button
-                onClick={handleUploadClick}
-                className="bg-[#00FFA3] hover:bg-green-500 text-black px-4 py-1 text-sm rounded-md font-semibold"
+              <label
+                className="cursor-pointer bg-[#00FFA3] px-4 py-2 text-sm rounded-lg text-black font-semibold hover:opacity-90 transition"
+                onClick={(e) => {
+                  if (blockIfNotSigned()) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }
+                }}
               >
-                Upload
-              </button>
+                Browse
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  multiple
+                  className="hidden"
+                  onChange={handleFileChange}
+                />
+              </label>
+            </div>
 
-              <input
-                ref={fileInputRef}
-                type="file"
-                multiple
-                className="hidden"
-                onChange={handleFileChange}
-              />
+            {/* DIVIDER */}
+            <div className="text-gray-500 text-sm font-medium md:block hidden">or</div>
+
+            {/* RIGHT REQUEST BOX */}
+            <div
+              className={`flex-1 border-2 border-dashed border-neutral-700 rounded-xl h-56 sm:h-64 
+                flex flex-col gap-5 justify-center items-center text-center transition-all duration-300 
+                p-4 w-full
+                ${isAgreementSigned ? "hover:border-[#00FFA3]" : ""}`}
+            >
+              <p className="text-white text-base sm:text-lg font-medium">
+                Request to Upload
+              </p>
 
               <button
                 onClick={() => {
                   if (blockIfNotSigned()) return;
                   setShowModal(true);
                 }}
-                className="bg-[#00FFA3] hover:bg-green-500 text-black px-4 py-1 text-sm rounded-md font-semibold"
+                className="bg-[#00FFA3] text-black text-sm font-semibold px-4 py-2 rounded-lg hover:opacity-90 transition"
               >
-                Request
+                Request Now
               </button>
             </div>
           </div>
+        ) : (
+          // FILE TABLE VIEW
+          <div className="bg-black rounded-xl p-4">
+            <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-4 gap-3">
+              <h2 className="text-lg font-semibold">Voices</h2>
 
-          <div className="overflow-x-auto w-full">
-            <table className="w-full text-left text-xs sm:text-sm min-w-[460px]">
-              <thead className="text-neutral-200 border-b border-neutral-700">
-                <tr>
-                  <th className="pb-2">LIST</th>
-                  <th className="pb-2">LENGTH</th>
-                  <th className="pb-2">QUALITY</th>
-                  <th className="pb-2">STATUS</th>
-                </tr>
-              </thead>
+              <div className="flex gap-3 sm:gap-5">
+                <button
+                  onClick={handleUploadClick}
+                  className="bg-[#00FFA3] hover:bg-green-500 text-black px-4 py-1 text-sm rounded-md font-semibold"
+                >
+                  Upload
+                </button>
 
-              <tbody>
-                {files.map((file, index) => (
-                  <tr
-                    key={index}
-                    className="border-b border-neutral-800 hover:bg-neutral-800/40 transition"
-                  >
-                    <td className="py-3 max-w-[140px] truncate">{file.name}</td>
-                    <td>{file.length}</td>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  multiple
+                  className="hidden"
+                  onChange={handleFileChange}
+                />
 
-                    <td
-                      className={
-                        file.quality === "Good"
-                          ? "text-green-400"
-                          : file.quality === "Avg"
-                            ? "text-yellow-400"
-                            : "text-red-400"
-                      }
+                <button
+                  onClick={() => {
+                    if (blockIfNotSigned()) return;
+                    setShowModal(true);
+                  }}
+                  className="bg-[#00FFA3] hover:bg-green-500 text-black px-4 py-1 text-sm rounded-md font-semibold"
+                >
+                  Request
+                </button>
+              </div>
+            </div>
+
+            <div className="overflow-x-auto w-full">
+              <table className="w-full text-left text-xs sm:text-sm min-w-[460px]">
+                <thead className="text-neutral-200 border-b border-neutral-700">
+                  <tr>
+                    <th className="pb-2">LIST</th>
+                    <th className="pb-2">LENGTH</th>
+                    <th className="pb-2">QUALITY</th>
+                    <th className="pb-2">STATUS</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {files.map((file, index) => (
+                    <tr
+                      key={index}
+                      className="border-b border-neutral-800 hover:bg-neutral-800/40 transition"
                     >
-                      {file.quality}
-                    </td>
+                      <td className="py-3 max-w-[140px] truncate">{file.name}</td>
+                      <td>{file.length}</td>
 
-                    <td>
-                      <div className="flex items-center gap-2 w-28 sm:w-32">
-                        <span>{file.status}%</span>
+                      <td
+                        className={
+                          file.quality === "Good"
+                            ? "text-green-400"
+                            : file.quality === "Avg"
+                              ? "text-yellow-400"
+                              : "text-red-400"
+                        }
+                      >
+                        {file.quality}
+                      </td>
 
-                        <div className="w-full bg-neutral-700 h-1.5 rounded-full">
-                          <div
-                            className={`h-1.5 rounded-full ${file.status < 30
+                      <td>
+                        <div className="flex items-center gap-2 w-28 sm:w-32">
+                          <span>{file.status}%</span>
+
+                          <div className="w-full bg-neutral-700 h-1.5 rounded-full">
+                            <div
+                              className={`h-1.5 rounded-full ${file.status < 30
                                 ? "bg-red-500"
                                 : file.status < 70
                                   ? "bg-yellow-400"
                                   : "bg-green-400"
-                              }`}
-                            style={{ width: `${file.status}%` }}
-                          ></div>
+                                }`}
+                              style={{ width: `${file.status}%` }}
+                            ></div>
+                          </div>
                         </div>
-                      </div>
-                    </td>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
-                  </tr>
-                ))}
-              </tbody>
-            </table>
           </div>
-
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 };
 
