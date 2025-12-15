@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link2, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { inviteTeamMember } from "../../services/teamService";
 
 interface Member {
     email: string;
@@ -20,6 +21,19 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
         if (email.trim() && !members.find((m) => m.email === email)) {
             setMembers([...members, { email, role: "Viewer" }]);
             setEmail("");
+        }
+    };
+    const handleSendInvites = async () => {
+        try {
+            for (const member of members) {
+                await inviteTeamMember({
+                    email: member.email,
+                    name: member.email.split("@")[0] // or any name logic
+                });
+            }
+            onClose();
+        } catch (err: any) {
+            console.error(err.message);
         }
     };
 
@@ -146,7 +160,9 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
                         >
                             Cancel
                         </button>
-                        <button className="px-3 py-1 bg-[#00FFA3] text-black font-medium rounded-md hover:bg-[#00e695] transition w-full sm:w-auto">
+                        <button
+                            onClick={handleSendInvites}
+                            className="px-3 py-1 bg-[#00FFA3] text-black font-medium rounded-md hover:bg-[#00e695] transition w-full sm:w-auto">
                             {members.length > 0 ? "Send" : "Done"}
                         </button>
                     </div>

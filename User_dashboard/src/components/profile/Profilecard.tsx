@@ -211,10 +211,10 @@ const Profilecard = () => {
     : user.otherRoles || ["Actor"];
 
   const bio = user.bio || "No bio provided.";
-  const profilePhoto = user.profilePhoto || DP;
+  const profilePhoto = user.profilePhoto;
 
   const languages = ["Malayalam", "Tamil", "Telugu"];
-  const affiliation = user.affiliation || "Pauly Jr. Pictures";
+  const affiliation = user.affiliation;
   return (
     <>
       <div className="flex flex-col gap-3 rounded-2xl bg-neutral-900 w-full h-auto">

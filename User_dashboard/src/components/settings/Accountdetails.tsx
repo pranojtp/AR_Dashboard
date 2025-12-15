@@ -1,8 +1,10 @@
 import Select from "react-select";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { StylesConfig } from "react-select";
 import avatar1 from "../../assets/avatar1.jpg";
 import avatar2 from "../../assets/avatar2.jpg";
+import useCurrentUser from "../../hooks/useCurrentUser";
+import userService from "../../services/userService";
 
 const roleOptions = [
     { value: "Actor", label: "Actor" },
@@ -69,6 +71,44 @@ const customStyles: StylesConfig<any, true> = {
 const Accountdetails = () => {
     const [image, setImage] = useState<string | null>(null);
     const [selectedAvatar, setSelectedAvatar] = useState<number | null>(null);
+    const { user, loading, error } = useCurrentUser();
+    const [profile, setProfile] = useState({
+        displayName: "",
+        legalName: "",
+        primaryRole: "",
+        otherRoles: [] as string[],
+        affiliation: "",
+        location: "",
+        bio: "",
+        facebook: "",
+        instagram: "",
+        x: "",
+        profilePhoto: ""
+    });
+
+    useEffect(() => {
+        if (!user) return;
+
+        setProfile({
+            displayName: user.displayName ?? "",
+            legalName: user.legalName ?? "",
+            primaryRole: user.primaryRole ?? "",
+            otherRoles: user.otherRoles ?? [],
+            affiliation: user.affiliation ?? "",
+            location: user.location ?? "",
+            bio: user.bio ?? "",
+            facebook: user.facebook ?? "",
+            instagram: user.instagram ?? "",
+            x: user.x ?? "",
+            profilePhoto: user.profilePhoto ?? "",
+        });
+
+        if (user.profilePhoto) {
+            setImage(user.profilePhoto);
+        }
+    }, [user]);
+
+
 
     const avatars = [
         avatar1,
@@ -129,6 +169,10 @@ const Accountdetails = () => {
                                     </label>
                                     <input
                                         type="text"
+                                        value={profile.displayName}
+                                        onChange={(e) =>
+                                            setProfile({ ...profile, displayName: e.target.value })
+                                        }
                                         placeholder="Enter your display name"
                                         className="w-full rounded-lg text-xs bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         required
@@ -140,6 +184,10 @@ const Accountdetails = () => {
                                     </label>
                                     <input
                                         type="text"
+                                        value={profile.legalName}
+                                        onChange={(e) =>
+                                            setProfile({ ...profile, legalName: e.target.value })
+                                        }
                                         placeholder="Enter your legal name"
                                         className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                     />
@@ -166,6 +214,10 @@ const Accountdetails = () => {
                                     </label>
                                     <input
                                         type="text"
+                                        value={profile.affiliation}
+                                        onChange={(e) =>
+                                            setProfile({ ...profile, affiliation: e.target.value })
+                                        }
                                         placeholder="Company or organization affiliation"
                                         className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                     />
@@ -176,6 +228,10 @@ const Accountdetails = () => {
                                     </label>
                                     <input
                                         type="text"
+                                        value={profile.primaryRole}
+                                        onChange={(e) =>
+                                            setProfile({ ...profile, primaryRole: e.target.value })
+                                        }
                                         placeholder="e.g. Actor,Producer,Director"
                                         className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                     />
@@ -186,6 +242,10 @@ const Accountdetails = () => {
                                     </label>
                                     <input
                                         type="text"
+                                        value={profile.location}
+                                        onChange={(e) =>
+                                            setProfile({ ...profile, location: e.target.value })
+                                        }
                                         placeholder="City, State/Country"
                                         className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                     />
@@ -197,6 +257,10 @@ const Accountdetails = () => {
                         <div className="mt-3">
                             <label className="block mb-2 text-sm font-medium">Bio</label>
                             <textarea
+                                value={profile.bio}
+                                onChange={(e) =>
+                                    setProfile({ ...profile, bio: e.target.value })
+                                }
                                 placeholder="Maximum 200 characters"
                                 maxLength={200}
                                 className="w-full h-24 text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
@@ -216,6 +280,10 @@ const Accountdetails = () => {
                                         </label>
                                         <input
                                             type="text"
+                                            value={profile.facebook}
+                                            onChange={(e) =>
+                                                setProfile({ ...profile, facebook: e.target.value })
+                                            }
                                             placeholder="https://facebook.com/username"
                                             className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
@@ -226,6 +294,10 @@ const Accountdetails = () => {
                                         </label>
                                         <input
                                             type="text"
+                                            value={profile.instagram}
+                                            onChange={(e) =>
+                                                setProfile({ ...profile, instagram: e.target.value })
+                                            }
                                             placeholder="https://instagram.com/username"
                                             className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
@@ -238,6 +310,10 @@ const Accountdetails = () => {
                                         </label>
                                         <input
                                             type="text"
+                                            value={profile.x}
+                                            onChange={(e) =>
+                                                setProfile({ ...profile, x: e.target.value })
+                                            }
                                             placeholder="https://x.com/username"
                                             className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
@@ -254,7 +330,7 @@ const Accountdetails = () => {
                                 <div className="h-28 w-28 rounded-full bg-neutral-800 border border-neutral-500 overflow-hidden flex items-center justify-center">
                                     {image ? (
                                         <img
-                                            src={image}
+                                            src={profile.profilePhoto}
                                             alt="Profile"
                                             className="w-full h-full object-cover"
                                         />
