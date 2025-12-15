@@ -12,8 +12,6 @@ const Projectdetails = () => {
     const [selectedValue, setSelectedValue] = useState<string>("allroles");
     const [sortBy, setSortBy] = useState<string>("");
     const [query, setQuery] = useState<string>("");
-    // const [members, setMembers] = useState<Member[]>([]);
-    // const [formData, setFormData] = useState({ name: "", role: "" });
 
     const options: Option[] = [
         { label: "All Roles", value: "allroles" },
@@ -41,67 +39,62 @@ const Projectdetails = () => {
     return (
         <>
             <div className="h-auto bg-neutral-900 p-3">
-                <div className="flex flex-col gap-2">                    
+                <div className="flex flex-col gap-2 w-full">
                     <h1 className="text-m font-medium mb-2">Select the type of Project</h1>
-                    <div className="flex flex-row gap-10">
-                        <div>
+
+                    {/* Top two inputs */}
+                    <div className="flex flex-col sm:flex-row gap-5 sm:gap-10 w-full">
+                        <div className="w-full sm:w-auto">
                             <label className="block mb-2 text-xs font-medium">Project Name</label>
                             <input
                                 type="text"
                                 name="displayName"
-                                // value={formData.displayName}
-                                // onChange={handleChange}
                                 placeholder="Enter your project name"
-                                className="w-64 rounded-lg text-xs bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                className="w-full sm:w-64 rounded-lg text-xs bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                 required
                             />
                         </div>
-                        <div>
+                        <div className="w-full sm:w-auto">
                             <label className="block mb-2 text-xs font-medium">Type of project</label>
                             <input
                                 type="text"
                                 name="legalName"
-                                // value={formData.legalName}
-                                // onChange={handleChange}
                                 placeholder="Company or organization affiliation"
-                                className="w-64 text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                className="w-full sm:w-64 text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                             />
                         </div>
                     </div>
+
                     <h1 className="text-m font-medium mt-5">Talents Involved</h1>
-                    {/* Right column */}
-                    <div className="flex flex-row gap-10">
-                        <div>
+
+                    <div className="flex flex-col sm:flex-row gap-5 sm:gap-10 w-full">
+                        <div className="w-full sm:w-auto">
                             <label className="block mb-2 text-xs font-medium">Source Voice 1</label>
                             <input
                                 type="text"
                                 name="affiliation"
-                                // value={formData.affiliation}
-                                // onChange={handleChange}
-                                // placeholder="Enter your legal name"
-                                className="w-64 text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                className="w-full sm:w-64 text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                             />
                         </div>
-                        <div>
+                        <div className="w-full sm:w-auto">
                             <label className="block mb-2 text-xs font-medium">Source Voice 2</label>
                             <input
                                 type="text"
                                 name="industry"
-                                // value={formData.industry}
-                                // onChange={handleChange}
-                                // placeholder="e.g. Mollywood, Hollywood"
-                                className="w-64 text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                className="w-full sm:w-64 text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                             />
                         </div>
-                        <div className="mt-7">
+                        <div className="sm:mt-7">
                             <button className="text-xs rounded-lg border-1 px-3 py-1 border-[#00FFA3] text-[#00FFA3]">Add more+</button>
                         </div>
                     </div>
-                    <h1 className="text-m font-medium mt-6">User Involved</h1>
-                    <div className="bg-neutral-950 rounded-2xl p-4 w-fit border border-neutral-700 text-white relative">
-                        {/* Header */}
-                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4 md:gap-5">                            
-                            <div className="flex flex-wrap items-center gap-3 sm:gap-4 w-full md:w-auto">
+
+                    <h1 className="text-m font-medium mt-5">User Involved</h1>
+
+                    <div className="bg-neutral-950 rounded-2xl p-4 w-full sm:w-fit border border-neutral-700 text-white relative">
+
+                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4 md:gap-5 w-full">
+                            <div className="flex flex-col sm:flex-row flex-wrap items-center gap-3 sm:gap-4 w-full">
                                 <input
                                     type="text"
                                     value={query}
@@ -113,7 +106,7 @@ const Projectdetails = () => {
                                 <select
                                     value={selectedValue}
                                     onChange={handleChange}
-                                    className="w-fit min-w-[100px] p-1 rounded-lg bg-amber-100 text-black text-xs"
+                                    className="w-full sm:w-fit min-w-[100px] p-1 rounded-lg bg-amber-100 text-black text-xs"
                                 >
                                     {options.map((option) => (
                                         <option key={option.value} value={option.value}>
@@ -125,7 +118,7 @@ const Projectdetails = () => {
                                 <select
                                     value={sortBy}
                                     onChange={sortChange}
-                                    className="w-fit min-w-[100px] p-1 rounded-lg bg-amber-100 text-black text-xs"
+                                    className="w-full sm:w-fit min-w-[100px] p-1 rounded-lg bg-amber-100 text-black text-xs"
                                 >
                                     {sortoptions.map((sortOption) => (
                                         <option key={sortOption.value} value={sortOption.value}>
@@ -135,7 +128,6 @@ const Projectdetails = () => {
                                 </select>
 
                                 <button
-                                    // onClick={}
                                     className="px-4 py-1 border-1 border-[#00FFA3] text-[#00FFA3] rounded-lg hover:bg-[#00e695] transition w-full sm:w-auto text-xs"
                                 >
                                     + Add User
@@ -146,7 +138,7 @@ const Projectdetails = () => {
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default Projectdetails
+export default Projectdetails;

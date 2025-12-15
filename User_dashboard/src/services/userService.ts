@@ -55,7 +55,7 @@ const userService = {
 
   getUsers: () => api.get("/users"),
 
-  getUserProfile: () => api.get("/users/6939496e8ef65137212ac698"),
+  getUserProfile: () => api.get("/users/jwt"),
 
   // getUserProfile: async () => {
   //   const id = await getLoggedInUserId();

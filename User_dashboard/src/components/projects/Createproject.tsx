@@ -39,36 +39,35 @@ interface FeatureCardProps {
     customGradientClass?: string;
 }
 
-// 1. FeatureCard Component
+// FeatureCard Component
 const FeatureCard: React.FC<FeatureCardProps> = ({ title, gradientFrom, gradientTo, customGradientClass }) => {
     return (
         <div className="flex flex-col items-center group cursor-pointer">
-            {/* The main box with the gradient and icon */}
+            {/* Gradient box */}
             <div
                 className={`
-          w-32 h-32 md:w-40 md:h-40
-          rounded-xl shadow-lg transition-all duration-300 ease-in-out
-          flex items-center justify-center p-2
-          ${customGradientClass || `bg-gradient-to-br ${gradientFrom} ${gradientTo}`}
-          group-hover:scale-[1.02] group-hover:shadow-2xl
-        `}
+                    w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40
+                    rounded-xl shadow-lg transition-all duration-300 ease-in-out
+                    flex items-center justify-center p-2
+                    ${customGradientClass || `bg-gradient-to-br ${gradientFrom} ${gradientTo}`}
+                    group-hover:scale-[1.02] group-hover:shadow-2xl
+                `}
             >
-                {/* The plus icon (represented here by a simple white cross) */}
-                <div className="w-15 h-15 relative">
-                    {/* Horizontal line */}
+                {/* Plus icon */}
+                <div className="w-12 h-12 relative">
                     <div className="absolute top-1/2 left-0 w-full h-px bg-white/70 transform -translate-y-1/2"></div>
-                    {/* Vertical line */}
                     <div className="absolute left-1/2 top-0 h-full w-px bg-white/70 transform -translate-x-1/2"></div>
                 </div>
             </div>
 
-            {/* The title text */}
+            {/* Title */}
             <p className="mt-4 text-white text-xs md:text-xs font-medium select-none">
                 {title}
             </p>
         </div>
     );
 };
+
 const Createproject = () => {
     const features: FeatureCardProps[] = [
         {
@@ -94,12 +93,23 @@ const Createproject = () => {
             customGradientClass: 'bg-gradient-to-br from-blue-900 to-green-600/70'
         },
     ];
+
     return (
         <>
             <div>
-                <h3 className="text-sm text-white font-medium mb-4">Select the type of Project</h3>
+                <h3 className="text-sm text-white font-medium mb-4">
+                    Select the type of Project
+                </h3>
             </div>
-            <div className="flex flex-row gap-10">
+
+            {/* Responsive layout */}
+            <div
+                className="
+                    flex flex-wrap 
+                    gap-6 sm:gap-8 md:gap-10
+                    justify-center md:justify-start
+                "
+            >
                 {features.map((feature, index) => (
                     <FeatureCard
                         key={index}
@@ -111,7 +121,7 @@ const Createproject = () => {
                 ))}
             </div>
         </>
-    )
-}
+    );
+};
 
-export default Createproject
+export default Createproject;
