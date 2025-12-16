@@ -296,7 +296,7 @@ const Accountdetails = () => {
                                     setProfile({ ...profile, bio: e.target.value })
                                 }
                                 placeholder="Maximum 200 characters"
-                                maxLength={200}
+                                maxLength={300}
                                 className="w-full h-24 text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                             />
                         </div>

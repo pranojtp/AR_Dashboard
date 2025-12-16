@@ -4,6 +4,8 @@ import type { StylesConfig } from "react-select";
 import { useNavigate } from "react-router-dom";
 import avatar1 from "../../assets/avatar1.jpg";
 import avatar2 from "../../assets/avatar2.jpg";
+import userService from "../../services/userService";
+import useCurrentUser from "../../hooks/useCurrentUser";
 
 const roleOptions = [
     { value: "Actor", label: "Actor" },
@@ -111,19 +113,36 @@ const Personaldetails = () => {
     };
 
     // --- Handle Save with Validation ---
-    const handleSave = () => {
+    const { user } = useCurrentUser();
+
+    const handleSave = async () => {
+        if (!user) {
+            console.error("User not loaded");
+            return;
+        }
+
         const newErrors = {
             displayName: formData.displayName ? "" : "Display Name is required",
             legalName: formData.legalName ? "" : "Legal Name is required",
             roles: formData.roles.length > 0 ? "" : "Please select at least one role",
         };
+
         setErrors(newErrors);
 
-        const hasError = Object.values(newErrors).some((err) => err !== "");
-        if (!hasError) {
-            navigate("/userdashboard/profile");
-        }
+        const hasError = Object.values(newErrors).some(err => err !== "");
+        if (hasError) return;
+
+        const payload = {
+            ...formData,
+            newUser: false,
+        };
+
+        await userService.updateUser(user.id, payload);
+
+        navigate("/userdashboard/profile");
     };
+
+
 
     // --- Image Upload Handler ---
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
