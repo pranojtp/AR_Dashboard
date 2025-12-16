@@ -70,7 +70,7 @@ const userService = {
   updateUser: (id: string, data: any) => api.put(`/users/${id}`, data),
 
   updateUserProfile: (data: any) =>
-  api.put("/users", data), // or /users/jwt
+  api.put("/users/jwt", data), // or /users/jwt
 
 
   deleteUser: (id: string) => api.delete(`/users/${id}`),

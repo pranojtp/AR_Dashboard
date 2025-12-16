@@ -19,11 +19,23 @@ import Createproject from "./components/projects/Createproject"
 import Projectdetails from "./components/projects/Projectdetails"
 import AuthCallback from "./pages/AuthCallBack"
 import ProtectedRoute from "./components/ProtectedRoute"
+import { Toaster } from "react-hot-toast";
 
 
 function App() {
   return (
     <>
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 3000,
+          style: {
+            background: "#111",
+            color: "#fff",
+            border: "1px solid #333",
+          },
+        }}
+      />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />

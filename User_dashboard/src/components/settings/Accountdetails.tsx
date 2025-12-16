@@ -72,6 +72,15 @@ const Accountdetails = () => {
     const [image, setImage] = useState<string | null>(null);
     const [selectedAvatar, setSelectedAvatar] = useState<number | null>(null);
     const { user, loading, error } = useCurrentUser();
+
+    if (loading) {
+        return <div>Loading account details...</div>;
+    }
+    if (error) {
+        return <div className="text-red-500">Failed to load account details</div>;
+    }
+    if (!user) return null;
+
     const [profile, setProfile] = useState({
         displayName: "",
         legalName: "",
@@ -103,12 +112,8 @@ const Accountdetails = () => {
             profilePhoto: user.profilePhoto ?? "",
         });
 
-        if (user.profilePhoto) {
-            setImage(user.profilePhoto);
-        }
+        setImage(user.profilePhoto ?? null);
     }, [user]);
-
-
 
     const avatars = [
         avatar1,
@@ -146,6 +151,24 @@ const Accountdetails = () => {
         setSelectedAvatar(index);
         setImage(avatars[index]);
     };
+    const handleSave = async () => {
+        if (!user?.id) return;
+
+        try {
+            const payload = {
+                ...profile,
+                profilePhoto: image,
+            };
+
+            await userService.updateUser(user.id, payload);
+
+            alert("Profile updated successfully");
+        } catch (err) {
+            console.error(err);
+            alert("Failed to update profile ");
+        }
+    };
+
 
     return (
         <div className="h-auto bg-neutral-900 p-2 md:p-4">
@@ -201,8 +224,17 @@ const Accountdetails = () => {
                                         placeholder="Select roles..."
                                         styles={customStyles}
                                         className="text-xs"
-                                        required
+                                        value={roleOptions.filter(opt =>
+                                            profile.otherRoles.includes(opt.value)
+                                        )}
+                                        onChange={(selected) =>
+                                            setProfile({
+                                                ...profile,
+                                                otherRoles: selected.map((opt) => opt.value),
+                                            })
+                                        }
                                     />
+
                                 </div>
                             </div>
 
@@ -330,10 +362,11 @@ const Accountdetails = () => {
                                 <div className="h-28 w-28 rounded-full bg-neutral-800 border border-neutral-500 overflow-hidden flex items-center justify-center">
                                     {image ? (
                                         <img
-                                            src={profile.profilePhoto}
+                                            src={image}
                                             alt="Profile"
                                             className="w-full h-full object-cover"
                                         />
+
                                     ) : (
                                         <div className="text-neutral-500 text-xs text-center">
                                             No Image
@@ -401,7 +434,9 @@ const Accountdetails = () => {
                                     <button className="px-4 py-2 bg-neutral-800 text-sm text-[#00e695] font-medium border border-[#00e695] rounded-lg hover:bg-[#00e695] hover:text-black transition">
                                         Cancel
                                     </button>
-                                    <button className="px-4 py-2 bg-[#00FFA3] text-sm text-black font-medium rounded-lg hover:bg-[#00e695] transition">
+                                    <button
+                                        onClick={handleSave}
+                                        className="px-4 py-2 bg-[#00FFA3] text-sm text-black font-medium rounded-lg hover:bg-[#00e695] transition">
                                         Save
                                     </button>
                                 </div>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link2, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { inviteTeamMember } from "../../services/teamService";
+import toast from "react-hot-toast";
 
 interface Member {
     email: string;
@@ -24,18 +25,40 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
         }
     };
     const handleSendInvites = async () => {
+        if (members.length === 0) {
+            toast.error("No members to invite");
+            return;
+        }
+
+        const toastId = toast.loading("Sending invites...");
+
         try {
             for (const member of members) {
-                await inviteTeamMember({
+                const res = await inviteTeamMember({
                     email: member.email,
-                    name: member.email.split("@")[0] // or any name logic
+                    name: member.email.split("@")[0]
                 });
+
+                if (res.error) {
+                    toast.error(res.message || `Failed to invite ${member.email}`, {
+                        id: toastId,
+                    });
+                    return;
+                }
             }
+
+            toast.success("Invitations sent successfully", {
+                id: toastId,
+            });
+
             onClose();
         } catch (err: any) {
-            console.error(err.message);
+            toast.error(err.message || "Something went wrong", {
+                id: toastId,
+            });
         }
     };
+
 
     const handleRemove = (email: string) => {
         setMembers(members.filter((m) => m.email !== email));
