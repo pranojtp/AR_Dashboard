@@ -73,13 +73,13 @@ const Accountdetails = () => {
     const [selectedAvatar, setSelectedAvatar] = useState<number | null>(null);
     const { user, loading, error } = useCurrentUser();
 
-    if (loading) {
-        return <div>Loading account details...</div>;
-    }
-    if (error) {
-        return <div className="text-red-500">Failed to load account details</div>;
-    }
-    if (!user) return null;
+    // if (loading) {
+    //     return <div>Loading account details...</div>;
+    // }
+    // if (error) {
+    //     return <div className="text-red-500">Failed to load account details</div>;
+    // }
+    // if (!user) return null;
 
     const [profile, setProfile] = useState({
         displayName: "",
@@ -156,9 +156,11 @@ const Accountdetails = () => {
 
         try {
             const payload = {
+                ...user,
                 ...profile,
                 profilePhoto: image,
             };
+
 
             await userService.updateUser(user.id, payload);
 
