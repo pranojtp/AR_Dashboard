@@ -73,16 +73,25 @@ const Personaldetails = () => {
     const navigate = useNavigate();
 
     // --- Form State ---
-    const [formData, setFormData] = useState({
+    const [profile, setProfile] = useState({
         displayName: "",
         legalName: "",
-        roles: [],
+        primaryRole: "",
+        otherRoles: [] as string[],
+        affiliation: "",
+        location: "",
+        bio: "",
+        facebook: "",
+        instagram: "",
+        x: "",
+        profilePhoto: ""
     });
+
 
     const [errors, setErrors] = useState({
         displayName: "",
         legalName: "",
-        roles: "",
+        primaryRole: "",
     });
 
     // --- Image Upload ---
@@ -102,15 +111,24 @@ const Personaldetails = () => {
     ];
 
     // --- Handle Text Inputs ---
+    // Handle input change for text fields
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
+        setProfile((prevProfile) => ({
+            ...prevProfile,
+            [name]: value
+        }));
     };
 
-    // --- Handle Role Select ---
+    // Handle select change for roles
     const handleRoleChange = (selected: any) => {
-        setFormData((prev) => ({ ...prev, roles: selected }));
+        const selectedRoles = selected.map((role: any) => role.value);
+        setProfile((prevProfile) => ({
+            ...prevProfile,
+            otherRoles: selectedRoles
+        }));
     };
+
 
     // --- Handle Save with Validation ---
     const { user } = useCurrentUser();
@@ -122,9 +140,9 @@ const Personaldetails = () => {
         }
 
         const newErrors = {
-            displayName: formData.displayName ? "" : "Display Name is required",
-            legalName: formData.legalName ? "" : "Legal Name is required",
-            roles: formData.roles.length > 0 ? "" : "Please select at least one role",
+            displayName: profile.displayName ? "" : "Display Name is required",
+            legalName: profile.legalName ? "" : "Legal Name is required",
+            primaryRole: profile.primaryRole.length > 0 ? "" : "Please select at least one role",
         };
 
         setErrors(newErrors);
@@ -133,27 +151,26 @@ const Personaldetails = () => {
         if (hasError) return;
 
         const payload = {
-            ...formData,
+            ...user,
+            ...profile,
             newUser: false,
+            profilePhoto: image,
         };
-
         await userService.updateUser(user.id, payload);
 
+        // Redirect to user dashboard profile after saving personal details
         navigate("/userdashboard/profile");
     };
-
 
 
     // --- Image Upload Handler ---
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
-
         if (file.size > 5 * 1024 * 1024) {
             alert("Max size is 5 MB!");
             return;
         }
-
         const reader = new FileReader();
         reader.onloadend = () => {
             setImage(reader.result as string);
@@ -169,8 +186,13 @@ const Personaldetails = () => {
 
     const handleAvatarSelect = (index: number) => {
         setSelectedAvatar(index);
-        setImage(avatars[index]);
+        setImage(null); // Clear uploaded image when selecting avatar
+        setProfile((prevProfile) => ({
+            ...prevProfile,
+            profilePhoto: avatars[index],
+        }));
     };
+
 
     return (
         <>
@@ -191,7 +213,7 @@ const Personaldetails = () => {
                                         <input
                                             type="text"
                                             name="displayName"
-                                            value={formData.displayName}
+                                            value={profile.displayName}
                                             onChange={handleChange}
                                             placeholder="Enter your display name"
                                             className="w-full rounded-lg text-xs bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
@@ -208,7 +230,7 @@ const Personaldetails = () => {
                                         <input
                                             type="text"
                                             name="legalName"
-                                            value={formData.legalName}
+                                            value={profile.legalName}
                                             onChange={handleChange}
                                             placeholder="Enter your legal name"
                                             className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
@@ -220,21 +242,17 @@ const Personaldetails = () => {
 
                                     {/* Role */}
                                     <div>
-                                        <label className="block mb-2 text-sm font-medium">Role *</label>
+                                        <label className="block mb-2 text-sm font-medium">Additional Roles</label>
                                         <Select
                                             isMulti
                                             name="role"
                                             options={roleOptions}
-                                            value={formData.roles}
                                             onChange={handleRoleChange}
                                             placeholder="Select roles..."
                                             styles={customStyles}
                                             className="text-xs"
                                             required
                                         />
-                                        {errors.roles && (
-                                            <p className="text-red-500 text-xs mt-1">{errors.roles}</p>
-                                        )}
                                     </div>
                                 </div>
 
@@ -245,24 +263,34 @@ const Personaldetails = () => {
                                         <input
                                             type="text"
                                             name="affiliation"
+                                            value={profile.affiliation}
+                                            onChange={handleChange}
                                             placeholder="Company or organization affiliation"
                                             className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
                                     </div>
                                     <div>
-                                        <label className="block mb-2 text-sm font-medium">Industry</label>
+                                        <label className="block mb-2 text-sm font-medium">Primary Role *</label>
                                         <input
                                             type="text"
-                                            name="industry"
-                                            placeholder="e.g. Mollywood, Hollywood"
+                                            name="primaryRole"
+                                            value={profile.primaryRole}
+                                            onChange={handleChange}
+                                            placeholder="e.g. Actor,Director"
                                             className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                            required
                                         />
+                                        {errors.primaryRole && (
+                                            <p className="text-red-500 text-xs mt-1">{errors.primaryRole}</p>
+                                        )}
                                     </div>
                                     <div>
                                         <label className="block mb-2 text-sm font-medium">Location</label>
                                         <input
                                             type="text"
                                             name="location"
+                                            value={profile.location}
+                                            onChange={handleChange}
                                             placeholder="City, State/Country"
                                             className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
@@ -273,10 +301,12 @@ const Personaldetails = () => {
                             {/* Bio */}
                             <div className="mt-6">
                                 <label className="block mb-2 text-sm font-medium">Bio</label>
-                                <textarea
+                                <input
                                     name="bio"
                                     placeholder="Maximum 200 characters"
-                                    maxLength={200}
+                                    value={profile.bio}
+                                    onChange={handleChange}
+                                    maxLength={300}
                                     className="w-full h-20 text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                 />
                             </div><br />
@@ -293,6 +323,8 @@ const Personaldetails = () => {
                                         <input
                                             type="text"
                                             name="facebook"
+                                            value={profile.facebook}
+                                            onChange={handleChange}
                                             placeholder="https://facebook.com/username"
                                             className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
@@ -302,6 +334,8 @@ const Personaldetails = () => {
                                         <input
                                             type="text"
                                             name="instagram"
+                                            value={profile.instagram}
+                                            onChange={handleChange}
                                             placeholder="https://instagram.com/username"
                                             className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />
@@ -314,6 +348,8 @@ const Personaldetails = () => {
                                         </label>
                                         <input
                                             type="text"
+                                            value={profile.x}
+                                            onChange={handleChange}
                                             placeholder="https://x.com/username"
                                             className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                         />

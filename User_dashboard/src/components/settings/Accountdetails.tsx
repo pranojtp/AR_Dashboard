@@ -71,7 +71,7 @@ const customStyles: StylesConfig<any, true> = {
 const Accountdetails = () => {
     const [image, setImage] = useState<string | null>(null);
     const [selectedAvatar, setSelectedAvatar] = useState<number | null>(null);
-    const { user, loading, error } = useCurrentUser();
+    const { user} = useCurrentUser();
 
     // if (loading) {
     //     return <div>Loading account details...</div>;
