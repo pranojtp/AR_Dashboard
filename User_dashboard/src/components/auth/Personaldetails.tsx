@@ -100,14 +100,7 @@ const Personaldetails = () => {
 
     const avatars = [
         avatar1,
-        avatar2,
-        avatar1,
-        avatar2,
-        avatar1,
-        avatar2,
-        avatar1,
-        avatar2,
-        avatar1,
+        avatar2,        
     ];
 
     // --- Handle Text Inputs ---
@@ -186,25 +179,20 @@ const Personaldetails = () => {
 
     const handleAvatarSelect = (index: number) => {
         setSelectedAvatar(index);
-        setImage(null); // Clear uploaded image when selecting avatar
-        setProfile((prevProfile) => ({
-            ...prevProfile,
-            profilePhoto: avatars[index],
-        }));
+        setImage(avatars[index]);
     };
-
 
     return (
         <>
-            <div className="h-full pl-80 pr-20 pt-5 pb-5 bg-neutral-800">
+            <div className="h-full pl-4 sm:pl-10 md:pl-20 lg:pl-20 pr-4 sm:pr-8 md:pr-20 lg:pr-20 pt-5 pb-5 bg-neutral-800">
                 <div className="bg-black flex-1 text-white h-fit w-fit border-1 border-neutral-700 rounded-xl p-3">
-                    <div className="flex justify-between items-center mb-8">
+                    <div className="flex justify-between items-center mb-5">
                         <h1 className="text-xl font-semibold">Complete Your Profile</h1>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-20">
-                        <div className="flex flex-col col-span-2 gap-2 ">
-                            <div className="grid grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-10">
+                        <div className="flex flex-col col-span-1 sm:col-span-2 lg:col-span-2 gap-2">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                 {/* Left column */}
                                 <div className="flex flex-col gap-6">
                                     {/* Display Name */}
@@ -276,7 +264,7 @@ const Personaldetails = () => {
                                             name="primaryRole"
                                             value={profile.primaryRole}
                                             onChange={handleChange}
-                                            placeholder="e.g. Actor,Director"
+                                            placeholder="e.g. Actor, Director"
                                             className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                             required
                                         />
@@ -299,7 +287,7 @@ const Personaldetails = () => {
                             </div>
 
                             {/* Bio */}
-                            <div className="mt-6">
+                            <div className="mt-2">
                                 <label className="block mb-2 text-sm font-medium">Bio</label>
                                 <input
                                     name="bio"
@@ -312,7 +300,7 @@ const Personaldetails = () => {
                             </div><br />
 
                             {/* Social Media */}
-                            <div className="flex justify-between items-center mb-8">
+                            <div className="flex justify-between items-center mb-2">
                                 <h1 className="text-m font-semibold">Social Media Links</h1>
                             </div>
 
@@ -343,9 +331,7 @@ const Personaldetails = () => {
                                 </div>
                                 <div className="flex flex-col gap-6">
                                     <div>
-                                        <label className="block mb-2 text-sm font-medium">
-                                            X
-                                        </label>
+                                        <label className="block mb-2 text-sm font-medium">X</label>
                                         <input
                                             type="text"
                                             value={profile.x}
@@ -362,7 +348,7 @@ const Personaldetails = () => {
                         <div className="flex flex-col col-span-1 gap-6">
                             <div className="p-6 w-full max-w-sm">
                                 <div className="flex flex-col gap-4">
-                                    <div className="h-25 w-25 rounded-full bg-neutral-800 border border-neutral-500 overflow-hidden flex items-center justify-center">
+                                    <div className="h-22 w-22 rounded-full bg-neutral-800 border border-neutral-500 overflow-hidden flex items-center justify-center">
                                         {image ? (
                                             <img src={image} alt="Profile" className="w-full h-full object-cover" />
                                         ) : (
@@ -370,7 +356,7 @@ const Personaldetails = () => {
                                         )}
                                     </div>
 
-                                    <label className="w-30 py-2 bg-neutral-800 text-xs text-[#59fbf0] font-medium rounded-lg border border-[#59fbf0] text-center cursor-pointer transition hover:bg-[#59fbf0] hover:text-black">
+                                    <label className="w-fit px-4 py-2 bg-neutral-800 text-xs text-[#59fbf0] font-medium rounded-lg border border-[#59fbf0] text-center cursor-pointer transition hover:bg-[#59fbf0] hover:text-black">
                                         Upload Image
                                         <input
                                             type="file"
@@ -380,7 +366,7 @@ const Personaldetails = () => {
                                         />
                                     </label>
 
-                                    <p className="text-xs text-neutral-400 mb-6">
+                                    <p className="text-xs text-neutral-400 mb-5">
                                         Max size 5 MB JPG or PNG Format
                                     </p>
                                 </div>
@@ -407,13 +393,13 @@ const Personaldetails = () => {
                                     <h2 className="block mb-2 text-white text-m font-medium">
                                         Or Choose an Avatar
                                     </h2>
-                                    <div className="p-4">
-                                        <div className="grid grid-cols-3 gap-4 max-w-xs mx-auto">
+                                    <div className="p-2">
+                                        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 gap-2 max-w-xs mx-auto">
                                             {avatars.map((avatar, index) => (
                                                 <div
                                                     key={index}
                                                     onClick={() => handleAvatarSelect(index)}
-                                                    className={`aspect-square flex items-center justify-center rounded-full p-1 cursor-pointer transition ${selectedAvatar === index
+                                                    className={`h-22 w-22 flex items-center justify-center rounded-full p-1 cursor-pointer transition ${selectedAvatar === index
                                                         ? "ring-2 ring-neutral-500"
                                                         : "hover:ring-1 hover:ring-neutral-500"
                                                         }`}
@@ -427,13 +413,13 @@ const Personaldetails = () => {
                                             ))}
                                         </div>
 
-                                        <div className="flex gap-5 mt-8">
-                                            <button className="px-4 py-2 bg-neutral-800 text-sm text-[#00e695] font-medium w-35 border border-[#00e695] rounded-lg hover:bg-[#00e695] hover:text-black transition">
+                                        <div className="flex gap-5 mt-5">
+                                            {/* <button className="px-4 py-2 bg-neutral-800 text-sm text-[#00e695] font-medium w-35 border border-[#00e695] rounded-lg hover:bg-[#00e695] hover:text-black transition">
                                                 Cancel
-                                            </button>
+                                            </button> */}
                                             <button
                                                 onClick={handleSave}
-                                                className="px-4 py-2 bg-[#00FFA3] text-sm text-black font-medium w-35 rounded-lg hover:bg-[#00e695] transition"
+                                                className="px-4 py-2 bg-[#00FFA3] text-sm text-black font-medium w-full rounded-lg hover:bg-[#00e695] transition"
                                             >
                                                 Save
                                             </button>
