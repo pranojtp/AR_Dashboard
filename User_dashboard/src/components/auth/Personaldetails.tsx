@@ -334,6 +334,7 @@ const Personaldetails = () => {
                                         <label className="block mb-2 text-sm font-medium">X</label>
                                         <input
                                             type="text"
+                                            name="x"
                                             value={profile.x}
                                             onChange={handleChange}
                                             placeholder="https://x.com/username"
