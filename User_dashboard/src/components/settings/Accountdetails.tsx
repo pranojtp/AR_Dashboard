@@ -5,6 +5,7 @@ import avatar1 from "../../assets/avatar1.jpg";
 import avatar2 from "../../assets/avatar2.jpg";
 import useCurrentUser from "../../hooks/useCurrentUser";
 import userService from "../../services/userService";
+import { useNavigate } from "react-router-dom";
 
 const roleOptions = [
     { value: "Actor", label: "Actor" },
@@ -71,7 +72,8 @@ const customStyles: StylesConfig<any, true> = {
 const Accountdetails = () => {
     const [image, setImage] = useState<string | null>(null);
     const [selectedAvatar, setSelectedAvatar] = useState<number | null>(null);
-    const { user} = useCurrentUser();
+    const { user } = useCurrentUser();
+    const navigate = useNavigate()
 
     // if (loading) {
     //     return <div>Loading account details...</div>;
@@ -154,23 +156,38 @@ const Accountdetails = () => {
     const handleSave = async () => {
         if (!user?.id) return;
 
-        try {
-            const payload = {
-                ...user,
-                ...profile,
-                profilePhoto: image,
-            };
+        // Show confirmation dialog
+        const isConfirmed = window.confirm("Confirm to make these changes?");
 
+        if (isConfirmed) {
+            try {
+                const payload = {
+                    ...user,
+                    ...profile,
+                    profilePhoto: image,
+                };
 
-            await userService.updateUser(user.id, payload);
+                await userService.updateUser(user.id, payload);
 
-            alert("Profile updated successfully");
-        } catch (err) {
-            console.error(err);
-            alert("Failed to update profile ");
+                alert("Profile updated successfully");                
+            } catch (err) {
+                console.error(err);
+                alert("Failed to update profile");
+            }
+        } else {
+            alert("Profile update canceled");
         }
     };
 
+    const handleCancel = () => {
+        const isConfirmed = window.confirm("Confirm to discard the changes?");
+
+        if (isConfirmed) {
+            navigate("/userdashboard/profile"); // Navigate to the profile page
+        } else {
+            // Stay on the current page, no action required
+        }
+    };
 
     return (
         <div className="h-auto bg-neutral-900 p-2 md:p-4">
@@ -433,7 +450,9 @@ const Accountdetails = () => {
                                 </div>
 
                                 <div className="flex justify-center lg:justify-start gap-4 mt-6">
-                                    <button className="px-4 py-2 bg-neutral-800 text-sm text-[#00e695] font-medium border border-[#00e695] rounded-lg hover:bg-[#00e695] hover:text-black transition">
+                                    <button
+                                        onClick={handleCancel}
+                                        className="px-4 py-2 bg-neutral-800 text-sm text-[#00e695] font-medium border border-[#00e695] rounded-lg hover:bg-[#00e695] hover:text-black transition">
                                         Cancel
                                     </button>
                                     <button

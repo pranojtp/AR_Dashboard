@@ -190,7 +190,7 @@
 // export default Profilecard
 
 
-import DP from "../../assets/nivin4.webp"
+
 
 import { Facebook, Instagram } from "lucide-react"
 import { FaXTwitter } from "react-icons/fa6";
@@ -248,8 +248,7 @@ const Profilecard = () => {
           </div>
           <div className="flex flex-col sm:flex-row gap-3 items-center sm:items-start text-center sm:text-left space-y-3 sm:space-y-0 sm:space-x-4">
             <img
-              src={profilePhoto}
-              onError={(e) => (e.currentTarget.src = DP)}
+              src={profilePhoto}              
               alt="Profile Picture"
               className="w-20 h-20 sm:w-40 sm:h-40 rounded-full object-cover border-1 border-[#00FFA3]"
             />

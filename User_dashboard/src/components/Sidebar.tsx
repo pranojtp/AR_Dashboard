@@ -86,7 +86,6 @@
 // }
 
 import { useLocation, useNavigate } from "react-router-dom";
-import { signOutRedirect } from "../services/authService";
 import {
   UserRound,
   AudioLines,
@@ -104,6 +103,20 @@ const Sidebar = () => {
   const isProjectActive = location.pathname.startsWith("/userdashboard/projectpage");
   const isSettingsActive = location.pathname.startsWith("/userdashboard/settings");
   const isLoginActive = location.pathname === "/login";
+
+  const handleLogout = () => {
+    const cognitoDomain = import.meta.env.VITE_LOGOUT_COGNITO_DOMAIN;
+    const clientId = import.meta.env.VITE_COGNITO_CLIENT_ID;
+
+    
+    
+    const postLogoutRedirectUri = encodeURIComponent(import.meta.env.VITE_POST_LOGOUT_REDIRECT_URI_1)
+    
+    const logoutUrl = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${postLogoutRedirectUri}`;
+ 
+    window.location.href = logoutUrl;
+  };
+
 
   return (
     <>
@@ -173,7 +186,7 @@ const Sidebar = () => {
             </button>
 
             <button
-              onClick={() => signOutRedirect()}
+              onClick={handleLogout}
               className={`flex items-center gap-3 px-2 py-2 w-full text-left rounded text-white
                 hover:border-r-4 border-[#00FFA3] hover:bg-neutral-700 transition
                 ${isLoginActive ? "border-r-4 bg-neutral-700" : ""}`}
@@ -237,7 +250,7 @@ const Sidebar = () => {
         </button>
 
         <button
-          onClick={() => signOutRedirect()}
+          onClick={handleLogout}
           className={`flex flex-col items-center text-xs ${isLoginActive ? "text-[#00FFA3]" : "text-gray-400"}`}
         >
           <LogOut className="size-5" />

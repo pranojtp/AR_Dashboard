@@ -123,7 +123,6 @@
 
 // authService.ts
 import { UserManager, WebStorageStateStore, User, Log } from "oidc-client-ts";
-import type { SigninRedirectArgs } from "oidc-client-ts";
 
 // ✅ Enable detailed OIDC logs
 Log.setLogger(console);
@@ -147,9 +146,9 @@ const settings = {
 
 export const userManager = new UserManager(settings);
 
-export function signInRedirect(args?: SigninRedirectArgs) {
+export function signInRedirect() {
   // Use a temporary signin storage key to prevent collision in development
-  return userManager.signinRedirect(args);
+  return userManager.signinRedirect();
 }
 
 export async function handleSigninCallback(): Promise<User | null> {
