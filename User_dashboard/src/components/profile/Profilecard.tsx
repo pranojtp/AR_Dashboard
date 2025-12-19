@@ -198,10 +198,10 @@ import useCurrentUser from "../../hooks/useCurrentUser";
 // import { useNavigate } from "react-router-dom";
 
 const Profilecard = () => {
-  const { user } = useCurrentUser();
-  // if (loading) return <div className="p-4 text-white">Loading profile…</div>;
-  // if (error) return <div className="p-4 text-red-400">Error loading profile: {error}</div>;
-  if (!user) return <div className="p-4 text-white"></div>;
+  const { user, loading, error } = useCurrentUser();
+  if (loading) return <div className="p-4 text-white"></div>;
+  if (error) return <div className="p-4 text-red-400">Error loading profile: {error}</div>;
+  if (!user) return <div className="p-4 text-white">No user data found.</div>;
 
   const displayName =
     user.displayName || user.legalName || user.email || "User";

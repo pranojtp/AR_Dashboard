@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleSigninCallback } from "../services/authService";
+import SignLoader from "../components/global/SignLoader";
 
 export default function AuthCallback() {
   const navigate = useNavigate();
@@ -27,5 +28,5 @@ export default function AuthCallback() {
     })();
   }, [navigate]);
 
-  return <div>Signing you in...</div>;
+  return <SignLoader />
 }
