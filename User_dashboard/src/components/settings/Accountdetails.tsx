@@ -18,7 +18,12 @@ const roleOptions = [
     { value: "Dubbing Director", label: "Dubbing Director" },
 ];
 
-const customStyles: StylesConfig<any, true> = {
+type RoleOption = {
+    value: string;
+    label: string;
+};
+
+const customStyles: StylesConfig<RoleOption, boolean>= {
     control: (base, state) => ({
         ...base,
         backgroundColor: "#262626",
@@ -169,7 +174,7 @@ const Accountdetails = () => {
 
                 await userService.updateUser(user.id, payload);
 
-                alert("Profile updated successfully");                
+                alert("Profile updated successfully");
             } catch (err) {
                 console.error(err);
                 alert("Failed to update profile");
@@ -188,6 +193,11 @@ const Accountdetails = () => {
             // Stay on the current page, no action required
         }
     };
+
+    const additionalRoleOptions = roleOptions.filter(
+        opt => opt.value !== profile.primaryRole
+    );
+
 
     return (
         <div className="h-auto bg-neutral-900 p-2 md:p-4">
@@ -235,11 +245,14 @@ const Accountdetails = () => {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block mb-2 text-sm font-medium">Additional Roles</label>
-                                    <Select
+                                    <label className="block mb-2 text-sm font-medium">
+                                        Additional Roles
+                                    </label>
+
+                                    <Select<RoleOption, true>
                                         isMulti
-                                        name="role"
-                                        options={roleOptions}
+                                        name="otherRoles"
+                                        options={additionalRoleOptions}
                                         placeholder="Select roles..."
                                         styles={customStyles}
                                         className="text-xs"
@@ -253,7 +266,6 @@ const Accountdetails = () => {
                                             })
                                         }
                                     />
-
                                 </div>
                             </div>
 
@@ -277,16 +289,25 @@ const Accountdetails = () => {
                                     <label className="block mb-2 text-sm font-medium">
                                         Primary Role
                                     </label>
-                                    <input
-                                        type="text"
-                                        value={profile.primaryRole}
-                                        onChange={(e) =>
-                                            setProfile({ ...profile, primaryRole: e.target.value })
+
+                                    <Select<RoleOption, false>                                        
+                                        name="primaryRole"
+                                        options={roleOptions}
+                                        placeholder="Select primary role..."
+                                        styles={customStyles}
+                                        className="text-xs"
+                                        value={
+                                            roleOptions.find(opt => opt.value === profile.primaryRole) || null
                                         }
-                                        placeholder="e.g. Actor,Producer,Director"
-                                        className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                        onChange={(selected) =>
+                                            setProfile({
+                                                ...profile,
+                                                primaryRole: selected?.value || "",
+                                            })
+                                        }
                                     />
                                 </div>
+
                                 <div>
                                     <label className="block mb-2 text-sm font-medium">
                                         Address
