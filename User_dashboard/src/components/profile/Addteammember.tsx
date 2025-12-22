@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { Link2, X } from "lucide-react";
+import { X , Plus} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { inviteTeamMember } from "../../services/teamService";
 import toast from "react-hot-toast";
 
 interface Member {
-    email: string;
-    role: "Admin" | "Editor" | "Viewer";
+    email: string;    
 }
 
 interface Props {
@@ -16,11 +15,11 @@ interface Props {
 const Addteammember: React.FC<Props> = ({ onClose }) => {
     const [email, setEmail] = useState("");
     const [members, setMembers] = useState<Member[]>([]);
-    const [copied, setCopied] = useState(false);
+    // const [copied, setCopied] = useState(false);
 
     const handleAddMember = () => {
         if (email.trim() && !members.find((m) => m.email === email)) {
-            setMembers([...members, { email, role: "Viewer" }]);
+            setMembers([...members, { email }]);
             setEmail("");
         }
     };
@@ -64,15 +63,15 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
         setMembers(members.filter((m) => m.email !== email));
     };
 
-    const handleRoleChange = (email: string, role: Member["role"]) => {
-        setMembers(members.map((m) => (m.email === email ? { ...m, role } : m)));
-    };
+    // const handleRoleChange = (email: string, role: Member["role"]) => {
+    //     setMembers(members.map((m) => (m.email === email ? { ...m, role } : m)));
+    // };
 
-    const handleCopyLink = async () => {
-        await navigator.clipboard.writeText("https://example.com/invite");
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-    };
+    // const handleCopyLink = async () => {
+    //     await navigator.clipboard.writeText("https://example.com/invite");
+    //     setCopied(true);
+    //     setTimeout(() => setCopied(false), 2000);
+    // };
 
     return (
         <AnimatePresence>
@@ -101,7 +100,7 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
                     </div>
 
                     {/* 🔗 Share Link */}
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-neutral-800 border border-neutral-600 rounded-lg px-4 py-3 gap-3">
+                    {/* <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-neutral-800 border border-neutral-600 rounded-lg px-4 py-3 gap-3">
                         <div>
                             <p className="text-sm text-white">Invite members via a sharable link</p>
                             <p className="text-xs text-gray-400">Anyone with the link can view</p>
@@ -113,7 +112,7 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
                             <Link2 size={14} />
                             {copied ? "Copied" : "Copy Link"}
                         </button>
-                    </div>
+                    </div> */}
 
                     {/* 📧 Add Member Field */}
                     <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
@@ -126,9 +125,9 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
                         />
                         <button
                             onClick={handleAddMember}
-                            className="border border-[#00FFA3] text-[#00FFA3] text-base font-bold rounded-md px-3 py-1 hover:bg-[#00FFA3]/20 transition"
+                            className="p-1 border border-[#00FFA3] text-[#00FFA3] font-bold rounded-md hover:bg-[#00FFA3]/20 transition"
                         >
-                            +
+                            <Plus />
                         </button>
                     </div>
 
@@ -148,7 +147,7 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
                                             {member.email}
                                         </span>
                                         <div className="flex items-center gap-2">
-                                            <select
+                                            {/* <select
                                                 value={member.role}
                                                 onChange={(e) =>
                                                     handleRoleChange(
@@ -161,7 +160,7 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
                                                 <option>Admin</option>
                                                 <option>Editor</option>
                                                 <option>Viewer</option>
-                                            </select>
+                                            </select> */}
                                             <button
                                                 onClick={() => handleRemove(member.email)}
                                                 className="text-gray-400 hover:text-red-400 transition"
