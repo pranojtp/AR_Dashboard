@@ -18,7 +18,12 @@ const roleOptions = [
     { value: "Dubbing Director", label: "Dubbing Director" },
 ];
 
-const customStyles: StylesConfig<any, true> = {
+type RoleOption = {
+    value: string;
+    label: string;
+};
+
+const customStyles: StylesConfig<RoleOption, boolean> = {
     control: (base, state) => ({
         ...base,
         backgroundColor: "#262626", // bg-neutral-800
@@ -100,7 +105,7 @@ const Personaldetails = () => {
 
     const avatars = [
         avatar1,
-        avatar2,        
+        avatar2,
     ];
 
     // --- Handle Text Inputs ---
@@ -114,13 +119,13 @@ const Personaldetails = () => {
     };
 
     // Handle select change for roles
-    const handleRoleChange = (selected: any) => {
-        const selectedRoles = selected.map((role: any) => role.value);
-        setProfile((prevProfile) => ({
-            ...prevProfile,
-            otherRoles: selectedRoles
-        }));
-    };
+    // const handleRoleChange = (selected: any) => {
+    //     const selectedRoles = selected.map((role: any) => role.value);
+    //     setProfile((prevProfile) => ({
+    //         ...prevProfile,
+    //         otherRoles: selectedRoles
+    //     }));
+    // };
 
 
     // --- Handle Save with Validation ---
@@ -182,6 +187,10 @@ const Personaldetails = () => {
         setImage(avatars[index]);
     };
 
+    const additionalRoleOptions = roleOptions.filter(
+        opt => opt.value !== profile.primaryRole
+    );
+
     return (
         <>
             <div className="h-full pl-4 sm:pl-10 md:pl-20 lg:pl-20 pr-4 sm:pr-8 md:pr-20 lg:pr-20 pt-5 pb-5 bg-neutral-800">
@@ -230,16 +239,26 @@ const Personaldetails = () => {
 
                                     {/* Role */}
                                     <div>
-                                        <label className="block mb-2 text-sm font-medium">Additional Roles</label>
-                                        <Select
+                                        <label className="block mb-2 text-sm font-medium">
+                                            Additional Roles
+                                        </label>
+
+                                        <Select<RoleOption, true>
                                             isMulti
-                                            name="role"
-                                            options={roleOptions}
-                                            onChange={handleRoleChange}
+                                            name="otherRoles"
+                                            options={additionalRoleOptions}
                                             placeholder="Select roles..."
                                             styles={customStyles}
                                             className="text-xs"
-                                            required
+                                            value={roleOptions.filter(opt =>
+                                                profile.otherRoles.includes(opt.value)
+                                            )}
+                                            onChange={(selected) =>
+                                                setProfile({
+                                                    ...profile,
+                                                    otherRoles: selected.map((opt) => opt.value),
+                                                })
+                                            }
                                         />
                                     </div>
                                 </div>
@@ -258,19 +277,26 @@ const Personaldetails = () => {
                                         />
                                     </div>
                                     <div>
-                                        <label className="block mb-2 text-sm font-medium">Primary Role *</label>
-                                        <input
-                                            type="text"
+                                        <label className="block mb-2 text-sm font-medium">
+                                            Primary Role
+                                        </label>
+
+                                        <Select<RoleOption, false>
                                             name="primaryRole"
-                                            value={profile.primaryRole}
-                                            onChange={handleChange}
-                                            placeholder="e.g. Actor, Director"
-                                            className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
-                                            required
+                                            options={roleOptions}
+                                            placeholder="Select primary role..."
+                                            styles={customStyles}
+                                            className="text-xs"
+                                            value={
+                                                roleOptions.find(opt => opt.value === profile.primaryRole) || null
+                                            }
+                                            onChange={(selected) =>
+                                                setProfile({
+                                                    ...profile,
+                                                    primaryRole: selected?.value || "",
+                                                })
+                                            }
                                         />
-                                        {errors.primaryRole && (
-                                            <p className="text-red-500 text-xs mt-1">{errors.primaryRole}</p>
-                                        )}
                                     </div>
                                     <div>
                                         <label className="block mb-2 text-sm font-medium">Location</label>
