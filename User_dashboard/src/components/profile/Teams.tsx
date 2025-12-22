@@ -259,7 +259,7 @@ const Teams = () => {
                 </div>
             </div>
 
-            {/* Responsive Animated List */}
+            
             <div className="relative min-h-[220px] sm:min-h-[260px] overflow-hidden">
                 <AnimatePresence mode="popLayout" custom={direction}>
                     {showPrevious ? (
@@ -347,12 +347,12 @@ const Teams = () => {
                     {showPrevious ? "Show Active Members" : "Show Previous Members"}
                 </button>
 
-                <p>
+                {/* <p>
                     Total Members:{" "}
                     <span className="ml-1 px-2 py-0.5 bg-[#00FFA3] text-black rounded-md font-semibold">
                         {showPrevious ? previousMembers.length : members.length}
                     </span>
-                </p>
+                </p> */}
             </div>
 
             {/* Add Modal */}
