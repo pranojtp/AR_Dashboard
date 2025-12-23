@@ -99,9 +99,10 @@ const Requestupload: React.FC<Props> = ({ onClose }) => {
                     {/* 👥 Members List */}
                     {members.length > 0 && (
                         <div className="mt-2">
-                            <p className="text-sm text-neutral-300 mb-2">
+                            <p className="text-sm text-neutral-300">
                                 Added {members.length} member{members.length > 1 ? "s" : ""}
                             </p>
+                            <p className="text-xs text-gray-400 mb-2">Request will expires in 14 days</p>
                             <div className="space-y-2 max-h-60 overflow-y-auto scrollbar-thin scrollbar-thumb-neutral-600 scrollbar-track-transparent pr-1">
                                 {members.map((member) => (
                                     <div
@@ -126,19 +127,21 @@ const Requestupload: React.FC<Props> = ({ onClose }) => {
                                                 <option>Editor</option>
                                                 <option>Viewer</option>
                                             </select> */}
-                                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-neutral-800 border border-neutral-600 rounded-lg px-4 py-3 gap-3 mt-2">
+                                            <div 
+                                            // className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-neutral-800 border border-neutral-600 rounded-lg px-4 py-3 gap-3 mt-2"
+                                            >
                                                 <div>
                                                     <input
                                                         type="text"
                                                         placeholder="Add note or something"
-                                                        className="px-2 py-2 bg-neutral-800 border-none rounded-md text-sm text-white placeholder-neutral-400"
+                                                        className="px-4 py-4 bg-neutral-800 border border-neutral-600 rounded-md text-sm text-white placeholder-neutral-400"
                                                     />
-                                                    <p className="text-xs text-gray-400">Request will expires in 14 days</p>
+                                                    {/* <p className="text-xs text-gray-400">Request will expires in 14 days</p> */}
                                                 </div>
                                             </div>
                                             <button
                                                 onClick={() => handleRemove(member.email)}
-                                                className="text-gray-400 hover:text-red-400 transition"
+                                                className="text-gray-400 hover:text-red-500 transition"
                                             >
                                                 <X size={14} />
                                             </button>
