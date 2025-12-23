@@ -190,6 +190,9 @@ const FileUpload: React.FC<FileUploadProps> = ({ isAgreementSigned }) => {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const ALLOWED_EXTENSIONS = ["wav", "aiff", "aif", "flac"];
+
+
   // Show popup + block actions if agreement not signed
   const blockIfNotSigned = () => {
     if (!isAgreementSigned) {
@@ -231,18 +234,39 @@ const FileUpload: React.FC<FileUploadProps> = ({ isAgreementSigned }) => {
   };
 
   const processFiles = (fileList: File[]) => {
-    const processed = fileList.map((file) => ({
+    const validFiles: File[] = [];
+    const invalidFiles: string[] = [];
+
+    fileList.forEach((file) => {
+      const extension = file.name.split(".").pop()?.toLowerCase();
+
+      if (extension && ALLOWED_EXTENSIONS.includes(extension)) {
+        validFiles.push(file);
+      } else {
+        invalidFiles.push(file.name);
+      }
+    });
+
+    if (invalidFiles.length > 0) {
+      alert(
+        `Invalid file format:\n${invalidFiles.join(
+          ", "
+        )}\n\nOnly WAV, AIFF, and FLAC files are allowed.`
+      );
+    }
+
+    const processed = validFiles.map((file) => ({
       name: file.name,
       length: `${(file.size / 1024).toFixed(2)} KB`,
-      quality: ["Good", "Avg", "Poor"][Math.floor(Math.random() * 3)] as
-        | "Good"
-        | "Avg"
-        | "Poor",
+      quality: ["Good", "Avg", "Poor"][
+        Math.floor(Math.random() * 3)
+      ] as "Good" | "Avg" | "Poor",
       status: Math.floor(Math.random() * 100),
     }));
 
     setFiles(processed);
   };
+
 
   return (
     <>
@@ -289,6 +313,9 @@ const FileUpload: React.FC<FileUploadProps> = ({ isAgreementSigned }) => {
               <p className="text-white text-base sm:text-lg font-medium px-2">
                 {isDragging ? "Release to upload files" : "Drag your files here"}
               </p>
+              <p className="text-gray-500 text-xs mt-2">
+                Supported formats: WAV, AIFF, FLAC
+              </p>
 
               <p className="text-gray-400 text-sm my-2">or</p>
 
@@ -306,6 +333,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ isAgreementSigned }) => {
                   ref={fileInputRef}
                   type="file"
                   multiple
+                  accept=".wav,.aiff,.aif,.flac"
                   className="hidden"
                   onChange={handleFileChange}
                 />
@@ -355,10 +383,10 @@ const FileUpload: React.FC<FileUploadProps> = ({ isAgreementSigned }) => {
                   ref={fileInputRef}
                   type="file"
                   multiple
+                  accept=".wav,.aiff,.aif,.flac"
                   className="hidden"
                   onChange={handleFileChange}
                 />
-
                 <button
                   onClick={() => {
                     if (blockIfNotSigned()) return;
