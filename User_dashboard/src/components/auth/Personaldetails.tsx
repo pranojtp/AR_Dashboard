@@ -81,8 +81,8 @@ const Personaldetails = () => {
     const [profile, setProfile] = useState({
         displayName: "",
         legalName: "",
-        primaryRole: "",
-        otherRoles: [] as string[],
+        primaryJobRole: "",
+        additionalJobRoles: [] as string[],
         affiliation: "",
         location: "",
         bio: "",
@@ -96,7 +96,7 @@ const Personaldetails = () => {
     const [errors, setErrors] = useState({
         displayName: "",
         legalName: "",
-        primaryRole: "",
+        primaryJobRole: "",
     });
 
     // --- Image Upload ---
@@ -140,25 +140,52 @@ const Personaldetails = () => {
         const newErrors = {
             displayName: profile.displayName ? "" : "Display Name is required",
             legalName: profile.legalName ? "" : "Legal Name is required",
-            primaryRole: profile.primaryRole.length > 0 ? "" : "Please select at least one role",
+            primaryJobRole: profile.primaryJobRole ? "" : "Primary role is required",
         };
 
         setErrors(newErrors);
 
-        const hasError = Object.values(newErrors).some(err => err !== "");
-        if (hasError) return;
+        if (Object.values(newErrors).some(err => err !== "")) return;
+
+        // Remove duplicate roles
+        const uniqueRoles = Array.from(
+            new Set([profile.primaryJobRole, ...profile.additionalJobRoles])
+        );
 
         const payload = {
             ...user,
-            ...profile,
-            newUser: false,
-            profilePhoto: image,
-        };
-        await userService.updateUser(user.id, payload);
 
-        // Redirect to user dashboard profile after saving personal details
+            displayName: profile.displayName,
+            legalName: profile.legalName,
+
+            primaryJobRole: {
+                name: profile.primaryJobRole,
+            },
+
+            additionalJobRoles: profile.additionalJobRoles.map(role => ({
+                name: role,
+            })),
+
+            roles: uniqueRoles.map(role => ({
+                name: role,
+            })),
+
+            affiliation: profile.affiliation,
+            location: profile.location,
+            bio: profile.bio,
+            facebook: profile.facebook,
+            instagram: profile.instagram,
+            x: profile.x,
+
+            profilePhoto: image || undefined,
+            newUser: false,
+            active: true,
+        };
+
+        await userService.updateUser(user.id, payload);
         navigate("/userdashboard/profile");
     };
+
 
 
     // --- Image Upload Handler ---
@@ -186,10 +213,6 @@ const Personaldetails = () => {
         setSelectedAvatar(index);
         setImage(avatars[index]);
     };
-
-    const additionalRoleOptions = roleOptions.filter(
-        opt => opt.value !== profile.primaryRole
-    );
 
     return (
         <>
@@ -245,25 +268,28 @@ const Personaldetails = () => {
 
                                         <Select<RoleOption, true>
                                             isMulti
-                                            name="otherRoles"
-                                            options={additionalRoleOptions}
+                                            name="additionalJobRoles"
+                                            options={roleOptions.filter(
+                                                opt => opt.value !== profile.primaryJobRole
+                                            )}
                                             placeholder="Select roles..."
                                             styles={customStyles}
                                             className="text-xs"
                                             value={roleOptions.filter(opt =>
-                                                profile.otherRoles.includes(opt.value)
+                                                profile.additionalJobRoles.includes(opt.value)
                                             )}
                                             onChange={(selected) =>
                                                 setProfile({
                                                     ...profile,
-                                                    otherRoles: selected.map((opt) => opt.value),
+                                                    additionalJobRoles: selected.map(opt => opt.value),
                                                 })
                                             }
                                         />
+
                                     </div>
                                 </div>
 
-                                {/* Right column */}
+
                                 <div className="flex flex-col gap-6">
                                     <div>
                                         <label className="block mb-2 text-sm font-medium">Affiliation</label>
@@ -282,18 +308,18 @@ const Personaldetails = () => {
                                         </label>
 
                                         <Select<RoleOption, false>
-                                            name="primaryRole"
+                                            name="primaryJobRole"
                                             options={roleOptions}
                                             placeholder="Select primary role..."
                                             styles={customStyles}
                                             className="text-xs"
                                             value={
-                                                roleOptions.find(opt => opt.value === profile.primaryRole) || null
+                                                roleOptions.find(opt => opt.value === profile.primaryJobRole) || null
                                             }
                                             onChange={(selected) =>
                                                 setProfile({
                                                     ...profile,
-                                                    primaryRole: selected?.value || "",
+                                                    primaryJobRole: selected?.value || "",
                                                 })
                                             }
                                         />

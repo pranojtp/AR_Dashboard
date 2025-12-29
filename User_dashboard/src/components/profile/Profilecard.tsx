@@ -206,9 +206,10 @@ const Profilecard = () => {
   const displayName =
     user.displayName || user.legalName || user.email || "User";
 
-  const roles: string[] = user.primaryRole
-    ? [user.primaryRole, ...(user.otherRoles || [])]
-    : user.otherRoles || ["Actor"];
+  const roles: string[] = [
+    ...(user.primaryJobRole ? [user.primaryJobRole.name] : []),
+    ...(user.additionalJobRoles?.map((r) => r.name) || []),
+  ];
 
   const bio = user.bio || "No bio provided.";
   const profilePhoto = user.profilePhoto;
@@ -306,5 +307,4 @@ const Profilecard = () => {
   )
 }
 
-export default Profilecard
-  ;
+export default Profilecard;

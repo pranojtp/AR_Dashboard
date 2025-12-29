@@ -23,7 +23,7 @@ type RoleOption = {
     label: string;
 };
 
-const customStyles: StylesConfig<RoleOption, boolean>= {
+const customStyles: StylesConfig<RoleOption, boolean> = {
     control: (base, state) => ({
         ...base,
         backgroundColor: "#262626",
@@ -91,8 +91,8 @@ const Accountdetails = () => {
     const [profile, setProfile] = useState({
         displayName: "",
         legalName: "",
-        primaryRole: "",
-        otherRoles: [] as string[],
+        primaryJobRole: "",
+        additionalJobRoles: [] as string[],
         affiliation: "",
         location: "",
         bio: "",
@@ -108,8 +108,9 @@ const Accountdetails = () => {
         setProfile({
             displayName: user.displayName ?? "",
             legalName: user.legalName ?? "",
-            primaryRole: user.primaryRole ?? "",
-            otherRoles: user.otherRoles ?? [],
+            primaryJobRole: user.primaryJobRole?.name ?? "",
+            additionalJobRoles:
+                user.additionalJobRoles?.map((r) => r.name) ?? [],
             affiliation: user.affiliation ?? "",
             location: user.location ?? "",
             bio: user.bio ?? "",
@@ -195,7 +196,7 @@ const Accountdetails = () => {
     };
 
     const additionalRoleOptions = roleOptions.filter(
-        opt => opt.value !== profile.primaryRole
+        (opt) => opt.value !== profile.primaryJobRole
     );
 
 
@@ -251,20 +252,19 @@ const Accountdetails = () => {
 
                                     <Select<RoleOption, true>
                                         isMulti
-                                        name="otherRoles"
                                         options={additionalRoleOptions}
-                                        placeholder="Select roles..."
-                                        styles={customStyles}
-                                        className="text-xs"
-                                        value={roleOptions.filter(opt =>
-                                            profile.otherRoles.includes(opt.value)
+                                        value={roleOptions.filter((r) =>
+                                            profile.additionalJobRoles.includes(r.value)
                                         )}
                                         onChange={(selected) =>
                                             setProfile({
                                                 ...profile,
-                                                otherRoles: selected.map((opt) => opt.value),
+                                                additionalJobRoles: selected.map((s) => s.value),
                                             })
                                         }
+                                        styles={customStyles}
+                                        placeholder="Additional Roles"
+                                        className="text-xs"
                                     />
                                 </div>
                             </div>
@@ -290,19 +290,19 @@ const Accountdetails = () => {
                                         Primary Role
                                     </label>
 
-                                    <Select<RoleOption, false>                                        
+                                    <Select<RoleOption, false>
                                         name="primaryRole"
                                         options={roleOptions}
                                         placeholder="Select primary role..."
                                         styles={customStyles}
                                         className="text-xs"
                                         value={
-                                            roleOptions.find(opt => opt.value === profile.primaryRole) || null
+                                            roleOptions.find(opt => opt.value === profile.primaryJobRole) || null
                                         }
                                         onChange={(selected) =>
                                             setProfile({
                                                 ...profile,
-                                                primaryRole: selected?.value || "",
+                                                primaryJobRole: selected?.value || "",
                                             })
                                         }
                                     />

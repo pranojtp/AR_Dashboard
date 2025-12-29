@@ -3,13 +3,19 @@ export interface AppUser {
   email: string;
   displayName?: string;
   legalName?: string;
-  primaryRole?: string;
-  otherRoles?: string[];
-  roles: {
-    id: string;
-    name: string;
-    description: string;
-  }[];
+  roles: [
+    {
+      "name": "string"
+    }
+  ];
+  primaryJobRole: {
+    "name": "string"
+  };
+  additionalJobRoles: [
+    {
+      "name": "string"
+    }
+  ];
   affiliation?: string;
   location?: string;
   bio?: string;
