@@ -144,14 +144,9 @@ const Personaldetails = () => {
         };
 
         setErrors(newErrors);
-
         if (Object.values(newErrors).some(err => err !== "")) return;
 
-        // Remove duplicate roles
-        const uniqueRoles = Array.from(
-            new Set([profile.primaryJobRole, ...profile.additionalJobRoles])
-        );
-
+        // Build schema-correct payload
         const payload = {
             ...user,
 
@@ -166,9 +161,10 @@ const Personaldetails = () => {
                 name: role,
             })),
 
-            roles: uniqueRoles.map(role => ({
-                name: role,
-            })),
+            roles: [
+                { name: profile.primaryJobRole },
+                ...profile.additionalJobRoles.map(role => ({ name: role })),
+            ],
 
             affiliation: profile.affiliation,
             location: profile.location,
@@ -182,7 +178,9 @@ const Personaldetails = () => {
             active: true,
         };
 
-        await userService.updateUser(user.id, payload);
+        const res = await userService.updateUser(user.id, payload);
+        console.log("UPDATED USER:", res.data);
+
         navigate("/userdashboard/profile");
     };
 
@@ -213,7 +211,6 @@ const Personaldetails = () => {
         setSelectedAvatar(index);
         setImage(avatars[index]);
     };
-
     return (
         <>
             <div className="h-full pl-4 sm:pl-10 md:pl-20 lg:pl-20 pr-4 sm:pr-8 md:pr-20 lg:pr-20 pt-5 pb-5 bg-neutral-800">
@@ -304,7 +301,7 @@ const Personaldetails = () => {
                                     </div>
                                     <div>
                                         <label className="block mb-2 text-sm font-medium">
-                                            Primary Role
+                                            Primary Role *
                                         </label>
 
                                         <Select<RoleOption, false>
