@@ -12,6 +12,7 @@ const Projectdetails = () => {
     const [selectedValue, setSelectedValue] = useState<string>("allroles");
     const [sortBy, setSortBy] = useState<string>("");
     const [query, setQuery] = useState<string>("");
+    const [image, setImage] = useState<string | null>(null);
 
     const options: Option[] = [
         { label: "All Roles", value: "allroles" },
@@ -36,13 +37,33 @@ const Projectdetails = () => {
     const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setQuery(event.target.value);
     };
+
+    const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        if (file.size > 5 * 1024 * 1024) {
+            alert("Max size is 5 MB!");
+            return;
+        }
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setImage(reader.result as string);
+            
+        };
+        reader.readAsDataURL(file);
+    };
+
+    const handleRemove = () => {
+        setImage(null);
+        
+    };
+
     return (
         <>
-            <div className="h-auto bg-neutral-900 p-3">
+            <div className="h-auto bg-neutral-900 p-3">                
                 <div className="flex flex-col gap-2 w-full">
                     <h1 className="text-m font-medium mb-2">Select the type of Project</h1>
-
-                    {/* Top two inputs */}
+                    
                     <div className="flex flex-col sm:flex-row gap-5 sm:gap-10 w-full">
                         <div className="w-full sm:w-auto">
                             <label className="block mb-2 text-xs font-medium">Project Name</label>
@@ -50,7 +71,7 @@ const Projectdetails = () => {
                                 type="text"
                                 name="displayName"
                                 placeholder="Enter your project name"
-                                className="w-full sm:w-64 rounded-lg text-xs bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                className="w-full sm:w-64 rounded-lg text-xs bg-neutral-950 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                 required
                             />
                         </div>
@@ -60,12 +81,12 @@ const Projectdetails = () => {
                                 type="text"
                                 name="legalName"
                                 placeholder="Company or organization affiliation"
-                                className="w-full sm:w-64 text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                className="w-full sm:w-64 text-xs rounded-lg bg-neutral-950 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                             />
                         </div>
                     </div>
 
-                    <h1 className="text-m font-medium mt-5">Talents Involved</h1>
+                    <h1 className="text-m font-medium mt-3">Talents Involved</h1>
 
                     <div className="flex flex-col sm:flex-row gap-5 sm:gap-10 w-full">
                         <div className="w-full sm:w-auto">
@@ -73,7 +94,7 @@ const Projectdetails = () => {
                             <input
                                 type="text"
                                 name="affiliation"
-                                className="w-full sm:w-64 text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                className="w-full sm:w-64 text-xs rounded-lg bg-neutral-950 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                             />
                         </div>
                         <div className="w-full sm:w-auto">
@@ -81,7 +102,7 @@ const Projectdetails = () => {
                             <input
                                 type="text"
                                 name="industry"
-                                className="w-full sm:w-64 text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                className="w-full sm:w-64 text-xs rounded-lg bg-neutral-950 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                             />
                         </div>
                         <div className="sm:mt-7">
@@ -89,7 +110,7 @@ const Projectdetails = () => {
                         </div>
                     </div>
 
-                    <h1 className="text-m font-medium mt-5">User Involved</h1>
+                    <h1 className="text-m font-medium mt-3">Add Project Managers</h1>
 
                     <div className="bg-neutral-950 rounded-2xl p-4 w-full sm:w-fit border border-neutral-700 text-white relative">
 
@@ -133,6 +154,58 @@ const Projectdetails = () => {
                                     + Add User
                                 </button>
                             </div>
+                        </div>
+                    </div>
+                    <div className="flex flex-col col-span-1 gap-6 items-center lg:items-start">
+                        <div className="p-4 w-full max-w-xs">
+                            <div className="flex flex-col gap-4">
+                                <div className="h-35 w-35 rounded-xl bg-neutral-950 border border-neutral-500 overflow-hidden flex items-center justify-center">
+                                    {image ? (
+                                        <img
+                                            src={image}
+                                            alt="Profile"
+                                            className="w-full h-full object-cover"
+                                        />
+
+                                    ) : (
+                                        <div className="text-neutral-500 text-xs text-center">
+                                            No Image
+                                        </div>
+                                    )}
+                                </div>
+
+                                <label className="w-fit px-4 py-2 bg-neutral-950 text-xs text-[#59fbf0] font-medium rounded-lg border border-[#59fbf0] text-center cursor-pointer transition hover:bg-[#59fbf0] hover:text-black">
+                                    Upload Cover
+                                    <input
+                                        type="file"
+                                        accept="image/png, image/jpeg"
+                                        className="hidden"
+                                        onChange={handleImageUpload}
+                                    />
+                                </label>
+
+                                <p className="text-xs text-neutral-400">
+                                    Max size 5 MB JPG or PNG Format
+                                </p>
+                            </div>
+
+                            <div className="flex flex-wrap gap-3 mt-3">
+                                <button
+                                    onClick={handleRemove}
+                                    className="w-fit rounded-lg text-xs text-neutral-400 bg-neutral-900 border border-neutral-500 px-3 py-1 hover:bg-neutral-700 transition"
+                                >
+                                    Remove Photo
+                                </button>
+                                <label className="w-fit rounded-lg text-xs text-neutral-400 bg-neutral-900 border border-neutral-500 px-3 py-1 text-center cursor-pointer hover:bg-neutral-700 transition">
+                                    Change Photo
+                                    <input
+                                        type="file"
+                                        accept="image/png, image/jpeg"
+                                        className="hidden"
+                                        onChange={handleImageUpload}
+                                    />
+                                </label>
+                            </div>                            
                         </div>
                     </div>
                 </div>
