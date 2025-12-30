@@ -48,170 +48,147 @@ const Projectdetails = () => {
         const reader = new FileReader();
         reader.onloadend = () => {
             setImage(reader.result as string);
-            
+
         };
         reader.readAsDataURL(file);
     };
 
     const handleRemove = () => {
         setImage(null);
-        
+
     };
 
     return (
-        <>
-            <div className="h-auto bg-neutral-900 p-3">                
-                <div className="flex flex-col gap-2 w-full">
-                    <h1 className="text-m font-medium mb-2">Select the type of Project</h1>
-                    
-                    <div className="flex flex-col sm:flex-row gap-5 sm:gap-10 w-full">
-                        <div className="w-full sm:w-auto">
-                            <label className="block mb-2 text-xs font-medium">Project Name</label>
-                            <input
-                                type="text"
-                                name="displayName"
-                                placeholder="Enter your project name"
-                                className="w-full sm:w-64 rounded-lg text-xs bg-neutral-950 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
-                                required
-                            />
-                        </div>
-                        <div className="w-full sm:w-auto">
-                            <label className="block mb-2 text-xs font-medium">Type of project</label>
-                            <input
-                                type="text"
-                                name="legalName"
-                                placeholder="Company or organization affiliation"
-                                className="w-full sm:w-64 text-xs rounded-lg bg-neutral-950 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
-                            />
-                        </div>
-                    </div>
+        <div className="bg-neutral-900 p-4">
+            <h1 className="text-sm font-medium mb-4">Select the type of Project</h1>
 
-                    <h1 className="text-m font-medium mt-3">Talents Involved</h1>
+            {/* MAIN GRID */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-                    <div className="flex flex-col sm:flex-row gap-5 sm:gap-10 w-full">
-                        <div className="w-full sm:w-auto">
-                            <label className="block mb-2 text-xs font-medium">Source Voice 1</label>
-                            <input
-                                type="text"
-                                name="affiliation"
-                                className="w-full sm:w-64 text-xs rounded-lg bg-neutral-950 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
-                            />
-                        </div>
-                        <div className="w-full sm:w-auto">
-                            <label className="block mb-2 text-xs font-medium">Source Voice 2</label>
-                            <input
-                                type="text"
-                                name="industry"
-                                className="w-full sm:w-64 text-xs rounded-lg bg-neutral-950 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
-                            />
-                        </div>
-                        <div className="sm:mt-7">
-                            <button className="text-xs rounded-lg border-1 px-3 py-1 border-[#00FFA3] text-[#00FFA3]">Add more+</button>
-                        </div>
-                    </div>
+                {/* LEFT COLUMN (Form + Managers) */}
+                <div className="lg:col-span-2 flex flex-col gap-6">
 
-                    <h1 className="text-m font-medium mt-3">Add Project Managers</h1>
-
-                    <div className="bg-neutral-950 rounded-2xl p-4 w-full sm:w-fit border border-neutral-700 text-white relative">
-
-                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4 md:gap-5 w-full">
-                            <div className="flex flex-col sm:flex-row flex-wrap items-center gap-3 sm:gap-4 w-full">
+                    {/* PROJECT DETAILS */}
+                    <div className="flex flex-col gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                            <div>
+                                <label className="block mb-2 text-xs font-medium">Project Name</label>
                                 <input
                                     type="text"
-                                    value={query}
-                                    onChange={handleQueryChange}
-                                    placeholder="Search ..."
-                                    className="p-1 border rounded-lg border-neutral-500 text-white w-full sm:w-auto text-xs max-w-xs"
+                                    placeholder="Enter your project name"
+                                    className="w-full rounded-lg text-xs bg-neutral-950 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                 />
+                            </div>
 
-                                <select
-                                    value={selectedValue}
-                                    onChange={handleChange}
-                                    className="w-full sm:w-fit min-w-[100px] p-1 rounded-lg bg-amber-100 text-black text-xs"
-                                >
-                                    {options.map((option) => (
-                                        <option key={option.value} value={option.value}>
-                                            {option.label}
-                                        </option>
-                                    ))}
-                                </select>
-
-                                <select
-                                    value={sortBy}
-                                    onChange={sortChange}
-                                    className="w-full sm:w-fit min-w-[100px] p-1 rounded-lg bg-amber-100 text-black text-xs"
-                                >
-                                    {sortoptions.map((sortOption) => (
-                                        <option key={sortOption.value} value={sortOption.value}>
-                                            {sortOption.label}
-                                        </option>
-                                    ))}
-                                </select>
-
-                                <button
-                                    className="px-4 py-1 border-1 border-[#00FFA3] text-[#00FFA3] rounded-lg hover:bg-[#00e695] transition w-full sm:w-auto text-xs"
-                                >
-                                    + Add User
-                                </button>
+                            <div>
+                                <label className="block mb-2 text-xs font-medium">Type of Project</label>
+                                <input
+                                    type="text"
+                                    placeholder="Choose from the list"
+                                    className="w-full rounded-lg text-xs bg-neutral-950 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                />
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-col col-span-1 gap-6 items-center lg:items-start">
-                        <div className="p-4 w-full max-w-xs">
-                            <div className="flex flex-col gap-4">
-                                <div className="h-35 w-35 rounded-xl bg-neutral-950 border border-neutral-500 overflow-hidden flex items-center justify-center">
-                                    {image ? (
-                                        <img
-                                            src={image}
-                                            alt="Profile"
-                                            className="w-full h-full object-cover"
-                                        />
 
-                                    ) : (
-                                        <div className="text-neutral-500 text-xs text-center">
-                                            No Image
-                                        </div>
-                                    )}
-                                </div>
+                    {/* TALENTS */}
+                    <div className="flex flex-col gap-4">
+                        <h2 className="text-sm font-medium">Talent Involved</h2>
 
-                                <label className="w-fit px-4 py-2 bg-neutral-950 text-xs text-[#59fbf0] font-medium rounded-lg border border-[#59fbf0] text-center cursor-pointer transition hover:bg-[#59fbf0] hover:text-black">
-                                    Upload Cover
-                                    <input
-                                        type="file"
-                                        accept="image/png, image/jpeg"
-                                        className="hidden"
-                                        onChange={handleImageUpload}
-                                    />
-                                </label>
-
-                                <p className="text-xs text-neutral-400">
-                                    Max size 5 MB JPG or PNG Format
-                                </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 items-end">
+                            <div>
+                                <label className="block mb-2 text-xs font-medium">Source Voice 1</label>
+                                <input className="w-full text-xs rounded-lg bg-neutral-950 border border-neutral-500 px-4 py-2" />
                             </div>
 
-                            <div className="flex flex-wrap gap-3 mt-3">
-                                <button
-                                    onClick={handleRemove}
-                                    className="w-fit rounded-lg text-xs text-neutral-400 bg-neutral-900 border border-neutral-500 px-3 py-1 hover:bg-neutral-700 transition"
-                                >
-                                    Remove Photo
-                                </button>
-                                <label className="w-fit rounded-lg text-xs text-neutral-400 bg-neutral-900 border border-neutral-500 px-3 py-1 text-center cursor-pointer hover:bg-neutral-700 transition">
-                                    Change Photo
-                                    <input
-                                        type="file"
-                                        accept="image/png, image/jpeg"
-                                        className="hidden"
-                                        onChange={handleImageUpload}
-                                    />
-                                </label>
-                            </div>                            
+                            <div>
+                                <label className="block mb-2 text-xs font-medium">Source Voice 2</label>
+                                <input className="w-full text-xs rounded-lg bg-neutral-950 border border-neutral-500 px-4 py-2" />
+                            </div>
+
+                            <button className="w-fit px-4 py-2 text-xs border border-[#00FFA3] text-[#00FFA3] hover:bg-[#00FFA3] hover:text-black rounded-lg">
+                                Add more +
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* PROJECT MANAGERS */}
+                    <h2 className="text-sm font-medium">Add Project Managers</h2>
+                    <div className="bg-neutral-950 w-fit rounded-2xl p-4 border border-neutral-700">
+                        <div className="flex flex-wrap gap-3">
+                            <input
+                                value={query}
+                                onChange={handleQueryChange}
+                                placeholder="Search..."
+                                className="p-1 text-xs rounded-lg bg-neutral-900 border border-neutral-500"
+                            />
+
+                            <select
+                                value={selectedValue}
+                                onChange={handleChange}
+                                className="p-1 text-xs rounded-lg bg-amber-100 text-black"
+                            >
+                                {options.map(o => (
+                                    <option key={o.value} value={o.value}>{o.label}</option>
+                                ))}
+                            </select>
+
+                            <select
+                                value={sortBy}
+                                onChange={sortChange}
+                                className="p-1 text-xs rounded-lg bg-amber-100 text-black"
+                            >
+                                {sortoptions.map(s => (
+                                    <option key={s.value} value={s.value}>{s.label}</option>
+                                ))}
+                            </select>
+
+                            <button className="px-4 py-1 text-xs border border-[#00FFA3] text-[#00FFA3] hover:bg-[#00FFA3] hover:text-black rounded-lg">
+                                + Add User
+                            </button>
                         </div>
                     </div>
                 </div>
+
+                {/* RIGHT COLUMN (COVER IMAGE) */}
+                <div className="flex flex-col gap-4">
+
+                    <div className="h-36 w-36 rounded-xl bg-neutral-950 border border-neutral-500 flex items-center justify-center overflow-hidden">
+                        {image ? (
+                            <img src={image} className="w-full h-full object-cover" />
+                        ) : (
+                            <span className="text-xs text-neutral-500">No Image</span>
+                        )}
+                    </div>
+
+                    <label className="block w-fit text-center px-4 py-2 text-xs border border-[#00FFA3] text-[#00FFA3] rounded-lg cursor-pointer hover:bg-[#00FFA3] hover:text-black">
+                        Upload Cover
+                        <input type="file" hidden accept="image/png, image/jpeg" onChange={handleImageUpload} />
+                    </label>
+
+                    <p className="text-xs text-neutral-400">
+                        Max size 5 MB JPG or PNG Format
+                    </p>
+
+                    <div className="flex gap-3">
+                        <button
+                            onClick={handleRemove}
+                            className="text-xs px-3 py-1 border border-neutral-500 rounded-lg text-neutral-400"
+                        >
+                            Remove Image
+                        </button>
+
+                        <label className="text-xs px-3 py-1 border border-neutral-500 rounded-lg cursor-pointer text-neutral-400">
+                            Change Image
+                            <input type="file" hidden onChange={handleImageUpload} />
+                        </label>
+                    </div>
+                </div>
+
             </div>
-        </>
+        </div>
     );
+
 };
 
 export default Projectdetails;

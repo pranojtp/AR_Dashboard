@@ -257,7 +257,7 @@ const Profilecard = () => {
               <h2 className="text-lg sm:text-lg font-semibold text-white">
                 {displayName}
               </h2>
-              <div className="flex flex-wrap gap-2 pt-1 rounded-md">
+              <div className="flex flex-wrap gap-2 rounded-md">
                 {roles.map((role: string, idx: number) => (
                   <div
                     key={idx}
@@ -275,7 +275,7 @@ const Profilecard = () => {
               <h2 className="text-sm sm:text-sm font-semibold text-white">
                 Industry
               </h2>
-              <div className="flex flex-wrap gap-2 pt-2 rounded-md">
+              <div className="flex flex-wrap gap-2 mt-2 rounded-md">
                 {languages.map((lang: string, idx: number) => (
                   <div
                     key={idx}
