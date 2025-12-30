@@ -152,28 +152,20 @@ const Personaldetails = () => {
 
             displayName: profile.displayName,
             legalName: profile.legalName,
-
             primaryJobRole: {
                 name: profile.primaryJobRole,
             },
-
             additionalJobRoles: profile.additionalJobRoles.map(role => ({
                 name: role,
-            })),
-
-            roles: [
-                { name: profile.primaryJobRole },
-                ...profile.additionalJobRoles.map(role => ({ name: role })),
-            ],
-
+            })),            
             affiliation: profile.affiliation,
             location: profile.location,
             bio: profile.bio,
             facebook: profile.facebook,
             instagram: profile.instagram,
             x: profile.x,
-
             profilePhoto: image || undefined,
+            
             newUser: false,
             active: true,
         };
