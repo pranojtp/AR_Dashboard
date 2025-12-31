@@ -84,7 +84,26 @@ const Projectdetails = () => {
                                 <label className="block mb-2 text-xs font-medium">Type of Project</label>
                                 <input
                                     type="text"
-                                    placeholder="Choose from the list"
+                                    placeholder="Eg. Voice coversion,Text to Speech"
+                                    className="w-full rounded-lg text-xs bg-neutral-950 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                />
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                            <div>
+                                <label className="block mb-2 text-xs font-medium">Director</label>
+                                <input
+                                    type="text"
+                                    placeholder="Enter director name"
+                                    className="w-full rounded-lg text-xs bg-neutral-950 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block mb-2 text-xs font-medium">Producer</label>
+                                <input
+                                    type="text"
+                                    placeholder="Enter producer name"
                                     className="w-full rounded-lg text-xs bg-neutral-950 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                 />
                             </div>

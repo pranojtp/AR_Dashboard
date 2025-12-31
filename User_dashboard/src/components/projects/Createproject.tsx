@@ -75,40 +75,34 @@ const Createproject = () => {
             gradientFrom: 'from-blue-700',
             gradientTo: 'to-blue-400',
         },
-        {
-            title: 'Text to Speech',
-            gradientFrom: 'from-purple-600',
-            gradientTo: 'to-cyan-400',
-        },
-        {
-            title: 'Voice Cloning',
-            gradientFrom: 'from-yellow-200',
-            gradientTo: 'to-cyan-200',
-            customGradientClass: 'bg-gradient-to-br from-yellow-100 to-cyan-300'
-        },
-        {
-            title: 'Voice Conversion',
-            gradientFrom: 'from-blue-900',
-            gradientTo: 'to-green-500',
-            customGradientClass: 'bg-gradient-to-br from-blue-900 to-green-600/70'
-        },
+        // {
+        //     title: 'Text to Speech',
+        //     gradientFrom: 'from-purple-600',
+        //     gradientTo: 'to-cyan-400',
+        // },
+        // {
+        //     title: 'Voice Cloning',
+        //     gradientFrom: 'from-yellow-200',
+        //     gradientTo: 'to-cyan-200',
+        //     customGradientClass: 'bg-gradient-to-br from-yellow-200 to-cyan-400'
+        // },
+        // {
+        //     title: 'Voice Conversion',
+        //     gradientFrom: 'from-blue-900',
+        //     gradientTo: 'to-green-500',
+        //     customGradientClass: 'bg-gradient-to-br from-blue-900 to-green-600/70'
+        // },
     ];
 
     return (
         <>
             <div>
-                <h3 className="text-sm text-white font-medium mb-4">
+                {/* <h3 className="text-sm text-white font-medium mb-4">
                     Select the type of Project
-                </h3>
+                </h3> */}
             </div>
-
-            {/* Responsive layout */}
             <div
-                className="
-                    flex flex-wrap 
-                    gap-6 sm:gap-8 md:gap-10
-                    justify-center md:justify-start
-                "
+                className="flex flex-wrap gap-6 sm:gap-8 md:gap-10 justify-center md:justify-start"
             >
                 {features.map((feature, index) => (
                     <FeatureCard
