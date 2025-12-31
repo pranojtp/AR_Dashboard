@@ -153,11 +153,11 @@ const Projectdetails = () => {
                 {/* RIGHT COLUMN (COVER IMAGE) */}
                 <div className="flex flex-col gap-4">
 
-                    <div className="h-36 w-36 rounded-xl bg-neutral-950 border border-neutral-500 flex items-center justify-center overflow-hidden">
+                    <div className="h-40 w-40 rounded-xl bg-neutral-950 border border-neutral-500 flex items-center justify-center overflow-hidden">
                         {image ? (
                             <img src={image} className="w-full h-full object-cover" />
                         ) : (
-                            <span className="text-xs text-neutral-500">No Image</span>
+                            <span className="text-xs text-neutral-500">No cover</span>
                         )}
                     </div>
 
@@ -188,7 +188,6 @@ const Projectdetails = () => {
             </div>
         </div>
     );
-
 };
 
 export default Projectdetails;

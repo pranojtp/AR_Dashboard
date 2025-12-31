@@ -71,7 +71,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ title, gradientFrom, gradient
 const Createproject = () => {
     const features: FeatureCardProps[] = [
         {
-            title: 'Dubbing',
+            title: 'New Project',
             gradientFrom: 'from-blue-700',
             gradientTo: 'to-blue-400',
         },
