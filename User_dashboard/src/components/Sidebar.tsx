@@ -138,7 +138,7 @@ const Sidebar = () => {
       >
         {/* Top */}
         <div>
-          <h1 className="text-lg font-sans mb-3 p-2 text-white tracking-wide">
+          <h1 className="text-lg font-medium mb-4 p-2 text-white tracking-wide">
             AUDIO REALITIES
           </h1>
           <hr className="text-white mb-4" />
