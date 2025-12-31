@@ -32,36 +32,55 @@
 // export default Createproject
 
 
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 interface FeatureCardProps {
     title: string;
     gradientFrom: string;
     gradientTo: string;
     customGradientClass?: string;
+    route?: string;
 }
 
-// FeatureCard Component
-const FeatureCard: React.FC<FeatureCardProps> = ({ title, gradientFrom, gradientTo, customGradientClass }) => {
+interface RecentProject {
+    id: string;
+    name: string;
+}
+
+// FeatureCard
+import { useNavigate as useNav } from "react-router-dom";
+
+const FeatureCard: React.FC<FeatureCardProps> = ({
+    title,
+    gradientFrom,
+    gradientTo,
+    customGradientClass,
+    route,
+}) => {
+    const navigate = useNav();
+
     return (
-        <div className="flex flex-col items-center group cursor-pointer">
-            {/* Gradient box */}
+        <div
+            className="flex flex-col items-center group cursor-pointer"
+            onClick={() => route && navigate(route)}
+        >
             <div
                 className={`
                     w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40
-                    rounded-xl shadow-lg transition-all duration-300 ease-in-out
+                    rounded-xl shadow-lg transition-all duration-300
                     flex items-center justify-center p-2
                     ${customGradientClass || `bg-gradient-to-br ${gradientFrom} ${gradientTo}`}
                     group-hover:scale-[1.02] group-hover:shadow-2xl
                 `}
             >
-                {/* Plus icon */}
                 <div className="w-12 h-12 relative">
-                    <div className="absolute top-1/2 left-0 w-full h-px bg-white/70 transform -translate-y-1/2"></div>
-                    <div className="absolute left-1/2 top-0 h-full w-px bg-white/70 transform -translate-x-1/2"></div>
+                    <div className="absolute top-1/2 left-0 w-full h-px bg-white/70 -translate-y-1/2" />
+                    <div className="absolute left-1/2 top-0 h-full w-px bg-white/70 -translate-x-1/2" />
                 </div>
             </div>
 
-            {/* Title */}
-            <p className="mt-4 text-white text-xs md:text-xs font-medium select-none">
+            <p className="mt-4 text-white text-xs font-medium select-none">
                 {title}
             </p>
         </div>
@@ -69,11 +88,22 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ title, gradientFrom, gradient
 };
 
 const Createproject = () => {
+    const [recentProject, setRecentProject] = useState<RecentProject | null>(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const stored = localStorage.getItem("recentProject");
+        if (stored) {
+            setRecentProject(JSON.parse(stored));
+        }
+    }, []);
+
     const features: FeatureCardProps[] = [
         {
-            title: 'New Project',
-            gradientFrom: 'from-blue-700',
-            gradientTo: 'to-blue-400',
+            title: "New Project",
+            gradientFrom: "from-blue-700",
+            gradientTo: "to-blue-400",
+            route: "/userdashboard/projectpage/projectdetails",
         },
         // {
         //     title: 'Text to Speech',
@@ -96,24 +126,41 @@ const Createproject = () => {
 
     return (
         <>
-            <div>
-                {/* <h3 className="text-sm text-white font-medium mb-4">
-                    Select the type of Project
-                </h3> */}
-            </div>
-            <div
-                className="flex flex-wrap gap-6 sm:gap-8 md:gap-10 justify-center md:justify-start"
-            >
+            {/* CREATE PROJECT */}
+            <div className="flex flex-wrap gap-6 sm:gap-8 mb-10 md:gap-10 justify-center md:justify-start">
                 {features.map((feature, index) => (
-                    <FeatureCard
-                        key={index}
-                        title={feature.title}
-                        gradientFrom={feature.gradientFrom}
-                        gradientTo={feature.gradientTo}
-                        customGradientClass={feature.customGradientClass}
-                    />
+                    <FeatureCard key={index} {...feature} />
                 ))}
             </div>
+
+            {/* RECENT SECTION */}
+            {recentProject && (
+                <div className="mb-10">
+                    <h3 className="text-sm text-white font-medium mb-4">
+                        Recent
+                    </h3>
+
+                    <div
+                        onClick={() =>
+                            navigate("/userdashboard/projectpage/projectdetails")
+                        }
+                        className="
+                            w-40 h-40 rounded-xl cursor-pointer
+                            bg-gradient-to-br from-blue-500 via-blue-700 to-emerald-400
+                            flex items-center justify-center
+                            shadow-lg hover:scale-[1.02] transition
+                        "
+                    >
+                        <span className="text-white text-sm font-medium">
+                            Open Now
+                        </span>
+                    </div>
+
+                    <p className="mt-2 text-xs font-medium text-white">
+                        {recentProject.name}
+                    </p>
+                </div>
+            )}
         </>
     );
 };

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 interface Option {
     label: string;
     value: string;
@@ -13,6 +14,7 @@ const Projectdetails = () => {
     const [sortBy, setSortBy] = useState<string>("");
     const [query, setQuery] = useState<string>("");
     const [image, setImage] = useState<string | null>(null);
+    const navigate = useNavigate()
 
     const options: Option[] = [
         { label: "All Roles", value: "allroles" },
@@ -57,6 +59,31 @@ const Projectdetails = () => {
         setImage(null);
 
     };
+
+    const handleCancel = () => {
+        const isConfirmed = window.confirm("Confirm to discard the changes?");
+
+        if (isConfirmed) {
+            navigate("/userdashboard/projectpage/createproject"); // Navigate to the profile page
+        } else {
+            // Stay on the current page, no action required
+        }
+    };
+
+    const handleSave = () => {
+        const isConfirmed = window.confirm("Confirm to create the project?");
+
+        if (isConfirmed) {
+            const newProject = {
+                id: "A314",
+                name: "Project A314",
+                createdAt: Date.now(),
+            };
+            localStorage.setItem("recentProject", JSON.stringify(newProject));
+            navigate("/userdashboard/projectpage/createproject");
+        }
+    };
+
 
     return (
         <div className="bg-neutral-900 p-4">
@@ -201,6 +228,18 @@ const Projectdetails = () => {
                             Change Image
                             <input type="file" hidden onChange={handleImageUpload} />
                         </label>
+                    </div>
+                    <div className="flex lg:justify-start gap-4 mt-6">
+                        <button
+                            onClick={handleCancel}
+                            className="px-4 py-2 bg-neutral-800 text-sm text-[#00e695] font-medium border border-[#00e695] rounded-lg hover:bg-[#00e695] hover:text-black transition">
+                            Cancel
+                        </button>
+                        <button
+                            onClick={handleSave}
+                            className="px-4 py-2 bg-[#00FFA3] text-sm text-black font-medium rounded-lg hover:bg-[#00e695] transition">
+                            Create Project
+                        </button>
                     </div>
                 </div>
 
