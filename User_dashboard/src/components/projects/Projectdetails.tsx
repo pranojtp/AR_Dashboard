@@ -9,11 +9,14 @@ interface sortOption {
     label: string;
     value: string;
 }
+
 const Projectdetails = () => {
     const [selectedValue, setSelectedValue] = useState<string>("allroles");
     const [sortBy, setSortBy] = useState<string>("");
     const [query, setQuery] = useState<string>("");
     const [image, setImage] = useState<string | null>(null);
+    const [projectName, setProjectName] = useState("");
+
     const navigate = useNavigate()
 
     const options: Option[] = [
@@ -71,19 +74,31 @@ const Projectdetails = () => {
     };
 
     const handleSave = () => {
-        const isConfirmed = window.confirm("Confirm to create the project?");
-
-        if (isConfirmed) {
-            const newProject = {
-                id: "A314",
-                name: "Project A314",
-                createdAt: Date.now(),
-            };
-            localStorage.setItem("recentProject", JSON.stringify(newProject));
-            navigate("/userdashboard/projectpage/createproject");
+        if (!projectName.trim()) {
+            alert("Project name is required");
+            return;
         }
-    };
 
+        const isConfirmed = window.confirm("Confirm to create the project?");
+        if (!isConfirmed) return;
+
+        const newProject = {
+            id: crypto.randomUUID(), // unique id
+            name: projectName,
+            coverImage: image, // base64 image
+            createdAt: Date.now(),
+        };
+
+        const existingProjects = JSON.parse(
+            localStorage.getItem("projects") || "[]"
+        );
+
+        const updatedProjects = [newProject, ...existingProjects];
+
+        localStorage.setItem("projects", JSON.stringify(updatedProjects));
+
+        navigate("/userdashboard/projectpage/createproject");
+    };
 
     return (
         <div className="bg-neutral-900 p-4">
@@ -103,6 +118,8 @@ const Projectdetails = () => {
                                 <input
                                     type="text"
                                     placeholder="Enter your project name"
+                                    value={projectName}
+                                    onChange={(e) => setProjectName(e.target.value)}
                                     className="w-full rounded-lg text-xs bg-neutral-950 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                 />
                             </div>

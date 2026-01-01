@@ -33,7 +33,7 @@
 
 
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 interface FeatureCardProps {
     title: string;
@@ -46,6 +46,7 @@ interface FeatureCardProps {
 interface RecentProject {
     id: string;
     name: string;
+    coverImage?: string | null;
 }
 
 // FeatureCard
@@ -88,14 +89,11 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
 };
 
 const Createproject = () => {
-    const [recentProject, setRecentProject] = useState<RecentProject | null>(null);
-    const navigate = useNavigate();
-
+    const [projects, setProjects] = useState<RecentProject[]>([]);
+    // const navigate = useNavigate()
     useEffect(() => {
-        const stored = localStorage.getItem("recentProject");
-        if (stored) {
-            setRecentProject(JSON.parse(stored));
-        }
+        const stored = JSON.parse(localStorage.getItem("projects") || "[]");
+        setProjects(stored);
     }, []);
 
     const features: FeatureCardProps[] = [
@@ -134,33 +132,48 @@ const Createproject = () => {
             </div>
 
             {/* RECENT SECTION */}
-            {recentProject && (
+            {projects.length > 0 && (
                 <div className="mb-10">
                     <h3 className="text-sm text-white font-medium mb-4">
                         Recent
                     </h3>
 
-                    <div
-                        onClick={() =>
-                            navigate("/userdashboard/projectpage/projectdetails")
-                        }
-                        className="
-                            w-40 h-40 rounded-xl cursor-pointer
-                            bg-gradient-to-br from-blue-500 via-blue-700 to-emerald-400
-                            flex items-center justify-center
-                            shadow-lg hover:scale-[1.02] transition
-                        "
-                    >
-                        <span className="text-white text-sm font-medium">
-                            Open Now
-                        </span>
-                    </div>
+                    <div className="flex flex-wrap gap-6">
+                        {projects.map((project) => (
+                            <div
+                                key={project.id}
+                                // onClick={() =>
+                                //     navigate("/userdashboard/projectpage/projectdetails")
+                                // }
+                                className="cursor-pointer"
+                            >
+                                <div
+                                    className="w-40 h-40 rounded-xl overflow-hidden
+                                   bg-neutral-800 border border-neutral-700
+                                   flex items-center justify-center
+                                   hover:scale-[1.02] transition"
+                                >
+                                    {project.coverImage ? (
+                                        <img
+                                            src={project.coverImage}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    ) : (
+                                        <span className="text-xs text-neutral-400">
+                                            Open Now
+                                        </span>
+                                    )}
+                                </div>
 
-                    <p className="mt-2 text-xs font-medium text-white">
-                        {recentProject.name}
-                    </p>
+                                <p className="mt-2 text-xs text-white text-center">
+                                    {project.name}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             )}
+
         </>
     );
 };
