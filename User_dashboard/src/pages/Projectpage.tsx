@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 const Projectpage = () => {
     return (
         <>
-            <div className="flex flex-col min-h-screen bg-neutral-900 text-white">
+            <div className="flex flex-col bg-neutral-900 text-white">
                 {/* Fixed top navigation bar */}
                 <div className="flex-shrink-0 border-b border-neutral-800">
                     <Navbar_project />
