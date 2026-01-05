@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import AddProjectManagers from "./AddProjectManagers";
+
 interface Option {
     label: string;
     value: string;
@@ -16,6 +19,7 @@ const Projectdetails = () => {
     const [query, setQuery] = useState<string>("");
     const [image, setImage] = useState<string | null>(null);
     const [projectName, setProjectName] = useState("");
+    const [showModal, setShowModal] = useState<boolean>(false);
 
     const navigate = useNavigate()
 
@@ -206,7 +210,9 @@ const Projectdetails = () => {
                                 ))}
                             </select>
 
-                            <button className="px-4 py-1 text-xs border border-[#00FFA3] text-[#00FFA3] hover:bg-[#00FFA3] hover:text-black rounded-lg">
+                            <button 
+                            onClick={() => setShowModal(true)}
+                            className="px-4 py-1 text-xs border border-[#00FFA3] text-[#00FFA3] hover:bg-[#00FFA3] hover:text-black rounded-lg">
                                 + Add User
                             </button>
                         </div>
@@ -261,6 +267,26 @@ const Projectdetails = () => {
                 </div>
 
             </div>
+            <AnimatePresence>
+                {showModal && (
+                    <>
+                        <motion.div
+                            className="fixed inset-0 bg-black/40 z-40"
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setShowModal(false)}
+                        />
+
+                        <motion.div
+                            className="fixed inset-0 flex items-center justify-center z-50 p-3 sm:p-6"
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.8 }}
+                        >
+                            <AddProjectManagers onClose={() => setShowModal(false)} />
+                        </motion.div>
+                    </>
+                )}
+            </AnimatePresence>
         </div>
     );
 };

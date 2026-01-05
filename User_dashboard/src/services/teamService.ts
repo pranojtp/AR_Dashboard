@@ -29,8 +29,12 @@ import api from "../api/api";
 
 export interface InviteUserRequest {
   email: string;
-  name?: string;
+  name: string;
+  primaryJobRole?: {
+    name: string;
+  };
 }
+
 
 
 export interface InviteUserResponse {

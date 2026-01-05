@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { inviteTeamMember } from "../../services/teamService";
 import toast from "react-hot-toast";
 
-type Role = "Assistant" | "Manager" | "Legal Head";
+type Role = "Director of Audiography" | "Sound Designer" | "Sound Mixer";
 
 interface Member {
     email: string;
@@ -15,21 +15,21 @@ interface Props {
     onClose: () => void;
 }
 
-const Addteammember: React.FC<Props> = ({ onClose }) => {
+const AddProjectManagers: React.FC<Props> = ({ onClose }) => {
     const [email, setEmail] = useState("");
     const [members, setMembers] = useState<Member[]>([]);
     // const [copied, setCopied] = useState(false);
 
     const handleAddMember = () => {
         if (email.trim() && !members.find((m) => m.email === email)) {
-            setMembers([...members, { email, role: "Assistant", }]);
+            setMembers([...members, { email, role: "Director of Audiography", }]);
             setEmail("");
         }
     };
     const ROLE_TO_PRIMARY_JOB: Record<Member["role"], string> = {
-        Assistant: "Assistant",
-        Manager: "Manager",
-        "Legal Head": "Legal Head",
+        "Director of Audiography": "Director of Audiography",
+        "Sound Designer": "Sound Designer",
+        "Sound Mixer": "Sound Mixer",
     };
 
     const handleSendInvites = async () => {
@@ -169,9 +169,9 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
                                                 }
                                                 className="bg-neutral-800 border border-neutral-600 text-xs text-white rounded-md px-2 py-1 focus:outline-none"
                                             >
-                                                <option>Assistant</option>
-                                                <option>Legal Head</option>
-                                                <option>Manager</option>
+                                                <option>Director of Audiography</option>
+                                                <option>Sound Designer</option>
+                                                <option>Sound Mixer</option>
                                             </select>
                                             <button
                                                 onClick={() => handleRemove(member.email)}
@@ -205,4 +205,4 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
     );
 };
 
-export default Addteammember;
+export default AddProjectManagers;
