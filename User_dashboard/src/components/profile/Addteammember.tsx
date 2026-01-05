@@ -5,7 +5,8 @@ import { inviteTeamMember } from "../../services/teamService";
 import toast from "react-hot-toast";
 
 interface Member {
-    email: string;    
+    email: string;
+    role:string; 
 }
 
 interface Props {
@@ -19,7 +20,7 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
 
     const handleAddMember = () => {
         if (email.trim() && !members.find((m) => m.email === email)) {
-            setMembers([...members, { email }]);
+            setMembers([...members, { email , role: "Assistant",}]);
             setEmail("");
         }
     };
@@ -63,9 +64,9 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
         setMembers(members.filter((m) => m.email !== email));
     };
 
-    // const handleRoleChange = (email: string, role: Member["role"]) => {
-    //     setMembers(members.map((m) => (m.email === email ? { ...m, role } : m)));
-    // };
+    const handleRoleChange = (email: string, role: Member["role"]) => {
+        setMembers(members.map((m) => (m.email === email ? { ...m, role } : m)));
+    };
 
     // const handleCopyLink = async () => {
     //     await navigator.clipboard.writeText("https://example.com/invite");
@@ -147,7 +148,7 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
                                             {member.email}
                                         </span>
                                         <div className="flex items-center gap-2">
-                                            {/* <select
+                                            <select
                                                 value={member.role}
                                                 onChange={(e) =>
                                                     handleRoleChange(
@@ -157,10 +158,10 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
                                                 }
                                                 className="bg-neutral-800 border border-neutral-600 text-xs text-white rounded-md px-2 py-1 focus:outline-none"
                                             >
-                                                <option>Admin</option>
-                                                <option>Editor</option>
-                                                <option>Viewer</option>
-                                            </select> */}
+                                                <option>Assistant</option>
+                                                <option>Legal Head</option>
+                                                <option>Manager</option>
+                                            </select>
                                             <button
                                                 onClick={() => handleRemove(member.email)}
                                                 className="text-gray-400 hover:text-red-400 transition"
