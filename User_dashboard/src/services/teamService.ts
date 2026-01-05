@@ -27,13 +27,12 @@
 
 import api from "../api/api";
 
-/** Request payload for inviting a user */
 export interface InviteUserRequest {
   email: string;
-  name?: string; // optional if backend allows
+  name?: string; 
 }
 
-/** Response schema from invite API */
+
 export interface InviteUserResponse {
   email: string;
   name: string;
@@ -43,10 +42,6 @@ export interface InviteUserResponse {
   message: string;
 }
 
-/**
- * Invite a new team member
- * POST /admin/users/invite
- */
 export const inviteTeamMember = async (
   payload: InviteUserRequest
 ): Promise<InviteUserResponse> => {
@@ -56,8 +51,7 @@ export const inviteTeamMember = async (
       payload
     );
     return response.data;
-  } catch (error: any) {
-    // Normalize backend errors
+  } catch (error: any) {    
     throw {
       message:
         error?.response?.data?.message ||
