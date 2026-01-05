@@ -205,7 +205,7 @@ const Personaldetails = () => {
     };
     return (
         <>
-            <div className="h-full pl-4 sm:pl-10 md:pl-20 lg:pl-20 pr-4 sm:pr-8 md:pr-20 lg:pr-20 pt-5 pb-5 bg-neutral-800">
+            <div className="h-screen pl-4 sm:pl-10 md:pl-20 lg:pl-20 pr-4 sm:pr-8 md:pr-20 lg:pr-20 pt-5 pb-5 bg-neutral-800">
                 <div className="bg-black flex-1 text-white h-fit w-fit border-1 border-neutral-700 rounded-xl p-3">
                     <div className="flex justify-between items-center mb-5">
                         <h1 className="text-xl font-semibold">Complete Your Profile</h1>

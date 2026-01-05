@@ -29,7 +29,7 @@ import api from "../api/api";
 
 export interface InviteUserRequest {
   email: string;
-  name?: string; 
+  name?: string;
 }
 
 
@@ -51,7 +51,7 @@ export const inviteTeamMember = async (
       payload
     );
     return response.data;
-  } catch (error: any) {    
+  } catch (error: any) {
     throw {
       message:
         error?.response?.data?.message ||
