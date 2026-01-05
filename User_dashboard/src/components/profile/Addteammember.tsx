@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { X , Plus} from "lucide-react";
+import { X, Plus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { inviteTeamMember } from "../../services/teamService";
 import toast from "react-hot-toast";
 
 interface Member {
     email: string;
-    role:string; 
+    role: string;
 }
 
 interface Props {
@@ -20,7 +20,7 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
 
     const handleAddMember = () => {
         if (email.trim() && !members.find((m) => m.email === email)) {
-            setMembers([...members, { email , role: "Assistant",}]);
+            setMembers([...members, { email, role: "Assistant", }]);
             setEmail("");
         }
     };
