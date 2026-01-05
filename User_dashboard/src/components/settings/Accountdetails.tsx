@@ -1,78 +1,78 @@
-import Select from "react-select";
+// import Select from "react-select";
 import { useState, useEffect } from "react";
-import type { StylesConfig } from "react-select";
+// import type { StylesConfig } from "react-select";
 import avatar1 from "../../assets/avatar1.jpg";
 import avatar2 from "../../assets/avatar2.jpg";
 import useCurrentUser from "../../hooks/useCurrentUser";
 import userService from "../../services/userService";
 import { useNavigate } from "react-router-dom";
 
-const roleOptions = [
-    { value: "Actor", label: "Actor" },
-    { value: "Producer", label: "Producer" },
-    { value: "Director", label: "Director" },
-    { value: "Director of Audiography", label: "Director of Audiography" },
-    { value: "Sound Designer", label: "Sound Designer" },
-    { value: "Sound Mixer", label: "Sound Mixer" },
-    { value: "Music Director", label: "Music Director" },
-    { value: "Dubbing Director", label: "Dubbing Director" },
-];
+// const roleOptions = [
+//     { value: "Actor", label: "Actor" },
+//     { value: "Producer", label: "Producer" },
+//     { value: "Director", label: "Director" },
+//     { value: "Director of Audiography", label: "Director of Audiography" },
+//     { value: "Sound Designer", label: "Sound Designer" },
+//     { value: "Sound Mixer", label: "Sound Mixer" },
+//     { value: "Music Director", label: "Music Director" },
+//     { value: "Dubbing Director", label: "Dubbing Director" },
+// ];
 
-type RoleOption = {
-    value: string;
-    label: string;
-};
+// type RoleOption = {
+//     value: string;
+//     label: string;
+// };
 
-const customStyles: StylesConfig<RoleOption, boolean> = {
-    control: (base, state) => ({
-        ...base,
-        backgroundColor: "#262626",
-        borderColor: state.isFocused ? "#00FFA3" : "#737373",
-        boxShadow: state.isFocused ? "0 0 0 1px #00FFA3" : "none",
-        "&:hover": { borderColor: "#00FFA3" },
-        color: "white",
-        borderRadius: "0.5rem",
-        padding: "2",
-    }),
-    menu: (base) => ({
-        ...base,
-        backgroundColor: "#171717",
-        color: "white",
-        borderRadius: "0.5rem",
-    }),
-    option: (base, { isFocused, isSelected }) => ({
-        ...base,
-        backgroundColor: isSelected
-            ? "#00FFA3"
-            : isFocused
-                ? "#262626"
-                : "transparent",
-        color: isSelected ? "#000000" : "#ffffff",
-        cursor: "pointer",
-    }),
-    multiValue: (base) => ({
-        ...base,
-        backgroundColor: "white",
-        color: "#000",
-    }),
-    multiValueLabel: (base) => ({
-        ...base,
-        color: "#000",
-    }),
-    multiValueRemove: (base) => ({
-        ...base,
-        color: "#000",
-        ":hover": { backgroundColor: "red", color: "#000" },
-    }),
-    placeholder: (base) => ({
-        ...base,
-        color: "#9CA3AF",
-    }),
-    singleValue: (base) => ({
-        ...base,
-        color: "white",
-    }),
-};
+// const customStyles: StylesConfig<RoleOption, boolean> = {
+//     control: (base, state) => ({
+//         ...base,
+//         backgroundColor: "#262626",
+//         borderColor: state.isFocused ? "#00FFA3" : "#737373",
+//         boxShadow: state.isFocused ? "0 0 0 1px #00FFA3" : "none",
+//         "&:hover": { borderColor: "#00FFA3" },
+//         color: "white",
+//         borderRadius: "0.5rem",
+//         padding: "2",
+//     }),
+//     menu: (base) => ({
+//         ...base,
+//         backgroundColor: "#171717",
+//         color: "white",
+//         borderRadius: "0.5rem",
+//     }),
+//     option: (base, { isFocused, isSelected }) => ({
+//         ...base,
+//         backgroundColor: isSelected
+//             ? "#00FFA3"
+//             : isFocused
+//                 ? "#262626"
+//                 : "transparent",
+//         color: isSelected ? "#000000" : "#ffffff",
+//         cursor: "pointer",
+//     }),
+//     multiValue: (base) => ({
+//         ...base,
+//         backgroundColor: "white",
+//         color: "#000",
+//     }),
+//     multiValueLabel: (base) => ({
+//         ...base,
+//         color: "#000",
+//     }),
+//     multiValueRemove: (base) => ({
+//         ...base,
+//         color: "#000",
+//         ":hover": { backgroundColor: "red", color: "#000" },
+//     }),
+//     placeholder: (base) => ({
+//         ...base,
+//         color: "#9CA3AF",
+//     }),
+//     singleValue: (base) => ({
+//         ...base,
+//         color: "white",
+//     }),
+// };
 
 const Accountdetails = () => {
     const [image, setImage] = useState<string | null>(null);
@@ -195,9 +195,9 @@ const Accountdetails = () => {
         }
     };
 
-    const additionalRoleOptions = roleOptions.filter(
-        (opt) => opt.value !== profile.primaryJobRole
-    );
+    // const additionalRoleOptions = roleOptions.filter(
+    //     (opt) => opt.value !== profile.primaryJobRole
+    // );
 
 
     return (
@@ -245,7 +245,7 @@ const Accountdetails = () => {
                                         className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                     />
                                 </div>
-                                <div>
+                                {/* <div>
                                     <label className="block mb-2 text-sm font-medium">
                                         Additional Roles
                                     </label>
@@ -266,7 +266,7 @@ const Accountdetails = () => {
                                         placeholder="Additional Roles"
                                         className="text-xs"
                                     />
-                                </div>
+                                </div> */}                                
                             </div>
 
                             {/* Right column */}
@@ -285,7 +285,7 @@ const Accountdetails = () => {
                                         className="w-full text-xs rounded-lg bg-neutral-800 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                     />
                                 </div>
-                                <div>
+                                {/* <div>
                                     <label className="block mb-2 text-sm font-medium">
                                         Primary Role
                                     </label>
@@ -306,8 +306,7 @@ const Accountdetails = () => {
                                             })
                                         }
                                     />
-                                </div>
-
+                                </div> */}
                                 <div>
                                     <label className="block mb-2 text-sm font-medium">
                                         Address
