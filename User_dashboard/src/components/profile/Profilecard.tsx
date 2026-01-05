@@ -213,7 +213,7 @@ const Profilecard = () => {
 
   const bio = user.bio || "No bio provided.";
   const profilePhoto = user.profilePhoto;
-  
+
   const affiliation = user.affiliation;
   return (
     <>
@@ -246,31 +246,32 @@ const Profilecard = () => {
               </a>
             )}
           </div>
-          <div className="flex flex-col sm:flex-row gap-5 items-center sm:items-start text-center sm:text-left space-y-3 sm:space-y-0 sm:space-x-4">
+          <div className="flex flex-col sm:flex-row gap-3 items-center sm:items-start text-center sm:text-left space-y-3 sm:space-y-0 sm:space-x-4">
             <img
               src={profilePhoto}
               alt="Profile Picture"
               className="w-20 h-20 sm:w-40 sm:h-40 rounded-full object-cover border-1 border-[#00FFA3]"
             />
-            <div className="sm:mt-0 md:mt-15">
-              <h2 className="text-lg sm:text-lg font-semibold text-white">
-                {displayName}
-              </h2>
-              <div className="flex flex-wrap gap-2 rounded-md">
-                {roles.map((role: string, idx: number) => (
-                  <div
-                    key={idx}
-                    className="flex items-center gap-2 bg-neutral-200 text-black px-1 text-xs rounded-sm"
-                  >
-                    <span>{role}</span>
-                  </div>
-                ))}
+            <div className="flex flex-col sm:flex-row sm:gap-20 gap-3">
+              <div className="sm:mt-0 md:mt-15">
+                <h2 className="text-lg sm:text-lg font-semibold text-white">
+                  {displayName}
+                </h2>
+                <div className="flex flex-wrap gap-2 rounded-md">
+                  {roles.map((role: string, idx: number) => (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-2 bg-neutral-200 text-black px-1 text-xs rounded-sm"
+                    >
+                      <span>{role}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs sm:text-xs text-white font-extralight text-justify max-w-md mt-1">
+                  {bio}
+                </p>
               </div>
-              <p className="text-xs sm:text-xs text-white font-extralight text-justify max-w-md mt-1">
-                {bio}
-              </p>
-            </div>
-            {/* <div className="sm:mt-0 md:mt-15">
+              {/* <div className="sm:mt-0 md:mt-15">
               <h2 className="text-sm sm:text-sm font-semibold text-white">
                 Industry
               </h2>
@@ -285,12 +286,13 @@ const Profilecard = () => {
                 ))}
               </div>
             </div> */}
-            <div className="sm:mt-0 md:mt-15">
-              <h2 className="text-sm sm:text-sm font-semibold text-white">
-                Affiliation
-              </h2>
-              <div className="flex flex-col gap-2 text-white text-xs max-w-md mt-1">
-                <p>{affiliation}</p>
+              <div className="sm:mt-0 md:mt-15">
+                <h2 className="text-sm sm:text-sm font-semibold text-white">
+                  Affiliation
+                </h2>
+                <div className="flex flex-col gap-2 text-white text-xs max-w-md mt-1">
+                  <p>{affiliation}</p>
+                </div>
               </div>
             </div>
           </div>
