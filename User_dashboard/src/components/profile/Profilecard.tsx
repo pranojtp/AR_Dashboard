@@ -213,8 +213,7 @@ const Profilecard = () => {
 
   const bio = user.bio || "No bio provided.";
   const profilePhoto = user.profilePhoto;
-
-  const languages = ["Malayalam", "Tamil", "Telugu"];
+  
   const affiliation = user.affiliation;
   return (
     <>
@@ -247,9 +246,9 @@ const Profilecard = () => {
               </a>
             )}
           </div>
-          <div className="flex flex-col sm:flex-row gap-3 items-center sm:items-start text-center sm:text-left space-y-3 sm:space-y-0 sm:space-x-4">
+          <div className="flex flex-col sm:flex-row gap-5 items-center sm:items-start text-center sm:text-left space-y-3 sm:space-y-0 sm:space-x-4">
             <img
-              src={profilePhoto}              
+              src={profilePhoto}
               alt="Profile Picture"
               className="w-20 h-20 sm:w-40 sm:h-40 rounded-full object-cover border-1 border-[#00FFA3]"
             />
@@ -271,7 +270,7 @@ const Profilecard = () => {
                 {bio}
               </p>
             </div>
-            <div className="sm:mt-0 md:mt-15">
+            {/* <div className="sm:mt-0 md:mt-15">
               <h2 className="text-sm sm:text-sm font-semibold text-white">
                 Industry
               </h2>
@@ -285,7 +284,7 @@ const Profilecard = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
             <div className="sm:mt-0 md:mt-15">
               <h2 className="text-sm sm:text-sm font-semibold text-white">
                 Affiliation
