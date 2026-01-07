@@ -91,8 +91,8 @@ const Accountdetails = () => {
     const [profile, setProfile] = useState({
         displayName: "",
         legalName: "",
-        primaryJobRole: "",
-        additionalJobRoles: [] as string[],
+        // primaryJobRole: "",
+        // additionalJobRoles: [] as string[],
         affiliation: "",
         location: "",
         bio: "",
@@ -108,9 +108,9 @@ const Accountdetails = () => {
         setProfile({
             displayName: user.displayName ?? "",
             legalName: user.legalName ?? "",
-            primaryJobRole: user.primaryJobRole?.name ?? "",
-            additionalJobRoles:
-                user.additionalJobRoles?.map((r) => r.name) ?? [],
+            // primaryJobRole: user.primaryJobRole?.name ?? "",
+            // additionalJobRoles:
+            //     user.additionalJobRoles?.map((r) => r.name) ?? [],
             affiliation: user.affiliation ?? "",
             location: user.location ?? "",
             bio: user.bio ?? "",
