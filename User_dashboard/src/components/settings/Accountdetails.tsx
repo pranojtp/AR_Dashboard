@@ -160,9 +160,7 @@ const Accountdetails = () => {
         setImage(avatars[index]);
     };
     const handleSave = async () => {
-        if (!user?.id) return;
-
-        // Show confirmation dialog
+        if (!user?.id) return;        
         const isConfirmed = window.confirm("Confirm to make these changes?");
 
         if (isConfirmed) {

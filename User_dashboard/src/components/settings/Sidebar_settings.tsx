@@ -62,8 +62,8 @@ import { useNavigate } from "react-router-dom";
 
 const navigation = [
     { name: "Account Details", href: "/userdashboard/settings/account", icon: "UserRound" },
-    { name: "General", href: "/userdashboard/settings/general", icon: "Settings" },
-    { name: "Notifications", href: "/userdashboard/settings/notification", icon: "Bell" },
+    // { name: "General", href: "/userdashboard/settings/general", icon: "Settings" },
+    // { name: "Notifications", href: "/userdashboard/settings/notification", icon: "Bell" },
 ];
 
 const SidebarSettings = () => {
