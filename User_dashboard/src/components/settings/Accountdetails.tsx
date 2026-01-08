@@ -1,10 +1,11 @@
 // import Select from "react-select";
 import { useState, useEffect } from "react";
 // import type { StylesConfig } from "react-select";
-import avatar1 from "../../assets/avatar1.jpg";
-import avatar2 from "../../assets/avatar2.jpg";
+// import avatar1 from "../../../public/avatars/avatar1.jpg";
+// import avatar2 from "../../../public/avatars/avatar2.jpg";
 import useCurrentUser from "../../hooks/useCurrentUser";
 import userService from "../../services/userService";
+import { imageUrlToBase64 } from "../../utils/imageUrlToBase64";
 import { useNavigate } from "react-router-dom";
 
 // const roleOptions = [
@@ -124,24 +125,26 @@ const Accountdetails = () => {
     }, [user]);
 
     const avatars = [
-        avatar1,
-        avatar2,
-        avatar1,
-        avatar2,
-        avatar1,
-        avatar2,
-        avatar1,
-        avatar2,
-        avatar1,
+        "/avatars/avatar1.jpg",
+        "/avatars/avatar2.jpg",
+        // avatar1,
+        // avatar2,
+        // avatar1,
+        // avatar2,
+        // avatar1,
+        // avatar2,
+        // avatar1,
     ];
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
+
         if (file.size > 5 * 1024 * 1024) {
             alert("Max size is 5 MB!");
             return;
         }
+
         const reader = new FileReader();
         reader.onloadend = () => {
             setImage(reader.result as string);
@@ -155,12 +158,19 @@ const Accountdetails = () => {
         setSelectedAvatar(null);
     };
 
-    const handleAvatarSelect = (index: number) => {
-        setSelectedAvatar(index);
-        setImage(avatars[index]);
+    const handleAvatarSelect = async (index: number) => {
+        try {
+            setSelectedAvatar(index);
+
+            const base64 = await imageUrlToBase64(avatars[index]);
+            setImage(base64);
+        } catch (error) {
+            console.error("Failed to convert avatar to base64", error);
+            alert("Failed to select avatar");
+        }
     };
     const handleSave = async () => {
-        if (!user?.id) return;        
+        if (!user?.id) return;
         const isConfirmed = window.confirm("Confirm to make these changes?");
 
         if (isConfirmed) {
@@ -264,7 +274,7 @@ const Accountdetails = () => {
                                         placeholder="Additional Roles"
                                         className="text-xs"
                                     />
-                                </div> */}                                
+                                </div> */}
                             </div>
 
                             {/* Right column */}
