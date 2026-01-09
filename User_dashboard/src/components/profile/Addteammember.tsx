@@ -26,11 +26,6 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
             setEmail("");
         }
     };
-    const ROLE_TO_PRIMARY_JOB: Record<Member["role"], string> = {
-        Assistant: "Assistant",
-        Manager: "Manager",
-        "Legal Head": "Legal Head",
-    };
 
     const handleSendInvites = async () => {
         if (members.length === 0) {
@@ -43,10 +38,12 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
             for (const member of members) {
                 const res = await inviteTeamMember({
                     email: member.email,
-                    name: member.email.split("@")[0],                    
-                    primaryJobRole: {
-                        name: ROLE_TO_PRIMARY_JOB[member.role],
-                    },
+                    name: member.email.split("@")[0],
+                    jobRoles: [
+                        {
+                            name: member.role,
+                        },
+                    ],
                 });
 
                 if (res.error) {
@@ -68,6 +65,7 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
             });
         }
     };
+
 
 
 

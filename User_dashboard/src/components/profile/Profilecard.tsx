@@ -207,8 +207,7 @@ const Profilecard = () => {
     user.displayName || user.legalName || user.email || "User";
 
   const roles: string[] = [
-    ...(user.primaryJobRole ? [user.primaryJobRole.name] : []),
-    ...(user.additionalJobRoles?.map((r) => r.name) || []),
+    ...(user.jobRoles?.map(role => role.name) ?? []),
   ];
 
   const bio = user.bio || "No bio provided.";

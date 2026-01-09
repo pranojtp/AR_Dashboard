@@ -30,9 +30,9 @@ import api from "../api/api";
 export interface InviteUserRequest {
   email: string;
   name: string;
-  primaryJobRole?: {
+  jobRoles: {
     name: string;
-  };
+  }[];
 }
 
 

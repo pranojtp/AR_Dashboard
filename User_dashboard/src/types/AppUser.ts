@@ -8,14 +8,11 @@ export interface AppUser {
       "name": "string"
     }
   ];
-  primaryJobRole: {
-    "name": "string"
-  };
-  additionalJobRoles: [
+  jobRoles: [
     {
       "name": "string"
     }
-  ];
+  ]
   affiliation?: string;
   location?: string;
   bio?: string;
@@ -23,6 +20,6 @@ export interface AppUser {
   instagram?: string;
   x?: string;
   profilePhoto?: string;
-  newUser: boolean;  
+  newUser: boolean;
   active: boolean;
 }
