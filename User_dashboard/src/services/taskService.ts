@@ -1,22 +1,28 @@
-// import api from "../api/api";
+import api from "../api/api";
 
-// const taskService = {
-//   // Read all tasks
-//   getMembers: () => {
-//     return api.get('/');
-//   },
+export interface CreateTaskRequest {
+  domain: "PROFILE" | "PROJECT" | "VOICE_VAULT";
+  taskType: "TEAM_INVITE";
+  title: string;
+  description: string;
+  targetUrl: string;
+  expiresAt?: string;
+  label?: string;
+  actionKey?: string;
+  apiEndpoint?: string;
+  method?: string;
+}
 
-//   // Create a new task
-//   addTask: () => {
-//     return api.post('/', );
-//   },
+const taskService = {
+  // 🔹 READ tasks (logged-in user)
+  getTasks: () => {
+    return api.get("/tasks");
+  },
 
-//   // Update an task
-//   updateMember: (id, ) => {
-//     return api.put(`//${id}`, );
-//   },
+  // 🔹 CREATE task for a specific user
+  createTask: (userIdOrEmail: string, payload: CreateTaskRequest) => {
+    return api.post(`/tasks/${userIdOrEmail}`, payload);
+  },
+};
 
-  
-// };
-
-// export default taskService;
+export default taskService;

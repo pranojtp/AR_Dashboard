@@ -2,7 +2,8 @@ import { useState } from "react";
 import { X, Plus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { inviteTeamMember } from "../../services/teamService";
-import toast from "react-hot-toast";
+import taskService from "../../services/taskService";
+import { useNotification } from "../global/NotificationContext";
 
 type Role = "Assistant" | "Manager" | "Legal Head";
 
@@ -18,6 +19,7 @@ interface Props {
 const Addteammember: React.FC<Props> = ({ onClose }) => {
     const [email, setEmail] = useState("");
     const [members, setMembers] = useState<Member[]>([]);
+    const { addNotification } = useNotification();
     // const [copied, setCopied] = useState(false);
 
     const handleAddMember = () => {
@@ -28,43 +30,47 @@ const Addteammember: React.FC<Props> = ({ onClose }) => {
     };
 
     const handleSendInvites = async () => {
-        if (members.length === 0) {
-            toast.error("No members to invite");
+        if (members.length === 0) {            
+            addNotification('error', 'No members to invite')
             return;
         }
-
-        const toastId = toast.loading("Sending invites...");
+        addNotification('info', 'Sending invites');
         try {
-            for (const member of members) {
+            for (const member of members) {                
                 const res = await inviteTeamMember({
                     email: member.email,
                     name: member.email.split("@")[0],
-                    jobRoles: [
-                        {
-                            name: member.role,
-                        },
-                    ],
+                    jobRoles: [member.role],
                 });
 
-                if (res.error) {
-                    toast.error(res.message || `Failed to invite ${member.email}`, {
-                        id: toastId,
-                    });
+                if (res?.error) {
+                    addNotification('error', `Failed to invite ${member.email}`);
                     return;
                 }
+
+                await taskService.createTask(member.email, {
+                    domain: "PROFILE",
+                    taskType: "TEAM_INVITE",
+                    title: "Team Invitation",
+                    description: "You have been invited to join the personal team",
+                    targetUrl: "",
+                    label: "JOIN NOW",
+                    actionKey: "",
+                    apiEndpoint: "",
+                    method: "",
+                    expiresAt: new Date(
+                        Date.now() + 7 * 24 * 60 * 60 * 1000
+                    ).toISOString(),
+                });
             }
-
-            toast.success("Invitations sent successfully", {
-                id: toastId,
-            });
-
+            
+            addNotification('success', 'Invitations sent successfully');
             onClose();
-        } catch (err: any) {
-            toast.error(err.message || "Something went wrong", {
-                id: toastId,
-            });
+        } catch (err: any) {            
+            addNotification('error', 'Something went wrong');
         }
     };
+
 
 
 

@@ -124,14 +124,14 @@
 // authService.ts
 import { UserManager, WebStorageStateStore, User, Log } from "oidc-client-ts";
 
-// ✅ Enable detailed OIDC logs
+// Enable detailed OIDC logs
 Log.setLogger(console);
-Log.setLevel(Log.DEBUG); // Keep this set to DEBUG during troubleshooting!
+Log.setLevel(Log.DEBUG);
 
 const authority = import.meta.env.VITE_COGNITO_DOMAIN!;
 const client_id = import.meta.env.VITE_COGNITO_CLIENT_ID!;
-const redirect_uri = import.meta.env.VITE_REDIRECT_URI!;
-const post_logout_redirect_uri = import.meta.env.VITE_POST_LOGOUT_REDIRECT_URI!;
+const redirect_uri =window.location.origin+"/auth/callback";
+const post_logout_redirect_uri = window.location.origin;
 
 const settings = {
   authority,
@@ -154,7 +154,7 @@ export function signInRedirect() {
 export async function handleSigninCallback(): Promise<User | null> {
   const user = await userManager.signinRedirectCallback();
 
-  if (!user?.id_token) {    
+  if (!user?.id_token) {
     console.error("No id_token received from Cognito.");
     //todo redirect to error page
   }
@@ -177,5 +177,5 @@ export async function getUser(): Promise<User | null> {
 
 export async function getIdToken(): Promise<string | null> {
   const user = await userManager.getUser();
-  return user?.id_token ?? null;  // Now returning the id_token
+  return user?.id_token ?? null; 
 }

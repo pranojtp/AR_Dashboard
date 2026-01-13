@@ -20,6 +20,7 @@ import Projectdetails from "./components/projects/Projectdetails"
 import AuthCallback from "./pages/AuthCallBack"
 import ProtectedRoute from "./components/ProtectedRoute"
 import { Toaster } from "react-hot-toast";
+import { NotificationProvider } from "./components/global/NotificationContext"
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           },
         }}
       />
+      <NotificationProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
@@ -68,7 +70,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-
+      </NotificationProvider>
     </>
   )
 }

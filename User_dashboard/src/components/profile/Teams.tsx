@@ -107,6 +107,9 @@ import { useState, useMemo } from "react";
 import { motion, AnimatePresence, easeInOut } from "framer-motion";
 import Addteammember from "./Addteammember";
 import Editteammember from "./Editteammember";
+import { getTeamUsers } from "../../services/teamService";
+import type { AppUser } from "../../types/AppUser";
+import { useEffect } from "react";
 
 export interface Member {
     name: string;
@@ -123,12 +126,9 @@ const Teams = () => {
 
     const [showPrevious, setShowPrevious] = useState(false);
 
-    const [members, setMembers] = useState<Member[]>([
-        { name: "Babychen Paul", role: "Assistant" },
-        { name: "Biju Basil", role: "Legal Head" },
-        { name: "Daniel de Bem", role: "Assistant" },
-        { name: "Nithin Chand", role: "Manager" },
-    ]);
+    const [members, setMembers] = useState<Member[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+
 
     const [previousMembers] = useState<Member[]>([
         { name: "Arun Kumar", role: "Former Manager" },
@@ -205,6 +205,30 @@ const Teams = () => {
         setShowPrevious(!showPrevious);
     };
 
+    useEffect(() => {
+        const fetchTeamUsers = async () => {
+            try {
+                const users: AppUser[] = await getTeamUsers();
+
+                const activeMembers: Member[] = users
+                    .filter((u) => u.active)
+                    .map((u) => ({
+                        name: u.displayName || u.legalName || u.email,
+                        role: u.jobRoles?.[0]?.name || "",
+                    }));
+
+                setMembers(activeMembers);
+            } catch (error) {
+                console.error("Failed to fetch team members", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchTeamUsers();
+    }, []);
+
+
     return (
         <div className="bg-neutral-950 rounded-2xl border border-neutral-800 p-4 sm:p-4 text-white w-full">
 
@@ -259,7 +283,7 @@ const Teams = () => {
                 </div>
             </div>
 
-            
+
             <div className="relative min-h-[220px] sm:min-h-[260px] overflow-hidden">
                 <AnimatePresence mode="popLayout" custom={direction}>
                     {showPrevious ? (

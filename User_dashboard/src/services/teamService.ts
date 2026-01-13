@@ -26,13 +26,12 @@
 
 
 import api from "../api/api";
+import type { AppUser } from "../types/AppUser";
 
 export interface InviteUserRequest {
   email: string;
   name: string;
-  jobRoles: {
-    name: string;
-  }[];
+  jobRoles: string[];
 }
 
 
@@ -65,3 +64,21 @@ export const inviteTeamMember = async (
     };
   }
 };
+
+export const getTeamUsers = async (): Promise<AppUser[]> => {
+  try {
+    const response = await api.get<AppUser[]>(
+      "/users/assistants"
+    );
+    return response.data;
+  } catch (error: any) {
+    throw {
+      message:
+        error?.response?.data?.message ||
+        "Failed to fetch team members",
+      status: error?.response?.status,
+      raw: error
+    };
+  }
+};
+

@@ -26,11 +26,11 @@ const AddProjectManagers: React.FC<Props> = ({ onClose }) => {
             setEmail("");
         }
     };
-    const ROLE_TO_PRIMARY_JOB: Record<Member["role"], string> = {
-        "Director of Audiography": "Director of Audiography",
-        "Sound Designer": "Sound Designer",
-        "Sound Mixer": "Sound Mixer",
-    };
+    // const ROLE_TO_PRIMARY_JOB: Record<Member["role"], string> = {
+    //     "Director of Audiography": "Director of Audiography",
+    //     "Sound Designer": "Sound Designer",
+    //     "Sound Mixer": "Sound Mixer",
+    // };
 
     const handleSendInvites = async () => {
         if (members.length === 0) {
@@ -44,9 +44,7 @@ const AddProjectManagers: React.FC<Props> = ({ onClose }) => {
                 const res = await inviteTeamMember({
                     email: member.email,
                     name: member.email.split("@")[0],                    
-                    primaryJobRole: {
-                        name: ROLE_TO_PRIMARY_JOB[member.role],
-                    },
+                    jobRoles: [member.role],
                 });
 
                 if (res.error) {

@@ -108,16 +108,13 @@ const Sidebar = () => {
     const cognitoDomain = import.meta.env.VITE_LOGOUT_COGNITO_DOMAIN;
     const clientId = import.meta.env.VITE_COGNITO_CLIENT_ID;
 
-    
-    
-    const postLogoutRedirectUri = encodeURIComponent(import.meta.env.VITE_POST_LOGOUT_REDIRECT_URI_1)
+    const postLogoutRedirectUri = encodeURIComponent(window.location.origin)
     
     const logoutUrl = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${postLogoutRedirectUri}`;
  
     window.location.href = logoutUrl;
+    window.location.replace(logoutUrl);
   };
-
-
   return (
     <>
       {/* Desktop Sidebar */}
