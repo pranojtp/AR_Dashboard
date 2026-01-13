@@ -143,7 +143,7 @@ const Tasks: React.FC = () => {
         setDirection(tab === "completed" ? 1 : -1);
         setActiveTab(tab);
     };
-
+    
     const [tasks, setTasks] = useState<TaskItem[]>([]);
     const [selectedTask, setSelectedTask] = useState<TaskItem | null>(null);
     const [activeTab, setActiveTab] = useState<"pending" | "completed">("pending");
@@ -231,9 +231,15 @@ const Tasks: React.FC = () => {
                             >
 
                                 <div className="flex items-start gap-3">
-                                    <div className="w-10 h-10 rounded-full bg-[#00e695] text-black font-bold flex items-center justify-center">
-                                        {getInitials(n.createdBy.displayName)}
+                                    <div className="relative">
+                                        <div className="w-10 h-10 rounded-full bg-[#00e695] text-black font-bold flex items-center justify-center">
+                                            {getInitials(n.createdBy.displayName)}
+                                        </div>
+                                        {n.status === "PENDING" && (
+                                            <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-[#00e695] rounded-full border border-neutral-950" />
+                                        )}
                                     </div>
+
                                     <div className="flex flex-col">
                                         <p className="font-semibold text-xs">{n.title}</p>
                                         <p className="font-normal text-xs">{n.createdBy.displayName}</p>
@@ -303,9 +309,8 @@ const Tasks: React.FC = () => {
                                 </div>
 
                                 <p className="text-xs text-neutral-300 leading-relaxed mb-3">
-                                    {selectedTask.description}
+                                    {selectedTask.createdBy.displayName} invited you to join the team.
                                 </p>
-
                                 <div className="flex justify-end gap-6 text-xs font-semibold">
                                     <button
                                         onClick={() =>
@@ -331,5 +336,4 @@ const Tasks: React.FC = () => {
         </div>
     );
 };
-
 export default Tasks;

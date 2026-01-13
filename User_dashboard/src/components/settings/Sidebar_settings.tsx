@@ -77,7 +77,7 @@ const SidebarSettings = () => {
             <p className="text-sm text-neutral-400 mt-1">Manage your account preferences</p> */}
 
             {/* Tabs Section */}
-            <div className="relative flex border-b border-neutral-800 mt-6">
+            <div className="relative flex border-b border-neutral-800 mt-3">
                 {navigation.map((item) => {
                     // const Icon = iconMap[item.icon];
                     const isActive = activeTab === item.name;

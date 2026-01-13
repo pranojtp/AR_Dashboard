@@ -115,6 +115,8 @@ const Sidebar = () => {
     window.location.href = logoutUrl;
     window.location.replace(logoutUrl);
   };
+
+
   return (
     <>
       {/* Desktop Sidebar */}
@@ -135,7 +137,7 @@ const Sidebar = () => {
       >
         {/* Top */}
         <div>
-          <h1 className="text-lg font-medium mb-4 p-2 text-white tracking-wide">
+          <h1 className="text-xl font-medium mb-5 flex justify-center text-white tracking-widest">
             AUDIO REALITIES
           </h1>
           <hr className="text-white mb-4" />

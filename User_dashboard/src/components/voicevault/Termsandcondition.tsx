@@ -295,6 +295,18 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
     const [direction, setDirection] = useState(1);
     const [selectedSection, setSelectedSection] = useState<number>(1);
 
+    const [formData, setFormData] = useState({
+        legalName: "",
+        address: "",
+        proofId: "",
+        dob: "",
+    });
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+
     const sections = [
         "AUDIO COLLABORATION AND VOICE PROCESSING AGREEMENT",
         "Acceptable Use Policy",
@@ -332,7 +344,19 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
 
                             BY AND BETWEEN <br />
 
-                            1.	[Name of the Actor], aged ___, residing at ______, who is an actor/actress/ media personality/sportsperson by profession and hereinafter referred to as “Party A” or “the Artist,” which expression shall, unless repugnant to the context or meaning thereof, include his/her heirs, successors, and permitted assigns.
+                            1.	<strong>{formData.legalName || "[Name of the Actor]"}</strong>, aged{" "}
+                            <strong>
+                                {formData.dob
+                                    ? new Date().getFullYear() - new Date(formData.dob).getFullYear()
+                                    : "___"}
+                            </strong>
+                            , residing at{" "}
+                            <strong>{formData.address || "______"}</strong>, who is an
+                            actor/actress/media personality/sportsperson by profession and
+                            hereinafter referred to as <strong>“Party A”</strong> or{" "}
+                            <strong>“the Artist”</strong>, which expression shall, unless
+                            repugnant to the context or meaning thereof, include his/her heirs,
+                            successors, and permitted assigns.
 
                             2.	Audio Realities Pvt. Ltd., a company incorporated under the Companies Act, 2013, having its registered office at “Karotte Maliyeckal, Chathamattom PO,  Ernakulam, Kerala 686671, represented by its authorized signatory ______, hereinafter referred to as “Party B” or “the Company,” which expression shall, unless repugnant to the context or meaning thereof, include its successors and permitted assigns.
 
@@ -368,17 +392,17 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
 
 
                             IN WITNESS WHEREOF, the Parties have executed this Agreement as of the date first above written. <br />
-
-                            Party	A (Actor): <br />
+                            
+                            <strong>Party A :</strong> <br />
                             Signature: _________________________ <br />
-                            Name: ____________________________ <br />
-                            Date: _____________________________ <br />
+                            Name: <strong>{formData.legalName || "____________________________"}</strong> <br />
+                            Date: <strong>{new Date().toLocaleDateString()}</strong>                            
                             <br />
-                            Party	B (Company): <br />
+                            Party	B : <br />
                             Signature: _________________________ <br />
-                            Name: ____________________________ <br />
+                            Name: <strong>Audio Realities</strong> <br />
                             Designation: _______________________ <br />
-                            Date: _____________________________
+                            Date: <strong>{new Date().toLocaleDateString()}</strong>
 
                         </p>
                     </>
@@ -476,6 +500,9 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
                                             </label>
                                             <input
                                                 type="text"
+                                                name="legalName"
+                                                value={formData.legalName}
+                                                onChange={handleChange}
                                                 placeholder="Enter your legal name"
                                                 className="w-full text-xs rounded-lg bg-neutral-900 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                             />
@@ -486,6 +513,9 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
                                             </label>
                                             <input
                                                 type="text"
+                                                name="address"
+                                                value={formData.address}
+                                                onChange={handleChange}
                                                 placeholder="Enter your address"
                                                 className="w-full text-xs rounded-lg bg-neutral-900 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                             />
@@ -498,6 +528,9 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
                                                 </label>
                                                 <input
                                                     type="text"
+                                                    name="proofId"
+                                                    value={formData.proofId}
+                                                    onChange={handleChange}
                                                     placeholder="Proof ID"
                                                     className="w-full text-xs rounded-lg bg-neutral-900 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                                 />
@@ -508,6 +541,9 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
                                                 </label>
                                                 <input
                                                     type="date"
+                                                    name="dob"
+                                                    value={formData.dob}
+                                                    onChange={handleChange}
                                                     className="w-full text-xs rounded-lg bg-neutral-900 border border-neutral-500 px-4 py-2 focus:outline-none focus:border-[#00FFA3]"
                                                 />
                                             </div>

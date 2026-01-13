@@ -59,7 +59,7 @@ const Signagreement: React.FC<SignagreementProps> = ({ onAgree }) => {
     const handleCloseModal = () => setShowModal(false);
     const handleAgree = () => {
         setShowModal(false);
-        onAgree(); // inform parent (Voicevault)
+        onAgree();
     };
 
     return (

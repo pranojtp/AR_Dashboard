@@ -22,7 +22,7 @@ const Navbar_project = () => {
 
     return (
         <div className="w-full bg-neutral-900 text-white">
-            <div className="relative flex border-b border-neutral-800 mt-6">
+            <div className="relative flex border-b border-neutral-800 mt-3">
                 {navigation.map((item) => {
                     const isActive = path === item.href;
 

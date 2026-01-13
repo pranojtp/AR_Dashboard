@@ -169,11 +169,10 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface AgreementsignProps {
-    onClose: () => void;
-    onAgree: () => void;
+    onClose: () => void;    
 }
 
-const Agreementsign: React.FC<AgreementsignProps> = ({ onClose, onAgree }) => {
+const Agreementsign: React.FC<AgreementsignProps> = ({ onClose }) => {
     const [selectedSection, setSelectedSection] = useState<number>(1);
 
     const sections = [
@@ -354,14 +353,14 @@ const Agreementsign: React.FC<AgreementsignProps> = ({ onClose, onAgree }) => {
                             onClick={onClose}
                             className="px-4 py-2 rounded-lg bg-neutral-800 text-xs md:text-xs text-[#00FFA3] border border-[#00FFA3] hover:border-[#ff0000] hover:text-[#ff0000] transition w-full md:w-auto"
                         >
-                            DECLINE
+                            Back
                         </button>
-                        <button
+                        {/* <button
                             onClick={onAgree}
                             className="px-6 py-2 rounded-lg bg-[#00FFA3] text-xs md:text-xs text-black font-medium hover:bg-[#00e697] transition w-full md:w-auto"
                         >
                             AGREE
-                        </button>
+                        </button> */}
                     </div>
                 </footer>
             </motion.div>
