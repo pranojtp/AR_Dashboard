@@ -8,7 +8,7 @@ interface TermsCardProps {
 }
 
 
-const TermsCard: React.FC<TermsCardProps> = ({ onView }) => {
+const TermsCard: React.FC<TermsCardProps> = ({}) => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const handleCloseModal = () => setShowModal(false);

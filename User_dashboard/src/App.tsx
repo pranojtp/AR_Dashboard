@@ -21,6 +21,7 @@ import AuthCallback from "./pages/AuthCallBack"
 import ProtectedRoute from "./components/ProtectedRoute"
 import { Toaster } from "react-hot-toast";
 import { NotificationProvider } from "./components/global/NotificationContext"
+import ProjectOverview from "./components/projects/ProjectOverview"
 
 
 function App() {
@@ -38,38 +39,42 @@ function App() {
         }}
       />
       <NotificationProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/termsofservice" element={<Termsofservice />} />
-          <Route path="/privacypolicy" element={<Privacypolicy />} />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/termsofservice" element={<Termsofservice />} />
+            <Route path="/privacypolicy" element={<Privacypolicy />} />
 
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/personaldetails" element={<Personaldetails />} />
-          <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/personaldetails" element={<Personaldetails />} />
+            <Route path="/login" element={<Login />} />
 
-          <Route path="/auth/callback" element={<AuthCallback />} />
+            <Route path="/auth/callback" element={<AuthCallback />} />
 
 
-          <Route path="/userdashboard" element={<Dashboard />} >
-            <Route path="profile" element={<ProtectedRoute> <Profilepage /> </ProtectedRoute>} />
+            <Route path="/userdashboard" element={<Dashboard />} >
+              <Route path="profile" element={<ProtectedRoute> <Profilepage /> </ProtectedRoute>} />
 
-            <Route path="voicevault" element={<Voicevault />} />
+              <Route path="voicevault" element={<Voicevault />} />
 
-            <Route path="projectpage" element={<Projectpage />} >
-              <Route path="createproject" element={<Createproject />} />
-              <Route path="projectdetails" element={<Projectdetails />} />
+              <Route path="projectpage" element={<Projectpage />} >
+                <Route path="createproject" element={<Createproject />} />
+                <Route path="projectdetails" element={<Projectdetails />} />
+              </Route>
+
+              <Route path="project/:projectId" element={<Projectpage />}>
+                <Route path="overview" element={<ProjectOverview />} />                
+              </Route>
+
+              <Route path="sidebarsettings" element={<SidebarSettings />} />
+              <Route path="settings" element={<Settingspage />} >
+                <Route path="account" element={<Accountdetails />} />
+                <Route path="general" element={<Generalsettings />} />
+                <Route path="notification" element={<Notificationsettings />} />
+              </Route>
             </Route>
-
-            <Route path="sidebarsettings" element={<SidebarSettings />} />
-            <Route path="settings" element={<Settingspage />} >
-              <Route path="account" element={<Accountdetails />} />
-              <Route path="general" element={<Generalsettings />} />
-              <Route path="notification" element={<Notificationsettings />} />
-            </Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+          </Routes>
+        </BrowserRouter>
       </NotificationProvider>
     </>
   )

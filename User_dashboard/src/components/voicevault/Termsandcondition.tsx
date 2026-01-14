@@ -294,6 +294,22 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
     const [showAgreement, setShowAgreement] = useState(false);
     const [direction, setDirection] = useState(1);
     const [selectedSection, setSelectedSection] = useState<number>(1);
+    const date = new Date();
+    const day = date.getDate();
+    const year = date.getFullYear();
+    const month = date.toLocaleString("en-US", { month: "long" });
+
+    const getOrdinal = (n: number) => {
+        if (n > 3 && n < 21) return `${n}th`;
+        switch (n % 10) {
+            case 1: return `${n}st`;
+            case 2: return `${n}nd`;
+            case 3: return `${n}rd`;
+            default: return `${n}th`;
+        }
+    };
+
+
 
     const [formData, setFormData] = useState({
         legalName: "",
@@ -340,11 +356,11 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
                             AUDIO COLLABORATION AND VOICE PROCESSING AGREEMENT
                         </h2>
                         <p className="text-sm leading-relaxed text-neutral-300">
-                            This Audio Collaboration and Voice Processing Agreement (hereinafter referred to as “Agreement”) is executed at ___ on this the ___ day of __, 2025 (in words) and shall be effective from ____, which shall be the “Effective Date” of this Agreement. <br />
+                            This Audio Collaboration and Voice Processing Agreement (hereinafter referred to as “Agreement”) is executed at ___ on this the <strong>{getOrdinal(day)}</strong> day of <strong>{month}</strong>,<strong>{year}</strong> and shall be effective from <strong>{new Date().toLocaleDateString("en-GB")}</strong>, which shall be the “Effective Date” of this Agreement. <br />
 
                             BY AND BETWEEN <br />
 
-                            1.	<strong>{formData.legalName || "[Name of the Actor]"}</strong>, aged{" "}
+                            1.<strong>{formData.legalName || "[Name of the Actor]"}</strong>, aged{" "}
                             <strong>
                                 {formData.dob
                                     ? new Date().getFullYear() - new Date(formData.dob).getFullYear()
@@ -356,7 +372,7 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
                             hereinafter referred to as <strong>“Party A”</strong> or{" "}
                             <strong>“the Artist”</strong>, which expression shall, unless
                             repugnant to the context or meaning thereof, include his/her heirs,
-                            successors, and permitted assigns.
+                            successors, and permitted assigns. <br />                    
 
                             2.	Audio Realities Pvt. Ltd., a company incorporated under the Companies Act, 2013, having its registered office at “Karotte Maliyeckal, Chathamattom PO,  Ernakulam, Kerala 686671, represented by its authorized signatory ______, hereinafter referred to as “Party B” or “the Company,” which expression shall, unless repugnant to the context or meaning thereof, include its successors and permitted assigns.
 
@@ -378,10 +394,9 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
 
 
                             01.	DEFINITIONS
-                            For the purposes of this Agreement, unless the context otherwise requires, the following terms shall have the meanings ascribed to them below:
-                            a)	“Applicable Laws” :  Means and includes all applicable statutes, enactments, acts of legislature, laws, ordinances, rules, bye-laws, regulations, guidelines, policies, directions, directives, notifications, and orders of any governmental or regulatory authority (whether central, state, or local), and all applicable international treaties and conventions, as may be in force and effect from time to time.
-                            b)	"Algorithm": Means the digital construct developed by the Company through artificial intelligence model training and algorithmic processing utilizing the Artist’s Voice Data. The Algorithm operates as a technical tool to generate synthetic voice outputs as permitted under this Agreement. The Algorithm may be retained and used by the Company for internal research and development, provided such use does not result in the direct recreation of the Artist’s recognizable voice, persona, or any other personally identifiable characteristics. For clarity, the Algorithm exists as code and mathematical models, distinct from the Artist’s unique vocal qualities or personality traits, and cannot, in itself, reproduce or represent the Artist’s identity without the application of the associated Voice Data;
-
+                            For the purposes of this Agreement, unless the context otherwise requires, the following terms shall have the meanings ascribed to them below: <br />
+                            a)	“Applicable Laws” :  Means and includes all applicable statutes, enactments, acts of legislature, laws, ordinances, rules, bye-laws, regulations, guidelines, policies, directions, directives, notifications, and orders of any governmental or regulatory authority (whether central, state, or local), and all applicable international treaties and conventions, as may be in force and effect from time to time. <br />
+                            b)	"Algorithm": Means the digital construct developed by the Company through artificial intelligence model training and algorithmic processing utilizing the Artist’s Voice Data. The Algorithm operates as a technical tool to generate synthetic voice outputs as permitted under this Agreement. The Algorithm may be retained and used by the Company for internal research and development, provided such use does not result in the direct recreation of the Artist’s recognizable voice, persona, or any other personally identifiable characteristics. For clarity, the Algorithm exists as code and mathematical models, distinct from the Artist’s unique vocal qualities or personality traits, and cannot, in itself, reproduce or represent the Artist’s identity without the application of the associated Voice Data; <br />
                             c)	“Business Day”: Means any day other than a Saturday, Sunday, or any public holiday declared by the Government of India or the applicable local government. <br />
 
                             02.	MUTUAL OBLIGATIONS:
@@ -392,17 +407,17 @@ const TermsAndCondition: React.FC<TermsAndConditionProps> = ({
 
 
                             IN WITNESS WHEREOF, the Parties have executed this Agreement as of the date first above written. <br />
-                            
+
                             <strong>Party A :</strong> <br />
                             Signature: _________________________ <br />
                             Name: <strong>{formData.legalName || "____________________________"}</strong> <br />
-                            Date: <strong>{new Date().toLocaleDateString()}</strong>                            
+                            Date: <strong>{new Date().toLocaleDateString("en-GB")}</strong>
                             <br />
                             Party	B : <br />
                             Signature: _________________________ <br />
                             Name: <strong>Audio Realities</strong> <br />
                             Designation: _______________________ <br />
-                            Date: <strong>{new Date().toLocaleDateString()}</strong>
+                            Date: <strong>{new Date().toLocaleDateString("en-GB")}</strong>
 
                         </p>
                     </>

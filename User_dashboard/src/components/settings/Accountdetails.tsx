@@ -1,8 +1,8 @@
 // import Select from "react-select";
 import { useState, useEffect } from "react";
 // import type { StylesConfig } from "react-select";
-// import avatar1 from "../../../public/avatars/avatar1.jpg";
-// import avatar2 from "../../../public/avatars/avatar2.jpg";
+import avatar1 from "../../assets/avatar1.jpg";
+import avatar2 from "../../assets/avatar2.jpg";
 import useCurrentUser from "../../hooks/useCurrentUser";
 import userService from "../../services/userService";
 import { imageUrlToBase64 } from "../../utils/imageUrlToBase64";
@@ -125,8 +125,8 @@ const Accountdetails = () => {
     }, [user]);
 
     const avatars = [
-        "/avatars/avatar1.jpg",
-        "/avatars/avatar2.jpg",
+        avatar1,
+        avatar2,
         // avatar1,
         // avatar2,
         // avatar1,

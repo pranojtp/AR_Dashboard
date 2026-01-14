@@ -50,7 +50,7 @@ interface RecentProject {
 }
 
 // FeatureCard
-import { useNavigate as useNav } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const FeatureCard: React.FC<FeatureCardProps> = ({
     title,
@@ -59,7 +59,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
     customGradientClass,
     route,
 }) => {
-    const navigate = useNav();
+    const navigate = useNavigate();
 
     return (
         <div
@@ -90,7 +90,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
 
 const Createproject = () => {
     const [projects, setProjects] = useState<RecentProject[]>([]);
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     useEffect(() => {
         const stored = JSON.parse(localStorage.getItem("projects") || "[]");
         setProjects(stored);
@@ -142,9 +142,9 @@ const Createproject = () => {
                         {projects.map((project) => (
                             <div
                                 key={project.id}
-                                // onClick={() =>
-                                //     navigate("/userdashboard/projectpage/projectdetails")
-                                // }
+                                onClick={() =>
+                                    navigate(`/userdashboard/project/${project.id}/overview`)
+                                }
                                 className="cursor-pointer"
                             >
                                 <div
