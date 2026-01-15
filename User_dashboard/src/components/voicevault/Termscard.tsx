@@ -4,12 +4,17 @@ import Agreementsign from "./Agreementsign";
 import { useState } from "react";
 
 interface TermsCardProps {
-  onView: () => void;
+  onView?: () => void;
 }
 
 
-const TermsCard: React.FC<TermsCardProps> = ({}) => {
+const TermsCard: React.FC<TermsCardProps> = ({ onView }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
+
+  const handleView = () => {
+    onView?.();
+    setShowModal(true);
+  };
 
   const handleCloseModal = () => setShowModal(false);
 
@@ -20,7 +25,7 @@ const TermsCard: React.FC<TermsCardProps> = ({}) => {
         <p className="text-xs text-neutral-400">Agreement code : FRB1235476</p>
       </div>
       <button
-        onClick={() => setShowModal(true)}
+        onClick={handleView}
         className="border text-sm border-[#00FFA3] text-[#00FFA3] rounded-xl px-3 py-1 hover:bg-[#00FFA3] hover:text-black transition">
         View Now
       </button>
@@ -44,7 +49,6 @@ const TermsCard: React.FC<TermsCardProps> = ({}) => {
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
             >
-              {/* <Agreementsign onClose={handleCloseModal} onAgree={handleAgree} /> */}
               <Agreementsign onClose={handleCloseModal} />
             </motion.div>
           </>

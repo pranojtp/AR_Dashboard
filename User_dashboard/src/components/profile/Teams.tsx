@@ -127,7 +127,7 @@ const Teams = () => {
     const [showPrevious, setShowPrevious] = useState(false);
 
     const [members, setMembers] = useState<Member[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [, setLoading] = useState<boolean>(true);
 
 
     const [previousMembers] = useState<Member[]>([
